@@ -5,109 +5,222 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Dört Oran</title>
   <style>
-    :root {
-      --bg: #0c1014;
-      --surface: #151b21;
-      --fg: #f4f7f8;
-      --muted: #93a1aa;
-      --red: #e30a17;
-      --azure: #00a3d7;
-      --green: #0e7a3d;
-      --line: #2c3842;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; background: var(--bg); color: var(--fg); }
-    body { font-family: "Segoe UI", sans-serif; line-height: 1.4; }
-    .rail { display: flex; height: 6px; }
-    .rail span { flex: 1; }
-    .rail .a { background: var(--azure); }
-    .rail .r { background: var(--red); }
-    .rail .g { background: var(--green); }
-    main { width: min(720px, calc(100% - 24px)); margin: 0 auto; padding: 20px 0 48px; }
-    h1 { margin: 0; font-size: 28px; }
-    .kicker { margin: 0; color: var(--muted); font-size: 14px; }
-    input {
-      width: 100%;
-      height: 44px;
-      margin: 16px 0 10px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      color: var(--fg);
-      padding: 0 14px;
-      font-size: 16px;
-    }
-    .meta { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
-    article {
-      background: var(--surface);
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 12px 14px;
-      margin-top: 8px;
-    }
-    .top { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 13px; }
-    .teams { margin: 4px 0; font-size: 17px; font-weight: 600; }
-    .odds { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; margin-top: 8px; }
-    .odds b, .odds span { display: block; text-align: center; }
-    .odds b { color: var(--muted); font-size: 11px; font-weight: 500; }
-    .odds span {
-      background: var(--bg);
-      border-radius: 8px;
-      padding: 6px 0;
-      font-variant-numeric: tabular-nums;
-    }
+    :root { --bg:#0c1014; --surface:#151b21; --fg:#f4f7f8; --muted:#93a1aa; --red:#e30a17; --azure:#00a3d7; --green:#0e7a3d; --line:#2c3842; }
+    * { box-sizing:border-box; }
+    html, body { margin:0; background:var(--bg); color:var(--fg); }
+    body { font-family:"Segoe UI",sans-serif; line-height:1.4; }
+    .rail { display:flex; height:6px; } .rail span { flex:1; }
+    .rail .a { background:var(--azure); } .rail .r { background:var(--red); } .rail .g { background:var(--green); }
+    main { width:min(720px, calc(100% - 24px)); margin:0 auto; padding:18px 0 48px; }
+    h1 { margin:0; font-size:28px; } .kicker { margin:0; color:var(--muted); font-size:14px; }
+    .tabs { display:grid; grid-template-columns:1fr 1fr; gap:6px; background:var(--surface); padding:4px; border-radius:16px; margin:16px 0; }
+    .tabs button, button.go { height:44px; border:0; border-radius:12px; font-size:15px; }
+    .tabs button { background:transparent; color:var(--muted); }
+    .tabs button.on { background:var(--red); color:#fff; }
+    input, button.go { width:100%; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:12px; }
+    input { height:48px; text-align:center; font-size:18px; }
+    .sheet { display:grid; grid-template-columns:repeat(5,1fr); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+    .sheet div, .sheet input { border-right:1px solid var(--line); }
+    .sheet div:last-child, .sheet input:last-child { border-right:0; }
+    .sheet .h, .sheet .lift { text-align:center; font-size:12px; color:var(--muted); padding:8px 2px; background:var(--surface); }
+    .row { display:flex; gap:8px; margin:12px 0; flex-wrap:wrap; }
+    .row button { height:40px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--fg); padding:0 14px; }
+    .row button.on { background:var(--red); border-color:var(--red); }
+    button.go { background:var(--red); border:0; font-weight:600; }
+    .meta { color:var(--muted); font-size:14px; }
+    article { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:12px 14px; margin-top:8px; }
+    article.pick { width:100%; text-align:left; color:inherit; }
+    article.on { outline:2px solid var(--red); }
+    .top { display:flex; justify-content:space-between; gap:8px; color:var(--muted); font-size:13px; }
+    .teams { margin:4px 0; font-size:17px; font-weight:600; }
+    .odds { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin-top:8px; }
+    .odds b, .odds span { display:block; text-align:center; }
+    .odds b { color:var(--muted); font-size:11px; font-weight:500; }
+    .odds span { background:var(--bg); border-radius:8px; padding:6px 0; }
+    .odds span.hit { background:var(--green); color:#fff; }
+    .hide { display:none; }
+    #bulten-list { max-height:280px; overflow:auto; }
   </style>
 </head>
 <body>
-  <div class="rail" aria-hidden="true"><span class="a"></span><span class="r"></span><span class="g"></span></div>
+  <div class="rail"><span class="a"></span><span class="r"></span><span class="g"></span></div>
   <main>
-    <p class="kicker">Günün bülteni</p>
+    <p class="kicker">Ay-yıldız arşivi</p>
     <h1>Dört Oran</h1>
-    <input id="q" placeholder="Takım veya lig ara" autocomplete="off">
-    <p class="meta" id="meta">Bülten yükleniyor</p>
-    <div id="list"></div>
+    <div class="tabs">
+      <button id="tab-manuel" class="on" type="button">Manuel analiz</button>
+      <button id="tab-bulten" type="button">Bülten</button>
+    </div>
+
+    <section id="panel-manuel">
+      <div class="sheet">
+        <div class="h">MS 1</div><div class="h">MS X</div><div class="h">MS 2</div><div class="h">Alt 2.5</div><div class="h">Üst 2.5</div>
+        <input id="o1" inputmode="decimal" placeholder="—">
+        <input id="ox" inputmode="decimal" placeholder="—">
+        <input id="o2" inputmode="decimal" placeholder="—">
+        <input id="alt" inputmode="decimal" placeholder="—">
+        <input id="ust" inputmode="decimal" placeholder="—">
+        <div class="lift" id="l1">—</div><div class="lift" id="lx">—</div><div class="lift" id="l2">—</div><div class="lift" id="la">—</div><div class="lift" id="lu">—</div>
+      </div>
+      <p class="meta">Üst satır İddaa. Alt satır arşivde aranan Bet365 karşılığı. En az iki kutu.</p>
+    </section>
+
+    <section id="panel-bulten" class="hide">
+      <input id="q" placeholder="Takım veya lig" style="text-align:left;padding:0 14px;margin-bottom:8px">
+      <p class="meta" id="bmeta">Bülten yükleniyor</p>
+      <div id="bulten-list"></div>
+    </section>
+
+    <div class="row" id="tol">
+      <button type="button" data-t="0.05">Sıkı ±0.05</button>
+      <button type="button" data-t="0.08" class="on">Yakın ±0.08</button>
+      <button type="button" data-t="0.12">Geniş ±0.12</button>
+    </div>
+    <button class="go" id="ara" type="button">Eski maçları bul</button>
+    <p class="meta" id="meta">Yeşil kutu tutan orandır. İkiden az yeşil olan elenir.</p>
+    <div id="hits"></div>
   </main>
   <script>
-    const list = document.getElementById("list");
-    const meta = document.getElementById("meta");
-    const box = document.getElementById("q");
-    let matches = [];
+    const BANDS = [
+      [1.2, 1.053], [1.4, 0.902], [1.6, 0.893], [1.8, 0.886], [2.1, 0.89],
+      [2.5, 0.875], [3, 0.86], [3.8, 0.906], [5, 0.85], [7, 0.833], [10, 0.786], [1e9, 0.658]
+    ];
+    const KEYS = ["o1", "ox", "o2", "alt", "ust"];
+    const LIFT = ["l1", "lx", "l2", "la", "lu"];
+    const SHORT = ["1", "X", "2", "A2.5", "Ü2.5"];
+    let tab = "manuel";
+    let tol = 0.08;
+    let archive = null;
+    let bulletin = [];
+    let picked = null;
 
-    function odd(value) {
-      return value == null ? "—" : Number(value).toFixed(2);
+    function band(price) {
+      for (const row of BANDS) if (price < row[0]) return row[1];
+      return 0.658;
     }
-
-    function draw() {
-      const needle = box.value.trim().toLocaleLowerCase("tr");
-      const rows = needle
-        ? matches.filter((m) => `${m.home} ${m.away} ${m.league}`.toLocaleLowerCase("tr").includes(needle))
-        : matches;
-      meta.textContent = rows.length + " maç";
-      list.innerHTML = rows.map((m) => `
-        <article>
+    function lift(iddaa) {
+      let guess = iddaa / 0.88;
+      for (let i = 0; i < 5; i++) guess = iddaa / band(guess);
+      return Math.round(guess * 100) / 100;
+    }
+    function num(value) {
+      const n = parseFloat(String(value).replace(",", "."));
+      return Number.isFinite(n) && n > 1 ? n : null;
+    }
+    function activeFrom(raw) {
+      return KEYS.map((key, index) => {
+        const iddaa = num(raw[key]);
+        return iddaa == null ? null : { index: index + 5, iddaa, bet365: lift(iddaa), short: SHORT[index] };
+      }).filter(Boolean);
+    }
+    function readManual() {
+      const raw = {};
+      KEYS.forEach((key, i) => {
+        raw[key] = document.getElementById(key).value;
+        const n = num(raw[key]);
+        document.getElementById(LIFT[i]).textContent = n == null ? "—" : lift(n).toFixed(2);
+      });
+      return raw;
+    }
+    function scoreOf(row) {
+      const [h, a] = String(row[4] || "").split("-").map(Number);
+      if (!Number.isFinite(h) || !Number.isFinite(a)) return "";
+      return h > a ? "MS 1" : h === a ? "MS X" : "MS 2";
+    }
+    function find(raw) {
+      const active = activeFrom(raw);
+      if (active.length < 2) return { active, hits: [], need: true };
+      const hits = [];
+      for (const row of archive) {
+        let matched = 0, gap = 0;
+        const flags = [];
+        for (const market of active) {
+          const price = row[market.index];
+          const ok = typeof price === "number" && Math.abs(price - market.bet365) <= tol + 0.001;
+          flags.push(ok);
+          if (ok) { matched += 1; gap += Math.abs(price - market.bet365); }
+        }
+        if (matched >= 2) hits.push({ row, matched, gap, flags });
+      }
+      hits.sort((a, b) => b.matched - a.matched || a.gap - b.gap);
+      return { active, hits: hits.slice(0, 40), total: hits.length };
+    }
+    function paint(found) {
+      const box = document.getElementById("hits");
+      const meta = document.getElementById("meta");
+      if (!archive) { meta.textContent = "Arşiv yükleniyor"; box.innerHTML = ""; return; }
+      if (found.need) { meta.textContent = "En az iki oran yaz."; box.innerHTML = ""; return; }
+      meta.textContent = found.total + " eski maç. İlk 40 gösteriliyor.";
+      box.innerHTML = found.hits.map((hit) => {
+        const cells = found.active.map((market, i) => {
+          const price = hit.row[market.index];
+          const text = typeof price === "number" ? price.toFixed(2) : "—";
+          return `<div><b>${market.short}</b><span class="${hit.flags[i] ? "hit" : ""}">${text}</span></div>`;
+        }).join("");
+        return `<article>
+          <div class="teams">${hit.row[2]} – ${hit.row[3]}</div>
+          <div class="top"><span>${hit.row[0]}</span><span>${hit.row[1]}</span><span>${hit.row[4] || "—"} ${scoreOf(hit.row)}</span><span>${hit.matched} oran</span></div>
+          <div class="odds">${cells}</div>
+        </article>`;
+      }).join("");
+    }
+    async function ensureArchive() {
+      if (archive) return;
+      document.getElementById("meta").textContent = "Arşiv yükleniyor";
+      const data = await fetch("bet365_maclar.json").then((res) => res.json());
+      archive = data;
+    }
+    async function search() {
+      try {
+        await ensureArchive();
+        const raw = tab === "manuel" ? readManual() : (picked || {});
+        paint(find(raw));
+      } catch (err) {
+        document.getElementById("meta").textContent = "Arşiv açılmadı";
+      }
+    }
+    function showTab(next) {
+      tab = next;
+      document.getElementById("tab-manuel").classList.toggle("on", next === "manuel");
+      document.getElementById("tab-bulten").classList.toggle("on", next === "bulten");
+      document.getElementById("panel-manuel").classList.toggle("hide", next !== "manuel");
+      document.getElementById("panel-bulten").classList.toggle("hide", next !== "bulten");
+    }
+    function drawBulletin() {
+      const needle = document.getElementById("q").value.trim().toLocaleLowerCase("tr");
+      const rows = needle ? bulletin.filter((m) => `${m.home} ${m.away} ${m.league}`.toLocaleLowerCase("tr").includes(needle)) : bulletin;
+      document.getElementById("bmeta").textContent = rows.length + " maç. Birine bas, eski karşılığı aranır.";
+      document.getElementById("bulten-list").innerHTML = rows.slice(0, 80).map((m, i) => `
+        <button class="pick article ${picked && picked.id === m.id ? "on" : ""}" data-i="${bulletin.indexOf(m)}" type="button">
           <div class="top"><span>${m.time || ""}</span><span>${m.league || ""}</span></div>
           <div class="teams">${m.home} – ${m.away}</div>
-          <div class="odds">
-            <div><b>1</b><span>${odd(m.o1)}</span></div>
-            <div><b>X</b><span>${odd(m.ox)}</span></div>
-            <div><b>2</b><span>${odd(m.o2)}</span></div>
-            <div><b>Alt</b><span>${odd(m.alt)}</span></div>
-            <div><b>Üst</b><span>${odd(m.ust)}</span></div>
-          </div>
-        </article>`).join("");
+        </button>`).join("");
     }
 
-    fetch("2026-09-26.json")
-      .then((res) => res.json())
-      .then((data) => {
-        matches = data.matches || [];
-        draw();
-      })
-      .catch(() => {
-        meta.textContent = "Bülten açılmadı";
-      });
-
-    box.addEventListener("input", draw);
+    document.getElementById("tab-manuel").onclick = () => showTab("manuel");
+    document.getElementById("tab-bulten").onclick = () => showTab("bulten");
+    document.getElementById("ara").onclick = search;
+    KEYS.forEach((key) => document.getElementById(key).addEventListener("input", readManual));
+    document.getElementById("tol").onclick = (event) => {
+      const button = event.target.closest("button");
+      if (!button) return;
+      tol = Number(button.dataset.t);
+      document.querySelectorAll("#tol button").forEach((item) => item.classList.toggle("on", item === button));
+    };
+    document.getElementById("q").addEventListener("input", drawBulletin);
+    document.getElementById("bulten-list").onclick = (event) => {
+      const button = event.target.closest("button");
+      if (!button) return;
+      const match = bulletin[Number(button.dataset.i)];
+      picked = { id: match.id, o1: match.o1, ox: match.ox, o2: match.o2, alt: match.alt, ust: match.ust };
+      drawBulletin();
+      search();
+    };
+    fetch("2026-09-26.json").then((res) => res.json()).then((data) => {
+      bulletin = data.matches || [];
+      drawBulletin();
+    }).catch(() => { document.getElementById("bmeta").textContent = "Bülten açılmadı"; });
+    readManual();
   </script>
 </body>
 </html>
