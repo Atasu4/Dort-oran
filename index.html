@@ -77,7 +77,8 @@
       <button type="button" data-t="0.12">Geniş ±0.12</button>
     </div>
     <button class="go" id="ara" type="button">Eski maçları bul</button>
-    <p class="meta" id="meta">Yeşil kutu tutan orandır. İkiden az yeşil olan elenir.</p>
+    <p class="meta" id="aranan"></p>
+    <p class="meta" id="meta">Yeşil kutu tutan orandır. Dört oran doluysa en az dört tutmalı.</p>
     <div id="hits"></div>
   </main>
   <script>
@@ -127,9 +128,13 @@
       if (!Number.isFinite(h) || !Number.isFinite(a)) return "";
       return h > a ? "MS 1" : h === a ? "MS X" : "MS 2";
     }
+    function minimumFor(count) {
+      return count >= 4 ? 4 : 2;
+    }
     function find(raw) {
       const active = activeFrom(raw);
-      if (active.length < 2) return { active, hits: [], need: true };
+      const minimum = minimumFor(active.length);
+      if (active.length < 2) return { active, hits: [], need: true, minimum };
       const hits = [];
       for (const row of archive) {
         let matched = 0, gap = 0;
@@ -140,27 +145,47 @@
           flags.push(ok);
           if (ok) { matched += 1; gap += Math.abs(price - market.bet365); }
         }
-        if (matched >= 2) hits.push({ row, matched, gap, flags });
+        if (matched >= minimum) hits.push({ row, matched, gap, flags });
       }
       hits.sort((a, b) => b.matched - a.matched || a.gap - b.gap);
-      return { active, hits: hits.slice(0, 40), total: hits.length };
+      return { active, hits, minimum };
     }
     function paint(found) {
       const box = document.getElementById("hits");
       const meta = document.getElementById("meta");
+      const ask = document.getElementById("aranan");
       if (!archive) { meta.textContent = "Arşiv yükleniyor"; box.innerHTML = ""; return; }
-      if (found.need) { meta.textContent = "En az iki oran yaz."; box.innerHTML = ""; return; }
-      meta.textContent = found.total + " eski maç. İlk 40 gösteriliyor.";
-      box.innerHTML = found.hits.map((hit) => {
+      if (found.need) { meta.textContent = "En az iki oran gerekli."; ask.textContent = ""; box.innerHTML = ""; return; }
+      const target = found.active.map((market) => market.short + " " + market.bet365.toFixed(2)).join("  ·  ");
+      const name = tab === "bulten" && picked && picked.name ? picked.name : "Yazdığın oranlar";
+      ask.textContent = name + "  →  " + target;
+      const groups = [];
+      const seen = new Map();
+      for (const hit of found.hits) {
+        const key = found.active.map((market, i) => (hit.flags[i] ? hit.row[market.index] : "x")).join("|") + "#" + hit.matched;
+        if (!seen.has(key)) {
+          const group = { hit, rows: [] };
+          seen.set(key, group);
+          groups.push(group);
+        }
+        if (seen.get(key).rows.length < 4) seen.get(key).rows.push(hit.row);
+        seen.get(key).count = (seen.get(key).count || 0) + 1;
+      }
+      meta.textContent = found.hits.length + " eski maç, " + groups.length + " farklı oran. Aynı kapanış tek kartta.";
+      box.innerHTML = groups.slice(0, 25).map((group) => {
+        const hit = group.hit;
         const cells = found.active.map((market, i) => {
           const price = hit.row[market.index];
           const text = typeof price === "number" ? price.toFixed(2) : "—";
           return `<div><b>${market.short}</b><span class="${hit.flags[i] ? "hit" : ""}">${text}</span></div>`;
         }).join("");
+        const names = group.rows.map((row) => `${row[0]} ${row[2]} – ${row[3]} ${row[4] || ""} ${scoreOf(row)}`.trim()).join("<br>");
+        const more = group.count > group.rows.length ? `<div class="top"><span>+${group.count - group.rows.length} maç daha</span></div>` : "";
         return `<article>
-          <div class="teams">${hit.row[2]} – ${hit.row[3]}</div>
-          <div class="top"><span>${hit.row[0]}</span><span>${hit.row[1]}</span><span>${hit.row[4] || "—"} ${scoreOf(hit.row)}</span><span>${hit.matched} oran</span></div>
+          <div class="top"><span>${hit.matched} oran tuttu</span><span>${group.count} maç</span></div>
           <div class="odds">${cells}</div>
+          <div class="teams" style="font-size:14px;font-weight:500;margin-top:8px">${names}</div>
+          ${more}
         </article>`;
       }).join("");
     }
@@ -212,7 +237,7 @@
       const button = event.target.closest("button");
       if (!button) return;
       const match = bulletin[Number(button.dataset.i)];
-      picked = { id: match.id, o1: match.o1, ox: match.ox, o2: match.o2, alt: match.alt, ust: match.ust };
+      picked = { id: match.id, name: match.home + " – " + match.away, o1: match.o1, ox: match.ox, o2: match.o2, alt: match.alt, ust: match.ust };
       drawBulletin();
       search();
     };
