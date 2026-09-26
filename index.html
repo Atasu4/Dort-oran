@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dört Oran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0c1014;
+      --surface: #151b21;
+      --surface-2: #1e272f;
+      --fg: #f4f7f8;
+      --muted: #93a1aa;
+      --red: #e30a17;
+      --azure: #00a3d7;
+      --green: #0e7a3d;
+      --line: #2c3842;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--bg); color: var(--fg); }
+    body {
+      font-family: Outfit, "Segoe UI", sans-serif;
+      line-height: 1.45;
+      min-height: 100vh;
+    }
+    .rail { display: flex; height: 6px; }
+    .rail span { flex: 1; }
+    .rail .a { background: var(--azure); }
+    .rail .r { background: var(--red); }
+    .rail .g { background: var(--green); }
+    main {
+      width: min(880px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+    header { display: flex; gap: 14px; align-items: center; }
+    .mark { width: 48px; height: 48px; flex: none; }
+    .kicker { margin: 0; color: var(--muted); font-size: 14px; }
+    h1 { margin: 0; font-size: 32px; font-weight: 600; letter-spacing: -0.03em; }
+    .lead { max-width: 38rem; color: var(--muted); margin: 22px 0 0; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .stat, .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+    .stat { border-radius: 18px; padding: 14px 16px; }
+    .stat b {
+      display: block;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 18px;
+      font-weight: 500;
+    }
+    .stat span { color: var(--muted); font-size: 13px; }
+    .grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .card { border-radius: 24px; padding: 20px; display: flex; flex-direction: column; gap: 8px; }
+    .card h2 { margin: 8px 0 0; font-size: 22px; font-weight: 600; letter-spacing: -0.02em; }
+    .card p { margin: 0; color: var(--muted); }
+    .tag {
+      align-self: flex-start;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--azure);
+    }
+    a.btn {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 44px;
+      padding: 0 16px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 500;
+      color: white;
+      background: var(--red);
+    }
+    a.btn.quiet {
+      color: var(--fg);
+      background: transparent;
+      border: 1px solid var(--line);
+    }
+    .sheet {
+      margin-top: 12px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 8px 8px 8px 20px;
+    }
+    .sheet h2 {
+      margin: 12px 0 4px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .file {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 8px 14px 0;
+      text-decoration: none;
+      color: inherit;
+      border-top: 1px solid var(--line);
+    }
+    .file:first-of-type { border-top: 0; }
+    .file strong { display: block; font-weight: 500; }
+    .file small { color: var(--muted); }
+    .file em {
+      font-style: normal;
+      font-size: 14px;
+      color: var(--fg);
+      flex: none;
+    }
+    @media (max-width: 700px) {
+      .grid, .stats { grid-template-columns: 1fr; }
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="rail" aria-hidden="true"><span class="a"></span><span class="r"></span><span class="g"></span></div>
+  <main>
+    <header>
+      <svg class="mark" viewBox="0 0 32 32" aria-hidden="true">
+        <rect width="32" height="32" rx="8" fill="#e30a17"/>
+        <mask id="ay">
+          <rect width="32" height="32" fill="#fff"/>
+          <circle cx="17.2" cy="16" r="6.2" fill="#000"/>
+        </mask>
+        <circle cx="14.2" cy="16" r="7.4" fill="#fff" mask="url(#ay)"/>
+        <path fill="#fff" d="M23.2 16l1.15 1.9 2.15-.2-1.35 1.7.7 2.05-1.95-1.05-1.95 1.05.7-2.05-1.35-1.7 2.15.2z"/>
+      </svg>
+      <div>
+        <p class="kicker">Ay-yıldız arşivi</p>
+        <h1>Dört Oran</h1>
+      </div>
+    </header>
+    <p class="lead">İddaa bülteni ile Bet365 kapanışları aynı yerde. Geçmiş maç, oran bandı ve tolerans tablosu buradan iner.</p>
+    <section class="stats">
+      <div class="stat"><b>33.728</b><span>maç</span></div>
+      <div class="stat"><b>2012–2026</b><span>arşiv</span></div>
+      <div class="stat"><b>7 lig</b><span>kapanış oranı</span></div>
+    </section>
+    <section class="grid">
+      <article class="card">
+        <span class="tag">Arşiv</span>
+        <h2>Bet365 kapanışları</h2>
+        <p>Tarih, lig, iki takım, skor, 1 / X / 2 ve 2.5 alt-üst. Eşleşme bunun üstünden yürür.</p>
+        <a class="btn" href="bet365_maclar.json">Arşivi aç</a>
+      </article>
+      <article class="card">
+        <span class="tag">Bülten</span>
+        <h2>26 Eylül 2026</h2>
+        <p>Günün İddaa futbol programı. Maç sonucu ve 2.5 alt-üst satırları.</p>
+        <a class="btn quiet" href="2026-09-26.json">Bülteni aç</a>
+      </article>
+    </section>
+    <section class="sheet">
+      <h2>Tablolar</h2>
+      <a class="file" href="iddaa_bet365_tolerans.xlsx">
+        <span><strong>Tolerans bandı</strong><small>2013–2019 İddaa ve Bet365 çarpanı</small></span>
+        <em>Aç</em>
+      </a>
+      <a class="file" href="oran_arsivi_son_2_sezon.xlsx">
+        <span><strong>Son iki sezon</strong><small>Büyük ligler ve Süper Lig</small></span>
+        <em>Aç</em>
+      </a>
+      <a class="file" href="mackolik_iddaa_programi_24138.xlsx">
+        <span><strong>Geniş bülten</strong><small>Haftalık İddaa programı</small></span>
+        <em>Aç</em>
+      </a>
+      <a class="file" href="README.md">
+        <span><strong>Sütun sırası</strong><small>Arşiv satırı nasıl okunur</small></span>
+        <em>Aç</em>
+      </a>
+    </section>
+  </main>
+</body>
+</html>
