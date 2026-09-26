@@ -159,35 +159,27 @@
       const target = found.active.map((market) => market.short + " " + market.bet365.toFixed(2)).join("  ·  ");
       const name = tab === "bulten" && picked && picked.name ? picked.name : "Yazdığın oranlar";
       ask.textContent = name + "  →  " + target;
-      const groups = [];
-      const seen = new Map();
+      const scores = new Map();
+      let home = 0, draw = 0, away = 0;
       for (const hit of found.hits) {
-        const key = found.active.map((market, i) => (hit.flags[i] ? hit.row[market.index] : "x")).join("|") + "#" + hit.matched;
-        if (!seen.has(key)) {
-          const group = { hit, rows: [] };
-          seen.set(key, group);
-          groups.push(group);
-        }
-        if (seen.get(key).rows.length < 4) seen.get(key).rows.push(hit.row);
-        seen.get(key).count = (seen.get(key).count || 0) + 1;
+        const score = hit.row[4] || "skor yok";
+        scores.set(score, (scores.get(score) || 0) + 1);
+        const result = scoreOf(hit.row);
+        if (result === "MS 1") home += 1;
+        else if (result === "MS X") draw += 1;
+        else if (result === "MS 2") away += 1;
       }
-      meta.textContent = found.hits.length + " eski maç, " + groups.length + " farklı oran. Aynı kapanış tek kartta.";
-      box.innerHTML = groups.slice(0, 25).map((group) => {
-        const hit = group.hit;
-        const cells = found.active.map((market, i) => {
-          const price = hit.row[market.index];
-          const text = typeof price === "number" ? price.toFixed(2) : "—";
-          return `<div><b>${market.short}</b><span class="${hit.flags[i] ? "hit" : ""}">${text}</span></div>`;
-        }).join("");
-        const names = group.rows.map((row) => `${row[0]} ${row[2]} – ${row[3]} ${row[4] || ""} ${scoreOf(row)}`.trim()).join("<br>");
-        const more = group.count > group.rows.length ? `<div class="top"><span>+${group.count - group.rows.length} maç daha</span></div>` : "";
-        return `<article>
-          <div class="top"><span>${hit.matched} oran tuttu</span><span>${group.count} maç</span></div>
-          <div class="odds">${cells}</div>
-          <div class="teams" style="font-size:14px;font-weight:500;margin-top:8px">${names}</div>
-          ${more}
-        </article>`;
-      }).join("");
+      const total = found.hits.length;
+      const pct = (n) => (total ? Math.round((n / total) * 100) : 0);
+      meta.textContent = total + " maçta skor dağılımı";
+      const rows = [...scores.entries()].sort((a, b) => b[1] - a[1]);
+      box.innerHTML = `
+        <article>
+          <div class="top"><span>1</span><span>${home} · %${pct(home)}</span></div>
+          <div class="top"><span>X</span><span>${draw} · %${pct(draw)}</span></div>
+          <div class="top"><span>2</span><span>${away} · %${pct(away)}</span></div>
+        </article>
+        ${rows.map(([score, n]) => `<article><div class="top"><strong>${score}</strong><span>${n} kez · %${pct(n)}</span></div></article>`).join("")}`;
     }
     async function ensureArchive() {
       if (archive) return;
