@@ -39,7 +39,7 @@
     .odds span { background:var(--bg); border-radius:8px; padding:6px 0; }
     .odds span.hit { background:var(--green); color:#fff; }
     .hide { display:none; }
-    #bulten-list { max-height:280px; overflow:auto; }
+    #bulten-list { max-height: none; }
   </style>
 </head>
 <body>
@@ -206,8 +206,10 @@
     function drawBulletin() {
       const needle = document.getElementById("q").value.trim().toLocaleLowerCase("tr");
       const rows = needle ? bulletin.filter((m) => `${m.home} ${m.away} ${m.league}`.toLocaleLowerCase("tr").includes(needle)) : bulletin;
-      document.getElementById("bmeta").textContent = rows.length + " maç. Birine bas, eski karşılığı aranır.";
-      document.getElementById("bulten-list").innerHTML = rows.slice(0, 80).map((m, i) => `
+      document.getElementById("bmeta").textContent = needle
+        ? rows.length + " maç"
+        : rows.length + " maç, günün tamamı. Birine bas.";
+      document.getElementById("bulten-list").innerHTML = rows.map((m) => `
         <button class="pick article ${picked && picked.id === m.id ? "on" : ""}" data-i="${bulletin.indexOf(m)}" type="button">
           <div class="top"><span>${m.time || ""}</span><span>${m.league || ""}</span></div>
           <div class="teams">${m.home} – ${m.away}</div>
