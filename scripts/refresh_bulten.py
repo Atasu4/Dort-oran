@@ -1,7 +1,7 @@
 import json
 import re
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -37,11 +37,18 @@ def main():
     text = re.sub(r"([{,])\s*([A-Za-z_][A-Za-z0-9_]*)\s*:", r'\1"\2":', raw).replace("'", '"')
     data = json.loads(text)
     now = datetime.now(ZoneInfo("Europe/Istanbul"))
-    today = day_key(now.strftime("%d.%m.%Y"))
+    today = now.strftime("%d.%m.%Y")
+    tomorrow = (now + timedelta(days=1)).strftime("%d.%m.%Y")
     matches = []
     for day in data["m"]:
         for row in day["m"]:
-            if day_key(row[7]) < today:
+            date = str(row[7])
+            time = str(row[6])
+            if date == today:
+                pass
+            elif date == tomorrow and time <= "11:59":
+                pass
+            else:
                 continue
             o1, ox, o2 = odd(row[16]), odd(row[17]), odd(row[18])
             if o1 is None or ox is None or o2 is None:
@@ -51,8 +58,8 @@ def main():
                     "id": int(row[0]),
                     "home": str(row[1]).strip(),
                     "away": str(row[3]).strip(),
-                    "time": str(row[6]),
-                    "date": str(row[7]),
+                    "time": time,
+                    "date": date,
                     "league": str(row[26] or ""),
                     "o1": o1,
                     "ox": ox,

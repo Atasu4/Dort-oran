@@ -39,7 +39,12 @@
     .odds span { background:var(--bg); border-radius:8px; padding:6px 0; }
     .odds span.hit { background:var(--green); color:#fff; }
     .hide { display:none; }
-    #bulten-list { max-height: none; }
+    .hour {
+      margin: 14px 0 6px;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+    }
   </style>
 </head>
 <body>
@@ -208,12 +213,23 @@
       const rows = needle ? bulletin.filter((m) => `${m.home} ${m.away} ${m.league}`.toLocaleLowerCase("tr").includes(needle)) : bulletin;
       document.getElementById("bmeta").textContent = needle
         ? rows.length + " maç"
-        : rows.length + " maç, bültenin tamamı. Birine bas.";
-      document.getElementById("bulten-list").innerHTML = rows.map((m) => `
-        <button class="pick article ${picked && picked.id === m.id ? "on" : ""}" data-i="${bulletin.indexOf(m)}" type="button">
-          <div class="top"><span>${m.date || ""} ${m.time || ""}</span><span>${m.league || ""}</span></div>
-          <div class="teams">${m.home} – ${m.away}</div>
-        </button>`).join("");
+        : rows.length + " maç. Bugün 23:59, yarın 11:59.";
+      const chunks = [];
+      let last = "";
+      for (const match of rows) {
+        const hour = (match.time || "00:00").slice(0, 2) + ":00";
+        const label = (match.date || "") + " " + hour;
+        if (label !== last) {
+          const count = rows.filter((item) => ((item.date || "") + " " + (item.time || "00:00").slice(0, 2) + ":00") === label).length;
+          chunks.push(`<div class="hour">${label} · ${count} maç</div>`);
+          last = label;
+        }
+        chunks.push(`<button class="pick article ${picked && picked.id === match.id ? "on" : ""}" data-i="${bulletin.indexOf(match)}" type="button">
+          <div class="top"><span>${match.time || ""}</span><span>${match.league || ""}</span></div>
+          <div class="teams">${match.home} – ${match.away}</div>
+        </button>`);
+      }
+      document.getElementById("bulten-list").innerHTML = chunks.join("");
     }
 
     document.getElementById("tab-manuel").onclick = () => showTab("manuel");
