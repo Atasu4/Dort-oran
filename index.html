@@ -208,10 +208,10 @@
       const rows = needle ? bulletin.filter((m) => `${m.home} ${m.away} ${m.league}`.toLocaleLowerCase("tr").includes(needle)) : bulletin;
       document.getElementById("bmeta").textContent = needle
         ? rows.length + " maç"
-        : rows.length + " maç, günün tamamı. Birine bas.";
+        : rows.length + " maç, bültenin tamamı. Birine bas.";
       document.getElementById("bulten-list").innerHTML = rows.map((m) => `
         <button class="pick article ${picked && picked.id === m.id ? "on" : ""}" data-i="${bulletin.indexOf(m)}" type="button">
-          <div class="top"><span>${m.time || ""}</span><span>${m.league || ""}</span></div>
+          <div class="top"><span>${m.date || ""} ${m.time || ""}</span><span>${m.league || ""}</span></div>
           <div class="teams">${m.home} – ${m.away}</div>
         </button>`).join("");
     }
@@ -235,7 +235,7 @@
       drawBulletin();
       search();
     };
-    fetch("2026-09-26.json").then((res) => res.json()).then((data) => {
+    fetch("bulten.json").then((res) => res.json()).then((data) => {
       bulletin = data.matches || [];
       drawBulletin();
     }).catch(() => { document.getElementById("bmeta").textContent = "Bülten açılmadı"; });

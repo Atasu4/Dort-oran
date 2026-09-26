@@ -1,0 +1,26 @@
+name: Bulten
+on:
+  schedule:
+    - cron: "0 3 * * *"
+    - cron: "0 9 * * *"
+    - cron: "0 15 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python3 scripts/refresh_bulten.py
+      - name: Kaydet
+        run: |
+          git config user.name "Atasu4"
+          git config user.email "atasugokcen@gmail.com"
+          git add bulten.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Bulteni guncelle"
+          git push
