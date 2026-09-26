@@ -39,12 +39,22 @@
     .odds span { background:var(--bg); border-radius:8px; padding:6px 0; }
     .odds span.hit { background:var(--green); color:#fff; }
     .hide { display:none; }
+    #bulten-list article { padding: 6px 10px; margin-top: 4px; border-radius: 10px; }
+    #bulten-list .top { font-size: 11px; }
+    #bulten-list .teams { margin: 0; font-size: 13px; font-weight: 500; }
     .hour {
-      margin: 14px 0 6px;
-      color: var(--muted);
+      width: 100%;
+      margin: 6px 0 0;
+      padding: 8px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--fg);
+      text-align: left;
       font-size: 13px;
-      letter-spacing: 0.04em;
     }
+    .slot { display: none; }
+    .slot.open { display: block; }
   </style>
 </head>
 <body>
@@ -208,28 +218,30 @@
       document.getElementById("panel-manuel").classList.toggle("hide", next !== "manuel");
       document.getElementById("panel-bulten").classList.toggle("hide", next !== "bulten");
     }
+    const openHours = new Set();
+    function hourOf(match) {
+      return (match.date || "") + " " + (match.time || "00:00").slice(0, 2) + ":00";
+    }
     function drawBulletin() {
       const needle = document.getElementById("q").value.trim().toLocaleLowerCase("tr");
       const rows = needle ? bulletin.filter((m) => `${m.home} ${m.away} ${m.league}`.toLocaleLowerCase("tr").includes(needle)) : bulletin;
       document.getElementById("bmeta").textContent = needle
         ? rows.length + " maç"
         : rows.length + " maç. Bugün 23:59, yarın 11:59.";
-      const chunks = [];
-      let last = "";
+      const groups = [];
       for (const match of rows) {
-        const hour = (match.time || "00:00").slice(0, 2) + ":00";
-        const label = (match.date || "") + " " + hour;
-        if (label !== last) {
-          const count = rows.filter((item) => ((item.date || "") + " " + (item.time || "00:00").slice(0, 2) + ":00") === label).length;
-          chunks.push(`<div class="hour">${label} · ${count} maç</div>`);
-          last = label;
-        }
-        chunks.push(`<button class="pick article ${picked && picked.id === match.id ? "on" : ""}" data-i="${bulletin.indexOf(match)}" type="button">
+        const label = hourOf(match);
+        if (!groups.length || groups[groups.length - 1].label !== label) groups.push({ label, items: [] });
+        groups[groups.length - 1].items.push(match);
+      }
+      document.getElementById("bulten-list").innerHTML = groups.map((group) => {
+        const open = openHours.has(group.label);
+        const matches = group.items.map((match) => `<button class="pick article ${picked && picked.id === match.id ? "on" : ""}" data-i="${bulletin.indexOf(match)}" type="button">
           <div class="top"><span>${match.time || ""}</span><span>${match.league || ""}</span></div>
           <div class="teams">${match.home} – ${match.away}</div>
-        </button>`);
-      }
-      document.getElementById("bulten-list").innerHTML = chunks.join("");
+        </button>`).join("");
+        return `<button class="hour" type="button" data-hour="${group.label}">${open ? "−" : "+"} ${group.label} · ${group.items.length}</button><div class="slot${open ? " open" : ""}">${matches}</div>`;
+      }).join("");
     }
 
     document.getElementById("tab-manuel").onclick = () => showTab("manuel");
@@ -244,9 +256,18 @@
     };
     document.getElementById("q").addEventListener("input", drawBulletin);
     document.getElementById("bulten-list").onclick = (event) => {
-      const button = event.target.closest("button");
+      const hourButton = event.target.closest(".hour");
+      if (hourButton) {
+        const label = hourButton.dataset.hour;
+        if (openHours.has(label)) openHours.delete(label);
+        else openHours.add(label);
+        drawBulletin();
+        return;
+      }
+      const button = event.target.closest("button.pick");
       if (!button) return;
       const match = bulletin[Number(button.dataset.i)];
+      openHours.add(hourOf(match));
       picked = { id: match.id, name: match.home + " – " + match.away, o1: match.o1, ox: match.ox, o2: match.o2, alt: match.alt, ust: match.ust };
       drawBulletin();
       search();
