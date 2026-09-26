@@ -62,7 +62,7 @@
         <input id="ust" inputmode="decimal" placeholder="—">
         <div class="lift" id="l1">—</div><div class="lift" id="lx">—</div><div class="lift" id="l2">—</div><div class="lift" id="la">—</div><div class="lift" id="lu">—</div>
       </div>
-      <p class="meta">Üst satır İddaa. Alt satır arşivde aranan Bet365 karşılığı. En az iki kutu.</p>
+      <p class="meta">Üst satır İddaa. Alt satır 22 liglik arşivde aranan Bet365 karşılığı. En az iki kutu.</p>
     </section>
 
     <section id="panel-bulten" class="hide">
@@ -167,7 +167,7 @@
     async function ensureArchive() {
       if (archive) return;
       document.getElementById("meta").textContent = "Arşiv yükleniyor";
-      const data = await fetch("bet365_maclar.json").then((res) => res.json());
+      const data = await fetch("arsiv.json").then((res) => res.json());
       archive = data;
     }
     async function search() {
