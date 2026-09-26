@@ -25,6 +25,59 @@ def day_key(value):
     return year + month + day
 
 
+def team_id(value):
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
+
+
+def side_line(row, played, win, draw, loss, goals_for, goals_against, points):
+    return {
+        "played": row[played],
+        "w": row[win],
+        "d": row[draw],
+        "l": row[loss],
+        "gf": row[goals_for],
+        "ga": row[goals_against],
+        "pts": row[points],
+    }
+
+
+def load_table(standing_id, cache):
+    if standing_id in cache:
+        return cache[standing_id]
+    table = {}
+    url = f"https://arsiv.mackolik.com/AjaxHandlers/StandingHandler.ashx?op=standing&id={standing_id}"
+    request = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "Mozilla/5.0",
+            "Referer": "https://arsiv.mackolik.com/Standings/Default.aspx",
+            "X-Requested-With": "XMLHttpRequest",
+        },
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=20) as response:
+            payload = json.loads(response.read().decode("utf-8", "replace"))
+        for rank, row in enumerate(payload.get("s") or [], start=1):
+            if not isinstance(row, list) or len(row) < 16:
+                continue
+            home = side_line(row, 2, 4, 6, 8, 10, 12, 14)
+            away = side_line(row, 3, 5, 7, 9, 11, 13, 15)
+            table[int(row[0])] = {
+                "rank": rank,
+                "pts": home["pts"] + away["pts"],
+                "played": home["played"] + away["played"],
+                "home": home,
+                "away": away,
+            }
+    except Exception as error:
+        print(f"puan {standing_id} alinmadi: {error}")
+    cache[standing_id] = table
+    return table
+
+
 def main():
     request = urllib.request.Request(
         URL,
@@ -58,6 +111,9 @@ def main():
                     "id": int(row[0]),
                     "home": str(row[1]).strip(),
                     "away": str(row[3]).strip(),
+                    "homeId": team_id(row[2]),
+                    "awayId": team_id(row[4]),
+                    "standingId": team_id(row[49]) if len(row) > 49 else 0,
                     "time": time,
                     "date": date,
                     "league": str(row[26] or ""),
@@ -68,6 +124,13 @@ def main():
                     "ust": odd(row[23]),
                 }
             )
+    cache = {}
+    for match in matches:
+        standing_id = match.pop("standingId", 0)
+        table = load_table(standing_id, cache) if standing_id else {}
+        match["homeTable"] = table.get(match.pop("homeId", 0))
+        match["awayTable"] = table.get(match.pop("awayId", 0))
+    filled = sum(1 for match in matches if match["homeTable"] or match["awayTable"])
     matches.sort(key=lambda match: (day_key(match["date"]), match["time"], match["home"]))
     out = {
         "updated": now.isoformat(timespec="minutes"),
@@ -75,7 +138,7 @@ def main():
     }
     path = Path(__file__).resolve().parents[1] / "bulten.json"
     path.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"{len(matches)} mac -> {path}")
+    print(f"{len(matches)} mac, {filled} puanli, {len(cache)} lig -> {path}")
 
 
 if __name__ == "__main__":

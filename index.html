@@ -41,7 +41,7 @@
     .hide { display:none; }
     #bulten-list article { padding: 6px 10px; margin-top: 4px; border-radius: 10px; }
     #bulten-list .top { font-size: 11px; }
-    #bulten-list .teams { margin: 0; font-size: 13px; font-weight: 500; }
+    #bulten-list .stat { font-size: 11px; color: var(--muted); margin-top: 1px; }
     .hour {
       width: 100%;
       margin: 6px 0 0;
@@ -222,6 +222,11 @@
     function hourOf(match) {
       return (match.date || "") + " " + (match.time || "00:00").slice(0, 2) + ":00";
     }
+    function tableLine(label, table, side) {
+      if (!table || !table[side]) return "";
+      const part = table[side];
+      return `<div class="stat">${table.rank}. sıra ${table.pts}p · ${label} ${part.w}-${part.d}-${part.l} ${part.gf}-${part.ga}</div>`;
+    }
     function drawBulletin() {
       const needle = document.getElementById("q").value.trim().toLocaleLowerCase("tr");
       const rows = needle ? bulletin.filter((m) => `${m.home} ${m.away} ${m.league}`.toLocaleLowerCase("tr").includes(needle)) : bulletin;
@@ -239,6 +244,8 @@
         const matches = group.items.map((match) => `<button class="pick article ${picked && picked.id === match.id ? "on" : ""}" data-i="${bulletin.indexOf(match)}" type="button">
           <div class="top"><span>${match.time || ""}</span><span>${match.league || ""}</span></div>
           <div class="teams">${match.home} – ${match.away}</div>
+          ${tableLine("ev", match.homeTable, "home")}
+          ${tableLine("dep", match.awayTable, "away")}
         </button>`).join("");
         return `<button class="hour" type="button" data-hour="${group.label}">${open ? "−" : "+"} ${group.label} · ${group.items.length}</button><div class="slot${open ? " open" : ""}">${matches}</div>`;
       }).join("");
