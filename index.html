@@ -81,6 +81,7 @@
     #hits .top { font-size: 12px; }
     #hits .sum { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; padding: 0; background: transparent; border: 0; }
     #hits .sum div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
+    #hits .sum div.good, #hits .sum div.good span { background: var(--green); color: #fff; border-color: var(--green); }
   </style>
 </head>
 <body>
@@ -212,13 +213,19 @@
       }
       const total = found.hits.length;
       const pct = (n) => (total ? Math.round((n / total) * 100) : 0);
+      const shares = { "1": pct(home), "X": pct(draw), "2": pct(away) };
+      const trio = found.active.filter((market) => market.short === "1" || market.short === "X" || market.short === "2");
+      const favorite = trio.reduce((best, market) => (!best || market.iddaa < best.iddaa ? market : best), null);
+      const leader = Object.entries(shares).sort((a, b) => b[1] - a[1])[0];
+      const good = favorite && leader && leader[0] === favorite.short && leader[1] > 64 ? leader[0] : "";
       meta.textContent = total + " maçta skor dağılımı";
       const rows = [...scores.entries()].sort((a, b) => b[1] - a[1]);
+      const cell = (label, value) => `<div class="top${good === label ? " good" : ""}"><span>${label}</span><span>%${value}</span></div>`;
       box.innerHTML = `
         <div class="sum">
-          <div class="top"><span>1</span><span>%${pct(home)}</span></div>
-          <div class="top"><span>X</span><span>%${pct(draw)}</span></div>
-          <div class="top"><span>2</span><span>%${pct(away)}</span></div>
+          ${cell("1", shares["1"])}
+          ${cell("X", shares.X)}
+          ${cell("2", shares["2"])}
         </div>
         ${rows.map(([score, n]) => `<article><div class="top"><strong>${score}</strong><span>%${pct(n)}</span></div></article>`).join("")}`;
     }
