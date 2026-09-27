@@ -24,4 +24,5 @@ jobs:
           git add bulten.json
           git diff --cached --quiet && exit 0
           git commit -m "Bulteni guncelle"
+          git pull --rebase origin main
           git push
