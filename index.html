@@ -4,39 +4,40 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Oran Analiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#0c1014; --surface:#151b21; --fg:#f4f7f8; --muted:#93a1aa; --red:#e30a17; --azure:#00a3d7; --green:#0e7a3d; --line:#2c3842; }
+    :root { --bg:#0b0d10; --surface:#14181d; --fg:#f3f0e8; --muted:#9a9386; --red:#9c2b2b; --line:#2a261f; --gold:#e4d0a2; }
     * { box-sizing:border-box; }
-    html, body { margin:0; background:#0c1014; color:var(--fg); }
+    html, body { margin:0; background:var(--bg); color:var(--fg); }
     body {
-      font-family:"Segoe UI",sans-serif;
+      font-family:"Source Sans 3","Segoe UI",sans-serif;
       line-height:1.4;
       min-height:100vh;
-      padding:8px;
-      background:
-        linear-gradient(#0c1014, #0c1014) padding-box,
-        repeating-linear-gradient(90deg, #6b5220 0 6px, #f6e2a4 6px 8px, #c9a24a 8px 14px, #8a6a2f 14px 16px) border-box;
-      border:8px solid transparent;
+      padding:10px;
     }
     .frame {
-      min-height:calc(100vh - 16px);
-      border:1px solid #e6c36a;
-      box-shadow:inset 0 0 0 3px #0c1014, inset 0 0 0 4px #a6843a;
-      padding:4px;
+      min-height:calc(100vh - 20px);
+      border:1px solid var(--gold);
+      box-shadow:inset 0 0 0 5px var(--bg), inset 0 0 0 6px rgba(228,208,162,0.55);
+      padding:10px 8px 28px;
     }
-    main { width:min(720px, calc(100% - 16px)); margin:0 auto; padding:14px 0 48px; }
+    main { width:min(720px, 100%); margin:0 auto; padding:6px 0 40px; }
     h1 {
-      margin:0;
+      margin:10px 0 0;
       text-align:center;
-      font-size:42px;
-      letter-spacing:0.06em;
-      color:#f6e2a4;
-      text-shadow:0 2px 0 #6b5220;
+      font-family:"Cormorant Garamond",Georgia,serif;
+      font-weight:500;
+      font-size:46px;
+      letter-spacing:0.16em;
+      text-transform:uppercase;
+      color:var(--gold);
     }
+    .rule { width:88px; height:1px; margin:10px auto 0; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
     .tabs { display:grid; grid-template-columns:1fr 1fr; gap:6px; background:var(--surface); padding:4px; border-radius:16px; margin:16px 0; }
     .tabs button, button.go { height:44px; border:0; border-radius:12px; font-size:15px; }
     .tabs button { background:transparent; color:var(--muted); }
-    .tabs button.on { background:var(--red); color:#fff; }
+    .tabs button.on { background:#2a2418; color:var(--gold); }
     input, button.go { width:100%; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:12px; }
     input { height:48px; text-align:center; font-size:18px; }
     .sheet { display:grid; grid-template-columns:repeat(5,1fr); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
@@ -45,12 +46,12 @@
     .sheet .h, .sheet .lift { text-align:center; font-size:12px; color:var(--muted); padding:8px 2px; background:var(--surface); }
     .row { display:flex; gap:8px; margin:12px 0; flex-wrap:wrap; }
     .row button { height:40px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--fg); padding:0 14px; }
-    .row button.on { background:var(--red); border-color:var(--red); }
-    button.go { background:var(--red); border:0; font-weight:600; }
+    .row button.on { background:#2a2418; border-color:var(--gold); color:var(--gold); }
+    button.go { background:#2a2418; color:var(--gold); border:1px solid rgba(228,208,162,0.5); font-weight:600; letter-spacing:0.04em; }
     .meta { color:var(--muted); font-size:14px; }
     article { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:12px 14px; margin-top:8px; }
     article.pick { width:100%; text-align:left; color:inherit; }
-    article.on { outline:2px solid var(--red); }
+    article.on { outline:1px solid var(--gold); }
     .top { display:flex; justify-content:space-between; gap:8px; color:var(--muted); font-size:13px; }
     .teams { margin:4px 0; font-size:17px; font-weight:600; }
     .odds { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin-top:8px; }
@@ -86,6 +87,7 @@
   <div class="frame">
   <main>
     <h1>Oran Analiz</h1>
+    <div class="rule"></div>
     <div class="tabs">
       <button id="tab-manuel" class="on" type="button">Manuel analiz</button>
       <button id="tab-bulten" type="button">Bülten</button>
