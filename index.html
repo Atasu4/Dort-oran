@@ -59,7 +59,13 @@
     .odds b { color:var(--muted); font-size:11px; font-weight:500; }
     .odds span { background:var(--bg); border-radius:8px; padding:6px 0; }
     .odds span.hit { background:var(--green); color:#fff; }
-    .hide { display:none; }
+    #lock {
+      position:fixed; inset:0; z-index:30; background:#0b0d10;
+      display:flex; align-items:center; justify-content:center; padding:24px;
+    }
+    #lock.hide { display:none; }
+    #lock form { width:min(320px, 100%); }
+    #lock input { margin:18px 0 10px; }
     #bulten-list article { padding: 4px 6px; margin: 0; border-radius: 8px; min-width: 0; }
     #bulten-list .top { font-size: 10px; }
     #bulten-list .teams { margin: 0; font-size: 12px; font-weight: 600; line-height: 1.2; }
@@ -87,6 +93,15 @@
   </style>
 </head>
 <body>
+  <div id="lock">
+    <form id="lock-form">
+      <h1>Oran Analiz</h1>
+      <div class="rule"></div>
+      <input id="lock-key" type="password" placeholder="Şifre" autocomplete="current-password">
+      <button class="go" type="submit">Gir</button>
+      <p class="meta" id="lock-msg"></p>
+    </form>
+  </div>
   <div class="frame">
   <main>
     <h1>Oran Analiz</h1>
@@ -370,11 +385,33 @@
       drawBulletin();
       search();
     };
-    fetch("bulten.json").then((res) => res.json()).then((data) => {
-      bulletin = data.matches || [];
-      drawBulletin();
-    }).catch(() => { document.getElementById("bmeta").textContent = "Bülten açılmadı"; });
+    function loadBulletin() {
+      fetch("bulten.json").then((res) => res.json()).then((data) => {
+        bulletin = data.matches || [];
+        drawBulletin();
+      }).catch(() => { document.getElementById("bmeta").textContent = "Bülten açılmadı"; });
+    }
     readManual();
+    const PASS = "848672fc2b14ce96ea00ac5cc8f5af759ff9470a83fb32067a125ca84f1b26fc";
+    async function hashKey(text) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+      return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
+    }
+    function unlock() {
+      document.getElementById("lock").classList.add("hide");
+      if (!unlock.done) { unlock.done = true; loadBulletin(); }
+    }
+    if (localStorage.getItem("oran-kapi") === PASS) unlock();
+    document.getElementById("lock-form").onsubmit = async (event) => {
+      event.preventDefault();
+      const hashed = await hashKey(document.getElementById("lock-key").value.trim());
+      if (hashed !== PASS) {
+        document.getElementById("lock-msg").textContent = "Şifre yanlış";
+        return;
+      }
+      localStorage.setItem("oran-kapi", PASS);
+      unlock();
+    };
   </script>
   </div>
 </body>
