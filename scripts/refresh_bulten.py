@@ -60,11 +60,16 @@ def load_table(standing_id, cache):
     try:
         with urllib.request.urlopen(request, timeout=20) as response:
             payload = json.loads(response.read().decode("utf-8", "replace"))
+        home_goals = home_games = away_goals = away_games = 0
         for rank, row in enumerate(payload.get("s") or [], start=1):
             if not isinstance(row, list) or len(row) < 16:
                 continue
             home = side_line(row, 2, 4, 6, 8, 10, 12, 14)
             away = side_line(row, 3, 5, 7, 9, 11, 13, 15)
+            home_goals += home["gf"]
+            home_games += home["played"]
+            away_goals += away["gf"]
+            away_games += away["played"]
             table[int(row[0])] = {
                 "rank": rank,
                 "pts": home["pts"] + away["pts"],
@@ -72,6 +77,8 @@ def load_table(standing_id, cache):
                 "home": home,
                 "away": away,
             }
+        table["_lgH"] = round(home_goals / home_games, 3) if home_games else None
+        table["_lgA"] = round(away_goals / away_games, 3) if away_games else None
     except Exception as error:
         print(f"puan {standing_id} alinmadi: {error}")
     cache[standing_id] = table
@@ -128,6 +135,8 @@ def main():
     for match in matches:
         standing_id = match.pop("standingId", 0)
         table = load_table(standing_id, cache) if standing_id else {}
+        match["lgH"] = table.get("_lgH")
+        match["lgA"] = table.get("_lgA")
         match["homeTable"] = table.get(match.pop("homeId", 0))
         match["awayTable"] = table.get(match.pop("awayId", 0))
     filled = sum(1 for match in matches if match["homeTable"] or match["awayTable"])

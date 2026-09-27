@@ -76,7 +76,9 @@
     }
     .slot { display: none; }
     .slot.open { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px; }
-    #hits { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    #second { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin:8px 0; }
+    #second div { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:6px 8px; font-size:12px; }
+    #second strong { font-weight:600; }
     #hits article { padding: 6px 8px; margin: 0; border-radius: 8px; }
     #hits .top { font-size: 12px; }
     #hits .sum { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; padding: 0; background: transparent; border: 0; }
@@ -120,6 +122,7 @@
     </div>
     <button class="go" id="ara" type="button">Eski maçları bul</button>
     <p class="meta" id="aranan"></p>
+    <div id="second"></div>
     <p class="meta" id="meta">Yeşil kutu tutan orandır. Dört oran doluysa en az dört tutmalı.</p>
     <div id="hits"></div>
   </main>
@@ -201,6 +204,51 @@
       const marg = z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n));
       return (centre - marg) / den;
     }
+    function poissonP(k, lambda) {
+      let fact = 1;
+      for (let i = 2; i <= k; i++) fact *= i;
+      return Math.exp(-lambda) * Math.pow(lambda, k) / fact;
+    }
+    function secondModel(match) {
+      const home = match.homeTable && match.homeTable.home;
+      const away = match.awayTable && match.awayTable.away;
+      if (!home || !away || !home.played || !away.played || !match.lgH || !match.lgA) return null;
+      const hs = home.gf / home.played;
+      const hc = home.ga / home.played;
+      const awayScored = away.gf / away.played;
+      const awayConceded = away.ga / away.played;
+      const lamH = hs * awayConceded / match.lgH;
+      const lamA = awayScored * hc / match.lgA;
+      let best = { score: "0-0", p: -1 };
+      for (let h = 0; h <= 5; h++) {
+        for (let a = 0; a <= 5; a++) {
+          const p = poissonP(h, lamH) * poissonP(a, lamA);
+          if (p > best.p) best = { score: h + "-" + a, p };
+        }
+      }
+      const diff = (home.gf - home.ga) - (away.gf - away.ga);
+      return {
+        lamH, lamA,
+        poisson: lamH > lamA ? "1" : lamA > lamH ? "2" : "X",
+        rating: diff > 0 ? "1" : diff < 0 ? "2" : "X",
+        score: best.score,
+        line: `Ev ${home.played} maç ${home.gf}-${home.ga} · Dep ${away.played} maç ${away.gf}-${away.ga}`,
+      };
+    }
+    function paintSecond(leader) {
+      const box = document.getElementById("second");
+      if (!box) return;
+      if (tab !== "bulten" || !picked) { box.innerHTML = ""; return; }
+      const model = secondModel(picked);
+      if (!model) { box.innerHTML = `<div>İkinci analiz için gol verisi yok</div>`; return; }
+      const same = model.poisson === model.rating && model.poisson === leader;
+      box.innerHTML = `
+        <div>${model.line}</div>
+        <div>Poisson <strong>${model.poisson}</strong> · ${model.lamH.toFixed(2)}-${model.lamA.toFixed(2)}</div>
+        <div>Reyting <strong>${model.rating}</strong></div>
+        <div>Skor <strong>${model.score}</strong></div>
+        <div>Eşleşme <strong>${same ? "VAR" : "YOK"}</strong></div>`;
+    }
     function paint(found) {
       const box = document.getElementById("hits");
       const meta = document.getElementById("meta");
@@ -229,6 +277,7 @@
       const leader = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
       const low = wilsonLower(leader ? leader[1] : 0, total);
       const good = favorite && leader && total >= 200 && leader[0] === favorite.short && low > 0.55 ? leader[0] : "";
+      paintSecond(leader ? leader[0] : "");
       meta.textContent = total + " maçta skor dağılımı";
       const rows = [...scores.entries()].sort((a, b) => b[1] - a[1]);
       const cell = (label, value) => `<div class="top${good === label ? " good" : ""}"><span>${label}</span><span>%${value}</span></div>`;
@@ -312,7 +361,12 @@
       if (!button) return;
       const match = bulletin[Number(button.dataset.i)];
       openHours.add(hourOf(match));
-      picked = { id: match.id, name: match.home + " – " + match.away, o1: match.o1, ox: match.ox, o2: match.o2, alt: match.alt, ust: match.ust };
+      picked = {
+        id: match.id,
+        name: match.home + " – " + match.away,
+        o1: match.o1, ox: match.ox, o2: match.o2, alt: match.alt, ust: match.ust,
+        homeTable: match.homeTable, awayTable: match.awayTable, lgH: match.lgH, lgA: match.lgA,
+      };
       drawBulletin();
       search();
     };
