@@ -192,6 +192,15 @@
       hits.sort((a, b) => b.matched - a.matched || a.gap - b.gap);
       return { active, hits, minimum };
     }
+    function wilsonLower(hits, n) {
+      if (!n) return 0;
+      const z = 1.96;
+      const p = hits / n;
+      const den = 1 + (z * z) / n;
+      const centre = p + (z * z) / (2 * n);
+      const marg = z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n));
+      return (centre - marg) / den;
+    }
     function paint(found) {
       const box = document.getElementById("hits");
       const meta = document.getElementById("meta");
@@ -213,11 +222,13 @@
       }
       const total = found.hits.length;
       const pct = (n) => (total ? Math.round((n / total) * 100) : 0);
+      const counts = { "1": home, "X": draw, "2": away };
       const shares = { "1": pct(home), "X": pct(draw), "2": pct(away) };
       const trio = found.active.filter((market) => market.short === "1" || market.short === "X" || market.short === "2");
       const favorite = trio.reduce((best, market) => (!best || market.iddaa < best.iddaa ? market : best), null);
-      const leader = Object.entries(shares).sort((a, b) => b[1] - a[1])[0];
-      const good = favorite && leader && leader[0] === favorite.short && leader[1] > 64 ? leader[0] : "";
+      const leader = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+      const low = wilsonLower(leader ? leader[1] : 0, total);
+      const good = favorite && leader && total >= 200 && leader[0] === favorite.short && low > 0.55 ? leader[0] : "";
       meta.textContent = total + " maçta skor dağılımı";
       const rows = [...scores.entries()].sort((a, b) => b[1] - a[1]);
       const cell = (label, value) => `<div class="top${good === label ? " good" : ""}"><span>${label}</span><span>%${value}</span></div>`;
