@@ -4,52 +4,161 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Oran Analiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#0b0d10; --surface:#14181d; --fg:#f3f0e8; --muted:#9a9386; --line:#2a261f; --gold:#e4d0a2; --green:#1f7a45; }
+    :root { --bg:#0b0d10; --surface:#14181d; --fg:#f3f0e8; --muted:#9a9386; --red:#9c2b2b; --line:#2a261f; --gold:#e4d0a2; --green:#1f7a45; }
     * { box-sizing:border-box; }
-    html,body { margin:0; background:var(--bg); color:var(--fg); font-family:sans-serif; }
-    body { padding:10px; }
-    .frame { border:1px solid var(--gold); min-height:calc(100vh - 20px); padding:10px 8px 28px; }
-    main { width:min(720px,100%); margin:0 auto; }
-    h1 { text-align:center; color:var(--gold); font-size:22px; letter-spacing:.12em; text-transform:uppercase; }
-    .tabs { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; background:var(--surface); padding:4px; border-radius:16px; }
-    .tabs button, .go { height:44px; border:0; border-radius:12px; }
+    html, body { margin:0; background:var(--bg); color:var(--fg); }
+    body {
+      font-family:"Source Sans 3","Segoe UI",sans-serif;
+      line-height:1.4;
+      min-height:100vh;
+      padding:10px;
+    }
+    .frame {
+      min-height:calc(100vh - 20px);
+      border:1px solid var(--gold);
+      box-shadow:inset 0 0 0 5px var(--bg), inset 0 0 0 6px rgba(228,208,162,0.55);
+      padding:10px 8px 28px;
+    }
+    main { width:min(720px, 100%); margin:0 auto; padding:6px 0 40px; }
+    h1 {
+      margin:10px 0 0;
+      text-align:center;
+      font-family:"Cormorant Garamond",Georgia,serif;
+      font-weight:500;
+      font-size:24px;
+      letter-spacing:0.18em;
+      text-transform:uppercase;
+      color:var(--gold);
+    }
+    .rule { width:88px; height:1px; margin:10px auto 0; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .tabs { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; background:var(--surface); padding:4px; border-radius:16px; margin:16px 0; }
+    .hide { display:none !important; }
+    .tabs button, button.go { height:44px; border:0; border-radius:12px; font-size:15px; }
     .tabs button { background:transparent; color:var(--muted); }
     .tabs button.on { background:#2a2418; color:var(--gold); }
-    .hide { display:none !important; }
+    input, button.go { width:100%; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:12px; }
+    input { height:48px; text-align:center; font-size:18px; }
+    .sheet { display:grid; grid-template-columns:repeat(5,1fr); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
+    .sheet div, .sheet input { border-right:1px solid var(--line); }
+    .sheet div:last-child, .sheet input:last-child { border-right:0; }
+    .sheet .h, .sheet .lift { text-align:center; font-size:12px; color:var(--muted); padding:8px 2px; background:var(--surface); }
+    .row { display:flex; gap:8px; margin:12px 0; flex-wrap:wrap; }
+    .row button { height:40px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--fg); padding:0 14px; }
+    .row button.on { background:#2a2418; border-color:var(--gold); color:var(--gold); }
+    button.go { background:#2a2418; color:var(--gold); border:1px solid rgba(228,208,162,0.5); font-weight:600; letter-spacing:0.04em; }
     .meta { color:var(--muted); font-size:14px; }
-    article { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 12px; margin:6px 0; }
-    .top { display:flex; justify-content:space-between; color:var(--muted); font-size:13px; }
-    input { width:100%; height:48px; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:12px; }
-    .go { width:100%; background:#2a2418; color:var(--gold); }
-    #lock { position:fixed; inset:0; background:#0b0d10; display:flex; align-items:center; justify-content:center; padding:24px; }
+    article { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:12px 14px; margin-top:8px; }
+    article.pick { width:100%; text-align:left; color:inherit; }
+    article.on { outline:1px solid var(--gold); }
+    .top { display:flex; justify-content:space-between; gap:8px; color:var(--muted); font-size:13px; }
+    .teams { margin:4px 0; font-size:17px; font-weight:600; }
+    .odds { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin-top:8px; }
+    .odds b, .odds span { display:block; text-align:center; }
+    .odds b { color:var(--muted); font-size:11px; font-weight:500; }
+    .odds span { background:var(--bg); border-radius:8px; padding:6px 0; }
+    .odds span.hit { background:var(--green); color:#fff; }
+    #lock {
+      position:fixed; inset:0; z-index:30; background:#0b0d10;
+      display:flex; align-items:center; justify-content:center; padding:24px;
+    }
     #lock.hide { display:none; }
+    #lock form { width:min(320px, 100%); }
+    #lock input { margin:18px 0 10px; }
+    #bulten-list article { padding: 4px 6px; margin: 0; border-radius: 8px; min-width: 0; }
+    #bulten-list .top { font-size: 10px; }
+    #bulten-list .teams { margin: 0; font-size: 12px; font-weight: 600; line-height: 1.2; }
+    .hour {
+      width: 100%;
+      margin: 6px 0 0;
+      padding: 6px 8px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--fg);
+      text-align: left;
+      font-size: 12px;
+    }
+    .slot { display: none; }
+    .slot.open { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px; }
+    #second { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin:8px 0; }
+    #second div { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:6px 8px; font-size:12px; }
+    #second strong { font-weight:600; }
+    #hits article { padding: 6px 8px; margin: 0; border-radius: 8px; }
+    #hits .top { font-size: 12px; }
+    #hits .sum { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; padding: 0; background: transparent; border: 0; }
+    #hits .sum div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
+    #hits .sum div.good, #hits .sum div.good span { background: var(--green); color: #fff; border-color: var(--green); }
   </style>
 </head>
 <body>
   <div id="lock">
-    <form id="lock-form" style="width:min(320px,100%)">
+    <form id="lock-form">
       <h1>Oran Analiz</h1>
-      <input id="lock-key" type="password" placeholder="Sifre">
+      <div class="rule"></div>
+      <input id="lock-key" type="password" placeholder="Şifre" autocomplete="current-password">
       <button class="go" type="submit">Gir</button>
       <p class="meta" id="lock-msg"></p>
     </form>
   </div>
   <div class="frame">
-    <main>
-      <h1>Oran Analiz</h1>
-      <div class="tabs">
-        <button id="tab-taktik" class="on" type="button">Taktik</button>
-        <button id="tab-bulten" type="button">Bulten</button>
-        <button id="tab-manuel" type="button">Yaz</button>
+  <main>
+    <h1>Oran Analiz</h1>
+    <div class="rule"></div>
+    <div class="tabs">
+      <button id="tab-taktik" class="on" type="button">Taktik</button>
+      <button id="tab-bulten" type="button">Bülten</button>
+      <button id="tab-manuel" type="button">Yaz</button>
+    </div>
+
+    <section id="panel-taktik">
+      <p class="meta">Yeşil kutu, Avrupa gecikmesi, üst 1,30 altı İY gol, 1,10 altı kısa favori.</p>
+      <div id="taktik-list"></div>
+    </section>
+
+    <section id="panel-manuel" class="hide">
+      <div class="sheet">
+        <div class="h">MS 1</div><div class="h">MS X</div><div class="h">MS 2</div><div class="h">Alt 2.5</div><div class="h">Üst 2.5</div>
+        <input id="o1" inputmode="decimal" placeholder="—">
+        <input id="ox" inputmode="decimal" placeholder="—">
+        <input id="o2" inputmode="decimal" placeholder="—">
+        <input id="alt" inputmode="decimal" placeholder="—">
+        <input id="ust" inputmode="decimal" placeholder="—">
+        <div class="lift" id="l1">—</div><div class="lift" id="lx">—</div><div class="lift" id="l2">—</div><div class="lift" id="la">—</div><div class="lift" id="lu">—</div>
       </div>
-      <section id="panel-taktik"><p class="meta">Yesil, Avrupa gecikmesi, ust 1,30 alti IY gol, 1,10 alti kisa favori.</p><div id="taktik-list"></div></section>
-      <section id="panel-bulten" class="hide"><p class="meta" id="bmeta">Bulten</p><div id="bulten-list"></div></section>
-      <section id="panel-manuel" class="hide"><p class="meta">Tam arsiv taramasi Bulten sekmesinde eski haliyle durur. Bu sayfa taktikleri gosterir.</p></section>
-    </main>
-  </div>
+      <p class="meta">Üst satır İddaa. Alt satır 22 liglik arşivde aranan Bet365 karşılığı. En az iki kutu.</p>
+    </section>
+
+    <section id="panel-bulten" class="hide">
+      <input id="q" placeholder="Takım veya lig" style="text-align:left;padding:0 14px;margin-bottom:8px">
+      <p class="meta" id="bmeta">Bülten yükleniyor</p>
+      <div id="bulten-list"></div>
+    </section>
+
+    <div id="analiz-tools" class="hide">
+    <div class="row" id="tol">
+      <button type="button" data-t="0.05">Sıkı ±0.05</button>
+      <button type="button" data-t="0.08" class="on">Yakın ±0.08</button>
+      <button type="button" data-t="0.12">Geniş ±0.12</button>
+    </div>
+    <button class="go" id="ara" type="button">Eski maçları bul</button>
+    <p class="meta" id="aranan"></p>
+    <div id="second"></div>
+    <p class="meta" id="meta">Yeşil kutu tutan orandır. Dört oran doluysa en az dört tutmalı.</p>
+    <div id="hits"></div>
+    </div>
+  </main>
   <script>
-    const PASS = "848672fc2b14ce96ea00ac5cc8f5af759ff9470a83fb32067a125ca84f1b26fc";
+    const BANDS = [
+      [1.2, 1.053], [1.4, 0.902], [1.6, 0.893], [1.8, 0.886], [2.1, 0.89],
+      [2.5, 0.875], [3, 0.86], [3.8, 0.906], [5, 0.85], [7, 0.833], [10, 0.786], [1e9, 0.658]
+    ];
+    const KEYS = ["o1", "ox", "o2", "alt", "ust"];
+    const LIFT = ["l1", "lx", "l2", "la", "lu"];
+    const SHORT = ["1", "X", "2", "A2.5", "Ü2.5"];
+    let tab = "taktik";
     const EUROPE = [
       { home:"Raelingen", away:"Lyn Oslo B", time:"19:00", side:"2", iddaa:6.82, europe:2.15, gap:30 },
       { home:"Guadeloupe", away:"Barbados", time:"22:00", side:"1", iddaa:2.14, europe:1.90, gap:10 },
@@ -57,45 +166,295 @@
       { home:"Leixoes U23", away:"Vizela U23", time:"18:00", side:"1", iddaa:2.16, europe:1.99, gap:7 },
       { home:"C Espanol", away:"Cambaceres", time:"21:00", side:"1", iddaa:1.68, europe:1.62, gap:7 }
     ];
-    function num(v){ const n=parseFloat(String(v).replace(",",".")); return Number.isFinite(n)&&n>1?n:null; }
-    function fav(m){ const s=[["1",num(m.o1)],["X",num(m.ox)],["2",num(m.o2)]].filter(x=>x[1]); s.sort((a,b)=>a[1]-b[1]); return s[0]||null; }
-    function card(m, extra){ return "<article><div class='top'><span>"+(m.time||"")+"</span><span>"+extra+"</span></div><div>"+m.home+" – "+m.away+"</div></article>"; }
-    function show(id){
-      ["taktik","bulten","manuel"].forEach(function(name){
-        document.getElementById("tab-"+name).classList.toggle("on", name===id);
-        document.getElementById("panel-"+name).classList.toggle("hide", name!==id);
+    let tol = 0.08;
+    let archive = null;
+    let bulletin = [];
+    let picked = null;
+
+    function band(price) {
+      for (const row of BANDS) if (price < row[0]) return row[1];
+      return 0.658;
+    }
+    function lift(iddaa) {
+      let guess = iddaa / 0.88;
+      for (let i = 0; i < 5; i++) guess = iddaa / band(guess);
+      return Math.round(guess * 100) / 100;
+    }
+    function num(value) {
+      const n = parseFloat(String(value).replace(",", "."));
+      return Number.isFinite(n) && n > 1 ? n : null;
+    }
+    function activeFrom(raw) {
+      return KEYS.map((key, index) => {
+        const iddaa = num(raw[key]);
+        return iddaa == null ? null : { index: index + 5, iddaa, bet365: lift(iddaa), short: SHORT[index] };
+      }).filter(Boolean);
+    }
+    function readManual() {
+      const raw = {};
+      KEYS.forEach((key, i) => {
+        raw[key] = document.getElementById(key).value;
+        const n = num(raw[key]);
+        document.getElementById(LIFT[i]).textContent = n == null ? "—" : lift(n).toFixed(2);
       });
+      return raw;
     }
-    async function hashKey(text){
-      const buf=await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
-      return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+    function scoreOf(row) {
+      const [h, a] = String(row[4] || "").split("-").map(Number);
+      if (!Number.isFinite(h) || !Number.isFinite(a)) return "";
+      return h > a ? "MS 1" : h === a ? "MS X" : "MS 2";
     }
-    function paint(list){
+    function minimumFor(count) {
+      return count >= 4 ? 4 : 2;
+    }
+    function find(raw) {
+      const active = activeFrom(raw);
+      const minimum = minimumFor(active.length);
+      if (active.length < 2) return { active, hits: [], need: true, minimum };
+      const hits = [];
+      for (const row of archive) {
+        let matched = 0, gap = 0;
+        const flags = [];
+        for (const market of active) {
+          const price = row[market.index];
+          const ok = typeof price === "number" && Math.abs(price - market.bet365) <= tol + 0.001;
+          flags.push(ok);
+          if (ok) { matched += 1; gap += Math.abs(price - market.bet365); }
+        }
+        if (matched >= minimum) hits.push({ row, matched, gap, flags });
+      }
+      hits.sort((a, b) => b.matched - a.matched || a.gap - b.gap);
+      return { active, hits, minimum };
+    }
+    function wilsonLower(hits, n) {
+      if (!n) return 0;
+      const z = 1.96;
+      const p = hits / n;
+      const den = 1 + (z * z) / n;
+      const centre = p + (z * z) / (2 * n);
+      const marg = z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n));
+      return (centre - marg) / den;
+    }
+    function poissonP(k, lambda) {
+      let fact = 1;
+      for (let i = 2; i <= k; i++) fact *= i;
+      return Math.exp(-lambda) * Math.pow(lambda, k) / fact;
+    }
+    function secondModel(match) {
+      const home = match.homeTable && match.homeTable.home;
+      const away = match.awayTable && match.awayTable.away;
+      if (!home || !away || !home.played || !away.played || !match.lgH || !match.lgA) return null;
+      const hs = home.gf / home.played;
+      const hc = home.ga / home.played;
+      const awayScored = away.gf / away.played;
+      const awayConceded = away.ga / away.played;
+      const lamH = hs * awayConceded / match.lgH;
+      const lamA = awayScored * hc / match.lgA;
+      let best = { score: "0-0", p: -1 };
+      for (let h = 0; h <= 5; h++) {
+        for (let a = 0; a <= 5; a++) {
+          const p = poissonP(h, lamH) * poissonP(a, lamA);
+          if (p > best.p) best = { score: h + "-" + a, p };
+        }
+      }
+      const diff = (home.gf - home.ga) - (away.gf - away.ga);
+      return {
+        lamH, lamA,
+        poisson: lamH > lamA ? "1" : lamA > lamH ? "2" : "X",
+        rating: diff > 0 ? "1" : diff < 0 ? "2" : "X",
+        score: best.score,
+        line: `Ev ${home.played} maç ${home.gf}-${home.ga} · Dep ${away.played} maç ${away.gf}-${away.ga}`,
+      };
+    }
+    function paintSecond(leader) {
+      const box = document.getElementById("second");
+      if (!box) return;
+      if (tab !== "bulten" || !picked) { box.innerHTML = ""; return; }
+      const model = secondModel(picked);
+      if (!model) { box.innerHTML = `<div>İkinci analiz için gol verisi yok</div>`; return; }
+      const same = model.poisson === model.rating && model.poisson === leader;
+      box.innerHTML = `
+        <div>${model.line}</div>
+        <div>Poisson <strong>${model.poisson}</strong> · ${model.lamH.toFixed(2)}-${model.lamA.toFixed(2)}</div>
+        <div>Reyting <strong>${model.rating}</strong></div>
+        <div>Skor <strong>${model.score}</strong></div>
+        <div>Eşleşme <strong>${same ? "VAR" : "YOK"}</strong></div>`;
+    }
+    function paint(found) {
+      const box = document.getElementById("hits");
+      const meta = document.getElementById("meta");
+      const ask = document.getElementById("aranan");
+      if (!archive) { meta.textContent = "Arşiv yükleniyor"; box.innerHTML = ""; return; }
+      if (found.need) { meta.textContent = "En az iki oran gerekli."; ask.textContent = ""; box.innerHTML = ""; return; }
+      const target = found.active.map((market) => market.short + " " + market.bet365.toFixed(2)).join("  ·  ");
+      const name = tab === "bulten" && picked && picked.name ? picked.name : "Yazdığın oranlar";
+      ask.textContent = name + "  →  " + target;
+      const scores = new Map();
+      let home = 0, draw = 0, away = 0;
+      for (const hit of found.hits) {
+        const score = hit.row[4] || "skor yok";
+        scores.set(score, (scores.get(score) || 0) + 1);
+        const result = scoreOf(hit.row);
+        if (result === "MS 1") home += 1;
+        else if (result === "MS X") draw += 1;
+        else if (result === "MS 2") away += 1;
+      }
+      const total = found.hits.length;
+      const pct = (n) => (total ? Math.round((n / total) * 100) : 0);
+      const counts = { "1": home, "X": draw, "2": away };
+      const shares = { "1": pct(home), "X": pct(draw), "2": pct(away) };
+      const trio = found.active.filter((market) => market.short === "1" || market.short === "X" || market.short === "2");
+      const favorite = trio.reduce((best, market) => (!best || market.iddaa < best.iddaa ? market : best), null);
+      const leader = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+      const low = wilsonLower(leader ? leader[1] : 0, total);
+      const good = favorite && leader && total >= 200 && leader[0] === favorite.short && low > 0.55 ? leader[0] : "";
+      paintSecond(leader ? leader[0] : "");
+      meta.textContent = total + " maçta skor dağılımı";
+      const rows = [...scores.entries()].sort((a, b) => b[1] - a[1]);
+      const cell = (label, value) => `<div class="top${good === label ? " good" : ""}"><span>${label}</span><span>%${value}</span></div>`;
+      box.innerHTML = `
+        <div class="sum">
+          ${cell("1", shares["1"])}
+          ${cell("X", shares.X)}
+          ${cell("2", shares["2"])}
+        </div>
+        ${rows.map(([score, n]) => `<article><div class="top"><strong>${score}</strong><span>%${pct(n)}</span></div></article>`).join("")}`;
+    }
+    async function ensureArchive() {
+      if (archive) return;
+      document.getElementById("meta").textContent = "Arşiv yükleniyor";
+      const data = await fetch("arsiv.json").then((res) => res.json());
+      archive = data;
+    }
+    async function search() {
+      try {
+        await ensureArchive();
+        const raw = tab === "manuel" ? readManual() : (picked || {});
+        paint(find(raw));
+      } catch (err) {
+        document.getElementById("meta").textContent = "Arşiv açılmadı";
+      }
+    }
+    function showTab(next) {
+      tab = next;
+      ["taktik","bulten","manuel"].forEach(function(name){
+        document.getElementById("tab-"+name).classList.toggle("on", name===next);
+        document.getElementById("panel-"+name).classList.toggle("hide", name!==next);
+      });
+      const tools = document.getElementById("analiz-tools");
+      if (tools) tools.classList.toggle("hide", next === "taktik");
+      if (next !== "bulten") {
+        document.getElementById("second").innerHTML = "";
+      } else if (picked) {
+        search();
+      }
+    }
+    const openHours = new Set();
+    function hourOf(match) {
+      return (match.date || "") + " " + (match.time || "00:00").slice(0, 2) + ":00";
+    }
+    function drawBulletin() {
+      const needle = document.getElementById("q").value.trim().toLocaleLowerCase("tr");
+      const rows = needle ? bulletin.filter((m) => `${m.home} ${m.away} ${m.league}`.toLocaleLowerCase("tr").includes(needle)) : bulletin;
+      document.getElementById("bmeta").textContent = needle
+        ? rows.length + " maç"
+        : rows.length + " maç. Bugün 23:59, yarın 11:59.";
+      const groups = [];
+      for (const match of rows) {
+        const label = hourOf(match);
+        if (!groups.length || groups[groups.length - 1].label !== label) groups.push({ label, items: [] });
+        groups[groups.length - 1].items.push(match);
+      }
+      document.getElementById("bulten-list").innerHTML = groups.map((group) => {
+        const open = openHours.has(group.label);
+        const matches = group.items.map((match) => `<button class="pick article ${picked && picked.id === match.id ? "on" : ""}" data-i="${bulletin.indexOf(match)}" type="button">
+          <div class="top"><span>${match.time || ""}</span><span>${match.league || ""}</span></div>
+          <div class="teams">${match.home} – ${match.away}</div>
+        </button>`).join("");
+        return `<button class="hour" type="button" data-hour="${group.label}">${open ? "−" : "+"} ${group.label} · ${group.items.length}</button><div class="slot${open ? " open" : ""}">${matches}</div>`;
+      }).join("");
+    }
+
+    document.getElementById("tab-taktik").onclick = () => showTab("taktik");
+    document.getElementById("tab-manuel").onclick = () => showTab("manuel");
+    document.getElementById("tab-bulten").onclick = () => showTab("bulten");
+    document.getElementById("ara").onclick = search;
+    KEYS.forEach((key) => document.getElementById(key).addEventListener("input", readManual));
+    document.getElementById("tol").onclick = (event) => {
+      const button = event.target.closest("button");
+      if (!button) return;
+      tol = Number(button.dataset.t);
+      document.querySelectorAll("#tol button").forEach((item) => item.classList.toggle("on", item === button));
+    };
+    document.getElementById("q").addEventListener("input", drawBulletin);
+    document.getElementById("bulten-list").onclick = (event) => {
+      const hourButton = event.target.closest(".hour");
+      if (hourButton) {
+        const label = hourButton.dataset.hour;
+        if (openHours.has(label)) openHours.delete(label);
+        else openHours.add(label);
+        drawBulletin();
+        return;
+      }
+      const button = event.target.closest("button.pick");
+      if (!button) return;
+      const match = bulletin[Number(button.dataset.i)];
+      openHours.add(hourOf(match));
+      picked = {
+        id: match.id,
+        name: match.home + " – " + match.away,
+        o1: match.o1, ox: match.ox, o2: match.o2, alt: match.alt, ust: match.ust,
+        homeTable: match.homeTable, awayTable: match.awayTable, lgH: match.lgH, lgA: match.lgA,
+      };
+      drawBulletin();
+      search();
+    };
+    function fav(m){
+      const s=[["1",num(m.o1)],["X",num(m.ox)],["2",num(m.o2)]].filter(x=>x[1]);
+      s.sort((a,b)=>a[1]-b[1]);
+      return s[0]||null;
+    }
+    function card(m, extra){
+      return "<article><div class='top'><span>"+(m.time||"")+"</span><span>"+extra+"</span></div><div class='teams'>"+m.home+" – "+m.away+"</div></article>";
+    }
+    function paintTaktik(list){
       const gol=list.filter(m=>num(m.ust)!=null&&num(m.ust)<1.3);
       const kisa=list.filter(m=>{ const f=fav(m); return f&&f[0]!=="X"&&f[1]<1.1; });
       document.getElementById("taktik-list").innerHTML =
-        "<p class='meta'><b>Yesil kutu</b></p><article class='meta'>Bu bultende yok.</article>"+
-        "<p class='meta'><b>Avrupa onde</b></p>"+EUROPE.map(m=>card(m,"MS "+m.side+" · Avrupa "+m.europe+" / Iddaa "+m.iddaa)).join("")+
-        "<p class='meta'><b>Ilk yari gol</b></p>"+(gol.length?gol.map(m=>card(m,"Ust "+Number(m.ust).toFixed(2))).join(""):"<article class='meta'>Yok</article>")+
-        "<p class='meta'><b>Kisa favori</b></p>"+(kisa.length?kisa.map(m=>{ const f=fav(m); return card(m,"MS "+f[0]+" "+f[1].toFixed(2)); }).join(""):"<article class='meta'>Yok</article>");
-      document.getElementById("bulten-list").innerHTML = list.slice(0,80).map(m=>card(m,m.league||"")).join("");
-      document.getElementById("bmeta").textContent = list.length+" mac";
+        "<p class='meta'><b>Yeşil kutu</b></p><p class='meta'>Bülten maçına basınca 200+ eşleşme ve %55 alt sınır bakılır.</p>"+
+        "<p class='meta'><b>Avrupa önde</b></p>"+EUROPE.map(m=>card(m,"MS "+m.side+" · Avrupa "+m.europe+" / İddaa "+m.iddaa)).join("")+
+        "<p class='meta'><b>İlk yarı gol</b></p>"+(gol.length?gol.map(m=>card(m,"Üst "+Number(m.ust).toFixed(2))).join(""):"<article class='meta'>Yok</article>")+
+        "<p class='meta'><b>Kısa favori</b></p>"+(kisa.length?kisa.map(m=>{ const f=fav(m); return card(m,"MS "+f[0]+" "+f[1].toFixed(2)); }).join(""):"<article class='meta'>Yok</article>");
     }
-    function unlock(){
+    function loadBulletin() {
+      fetch("bulten.json").then((res) => res.json()).then((data) => {
+        bulletin = data.matches || [];
+        drawBulletin();
+        paintTaktik(bulletin);
+      }).catch(() => { document.getElementById("bmeta").textContent = "Bülten açılmadı"; });
+    }
+    readManual();
+    const PASS = "848672fc2b14ce96ea00ac5cc8f5af759ff9470a83fb32067a125ca84f1b26fc";
+    async function hashKey(text) {
+      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+      return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
+    }
+    function unlock() {
       document.getElementById("lock").classList.add("hide");
-      fetch("bulten.json").then(r=>r.json()).then(d=>paint(d.matches||[])).catch(function(){});
+      if (!unlock.done) { unlock.done = true; loadBulletin(); }
     }
-    document.getElementById("tab-taktik").onclick=function(){ show("taktik"); };
-    document.getElementById("tab-bulten").onclick=function(){ show("bulten"); };
-    document.getElementById("tab-manuel").onclick=function(){ show("manuel"); };
-    if (localStorage.getItem("oran-kapi")===PASS) unlock();
-    document.getElementById("lock-form").onsubmit=async function(e){
-      e.preventDefault();
-      const hashed=await hashKey(document.getElementById("lock-key").value.trim());
-      if (hashed!==PASS){ document.getElementById("lock-msg").textContent="Sifre yanlis"; return; }
+    if (localStorage.getItem("oran-kapi") === PASS) unlock();
+    document.getElementById("lock-form").onsubmit = async (event) => {
+      event.preventDefault();
+      const hashed = await hashKey(document.getElementById("lock-key").value.trim());
+      if (hashed !== PASS) {
+        document.getElementById("lock-msg").textContent = "Şifre yanlış";
+        return;
+      }
       localStorage.setItem("oran-kapi", PASS);
       unlock();
     };
   </script>
+  </div>
 </body>
 </html>
