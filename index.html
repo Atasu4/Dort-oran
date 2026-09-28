@@ -1,1 +1,101 @@
-<placeholder>
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Oran Analiz</title>
+  <style>
+    :root { --bg:#0b0d10; --surface:#14181d; --fg:#f3f0e8; --muted:#9a9386; --line:#2a261f; --gold:#e4d0a2; --green:#1f7a45; }
+    * { box-sizing:border-box; }
+    html,body { margin:0; background:var(--bg); color:var(--fg); font-family:sans-serif; }
+    body { padding:10px; }
+    .frame { border:1px solid var(--gold); min-height:calc(100vh - 20px); padding:10px 8px 28px; }
+    main { width:min(720px,100%); margin:0 auto; }
+    h1 { text-align:center; color:var(--gold); font-size:22px; letter-spacing:.12em; text-transform:uppercase; }
+    .tabs { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; background:var(--surface); padding:4px; border-radius:16px; }
+    .tabs button, .go { height:44px; border:0; border-radius:12px; }
+    .tabs button { background:transparent; color:var(--muted); }
+    .tabs button.on { background:#2a2418; color:var(--gold); }
+    .hide { display:none !important; }
+    .meta { color:var(--muted); font-size:14px; }
+    article { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:10px 12px; margin:6px 0; }
+    .top { display:flex; justify-content:space-between; color:var(--muted); font-size:13px; }
+    input { width:100%; height:48px; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:12px; }
+    .go { width:100%; background:#2a2418; color:var(--gold); }
+    #lock { position:fixed; inset:0; background:#0b0d10; display:flex; align-items:center; justify-content:center; padding:24px; }
+    #lock.hide { display:none; }
+  </style>
+</head>
+<body>
+  <div id="lock">
+    <form id="lock-form" style="width:min(320px,100%)">
+      <h1>Oran Analiz</h1>
+      <input id="lock-key" type="password" placeholder="Sifre">
+      <button class="go" type="submit">Gir</button>
+      <p class="meta" id="lock-msg"></p>
+    </form>
+  </div>
+  <div class="frame">
+    <main>
+      <h1>Oran Analiz</h1>
+      <div class="tabs">
+        <button id="tab-taktik" class="on" type="button">Taktik</button>
+        <button id="tab-bulten" type="button">Bulten</button>
+        <button id="tab-manuel" type="button">Yaz</button>
+      </div>
+      <section id="panel-taktik"><p class="meta">Yesil, Avrupa gecikmesi, ust 1,30 alti IY gol, 1,10 alti kisa favori.</p><div id="taktik-list"></div></section>
+      <section id="panel-bulten" class="hide"><p class="meta" id="bmeta">Bulten</p><div id="bulten-list"></div></section>
+      <section id="panel-manuel" class="hide"><p class="meta">Tam arsiv taramasi Bulten sekmesinde eski haliyle durur. Bu sayfa taktikleri gosterir.</p></section>
+    </main>
+  </div>
+  <script>
+    const PASS = "848672fc2b14ce96ea00ac5cc8f5af759ff9470a83fb32067a125ca84f1b26fc";
+    const EUROPE = [
+      { home:"Raelingen", away:"Lyn Oslo B", time:"19:00", side:"2", iddaa:6.82, europe:2.15, gap:30 },
+      { home:"Guadeloupe", away:"Barbados", time:"22:00", side:"1", iddaa:2.14, europe:1.90, gap:10 },
+      { home:"Atletico Tembe", away:"Paraguari", time:"23:00", side:"2", iddaa:2.25, europe:2.02, gap:8 },
+      { home:"Leixoes U23", away:"Vizela U23", time:"18:00", side:"1", iddaa:2.16, europe:1.99, gap:7 },
+      { home:"C Espanol", away:"Cambaceres", time:"21:00", side:"1", iddaa:1.68, europe:1.62, gap:7 }
+    ];
+    function num(v){ const n=parseFloat(String(v).replace(",",".")); return Number.isFinite(n)&&n>1?n:null; }
+    function fav(m){ const s=[["1",num(m.o1)],["X",num(m.ox)],["2",num(m.o2)]].filter(x=>x[1]); s.sort((a,b)=>a[1]-b[1]); return s[0]||null; }
+    function card(m, extra){ return "<article><div class='top'><span>"+(m.time||"")+"</span><span>"+extra+"</span></div><div>"+m.home+" – "+m.away+"</div></article>"; }
+    function show(id){
+      ["taktik","bulten","manuel"].forEach(function(name){
+        document.getElementById("tab-"+name).classList.toggle("on", name===id);
+        document.getElementById("panel-"+name).classList.toggle("hide", name!==id);
+      });
+    }
+    async function hashKey(text){
+      const buf=await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+      return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("");
+    }
+    function paint(list){
+      const gol=list.filter(m=>num(m.ust)!=null&&num(m.ust)<1.3);
+      const kisa=list.filter(m=>{ const f=fav(m); return f&&f[0]!=="X"&&f[1]<1.1; });
+      document.getElementById("taktik-list").innerHTML =
+        "<p class='meta'><b>Yesil kutu</b></p><article class='meta'>Bu bultende yok.</article>"+
+        "<p class='meta'><b>Avrupa onde</b></p>"+EUROPE.map(m=>card(m,"MS "+m.side+" · Avrupa "+m.europe+" / Iddaa "+m.iddaa)).join("")+
+        "<p class='meta'><b>Ilk yari gol</b></p>"+(gol.length?gol.map(m=>card(m,"Ust "+Number(m.ust).toFixed(2))).join(""):"<article class='meta'>Yok</article>")+
+        "<p class='meta'><b>Kisa favori</b></p>"+(kisa.length?kisa.map(m=>{ const f=fav(m); return card(m,"MS "+f[0]+" "+f[1].toFixed(2)); }).join(""):"<article class='meta'>Yok</article>");
+      document.getElementById("bulten-list").innerHTML = list.slice(0,80).map(m=>card(m,m.league||"")).join("");
+      document.getElementById("bmeta").textContent = list.length+" mac";
+    }
+    function unlock(){
+      document.getElementById("lock").classList.add("hide");
+      fetch("bulten.json").then(r=>r.json()).then(d=>paint(d.matches||[])).catch(function(){});
+    }
+    document.getElementById("tab-taktik").onclick=function(){ show("taktik"); };
+    document.getElementById("tab-bulten").onclick=function(){ show("bulten"); };
+    document.getElementById("tab-manuel").onclick=function(){ show("manuel"); };
+    if (localStorage.getItem("oran-kapi")===PASS) unlock();
+    document.getElementById("lock-form").onsubmit=async function(e){
+      e.preventDefault();
+      const hashed=await hashKey(document.getElementById("lock-key").value.trim());
+      if (hashed!==PASS){ document.getElementById("lock-msg").textContent="Sifre yanlis"; return; }
+      localStorage.setItem("oran-kapi", PASS);
+      unlock();
+    };
+  </script>
+</body>
+</html>
