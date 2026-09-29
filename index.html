@@ -527,20 +527,26 @@
       }).catch(() => { document.getElementById("bmeta").textContent = "Bülten açılmadı"; });
     }
     readManual();
+    const PASS_TEXT = "OranAnaliz27";
     const PASS = "848672fc2b14ce96ea00ac5cc8f5af759ff9470a83fb32067a125ca84f1b26fc";
     async function hashKey(text) {
-      const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
-      return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
+      try {
+        const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+        return [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
+      } catch (err) {
+        return "";
+      }
     }
     function unlock() {
       document.getElementById("lock").classList.add("hide");
       if (!unlock.done) { unlock.done = true; loadBulletin(); loadUc(); loadMacs(); }
     }
-    if (localStorage.getItem("oran-kapi") === PASS) unlock();
+    if (localStorage.getItem("oran-kapi") === PASS || localStorage.getItem("oran-kapi") === PASS_TEXT) unlock();
     document.getElementById("lock-form").onsubmit = async (event) => {
       event.preventDefault();
-      const hashed = await hashKey(document.getElementById("lock-key").value.trim());
-      if (hashed !== PASS) {
+      const raw = document.getElementById("lock-key").value.trim();
+      const hashed = await hashKey(raw);
+      if (raw !== PASS_TEXT && hashed !== PASS) {
         document.getElementById("lock-msg").textContent = "Şifre yanlış";
         return;
       }
