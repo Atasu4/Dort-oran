@@ -167,6 +167,38 @@ def iy21_row(event, markets):
         "n": count,
     }
 
+
+KG2Y = {
+    "yy": {"ad": "İY/2Y KG Evet-Evet", "min": 11.50, "max": 12.50},
+    "ust35": {"ad": "3,5 üst", "min": 2.45, "max": 2.60},
+    "iy2kg": {"ad": "İY 2 ve KG var", "min": 18.45, "max": 19.50},
+}
+
+
+def kg2y_row(event, markets):
+    yy = market_odd(markets, 801, 2)
+    ust35 = market_odd(markets, 13, 1)
+    iy2kg = market_odd(markets, 416, 0)
+    hits = {
+        "yy": yy if in_range(yy, KG2Y["yy"]["min"], KG2Y["yy"]["max"]) else None,
+        "ust35": ust35 if in_range(ust35, KG2Y["ust35"]["min"], KG2Y["ust35"]["max"]) else None,
+        "iy2kg": iy2kg if in_range(iy2kg, KG2Y["iy2kg"]["min"], KG2Y["iy2kg"]["max"]) else None,
+    }
+    count = sum(1 for value in hits.values() if value is not None)
+    if count < 2:
+        return None
+    return {
+        "id": event.get("C"),
+        "home": str(event.get("HN")).strip(),
+        "away": str(event.get("AN")).strip(),
+        "date": event.get("D") or "",
+        "time": event.get("T") or "",
+        "yy": hits["yy"],
+        "ust35": hits["ust35"],
+        "iy2kg": hits["iy2kg"],
+        "n": count,
+    }
+
 def diger_odd(markets):
     found = []
     for market in markets:
@@ -201,6 +233,7 @@ def main():
     yari12 = []
     ust45 = []
     iy21 = []
+    kg2y = []
     for event in payload.get("sg", {}).get("EA") or []:
         if event.get("TYPE") != 1:
             continue
@@ -218,6 +251,9 @@ def main():
         row21 = iy21_row(event, markets)
         if row21:
             iy21.append(row21)
+        rowkg = kg2y_row(event, markets)
+        if rowkg:
+            kg2y.append(rowkg)
         if date == today:
             pass
         elif date == tomorrow and time <= "23:59":
@@ -270,6 +306,7 @@ def main():
     yari12.sort(key=sort_key12)
     ust45.sort(key=sort_key)
     iy21.sort(key=sort_key)
+    kg2y.sort(key=sort_key)
     out = {
         "updated": now.strftime("%Y-%m-%dT%H:%M%z"),
         "tol": TOL,
@@ -282,11 +319,13 @@ def main():
         "ust45": ust45,
         "iy21Rules": IY21,
         "iy21": iy21,
+        "kg2yRules": KG2Y,
+        "kg2y": kg2y,
     }
     root = Path(__file__).resolve().parent
     path = (root.parent if root.name == "scripts" else Path("/tmp")) / "uc_oran.json"
     path.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"{len(matches)} mac ({counts}) 1/2={len(yari12)} 4.5={len(ust45)} iy21={len(iy21)} -> {path}")
+    print(f"{len(matches)} mac ({counts}) 1/2={len(yari12)} 4.5={len(ust45)} iy21={len(iy21)} kg2y={len(kg2y)} -> {path}")
 
 
 if __name__ == "__main__":

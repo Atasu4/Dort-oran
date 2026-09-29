@@ -125,7 +125,7 @@
     </section>
 
     <section id="panel-ucoran" class="hide">
-      <p class="meta" id="uc-meta">Dört ayrı filtre: iki yarı 1,5 üst · 4,5 üst · 2/1 · İY 2-1.</p>
+      <p class="meta" id="uc-meta">Beş ayrı filtre: 1,5 üst · 4,5 üst · 2/1 · İY 2-1 · iki yarı KG.</p>
       <div id="uc-sum"></div>
       <div id="uc-list"></div>
     </section>
@@ -454,7 +454,8 @@
         "<div>İki yarı 1,5 üst <strong>" + rows.length + "</strong><div class='meta'>min 2 kural ±0,10</div></div>" +
         "<div>4,5 üst <strong>" + (((data && data.ust45) || []).length) + "</strong><div class='meta'>min 2 kural</div></div>" +
         "<div>2/1 <strong>" + (((data && data.yari12) || []).length) + "</strong><div class='meta'>Δ ≤ 0,20</div></div>" +
-        "<div>İY 2-1 <strong>" + (((data && data.iy21) || []).length) + "</strong><div class='meta'>min 2 kural</div></div></div>";
+        "<div>İY 2-1 <strong>" + (((data && data.iy21) || []).length) + "</strong><div class='meta'>min 2 kural</div></div>" +
+        "<div>İki yarı KG <strong>" + (((data && data.kg2y) || []).length) + "</strong><div class='meta'>min 2 kural</div></div></div>";
       const chip = (ok, label, value) => {
         if (value == null) return "<span class='chip'>" + label + " —</span>";
         return "<span class='chip" + (ok ? " on" : "") + "'>" + label + " " + Number(value).toFixed(2).replace(".", ",") + "</span>";
@@ -502,6 +503,18 @@
                 chip(m.iy21 != null, "İY 2-1", m.iy21) +
                 chip(m.plus4 != null, "4+/4+", m.plus4) +
                 chip(m.gol23 != null, "2-3 gol", m.gol23) +
+              "</article>"
+            ).join("")
+          : "<article class='meta'>Bu filtrede maç yok</article>") +
+        "<p class='meta'><b>İki yarıda KG var</b> İY/2Y Evet-Evet 11,50–12,50 · 3,5 üst 2,45–2,60 · İY 2 ve KG 18,45–19,50 · en az iki</p>" +
+        ((((data && data.kg2y) || []).length)
+          ? data.kg2y.map((m) =>
+              "<article>" +
+                "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n || 2) + " kural</span></div>" +
+                "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
+                chip(m.yy != null, "E/E", m.yy) +
+                chip(m.ust35 != null, "3,5 üst", m.ust35) +
+                chip(m.iy2kg != null, "İY 2+KG", m.iy2kg) +
               "</article>"
             ).join("")
           : "<article class='meta'>Bu filtrede maç yok</article>");
