@@ -455,7 +455,8 @@
         line("iySkorDiger", "İY skor Diğer") +
         line("iyKgVar", "İY KG var") +
         "<div>Çift kural <strong>" + (counts.cift || 0) + "</strong></div>" +
-        "<div>1/2 <strong>" + (((data && data.yari12) || []).length) + "</strong><div class='meta'>Δ ≤ 0,20</div></div></div>";
+        "<div>1/2 <strong>" + (((data && data.yari12) || []).length) + "</strong><div class='meta'>Δ ≤ 0,20</div></div>" +
+        "<div>4,5 üst <strong>" + (((data && data.ust45) || []).length) + "</strong><div class='meta'>min 2 kural</div></div></div>";
       const chip = (ok, label, value) => {
         if (value == null) return "<span class='chip'>" + label + " —</span>";
         return "<span class='chip" + (ok ? " on" : "") + "'>" + label + " " + Number(value).toFixed(2).replace(".", ",") + "</span>";
@@ -488,7 +489,19 @@
           section("2 · 1. yarı skoru Diğer", "iySkorDiger", "12,80–13,50") +
           section("3 · 1. yarı KG var", "iyKgVar", "3,55–3,65")
         : "<article class='meta'>İki oran birden tutan maç yok</article>";
-      box.innerHTML = three + "<p class='meta'><b>1/2</b> MS ve İY ev-dep farkı en fazla 0,20 · çifte şans üçü açık, 1X ile X2 yakın</p>" + y12body;
+      const u45 = (data && data.ust45) || [];
+      const u45body = u45.length ? u45.map((m) =>
+        "<article>" +
+          "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n || 2) + " kural</span></div>" +
+          "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
+          chip(m.ust45 != null, "4,5 üst", m.ust45) +
+          chip(m.iy1ust != null, "İY 1+üst", m.iy1ust) +
+          chip(m.gol45 != null, "4-5 gol", m.gol45) +
+        "</article>"
+      ).join("") : "<article class='meta'>4,5 üst filtresinde iki kural tutan maç yok</article>";
+      box.innerHTML = three +
+        "<p class='meta'><b>1/2</b> MS ve İY ev-dep farkı en fazla 0,20 · çifte şans üçü açık, 1X ile X2 yakın</p>" + y12body +
+        "<p class='meta'><b>4,5 üst</b> 4,20–5,10 · İY 1 ve üst 5,40–6,20 · 4-5 gol 2,80–3,10 · en az iki kural</p>" + u45body;
     }
     function loadUc() {
       fetch("uc_oran.json").then((res) => res.json()).then(paintUc).catch(() => {

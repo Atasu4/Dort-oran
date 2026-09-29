@@ -93,6 +93,38 @@ def yari12_row(event, markets):
         "csGap": round(abs(cs1x - csx2), 2),
     }
 
+
+UST45 = {
+    "ust45": {"ad": "4,5 üst", "min": 4.20, "max": 5.10},
+    "iy1ust": {"ad": "1. yarı 1 ve üst", "min": 5.40, "max": 6.20},
+    "gol45": {"ad": "Toplam gol 4-5", "min": 2.80, "max": 3.10},
+}
+
+
+def ust45_row(event, markets):
+    ust = market_odd(markets, 155, 1)
+    iy1 = market_odd(markets, 342, 0)
+    gol = market_odd(markets, 43, 2)
+    hits = {
+        "ust45": ust if in_range(ust, UST45["ust45"]["min"], UST45["ust45"]["max"]) else None,
+        "iy1ust": iy1 if in_range(iy1, UST45["iy1ust"]["min"], UST45["iy1ust"]["max"]) else None,
+        "gol45": gol if in_range(gol, UST45["gol45"]["min"], UST45["gol45"]["max"]) else None,
+    }
+    count = sum(1 for value in hits.values() if value is not None)
+    if count < 2:
+        return None
+    return {
+        "id": event.get("C"),
+        "home": str(event.get("HN")).strip(),
+        "away": str(event.get("AN")).strip(),
+        "date": event.get("D") or "",
+        "time": event.get("T") or "",
+        "ust45": hits["ust45"],
+        "iy1ust": hits["iy1ust"],
+        "gol45": hits["gol45"],
+        "n": count,
+    }
+
 def diger_odd(markets):
     found = []
     for market in markets:
@@ -125,6 +157,7 @@ def main():
     tomorrow = (now + timedelta(days=1)).strftime("%d.%m.%Y")
     matches = []
     yari12 = []
+    ust45 = []
     for event in payload.get("sg", {}).get("EA") or []:
         if event.get("TYPE") != 1:
             continue
@@ -136,6 +169,9 @@ def main():
         row12 = yari12_row(event, markets)
         if row12:
             yari12.append(row12)
+        row45 = ust45_row(event, markets)
+        if row45:
+            ust45.append(row45)
         if date == today:
             pass
         elif date == tomorrow and time <= "23:59":
@@ -183,6 +219,7 @@ def main():
         return (year + month + day, row["time"] or "", row["msGap"], row["home"])
 
     yari12.sort(key=sort_key12)
+    ust45.sort(key=sort_key)
     out = {
         "updated": now.strftime("%Y-%m-%dT%H:%M%z"),
         "tol": TOL,
@@ -191,11 +228,13 @@ def main():
         "counts": counts,
         "matches": matches,
         "yari12": yari12,
+        "ust45Rules": UST45,
+        "ust45": ust45,
     }
     root = Path(__file__).resolve().parent
     path = (root.parent if root.name == "scripts" else Path("/tmp")) / "uc_oran.json"
     path.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"{len(matches)} mac ({counts}) 1/2={len(yari12)} -> {path}")
+    print(f"{len(matches)} mac ({counts}) 1/2={len(yari12)} 4.5={len(ust45)} -> {path}")
 
 
 if __name__ == "__main__":
