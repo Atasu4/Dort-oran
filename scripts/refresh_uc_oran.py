@@ -2,9 +2,10 @@
 """Nesine bülteninden üç oran penceresini çıkar."""
 from __future__ import annotations
 
+import gzip
 import json
 import urllib.request
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -44,7 +45,6 @@ def market_odd(markets, mtid, index=0):
 
 
 def diger_odd(markets):
-    """1. yarı 9'lu piyasada 12.80-13.50 hücresi (Nesine MTID 5)."""
     found = []
     for market in markets:
         if market.get("MTID") != 5:
@@ -67,17 +67,26 @@ def main():
     )
     with urllib.request.urlopen(request, timeout=40) as response:
         raw = response.read()
-    if response.headers.get("Content-Encoding") == "gzip" or raw[:2] == b"\x1f\x8b":
-        import gzip
-
+        encoding = response.headers.get("Content-Encoding", "")
+    if "gzip" in encoding or raw[:2] == b"\x1f\x8b":
         raw = gzip.decompress(raw)
     payload = json.loads(raw.decode("utf-8", "replace"))
     now = datetime.now(ZoneInfo("Europe/Istanbul"))
+    today = now.strftime("%d.%m.%Y")
+    tomorrow = (now + timedelta(days=1)).strftime("%d.%m.%Y")
     matches = []
     for event in payload.get("sg", {}).get("EA") or []:
         if event.get("TYPE") != 1:
             continue
         if not event.get("HN") or not event.get("AN"):
+            continue
+        date = event.get("D") or ""
+        time = event.get("T") or ""
+        if date == today:
+            pass
+        elif date == tomorrow and time <= "23:59":
+            pass
+        else:
             continue
         markets = event.get("MA") or []
         iki15 = market_odd(markets, 529, 0)
@@ -96,8 +105,8 @@ def main():
                 "id": event.get("C"),
                 "home": str(event.get("HN")).strip(),
                 "away": str(event.get("AN")).strip(),
-                "date": event.get("D") or "",
-                "time": event.get("T") or "",
+                "date": date,
+                "time": time,
                 "iki15": hits["iki15"],
                 "iySkorDiger": hits["iySkorDiger"],
                 "iyKgVar": hits["iyKgVar"],
