@@ -454,7 +454,8 @@
         line("iki15", "İki yarı 1,5 üst") +
         line("iySkorDiger", "İY skor Diğer") +
         line("iyKgVar", "İY KG var") +
-        "<div>Çift kural <strong>" + (counts.cift || 0) + "</strong></div></div>";
+        "<div>Çift kural <strong>" + (counts.cift || 0) + "</strong></div>" +
+        "<div>1/2 <strong>" + (((data && data.yari12) || []).length) + "</strong><div class='meta'>Δ ≤ 0,20</div></div></div>";
       const chip = (ok, label, value) => {
         if (value == null) return "<span class='chip'>" + label + " —</span>";
         return "<span class='chip" + (ok ? " on" : "") + "'>" + label + " " + Number(value).toFixed(2).replace(".", ",") + "</span>";
@@ -472,11 +473,22 @@
         ).join("") : "<article class='meta'>Bu aralıkta maç yok</article>";
         return "<p class='meta'><b>" + title + "</b></p>" + body;
       };
-      box.innerHTML = rows.length
+      const y12 = (data && data.yari12) || [];
+      const y12body = y12.length ? y12.map((m) =>
+        "<article>" +
+          "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>1/2 Δ" + Number(m.msGap).toFixed(2).replace(".", ",") + "</span></div>" +
+          "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
+          chip(true, "MS 1", m.ms1) + chip(true, "MS 2", m.ms2) +
+          chip(true, "İY 1", m.iy1) + chip(true, "İY 2", m.iy2) +
+          chip(true, "1X", m.cs1x) + chip(true, "12", m.cs12) + chip(true, "X2", m.csx2) +
+        "</article>"
+      ).join("") : "<article class='meta'>1/2 filtresinde maç yok</article>";
+      const three = rows.length
         ? section("1 · İki yarıda 1,5 üst", "iki15", "4,20–4,32") +
           section("2 · 1. yarı skoru Diğer", "iySkorDiger", "12,80–13,50") +
           section("3 · 1. yarı KG var", "iyKgVar", "3,55–3,65")
         : "<article class='meta'>İki oran birden tutan maç yok</article>";
+      box.innerHTML = three + "<p class='meta'><b>1/2</b> MS ve İY ev-dep farkı en fazla 0,20 · çifte şans üçü açık, 1X ile X2 yakın</p>" + y12body;
     }
     function loadUc() {
       fetch("uc_oran.json").then((res) => res.json()).then(paintUc).catch(() => {

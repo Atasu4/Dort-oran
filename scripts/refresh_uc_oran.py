@@ -45,6 +45,54 @@ def market_odd(markets, mtid, index=0):
     return None
 
 
+
+YARI12_GAP = 0.20
+
+
+def triple(markets, mtid):
+    for market in markets:
+        if market.get("MTID") != mtid:
+            continue
+        outcomes = market.get("OCA") or []
+        if len(outcomes) >= 3:
+            return odd(outcomes[0].get("O")), odd(outcomes[1].get("O")), odd(outcomes[2].get("O"))
+    return None, None, None
+
+
+def close_pair(a, b, gap=YARI12_GAP):
+    return a is not None and b is not None and abs(a - b) <= gap + 1e-9
+
+
+def yari12_row(event, markets):
+    ms1, msx, ms2 = triple(markets, 1)
+    iy1, iyx, iy2 = triple(markets, 9)
+    cs1x, cs12, csx2 = triple(markets, 8)
+    if not close_pair(ms1, ms2) or not close_pair(iy1, iy2):
+        return None
+    if cs1x is None or cs12 is None or csx2 is None:
+        return None
+    if not close_pair(cs1x, csx2):
+        return None
+    return {
+        "id": event.get("C"),
+        "home": str(event.get("HN")).strip(),
+        "away": str(event.get("AN")).strip(),
+        "date": event.get("D") or "",
+        "time": event.get("T") or "",
+        "ms1": ms1,
+        "msx": msx,
+        "ms2": ms2,
+        "iy1": iy1,
+        "iyx": iyx,
+        "iy2": iy2,
+        "cs1x": cs1x,
+        "cs12": cs12,
+        "csx2": csx2,
+        "msGap": round(abs(ms1 - ms2), 2),
+        "iyGap": round(abs(iy1 - iy2), 2),
+        "csGap": round(abs(cs1x - csx2), 2),
+    }
+
 def diger_odd(markets):
     found = []
     for market in markets:
@@ -76,6 +124,7 @@ def main():
     today = now.strftime("%d.%m.%Y")
     tomorrow = (now + timedelta(days=1)).strftime("%d.%m.%Y")
     matches = []
+    yari12 = []
     for event in payload.get("sg", {}).get("EA") or []:
         if event.get("TYPE") != 1:
             continue
@@ -83,13 +132,16 @@ def main():
             continue
         date = event.get("D") or ""
         time = event.get("T") or ""
+        markets = event.get("MA") or []
+        row12 = yari12_row(event, markets)
+        if row12:
+            yari12.append(row12)
         if date == today:
             pass
         elif date == tomorrow and time <= "23:59":
             pass
         else:
             continue
-        markets = event.get("MA") or []
         iki15 = market_odd(markets, 529, 0)
         iy_kg = market_odd(markets, 599, 0)
         iy_diger = diger_odd(markets)
@@ -126,17 +178,24 @@ def main():
         "iyKgVar": sum(1 for row in matches if row["iyKgVar"] is not None),
         "cift": sum(1 for row in matches if row["n"] >= 2),
     }
+    def sort_key12(row):
+        day, month, year = (row["date"] or "01.01.1970").split(".")
+        return (year + month + day, row["time"] or "", row["msGap"], row["home"])
+
+    yari12.sort(key=sort_key12)
     out = {
         "updated": now.strftime("%Y-%m-%dT%H:%M%z"),
         "tol": TOL,
+        "yari12Gap": YARI12_GAP,
         "rules": RULES,
         "counts": counts,
         "matches": matches,
+        "yari12": yari12,
     }
     root = Path(__file__).resolve().parent
     path = (root.parent if root.name == "scripts" else Path("/tmp")) / "uc_oran.json"
     path.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"{len(matches)} mac ({counts}) -> {path}")
+    print(f"{len(matches)} mac ({counts}) 1/2={len(yari12)} -> {path}")
 
 
 if __name__ == "__main__":
