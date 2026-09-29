@@ -120,7 +120,7 @@
     </div>
 
     <section id="panel-taktik">
-      <p class="meta">Yeşil kutu, Avrupa gecikmesi, üst 1,30 altı İY gol, 1,10 altı kısa favori.</p>
+      <p class="meta">Yeşil kutu, Avrupa gecikmesi, İddaa düşen oran, seri 5+, üst 1,30 altı İY gol, 1,10 altı kısa favori.</p>
       <div id="taktik-list"></div>
     </section>
 
@@ -458,29 +458,49 @@
         if (value == null) return "<span class='chip'>" + label + " —</span>";
         return "<span class='chip" + (ok ? " on" : "") + "'>" + label + " " + Number(value).toFixed(2).replace(".", ",") + "</span>";
       };
-      box.innerHTML = rows.length ? rows.map((m) =>
-        "<article>" +
-          "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n || 1) + " kural</span></div>" +
-          "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
-          chip(m.iki15 != null, "İki 1,5", m.iki15) +
-          chip(m.iySkorDiger != null, "İY Diğer", m.iySkorDiger) +
-          chip(m.iyKgVar != null, "İY KG", m.iyKgVar) +
-        "</article>"
-      ).join("") : "<article class='meta'>Bu pencerede maç yok</article>";
+      const section = (title, key, label) => {
+        const list = rows.filter((m) => m[key] != null);
+        const body = list.length ? list.map((m) =>
+          "<article>" +
+            "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n > 1 ? m.n + " kural" : label) + "</span></div>" +
+            "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
+            chip(m.iki15 != null, "İki 1,5", m.iki15) +
+            chip(m.iySkorDiger != null, "İY skor", m.iySkorDiger) +
+            chip(m.iyKgVar != null, "İY KG", m.iyKgVar) +
+          "</article>"
+        ).join("") : "<article class='meta'>Bu aralıkta maç yok</article>";
+        return "<p class='meta'><b>" + title + "</b></p>" + body;
+      };
+      box.innerHTML = rows.length
+        ? section("1 · İki yarıda 1,5 üst", "iki15", "4,20–4,32") +
+          section("2 · 1. yarı skoru Diğer", "iySkorDiger", "12,80–13,50") +
+          section("3 · 1. yarı KG var", "iyKgVar", "3,55–3,65")
+        : "<article class='meta'>Bu pencerede maç yok</article>";
     }
     function loadUc() {
       fetch("uc_oran.json").then((res) => res.json()).then(paintUc).catch(() => {
         document.getElementById("uc-meta").textContent = "Üç oran listesi açılmadı";
       });
     }
+    let macs = { drops: [], series: [] };
     function paintTaktik(list){
       const gol=list.filter(m=>num(m.ust)!=null&&num(m.ust)<1.3);
       const kisa=list.filter(m=>{ const f=fav(m); return f&&f[0]!=="X"&&f[1]<1.1; });
+      const dusen=(macs.drops||[]).map(m=>card(m,"MS "+m.side+" · "+Number(m.first).toFixed(2)+" → "+Number(m.now).toFixed(2)+" (−%"+Number(m.pct).toFixed(1)+")"));
+      const seriler=(macs.series||[]).map(m=>card(m,(m.who||"")+" · "+(m.market||"")+" "+(m.pick||"")+" · "+m.seri+" · "+Number(m.odd).toFixed(2)));
       document.getElementById("taktik-list").innerHTML =
         "<p class='meta'><b>Yeşil kutu</b></p><p class='meta'>Bülten maçına basınca 200+ eşleşme ve %55 alt sınır bakılır.</p>"+
         "<p class='meta'><b>Avrupa önde</b></p>"+EUROPE.map(m=>card(m,"MS "+m.side+" · Avrupa "+m.europe+" / İddaa "+m.iddaa)).join("")+
+        "<p class='meta'><b>İddaa düşen oran</b></p>"+(dusen.length?dusen.join(""):"<article class='meta'>Yok</article>")+
+        "<p class='meta'><b>Seri 5+</b></p>"+(seriler.length?seriler.join(""):"<article class='meta'>Yok</article>")+
         "<p class='meta'><b>İlk yarı gol</b></p>"+(gol.length?gol.map(m=>card(m,"Üst "+Number(m.ust).toFixed(2))).join(""):"<article class='meta'>Yok</article>")+
         "<p class='meta'><b>Kısa favori</b></p>"+(kisa.length?kisa.map(m=>{ const f=fav(m); return card(m,"MS "+f[0]+" "+f[1].toFixed(2)); }).join(""):"<article class='meta'>Yok</article>");
+    }
+    function loadMacs() {
+      fetch("macsonuclari.json").then((res) => res.json()).then((data) => {
+        macs = data || macs;
+        paintTaktik(bulletin);
+      }).catch(() => {});
     }
     function loadBulletin() {
       fetch("bulten.json").then((res) => res.json()).then((data) => {
@@ -497,7 +517,7 @@
     }
     function unlock() {
       document.getElementById("lock").classList.add("hide");
-      if (!unlock.done) { unlock.done = true; loadBulletin(); loadUc(); }
+      if (!unlock.done) { unlock.done = true; loadBulletin(); loadUc(); loadMacs(); }
     }
     if (localStorage.getItem("oran-kapi") === PASS) unlock();
     document.getElementById("lock-form").onsubmit = async (event) => {
