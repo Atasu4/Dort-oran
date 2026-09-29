@@ -34,9 +34,9 @@
       color:var(--gold);
     }
     .rule { width:88px; height:1px; margin:10px auto 0; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
-    .tabs { display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; background:var(--surface); padding:4px; border-radius:16px; margin:16px 0; }
+    .tabs { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:4px; background:var(--surface); padding:4px; border-radius:16px; margin:16px 0; }
     .hide { display:none !important; }
-    .tabs button, button.go { height:44px; border:0; border-radius:12px; font-size:15px; }
+    .tabs button, button.go { height:44px; border:0; border-radius:12px; font-size:13px; }
     .tabs button { background:transparent; color:var(--muted); }
     .tabs button.on { background:#2a2418; color:var(--gold); }
     input, button.go { width:100%; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:12px; }
@@ -59,6 +59,11 @@
     .odds b, .odds span { display:block; text-align:center; }
     .odds b { color:var(--muted); font-size:11px; font-weight:500; }
     .odds span { background:var(--bg); border-radius:8px; padding:6px 0; }
+    .chip { display:inline-block; margin:4px 4px 0 0; padding:3px 8px; border-radius:999px; background:var(--bg); font-size:11px; color:var(--muted); }
+    .chip.on { background:var(--green); color:#fff; }
+    #uc-list article { padding:10px 12px; margin:0 0 6px; }
+    .uc-grid { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin:8px 0; }
+    .uc-grid div { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:6px 8px; font-size:12px; }
     .odds span.hit { background:var(--green); color:#fff; }
     #lock {
       position:fixed; inset:0; z-index:30; background:#0b0d10;
@@ -109,6 +114,7 @@
     <div class="rule"></div>
     <div class="tabs">
       <button id="tab-taktik" class="on" type="button">Taktik</button>
+      <button id="tab-ucoran" type="button">1,5 Üst</button>
       <button id="tab-bulten" type="button">Bülten</button>
       <button id="tab-manuel" type="button">Yaz</button>
     </div>
@@ -116,6 +122,12 @@
     <section id="panel-taktik">
       <p class="meta">Yeşil kutu, Avrupa gecikmesi, üst 1,30 altı İY gol, 1,10 altı kısa favori.</p>
       <div id="taktik-list"></div>
+    </section>
+
+    <section id="panel-ucoran" class="hide">
+      <p class="meta" id="uc-meta">Üç pencere taranıyor.</p>
+      <div id="uc-sum"></div>
+      <div id="uc-list"></div>
     </section>
 
     <section id="panel-manuel" class="hide">
@@ -337,12 +349,12 @@
     }
     function showTab(next) {
       tab = next;
-      ["taktik","bulten","manuel"].forEach(function(name){
+      ["taktik","ucoran","bulten","manuel"].forEach(function(name){
         document.getElementById("tab-"+name).classList.toggle("on", name===next);
         document.getElementById("panel-"+name).classList.toggle("hide", name!==next);
       });
       const tools = document.getElementById("analiz-tools");
-      if (tools) tools.classList.toggle("hide", next === "taktik");
+      if (tools) tools.classList.toggle("hide", next === "taktik" || next === "ucoran");
       if (next !== "bulten") {
         document.getElementById("second").innerHTML = "";
       } else if (picked) {
@@ -376,6 +388,7 @@
     }
 
     document.getElementById("tab-taktik").onclick = () => showTab("taktik");
+    document.getElementById("tab-ucoran").onclick = () => showTab("ucoran");
     document.getElementById("tab-manuel").onclick = () => showTab("manuel");
     document.getElementById("tab-bulten").onclick = () => showTab("bulten");
     document.getElementById("ara").onclick = search;
@@ -417,6 +430,49 @@
     function card(m, extra){
       return "<article><div class='top'><span>"+(m.time||"")+"</span><span>"+extra+"</span></div><div class='teams'>"+m.home+" – "+m.away+"</div></article>";
     }
+    function paintUc(data) {
+      const box = document.getElementById("uc-list");
+      const meta = document.getElementById("uc-meta");
+      const sum = document.getElementById("uc-sum");
+      const rows = (data && data.matches) || [];
+      const rules = (data && data.rules) || {};
+      const counts = data && data.counts ? data.counts : {
+        iki15: rows.filter((m) => m.iki15 != null).length,
+        iySkorDiger: rows.filter((m) => m.iySkorDiger != null).length,
+        iyKgVar: rows.filter((m) => m.iyKgVar != null).length,
+        cift: rows.filter((m) => m.n >= 2).length
+      };
+      meta.textContent = rows.length + " maç · " + ((data && data.updated) || "").replace("T", " ").slice(0, 16);
+      const line = (key, text) => {
+        const rule = rules[key] || {};
+        const lo = rule.min != null ? String(rule.min).replace(".", ",") : "";
+        const hi = rule.max != null ? String(rule.max).replace(".", ",") : "";
+        return "<div>" + text + " <strong>" + (counts[key] || 0) + "</strong><div class='meta'>" + lo + "–" + hi + "</div></div>";
+      };
+      sum.innerHTML = "<div class='uc-grid'>" +
+        line("iki15", "İki yarı 1,5 üst") +
+        line("iySkorDiger", "İY skor Diğer") +
+        line("iyKgVar", "İY KG var") +
+        "<div>Çift kural <strong>" + (counts.cift || 0) + "</strong></div></div>";
+      const chip = (ok, label, value) => {
+        if (value == null) return "<span class='chip'>" + label + " —</span>";
+        return "<span class='chip" + (ok ? " on" : "") + "'>" + label + " " + Number(value).toFixed(2).replace(".", ",") + "</span>";
+      };
+      box.innerHTML = rows.length ? rows.map((m) =>
+        "<article>" +
+          "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n || 1) + " kural</span></div>" +
+          "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
+          chip(m.iki15 != null, "İki 1,5", m.iki15) +
+          chip(m.iySkorDiger != null, "İY Diğer", m.iySkorDiger) +
+          chip(m.iyKgVar != null, "İY KG", m.iyKgVar) +
+        "</article>"
+      ).join("") : "<article class='meta'>Bu pencerede maç yok</article>";
+    }
+    function loadUc() {
+      fetch("uc_oran.json").then((res) => res.json()).then(paintUc).catch(() => {
+        document.getElementById("uc-meta").textContent = "Üç oran listesi açılmadı";
+      });
+    }
     function paintTaktik(list){
       const gol=list.filter(m=>num(m.ust)!=null&&num(m.ust)<1.3);
       const kisa=list.filter(m=>{ const f=fav(m); return f&&f[0]!=="X"&&f[1]<1.1; });
@@ -441,7 +497,7 @@
     }
     function unlock() {
       document.getElementById("lock").classList.add("hide");
-      if (!unlock.done) { unlock.done = true; loadBulletin(); }
+      if (!unlock.done) { unlock.done = true; loadBulletin(); loadUc(); }
     }
     if (localStorage.getItem("oran-kapi") === PASS) unlock();
     document.getElementById("lock-form").onsubmit = async (event) => {
