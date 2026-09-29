@@ -11,6 +11,7 @@ from zoneinfo import ZoneInfo
 
 URL = "https://bulten.nesine.com/api/bulten/getprebultenfull"
 
+TOL = 0.10
 RULES = {
     "iki15": {"ad": "İki yarıda 1,5 üst", "min": 4.20, "max": 4.32},
     "iySkorDiger": {"ad": "1. yarı skoru Diğer", "min": 12.80, "max": 13.50},
@@ -51,7 +52,7 @@ def diger_odd(markets):
             continue
         for outcome in market.get("OCA") or []:
             price = odd(outcome.get("O"))
-            if in_range(price, RULES["iySkorDiger"]["min"], RULES["iySkorDiger"]["max"]):
+            if in_range(price, RULES["iySkorDiger"]["min"] - TOL, RULES["iySkorDiger"]["max"] + TOL):
                 found.append(price)
     return found[0] if found else None
 
@@ -93,9 +94,9 @@ def main():
         iy_kg = market_odd(markets, 599, 0)
         iy_diger = diger_odd(markets)
         hits = {
-            "iki15": iki15 if in_range(iki15, 4.20, 4.32) else None,
-            "iySkorDiger": iy_diger if in_range(iy_diger, 12.80, 13.50) else None,
-            "iyKgVar": iy_kg if in_range(iy_kg, 3.55, 3.65) else None,
+            "iki15": iki15 if in_range(iki15, RULES["iki15"]["min"] - TOL, RULES["iki15"]["max"] + TOL) else None,
+            "iySkorDiger": iy_diger if in_range(iy_diger, RULES["iySkorDiger"]["min"] - TOL, RULES["iySkorDiger"]["max"] + TOL) else None,
+            "iyKgVar": iy_kg if in_range(iy_kg, RULES["iyKgVar"]["min"] - TOL, RULES["iyKgVar"]["max"] + TOL) else None,
         }
         count = sum(1 for value in hits.values() if value is not None)
         if count < 2:
@@ -127,6 +128,7 @@ def main():
     }
     out = {
         "updated": now.strftime("%Y-%m-%dT%H:%M%z"),
+        "tol": TOL,
         "rules": RULES,
         "counts": counts,
         "matches": matches,

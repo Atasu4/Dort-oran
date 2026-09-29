@@ -125,7 +125,7 @@
     </section>
 
     <section id="panel-ucoran" class="hide">
-      <p class="meta" id="uc-meta">En az iki pencere tutan maçlar.</p>
+      <p class="meta" id="uc-meta">En az iki pencere tutan maçlar. Tolerans ±0,10.</p>
       <div id="uc-sum"></div>
       <div id="uc-list"></div>
     </section>
@@ -442,7 +442,8 @@
         iyKgVar: rows.filter((m) => m.iyKgVar != null).length,
         cift: rows.filter((m) => m.n >= 2).length
       };
-      meta.textContent = rows.length + " maç · " + ((data && data.updated) || "").replace("T", " ").slice(0, 16);
+      const tol = data && data.tol != null ? " · ±" + String(data.tol).replace(".", ",") : " · ±0,10";
+      meta.textContent = rows.length + " maç" + tol + " · " + ((data && data.updated) || "").replace("T", " ").slice(0, 16);
       const line = (key, text) => {
         const rule = rules[key] || {};
         const lo = rule.min != null ? String(rule.min).replace(".", ",") : "";
