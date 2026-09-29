@@ -98,7 +98,7 @@ def main():
             "iyKgVar": iy_kg if in_range(iy_kg, 3.55, 3.65) else None,
         }
         count = sum(1 for value in hits.values() if value is not None)
-        if not count:
+        if count < 2:
             continue
         matches.append(
             {

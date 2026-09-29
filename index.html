@@ -125,7 +125,7 @@
     </section>
 
     <section id="panel-ucoran" class="hide">
-      <p class="meta" id="uc-meta">Üç pencere taranıyor.</p>
+      <p class="meta" id="uc-meta">En az iki pencere tutan maçlar.</p>
       <div id="uc-sum"></div>
       <div id="uc-list"></div>
     </section>
@@ -434,7 +434,7 @@
       const box = document.getElementById("uc-list");
       const meta = document.getElementById("uc-meta");
       const sum = document.getElementById("uc-sum");
-      const rows = (data && data.matches) || [];
+      const rows = ((data && data.matches) || []).filter((m) => (m.n || 0) >= 2);
       const rules = (data && data.rules) || {};
       const counts = data && data.counts ? data.counts : {
         iki15: rows.filter((m) => m.iki15 != null).length,
@@ -475,7 +475,7 @@
         ? section("1 · İki yarıda 1,5 üst", "iki15", "4,20–4,32") +
           section("2 · 1. yarı skoru Diğer", "iySkorDiger", "12,80–13,50") +
           section("3 · 1. yarı KG var", "iyKgVar", "3,55–3,65")
-        : "<article class='meta'>Bu pencerede maç yok</article>";
+        : "<article class='meta'>İki oran birden tutan maç yok</article>";
     }
     function loadUc() {
       fetch("uc_oran.json").then((res) => res.json()).then(paintUc).catch(() => {
