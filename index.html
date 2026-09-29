@@ -53,6 +53,14 @@
     article { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:12px 14px; margin-top:8px; }
     article.pick { width:100%; text-align:left; color:inherit; }
     article.on { outline:1px solid var(--gold); }
+    #bulten-list button.on {
+      background: var(--red);
+      border-color: var(--red);
+      color: #fff;
+      outline: 0;
+    }
+    #bulten-list button.on .top { color: rgba(255,255,255,0.8); }
+
     .top { display:flex; justify-content:space-between; gap:8px; color:var(--muted); font-size:13px; }
     .teams { margin:4px 0; font-size:17px; font-weight:600; }
     .odds { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin-top:8px; }
@@ -421,6 +429,8 @@
         </button>`).join("");
         return `<button class="hour" type="button" data-hour="${group.label}">${open ? "−" : "+"} ${group.label} · ${group.items.length}</button><div class="slot${open ? " open" : ""}">${matches}</div>`;
       }).join("");
+      const selected = document.querySelector("#bulten-list button.on");
+      if (selected) selected.scrollIntoView({ block: "center", behavior: "smooth" });
     }
 
     document.getElementById("tab-taktik").onclick = () => showTab("taktik");
