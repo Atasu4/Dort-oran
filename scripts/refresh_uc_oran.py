@@ -13,12 +13,9 @@ URL = "https://bulten.nesine.com/api/bulten/getprebultenfull"
 
 TOL = 0.10
 RULES = {
-    "iki15": {"ad": "İki yarıda 1,5 üst", "min": 4.20, "max": 4.32, "tol": True},
-    "iySkorDiger": {"ad": "1. yarı skoru Diğer", "min": 12.80, "max": 13.50, "tol": True},
-    "iyKgVar": {"ad": "1. yarı KG var", "min": 3.55, "max": 3.65, "tol": True},
-    "ust45": {"ad": "4,5 üst", "min": 4.20, "max": 5.10, "tol": False},
-    "iy1ust": {"ad": "1. yarı 1 ve üst", "min": 5.40, "max": 6.20, "tol": False},
-    "gol45": {"ad": "Toplam gol 4-5", "min": 2.80, "max": 3.10, "tol": False},
+    "iki15": {"ad": "İki yarıda 1,5 üst", "min": 4.20, "max": 4.32},
+    "iySkorDiger": {"ad": "1. yarı skoru Diğer", "min": 12.80, "max": 13.50},
+    "iyKgVar": {"ad": "1. yarı KG var", "min": 3.55, "max": 3.65},
 }
 
 
@@ -181,39 +178,44 @@ def main():
             pass
         else:
             continue
-        raw = {
-            "iki15": market_odd(markets, 529, 0),
-            "iySkorDiger": diger_odd(markets),
-            "iyKgVar": market_odd(markets, 599, 0),
-            "ust45": market_odd(markets, 155, 1),
-            "iy1ust": market_odd(markets, 342, 0),
-            "gol45": market_odd(markets, 43, 2),
+        iki15 = market_odd(markets, 529, 0)
+        iy_kg = market_odd(markets, 599, 0)
+        iy_diger = diger_odd(markets)
+        hits = {
+            "iki15": iki15 if in_range(iki15, RULES["iki15"]["min"] - TOL, RULES["iki15"]["max"] + TOL) else None,
+            "iySkorDiger": iy_diger if in_range(iy_diger, RULES["iySkorDiger"]["min"] - TOL, RULES["iySkorDiger"]["max"] + TOL) else None,
+            "iyKgVar": iy_kg if in_range(iy_kg, RULES["iyKgVar"]["min"] - TOL, RULES["iyKgVar"]["max"] + TOL) else None,
         }
-        hits = {}
-        for key, rule in RULES.items():
-            pad = TOL if rule.get("tol") else 0
-            hits[key] = raw[key] if in_range(raw[key], rule["min"] - pad, rule["max"] + pad) else None
         count = sum(1 for value in hits.values() if value is not None)
         if count < 2:
             continue
-        row = {
-            "id": event.get("C"),
-            "home": str(event.get("HN")).strip(),
-            "away": str(event.get("AN")).strip(),
-            "date": date,
-            "time": time,
-            "n": count,
-        }
-        row.update(hits)
-        matches.append(row)
+        matches.append(
+            {
+                "id": event.get("C"),
+                "home": str(event.get("HN")).strip(),
+                "away": str(event.get("AN")).strip(),
+                "date": date,
+                "time": time,
+                "iki15": hits["iki15"],
+                "iySkorDiger": hits["iySkorDiger"],
+                "iyKgVar": hits["iyKgVar"],
+                "n": count,
+            }
+        )
 
     def sort_key(row):
         day, month, year = (row["date"] or "01.01.1970").split(".")
         return (year + month + day, row["time"] or "", -row["n"], row["home"])
 
     matches.sort(key=sort_key)
-    counts = {key: sum(1 for row in matches if row.get(key) is not None) for key in RULES}
-    counts["cift"] = sum(1 for row in matches if row["n"] >= 2)
+    counts = {
+        "iki15": sum(1 for row in matches if row["iki15"] is not None),
+        "iySkorDiger": sum(1 for row in matches if row["iySkorDiger"] is not None),
+        "iyKgVar": sum(1 for row in matches if row["iyKgVar"] is not None),
+        "cift": sum(1 for row in matches if row["n"] >= 2),
+        "ust45": len(ust45),
+        "yari12": len(yari12),
+    }
 
     def sort_key12(row):
         day, month, year = (row["date"] or "01.01.1970").split(".")

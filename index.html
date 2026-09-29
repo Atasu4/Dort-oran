@@ -125,7 +125,7 @@
     </section>
 
     <section id="panel-ucoran" class="hide">
-      <p class="meta" id="uc-meta">youtube · pencereler bir listede · 2/1 ayrı.</p>
+      <p class="meta" id="uc-meta">Üç ayrı filtre: iki yarı 1,5 üst · 4,5 üst · 2/1.</p>
       <div id="uc-sum"></div>
       <div id="uc-list"></div>
     </section>
@@ -443,7 +443,7 @@
         cift: rows.filter((m) => m.n >= 2).length
       };
       const tol = data && data.tol != null ? " · ±" + String(data.tol).replace(".", ",") : " · ±0,10";
-      meta.textContent = rows.length + " maç" + tol + " · " + ((data && data.updated) || "").replace("T", " ").slice(0, 16);
+      meta.textContent = "3 ayrı filtre · " + ((data && data.updated) || "").replace("T", " ").slice(0, 16);
       const line = (key, text) => {
         const rule = rules[key] || {};
         const lo = rule.min != null ? String(rule.min).replace(".", ",") : "";
@@ -451,29 +451,30 @@
         return "<div>" + text + " <strong>" + (counts[key] || 0) + "</strong><div class='meta'>" + lo + "–" + hi + "</div></div>";
       };
       sum.innerHTML = "<div class='uc-grid'>" +
-        line("iki15", "İki yarı 1,5 üst") +
-        line("iySkorDiger", "İY skor Diğer") +
-        line("iyKgVar", "İY KG var") +
-        line("ust45", "4,5 üst") +
-        line("iy1ust", "İY 1 ve üst") +
-        line("gol45", "4-5 gol") +
-        "<div>Çift kural <strong>" + (counts.cift || 0) + "</strong></div>" +
+        "<div>İki yarı 1,5 üst <strong>" + rows.length + "</strong><div class='meta'>min 2 kural ±0,10</div></div>" +
+        "<div>4,5 üst <strong>" + (((data && data.ust45) || []).length) + "</strong><div class='meta'>min 2 kural</div></div>" +
         "<div>2/1 <strong>" + (((data && data.yari12) || []).length) + "</strong><div class='meta'>Δ ≤ 0,20</div></div></div>";
       const chip = (ok, label, value) => {
         if (value == null) return "<span class='chip'>" + label + " —</span>";
         return "<span class='chip" + (ok ? " on" : "") + "'>" + label + " " + Number(value).toFixed(2).replace(".", ",") + "</span>";
       };
-      const card = (m) =>
+      const card15 = (m) =>
         "<article>" +
           "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n || 2) + " kural</span></div>" +
           "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
           chip(m.iki15 != null, "İki 1,5", m.iki15) +
           chip(m.iySkorDiger != null, "İY skor", m.iySkorDiger) +
           chip(m.iyKgVar != null, "İY KG", m.iyKgVar) +
+        "</article>";
+      const card45 = (m) =>
+        "<article>" +
+          "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n || 2) + " kural</span></div>" +
+          "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
           chip(m.ust45 != null, "4,5 üst", m.ust45) +
           chip(m.iy1ust != null, "İY 1+üst", m.iy1ust) +
           chip(m.gol45 != null, "4-5 gol", m.gol45) +
         "</article>";
+      const u45 = (data && data.ust45) || [];
       const y12 = (data && data.yari12) || [];
       const y12body = y12.length ? y12.map((m) =>
         "<article>" +
@@ -484,14 +485,15 @@
           chip(true, "1X", m.cs1x) + chip(true, "12", m.cs12) + chip(true, "X2", m.csx2) +
         "</article>"
       ).join("") : "<article class='meta'>2/1 filtresinde maç yok</article>";
-      const windows = rows.length
-        ? rows.map(card).join("")
-        : "<article class='meta'>İki oran birden tutan maç yok</article>";
       box.innerHTML =
-        "<p class='meta'><b>Pencereler</b> altı kural tek listede, en az iki tutan</p>" + windows +
-        "<p class='meta'><b>2/1</b> MS ve İY ev-dep farkı en fazla 0,20 · çifte şans üçü açık, 1X ile X2 yakın</p>" + y12body;
-    }
-    function loadUc() {
+        "<p class='meta'><b>İki yarıda 1,5 üst</b> 4,20–4,32 · İY skor 12,80–13,50 · İY KG 3,55–3,65 · ±0,10 · en az iki</p>" +
+        (rows.length ? rows.map(card15).join("") : "<article class='meta'>Bu filtrede maç yok</article>") +
+        "<p class='meta'><b>4,5 üst</b> 4,20–5,10 · İY 1 ve üst 5,40–6,20 · 4-5 gol 2,80–3,10 · en az iki</p>" +
+        (u45.length ? u45.map(card45).join("") : "<article class='meta'>Bu filtrede maç yok</article>") +
+        "<p class='meta'><b>2/1</b> MS ve İY ev-dep farkı en fazla 0,20 · çifte şans üçü açık, 1X ile X2 yakın</p>" +
+        y12body;
+
+        function loadUc() {
       fetch("uc_oran.json").then((res) => res.json()).then(paintUc).catch(() => {
         document.getElementById("uc-meta").textContent = "Üç oran listesi açılmadı";
       });
