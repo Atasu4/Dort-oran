@@ -114,7 +114,7 @@
     <div class="rule"></div>
     <div class="tabs">
       <button id="tab-taktik" class="on" type="button">Taktik</button>
-      <button id="tab-ucoran" type="button">1,5 Üst</button>
+      <button id="tab-ucoran" type="button">youtube</button>
       <button id="tab-bulten" type="button">Bülten</button>
       <button id="tab-manuel" type="button">Yaz</button>
     </div>
@@ -125,7 +125,7 @@
     </section>
 
     <section id="panel-ucoran" class="hide">
-      <p class="meta" id="uc-meta">En az iki pencere tutan maçlar. Tolerans ±0,10.</p>
+      <p class="meta" id="uc-meta">youtube · pencereler bir listede · 2/1 ayrı.</p>
       <div id="uc-sum"></div>
       <div id="uc-list"></div>
     </section>
@@ -458,47 +458,38 @@
         line("iy1ust", "İY 1 ve üst") +
         line("gol45", "4-5 gol") +
         "<div>Çift kural <strong>" + (counts.cift || 0) + "</strong></div>" +
-        "<div>1/2 <strong>" + (((data && data.yari12) || []).length) + "</strong><div class='meta'>Δ ≤ 0,20</div></div></div>";
+        "<div>2/1 <strong>" + (((data && data.yari12) || []).length) + "</strong><div class='meta'>Δ ≤ 0,20</div></div></div>";
       const chip = (ok, label, value) => {
         if (value == null) return "<span class='chip'>" + label + " —</span>";
         return "<span class='chip" + (ok ? " on" : "") + "'>" + label + " " + Number(value).toFixed(2).replace(".", ",") + "</span>";
       };
-      const section = (title, key, label) => {
-        const list = rows.filter((m) => m[key] != null);
-        const body = list.length ? list.map((m) =>
-          "<article>" +
-            "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n > 1 ? m.n + " kural" : label) + "</span></div>" +
-            "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
-            chip(m.iki15 != null, "İki 1,5", m.iki15) +
-            chip(m.iySkorDiger != null, "İY skor", m.iySkorDiger) +
-            chip(m.iyKgVar != null, "İY KG", m.iyKgVar) +
-            chip(m.ust45 != null, "4,5 üst", m.ust45) +
-            chip(m.iy1ust != null, "İY 1+üst", m.iy1ust) +
-            chip(m.gol45 != null, "4-5 gol", m.gol45) +
-          "</article>"
-        ).join("") : "<article class='meta'>Bu aralıkta maç yok</article>";
-        return "<p class='meta'><b>" + title + "</b></p>" + body;
-      };
+      const card = (m) =>
+        "<article>" +
+          "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n || 2) + " kural</span></div>" +
+          "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
+          chip(m.iki15 != null, "İki 1,5", m.iki15) +
+          chip(m.iySkorDiger != null, "İY skor", m.iySkorDiger) +
+          chip(m.iyKgVar != null, "İY KG", m.iyKgVar) +
+          chip(m.ust45 != null, "4,5 üst", m.ust45) +
+          chip(m.iy1ust != null, "İY 1+üst", m.iy1ust) +
+          chip(m.gol45 != null, "4-5 gol", m.gol45) +
+        "</article>";
       const y12 = (data && data.yari12) || [];
       const y12body = y12.length ? y12.map((m) =>
         "<article>" +
-          "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>1/2 Δ" + Number(m.msGap).toFixed(2).replace(".", ",") + "</span></div>" +
+          "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>2/1 Δ" + Number(m.msGap).toFixed(2).replace(".", ",") + "</span></div>" +
           "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
           chip(true, "MS 1", m.ms1) + chip(true, "MS 2", m.ms2) +
           chip(true, "İY 1", m.iy1) + chip(true, "İY 2", m.iy2) +
           chip(true, "1X", m.cs1x) + chip(true, "12", m.cs12) + chip(true, "X2", m.csx2) +
         "</article>"
-      ).join("") : "<article class='meta'>1/2 filtresinde maç yok</article>";
-      const three = rows.length
-        ? section("1 · İki yarıda 1,5 üst", "iki15", "4,20–4,32") +
-          section("2 · 1. yarı skoru Diğer", "iySkorDiger", "12,80–13,50") +
-          section("3 · 1. yarı KG var", "iyKgVar", "3,55–3,65") +
-          section("4 · 4,5 üst", "ust45", "4,20–5,10") +
-          section("5 · 1. yarı 1 ve üst", "iy1ust", "5,40–6,20") +
-          section("6 · Toplam gol 4-5", "gol45", "2,80–3,10")
+      ).join("") : "<article class='meta'>2/1 filtresinde maç yok</article>";
+      const windows = rows.length
+        ? rows.map(card).join("")
         : "<article class='meta'>İki oran birden tutan maç yok</article>";
-      box.innerHTML = three +
-        "<p class='meta'><b>1/2</b> MS ve İY ev-dep farkı en fazla 0,20 · çifte şans üçü açık, 1X ile X2 yakın</p>" + y12body;
+      box.innerHTML =
+        "<p class='meta'><b>Pencereler</b> altı kural tek listede, en az iki tutan</p>" + windows +
+        "<p class='meta'><b>2/1</b> MS ve İY ev-dep farkı en fazla 0,20 · çifte şans üçü açık, 1X ile X2 yakın</p>" + y12body;
     }
     function loadUc() {
       fetch("uc_oran.json").then((res) => res.json()).then(paintUc).catch(() => {
@@ -511,13 +502,14 @@
       const kisa=list.filter(m=>{ const f=fav(m); return f&&f[0]!=="X"&&f[1]<1.1; });
       const dusen=(macs.drops||[]).map(m=>card(m,"MS "+m.side+" · "+Number(m.first).toFixed(2)+" → "+Number(m.now).toFixed(2)+" (−%"+Number(m.pct).toFixed(1)+")"));
       const seriler=(macs.series||[]).map(m=>card(m,(m.who||"")+" · "+(m.market||"")+" "+(m.pick||"")+" · "+m.seri+" · "+Number(m.odd).toFixed(2)));
+      const block=(title,note,body)=>"<p class='meta'><b>"+title+"</b></p>"+(note?"<p class='meta'>"+note+"</p>":"")+(body||"<article class='meta'>Yok</article>");
       document.getElementById("taktik-list").innerHTML =
-        "<p class='meta'><b>Yeşil kutu</b></p><p class='meta'>Bülten maçına basınca 200+ eşleşme ve %55 alt sınır bakılır.</p>"+
-        "<p class='meta'><b>Avrupa önde</b></p>"+EUROPE.map(m=>card(m,"MS "+m.side+" · Avrupa "+m.europe+" / İddaa "+m.iddaa)).join("")+
-        "<p class='meta'><b>İddaa düşen oran</b></p>"+(dusen.length?dusen.join(""):"<article class='meta'>Yok</article>")+
-        "<p class='meta'><b>Seri 5+</b></p>"+(seriler.length?seriler.join(""):"<article class='meta'>Yok</article>")+
-        "<p class='meta'><b>İlk yarı gol</b></p>"+(gol.length?gol.map(m=>card(m,"Üst "+Number(m.ust).toFixed(2))).join(""):"<article class='meta'>Yok</article>")+
-        "<p class='meta'><b>Kısa favori</b></p>"+(kisa.length?kisa.map(m=>{ const f=fav(m); return card(m,"MS "+f[0]+" "+f[1].toFixed(2)); }).join(""):"<article class='meta'>Yok</article>");
+        block("Yeşil kutu","Bülten maçına basınca 200+ eşleşme ve %55 alt sınır bakılır.","") +
+        block("Avrupa önde","",EUROPE.map(m=>card(m,"MS "+m.side+" · Avrupa "+m.europe+" / İddaa "+m.iddaa)).join("")) +
+        block("İddaa düşen oran","MS en az %5 kısalma",dusen.length?dusen.join(""):"") +
+        block("Seri 5+","Aynı lig 180 gün, oran ≥ 1,20",seriler.length?seriler.join(""):"") +
+        block("İlk yarı gol","Üst 2,5 < 1,30",gol.length?gol.map(m=>card(m,"Üst "+Number(m.ust).toFixed(2))).join(""):"") +
+        block("Kısa favori","MS 1 veya 2 < 1,10",kisa.length?kisa.map(m=>{ const f=fav(m); return card(m,"MS "+f[0]+" "+f[1].toFixed(2)); }).join(""):"");
     }
     function loadMacs() {
       fetch("macsonuclari.json").then((res) => res.json()).then((data) => {
