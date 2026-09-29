@@ -125,7 +125,7 @@
     </section>
 
     <section id="panel-ucoran" class="hide">
-      <p class="meta" id="uc-meta">Üç ayrı filtre: iki yarı 1,5 üst · 4,5 üst · 2/1.</p>
+      <p class="meta" id="uc-meta">Dört ayrı filtre: iki yarı 1,5 üst · 4,5 üst · 2/1 · İY 2-1.</p>
       <div id="uc-sum"></div>
       <div id="uc-list"></div>
     </section>
@@ -453,7 +453,8 @@
       sum.innerHTML = "<div class='uc-grid'>" +
         "<div>İki yarı 1,5 üst <strong>" + rows.length + "</strong><div class='meta'>min 2 kural ±0,10</div></div>" +
         "<div>4,5 üst <strong>" + (((data && data.ust45) || []).length) + "</strong><div class='meta'>min 2 kural</div></div>" +
-        "<div>2/1 <strong>" + (((data && data.yari12) || []).length) + "</strong><div class='meta'>Δ ≤ 0,20</div></div></div>";
+        "<div>2/1 <strong>" + (((data && data.yari12) || []).length) + "</strong><div class='meta'>Δ ≤ 0,20</div></div>" +
+        "<div>İY 2-1 <strong>" + (((data && data.iy21) || []).length) + "</strong><div class='meta'>min 2 kural</div></div></div>";
       const chip = (ok, label, value) => {
         if (value == null) return "<span class='chip'>" + label + " —</span>";
         return "<span class='chip" + (ok ? " on" : "") + "'>" + label + " " + Number(value).toFixed(2).replace(".", ",") + "</span>";
@@ -491,7 +492,19 @@
         "<p class='meta'><b>4,5 üst</b> 4,20–5,10 · İY 1 ve üst 5,40–6,20 · 4-5 gol 2,80–3,10 · en az iki</p>" +
         (u45.length ? u45.map(card45).join("") : "<article class='meta'>Bu filtrede maç yok</article>") +
         "<p class='meta'><b>2/1</b> MS ve İY ev-dep farkı en fazla 0,20 · çifte şans üçü açık, 1X ile X2 yakın</p>" +
-        y12body;
+        y12body +
+        "<p class='meta'><b>İY 2-1</b> İY skor 2-1 17,90–18,90 · İY/MS 4+/4+ 14,80–16,20 · 2-3 gol 1,82–1,90 · en az iki</p>" +
+        ((((data && data.iy21) || []).length)
+          ? (data.iy21).map((m) =>
+              "<article>" +
+                "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n || 2) + " kural</span></div>" +
+                "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
+                chip(m.iy21 != null, "İY 2-1", m.iy21) +
+                chip(m.plus4 != null, "4+/4+", m.plus4) +
+                chip(m.gol23 != null, "2-3 gol", m.gol23) +
+              "</article>"
+            ).join("")
+          : "<article class='meta'>Bu filtrede maç yok</article>");
     }
     function loadUc() {
       fetch("uc_oran.json").then((res) => res.json()).then(paintUc).catch(() => {

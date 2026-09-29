@@ -125,6 +125,48 @@ def ust45_row(event, markets):
         "n": count,
     }
 
+
+IY21 = {
+    "iy21": {"ad": "İY skor 2-1", "min": 17.90, "max": 18.90},
+    "plus4": {"ad": "İY/MS 4+/4+", "min": 14.80, "max": 16.20},
+    "gol23": {"ad": "Toplam gol 2-3", "min": 1.82, "max": 1.90},
+}
+
+
+def labeled_odd(markets, mtid, label):
+    for market in markets:
+        if market.get("MTID") != mtid:
+            continue
+        for outcome in market.get("OCA") or []:
+            if str(outcome.get("ON") or "") == label:
+                return odd(outcome.get("O"))
+    return None
+
+
+def iy21_row(event, markets):
+    iy21 = labeled_odd(markets, 779, "2:1")
+    plus4 = market_odd(markets, 571, -1)
+    gol23 = market_odd(markets, 43, 1)
+    hits = {
+        "iy21": iy21 if in_range(iy21, IY21["iy21"]["min"], IY21["iy21"]["max"]) else None,
+        "plus4": plus4 if in_range(plus4, IY21["plus4"]["min"], IY21["plus4"]["max"]) else None,
+        "gol23": gol23 if in_range(gol23, IY21["gol23"]["min"], IY21["gol23"]["max"]) else None,
+    }
+    count = sum(1 for value in hits.values() if value is not None)
+    if count < 2:
+        return None
+    return {
+        "id": event.get("C"),
+        "home": str(event.get("HN")).strip(),
+        "away": str(event.get("AN")).strip(),
+        "date": event.get("D") or "",
+        "time": event.get("T") or "",
+        "iy21": hits["iy21"],
+        "plus4": hits["plus4"],
+        "gol23": hits["gol23"],
+        "n": count,
+    }
+
 def diger_odd(markets):
     found = []
     for market in markets:
@@ -158,6 +200,7 @@ def main():
     matches = []
     yari12 = []
     ust45 = []
+    iy21 = []
     for event in payload.get("sg", {}).get("EA") or []:
         if event.get("TYPE") != 1:
             continue
@@ -172,6 +215,9 @@ def main():
         row45 = ust45_row(event, markets)
         if row45:
             ust45.append(row45)
+        row21 = iy21_row(event, markets)
+        if row21:
+            iy21.append(row21)
         if date == today:
             pass
         elif date == tomorrow and time <= "23:59":
@@ -223,6 +269,7 @@ def main():
 
     yari12.sort(key=sort_key12)
     ust45.sort(key=sort_key)
+    iy21.sort(key=sort_key)
     out = {
         "updated": now.strftime("%Y-%m-%dT%H:%M%z"),
         "tol": TOL,
@@ -233,11 +280,13 @@ def main():
         "yari12": yari12,
         "ust45Rules": UST45,
         "ust45": ust45,
+        "iy21Rules": IY21,
+        "iy21": iy21,
     }
     root = Path(__file__).resolve().parent
     path = (root.parent if root.name == "scripts" else Path("/tmp")) / "uc_oran.json"
     path.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
-    print(f"{len(matches)} mac ({counts}) 1/2={len(yari12)} 4.5={len(ust45)} -> {path}")
+    print(f"{len(matches)} mac ({counts}) 1/2={len(yari12)} 4.5={len(ust45)} iy21={len(iy21)} -> {path}")
 
 
 if __name__ == "__main__":
