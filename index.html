@@ -60,6 +60,10 @@
       outline: 0;
     }
     #bulten-list button.on .top { color: rgba(255,255,255,0.8); }
+    .dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; }
+    .dot.g { background: var(--green); }
+    .dot.s { background: #e6b325; }
+    #bulten-list button.sondu { border-color: #e6b325; }
 
     .top { display:flex; justify-content:space-between; gap:8px; color:var(--muted); font-size:13px; }
     .teams { margin:4px 0; font-size:17px; font-weight:600; }
@@ -386,15 +390,52 @@
       }
     }
     const openHours = new Set();
+    let greenFlags = {};
+    function lockMap() {
+      try { return JSON.parse(localStorage.getItem("yesil-kilit") || "{}"); }
+      catch (e) { return {}; }
+    }
+    async function scanGreens() {
+      const meta = document.getElementById("bmeta");
+      if (meta) meta.textContent = "Yeşil taranıyor";
+      try { await ensureArchive(); }
+      catch (e) { if (meta) meta.textContent = "Arşiv açılmadı"; return; }
+      const locks = lockMap();
+      const flags = {};
+      const ids = new Set();
+      for (const match of bulletin) {
+        ids.add(String(match.id));
+        let hit = null;
+        for (const band of [0.05, 0.08, 0.12]) {
+          const found = find(match, band);
+          const good = greenSide(found);
+          if (!good) continue;
+          const fav = found.active.filter((m) => m.short === "1" || m.short === "X" || m.short === "2")
+            .reduce((best, m) => (!best || m.iddaa < best.iddaa ? m : best), null);
+          hit = { side: good, n: found.hits.length, band, odd: fav ? fav.iddaa : null };
+          break;
+        }
+        if (hit && !locks[match.id]) {
+          locks[match.id] = Object.assign({ at: new Date().toISOString(), home: match.home, away: match.away, date: match.date, time: match.time }, hit);
+        }
+        flags[match.id] = hit ? "g" : (locks[match.id] ? "s" : "");
+      }
+      Object.keys(locks).forEach((id) => { if (!ids.has(String(id))) delete locks[id]; });
+      localStorage.setItem("yesil-kilit", JSON.stringify(locks));
+      greenFlags = flags;
+      drawBulletin();
+    }
     function hourOf(match) {
       return (match.date || "") + " " + (match.time || "00:00").slice(0, 2) + ":00";
     }
     function drawBulletin() {
       const needle = document.getElementById("q").value.trim().toLocaleLowerCase("tr");
       const rows = needle ? bulletin.filter((m) => `${m.home} ${m.away} ${m.league}`.toLocaleLowerCase("tr").includes(needle)) : bulletin;
+      const live = bulletin.filter((m) => greenFlags[m.id] === "g").length;
+      const dead = bulletin.filter((m) => greenFlags[m.id] === "s").length;
       document.getElementById("bmeta").textContent = needle
         ? rows.length + " maç"
-        : rows.length + " maç. Bugün 23:59, yarın 11:59.";
+        : rows.length + " maç. Yeşil " + live + " · söndü " + dead + ".";
       const groups = [];
       for (const match of rows) {
         const label = hourOf(match);
@@ -403,11 +444,18 @@
       }
       document.getElementById("bulten-list").innerHTML = groups.map((group) => {
         const open = openHours.has(group.label);
-        const matches = group.items.map((match) => `<button class="pick article ${picked && picked.id === match.id ? "on" : ""}" data-i="${bulletin.indexOf(match)}" type="button">
+        const matches = group.items.map((match) => {
+          const flag = greenFlags[match.id] || "";
+          const mark = flag === "g" ? "<i class='dot g'></i>" : flag === "s" ? "<i class='dot s'></i>" : "";
+          return `<button class="pick article ${picked && picked.id === match.id ? "on" : ""} ${flag === "s" ? "sondu" : ""}" data-i="${bulletin.indexOf(match)}" type="button">
           <div class="top"><span>${match.time || ""}</span><span>${match.league || ""}</span></div>
-          <div class="teams">${match.home} – ${match.away}</div>
-        </button>`).join("");
-        return `<button class="hour" type="button" data-hour="${group.label}">${open ? "−" : "+"} ${group.label} · ${group.items.length}</button><div class="slot${open ? " open" : ""}">${matches}</div>`;
+          <div class="teams">${mark}${match.home} – ${match.away}</div>
+        </button>`;
+        }).join("");
+        const g = group.items.filter((m) => greenFlags[m.id] === "g").length;
+        const s = group.items.filter((m) => greenFlags[m.id] === "s").length;
+        const extra = (g ? " · " + g + " yeşil" : "") + (s ? " · " + s + " söndü" : "");
+        return `<button class="hour" type="button" data-hour="${group.label}">${open ? "−" : "+"} ${group.label} · ${group.items.length}${extra}</button><div class="slot${open ? " open" : ""}">${matches}</div>`;
       }).join("");
       const selected = document.querySelector("#bulten-list button.on");
       if (selected) selected.scrollIntoView({ block: "center", behavior: "smooth" });
@@ -572,6 +620,7 @@
       fetch("bulten.json").then((res) => res.json()).then((data) => {
         bulletin = data.matches || [];
         drawBulletin();
+        scanGreens();
       }).catch(() => { document.getElementById("bmeta").textContent = "Bülten açılmadı"; });
     }
     if (document.getElementById("o1")) readManual();
