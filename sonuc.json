@@ -1,0 +1,109 @@
+{
+  "updated": "2026-10-02T09:03+03:00",
+  "days": [
+    {
+      "date": "30.09.2026",
+      "tutan": [
+        {
+          "mac": "Abd – Şili",
+          "skor": "4-2",
+          "not": "yeşil durdu"
+        },
+        {
+          "mac": "Sporting Huelva – Cordoba",
+          "skor": "7-1",
+          "not": "yeşil durdu"
+        },
+        {
+          "mac": "Çekya U21 – Bulgaristan U21",
+          "skor": "1-0",
+          "not": "yeşil durdu"
+        }
+      ],
+      "tutmayan": [
+        {
+          "mac": "Cienciano – Chankas",
+          "skor": "1-1",
+          "not": "yeşil söndü, n188"
+        }
+      ]
+    },
+    {
+      "date": "01.10.2026",
+      "tutan": [
+        {
+          "mac": "Cerro Porteño – Rubio Nu",
+          "skor": "2-1",
+          "not": "1.30"
+        },
+        {
+          "mac": "Alianza – Platense",
+          "skor": "2-1",
+          "not": "1.43, gol 90+8"
+        },
+        {
+          "mac": "Nacional – Junior",
+          "skor": "3-1",
+          "not": "1.24"
+        },
+        {
+          "mac": "Sacramento – Las Vegas",
+          "skor": "3-2",
+          "not": "1.36"
+        },
+        {
+          "mac": "Malezya – Singapur",
+          "skor": "6-0",
+          "not": "1.27"
+        },
+        {
+          "mac": "Sharjah – Dhafra",
+          "skor": "2-1",
+          "not": "1.37"
+        },
+        {
+          "mac": "Stuttgart – Greuther Fürth",
+          "skor": "5-0",
+          "not": "1.18"
+        },
+        {
+          "mac": "Macaristan U21 – Litvanya U21",
+          "skor": "2-1",
+          "not": "1.30"
+        },
+        {
+          "mac": "Qatar SC – Al Bidda",
+          "skor": "1-0",
+          "not": "1.43"
+        },
+        {
+          "mac": "Al Shamal – Al Muaidar",
+          "skor": "2-0",
+          "not": "1.27"
+        },
+        {
+          "mac": "Sporting Cristal – ADT",
+          "skor": "5-0",
+          "not": "1.33"
+        }
+      ],
+      "tutmayan": [
+        {
+          "mac": "Japonya – Ekvador",
+          "skor": "0-0",
+          "not": "yeşil durdu, %59"
+        },
+        {
+          "mac": "Man City (K) – Real Madrid (K)",
+          "skor": "1-1",
+          "not": "1.44"
+        },
+        {
+          "mac": "Olimpia – Sportivo Luqueño",
+          "skor": "1-1",
+          "not": "penaltıda elendi"
+        }
+      ]
+    }
+  ]
+}

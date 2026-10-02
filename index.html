@@ -128,8 +128,14 @@
     <div class="rule"></div>
     <div class="tabs">
       <button id="tab-bulten" class="on" type="button">Bülten</button>
+      <button id="tab-sonuc" type="button">Sonuç</button>
       <button id="tab-ucoran" type="button">youtube</button>
     </div>
+
+    <section id="panel-sonuc" class="hide">
+      <p class="meta" id="sonuc-meta">Yeşil kilitlerin günü.</p>
+      <div id="sonuc-list"></div>
+    </section>
 
     <section id="panel-ucoran" class="hide">
       <p class="meta" id="uc-meta">Beş ayrı filtre: 1,5 üst · 4,5 üst · 2/1 · İY 2-1 · iki yarı KG.</p>
@@ -379,12 +385,12 @@
     }
     function showTab(next) {
       tab = next;
-      ["ucoran","bulten"].forEach(function(name){
+      ["ucoran","bulten","sonuc"].forEach(function(name){
         document.getElementById("tab-"+name).classList.toggle("on", name===next);
         document.getElementById("panel-"+name).classList.toggle("hide", name!==next);
       });
       const tools = document.getElementById("analiz-tools");
-      if (tools) tools.classList.toggle("hide", next === "ucoran");
+      if (tools) tools.classList.toggle("hide", next === "ucoran" || next === "sonuc");
       if (next !== "bulten") {
         document.getElementById("second").innerHTML = "";
       } else if (picked) {
@@ -471,6 +477,7 @@
 
     document.getElementById("tab-ucoran").onclick = () => showTab("ucoran");
     document.getElementById("tab-bulten").onclick = () => showTab("bulten");
+    document.getElementById("tab-sonuc").onclick = () => showTab("sonuc");
     document.getElementById("ara").onclick = search;
     KEYS.forEach((key) => { const el = document.getElementById(key); if (el) el.addEventListener("input", readManual); });
     document.getElementById("tol").onclick = (event) => {
@@ -624,6 +631,27 @@
         macs = data || macs;
       }).catch(() => {});
     }
+
+    function paintSonuc(data) {
+      const box = document.getElementById("sonuc-list");
+      const meta = document.getElementById("sonuc-meta");
+      const days = (data && data.days) || [];
+      let hit = 0, miss = 0;
+      days.forEach((day) => { hit += (day.tutan || []).length; miss += (day.tutmayan || []).length; });
+      if (meta) meta.textContent = hit + " tuttu · " + miss + " tutmadı";
+      box.innerHTML = days.map((day) => {
+        const row = (item, kind) => `<div class="article"><div class="top"><span>${kind}</span><span>${item.skor}</span></div><div class="teams">${item.mac}</div><div class="lockline">${item.not || ""}</div></div>`;
+        return `<p class="meta">${day.date} · ${(day.tutan || []).length} tuttu · ${(day.tutmayan || []).length} tutmadı</p>`
+          + (day.tutan || []).map((item) => row(item, "tuttu")).join("")
+          + (day.tutmayan || []).map((item) => row(item, "tutmadı")).join("");
+      }).join("");
+    }
+    function loadSonuc() {
+      fetch("sonuc.json").then((res) => res.json()).then(paintSonuc).catch(() => {
+        const meta = document.getElementById("sonuc-meta");
+        if (meta) meta.textContent = "Sonuç açılmadı";
+      });
+    }
     function loadBulletin() {
       fetch("bulten.json").then((res) => res.json()).then((data) => {
         bulletin = data.matches || [];
@@ -635,7 +663,7 @@
     const PASS_TEXT = "OranAnaliz27";
     function unlock() {
       document.getElementById("lock").classList.add("hide");
-      if (!unlock.done) { unlock.done = true; loadBulletin(); loadUc(); loadMacs(); }
+      if (!unlock.done) { unlock.done = true; loadBulletin(); loadUc(); loadMacs(); loadSonuc(); }
     }
     if (localStorage.getItem("oran-kapi") === PASS_TEXT) unlock();
     document.getElementById("lock-form").onsubmit = (event) => {
