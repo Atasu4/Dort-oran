@@ -65,6 +65,11 @@
     .dot.s { background: #e6b325; }
     #bulten-list button.sondu { border-color: #e6b325; }
     .lockline { margin: 2px 0 0; font-size: 11px; color: var(--muted); }
+    .gun { display:flex; justify-content:space-between; margin:14px 0 6px; font-size:12px; color:var(--muted); }
+    .satir { display:flex; justify-content:space-between; gap:8px; padding:7px 0; border-bottom:1px solid rgba(201,162,39,0.25); font-size:14px; }
+    .satir b { font-weight:600; }
+    .ok { color:#3dd68c; }
+    .no { color:#e85d4c; }
     #bulten-list button.on .lockline { color: rgba(255,255,255,0.8); }
 
     .top { display:flex; justify-content:space-between; gap:8px; color:var(--muted); font-size:13px; }
@@ -648,11 +653,12 @@
       let hit = 0, miss = 0;
       days.forEach((day) => { hit += (day.tutan || []).length; miss += (day.tutmayan || []).length; });
       if (meta) meta.textContent = hit + " tuttu · " + miss + " tutmadı";
+      const row = (item, ok) => `<div class="satir"><span>${item.mac} ${item.skor}</span><b class="${ok ? "ok" : "no"}">${ok ? "tuttu" : "tutmadı"}</b></div>`;
       box.innerHTML = days.map((day) => {
-        const row = (item, kind) => `<div class="article"><div class="top"><span>${kind}</span><span>${item.skor}</span></div><div class="teams">${item.mac}</div><div class="lockline">${item.not || ""}</div></div>`;
-        return `<p class="meta">${day.date} · ${(day.tutan || []).length} tuttu · ${(day.tutmayan || []).length} tutmadı</p>`
-          + (day.tutan || []).map((item) => row(item, "tuttu")).join("")
-          + (day.tutmayan || []).map((item) => row(item, "tutmadı")).join("");
+        const t = (day.tutan || []).length, m = (day.tutmayan || []).length;
+        return `<div class="gun"><span>${day.date}</span><span><b class="ok">${t} tuttu</b> · <b class="no">${m} tutmadı</b></span></div>`
+          + (day.tutan || []).map((item) => row(item, true)).join("")
+          + (day.tutmayan || []).map((item) => row(item, false)).join("");
       }).join("");
     }
     function loadSonuc() {
