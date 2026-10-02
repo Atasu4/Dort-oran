@@ -17,7 +17,6 @@ jobs:
         with:
           python-version: "3.12"
       - run: python3 scripts/refresh_bulten.py
-      - run: python3 scripts/master_analyzer.py
       - run: python3 scripts/refresh_uc_oran.py
       - run: python3 scripts/refresh_macsonuclari.py
       - name: Kaydet
