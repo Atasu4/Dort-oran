@@ -468,10 +468,11 @@
           const lock = lockMap()[match.id];
           const mark = flag === "g" ? "<i class='dot g'></i>" : flag === "s" ? "<i class='dot s'></i>" : "";
           const line = lock ? `<div class="lockline">${flag === "s" ? "söndü · " : ""}kilit ${String(lock.at || "").slice(11, 16)} · MS ${lock.side || ""} ${lock.odd || ""} · ${lock.n || "?"} maç</div>` : "";
+          const xg = match.xgH != null ? `<div class="lockline">xG ${match.xgH}-${match.xgA} · 2.5 üst %${match.ust25}</div>` : "";
           return `<button class="pick article ${picked && picked.id === match.id ? "on" : ""} ${flag === "s" ? "sondu" : ""}" data-i="${bulletin.indexOf(match)}" type="button">
           <div class="top"><span>${match.time || ""}</span><span>${match.league || ""}</span></div>
           <div class="teams">${mark}${match.home} – ${match.away}</div>
-          ${line}
+          ${line}${xg}
         </button>`;
         }).join("");
         const g = group.items.filter((m) => greenFlags[m.id] === "g").length;
