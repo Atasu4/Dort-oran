@@ -313,7 +313,26 @@
         <div>Poisson <strong>${model.poisson}</strong> · ${model.lamH.toFixed(2)}-${model.lamA.toFixed(2)}</div>
         <div>Reyting <strong>${model.rating}</strong></div>
         <div>Skor <strong>${model.score}</strong></div>
-        <div>Eşleşme <strong>${same ? "VAR" : "YOK"}</strong></div>`;
+        <div>Eşleşme <strong>${same ? "VAR" : "YOK"}</strong></div>
+        <div>Adil <strong>${shinLine(match)}</strong></div>`;
+    }
+    function shinLine(match) {
+      const odds = [match.o1, match.ox, match.o2].filter((n) => n > 1);
+      if (odds.length < 3) return "yok";
+      const implied = odds.map((o) => 1 / o);
+      const s = implied.reduce((a, b) => a + b, 0);
+      let low = 0, high = 0.4, z = 0;
+      for (let i = 0; i < 40; i++) {
+        z = (low + high) / 2;
+        const val = implied.reduce((sum, pi) => sum + Math.sqrt(z * z + 4 * (1 - z) * pi * pi / s), 0);
+        if (val > 1 + z) low = z;
+        else high = z;
+      }
+      z = (low + high) / 2;
+      const fair = implied.map((pi) => (Math.sqrt(z * z + 4 * (1 - z) * pi * pi / s) - z) / (2 * (1 - z)));
+      const total = fair.reduce((a, b) => a + b, 0);
+      const pct = fair.map((p) => Math.round(100 * p / total));
+      return `1 %${pct[0]} · X %${pct[1]} · 2 %${pct[2]}`;
     }
     function paint(found) {
       const box = document.getElementById("hits");
