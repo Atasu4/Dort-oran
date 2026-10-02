@@ -685,7 +685,7 @@
       let hit = 0, miss = 0;
       days.forEach((day) => { hit += (day.tutan || []).length; miss += (day.tutmayan || []).length; });
       if (meta) meta.textContent = hit + " tuttu · " + miss + " tutmadı";
-      const row = (item, ok) => `<div class="satir"><span>${item.mac} ${item.skor}</span><b class="${ok ? "ok" : "no"}">${ok ? "tuttu" : "tutmadı"}</b></div>`;
+      const row = (item, ok) => `<div class="satir"><span>${item.mac} ${item.skor}</span><span>${item.oran || ""} <b class="${ok ? "ok" : "no"}">${ok ? "tuttu" : "tutmadı"}</b></span></div>`;
       box.innerHTML = days.map((day) => {
         const t = (day.tutan || []).length, m = (day.tutmayan || []).length;
         return `<div class="gun"><span>${day.date}</span><span><b class="ok">${t} tuttu</b> · <b class="no">${m} tutmadı</b></span></div>`
