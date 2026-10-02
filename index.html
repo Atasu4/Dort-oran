@@ -423,10 +423,11 @@
     }
     const openHours = new Set();
     let greenFlags = {};
-    const CUP = new Set(["ÇEKK","ESTK","MEKKA","PARK","ARJK","ARJKŞ","BAELK","ALKB","ARJPBN","AFCAG"]);
+    const CUP = new Set(["ÇEKK","ESTK","MEKKA","PARK","ARJK","ARJKŞ","BAELK","ALKB","ARJPBN","AFCAG","KOLPB","GALFAW"]);
     function allowGreen(match) {
       const lig = String(match.league || "");
       const blob = `${match.home || ""} ${match.away || ""} ${lig}`;
+      if (cupMatch(match)) return false;
       if (lig === "HAZ" || /hazırlık|hazirlik|dostluk|friendly/i.test(blob)) return false;
       const o1 = Number(match.o1) || 0;
       const o2 = Number(match.o2) || 0;
@@ -440,8 +441,8 @@
     function cupMatch(match) {
       const lig = String(match.league || "").toUpperCase();
       const blob = `${match.home || ""} ${match.away || ""} ${match.league || ""}`.toUpperCase();
-      if (CUP.has(lig)) return true;
-      return /KUPA|\bCUP\b|KUP |PLAYOFF|ELEME|PENALTI/.test(blob);
+      if (CUP.has(lig) || /K$|KŞ$/.test(lig)) return true;
+      return /KUPA|\bCUP\b|KUP |PLAYOFF|ELEME|PENALTI|UZATMA/.test(blob);
     }
     function lockMap() {
       try { return JSON.parse(localStorage.getItem("yesil-kilit") || "{}"); }
