@@ -134,12 +134,18 @@
     <div class="tabs">
       <button id="tab-bulten" class="on" type="button">Bülten</button>
       <button id="tab-sonuc" type="button">Sonuç</button>
+      <button id="tab-deger" type="button">Değer</button>
       <button id="tab-ucoran" type="button">youtube</button>
     </div>
 
     <section id="panel-sonuc" class="hide">
       <p class="meta" id="sonuc-meta">Yeşil kilitlerin günü.</p>
       <div id="sonuc-list"></div>
+    </section>
+
+    <section id="panel-deger" class="hide">
+      <p class="meta" id="deger-meta">2.5 üst, model oranı %5 geçerse.</p>
+      <div id="deger-list"></div>
     </section>
 
     <section id="panel-ucoran" class="hide">
@@ -390,12 +396,12 @@
     }
     function showTab(next) {
       tab = next;
-      ["ucoran","bulten","sonuc"].forEach(function(name){
+      ["ucoran","bulten","sonuc","deger"].forEach(function(name){
         document.getElementById("tab-"+name).classList.toggle("on", name===next);
         document.getElementById("panel-"+name).classList.toggle("hide", name!==next);
       });
       const tools = document.getElementById("analiz-tools");
-      if (tools) tools.classList.toggle("hide", next === "ucoran" || next === "sonuc");
+      if (tools) tools.classList.toggle("hide", next === "ucoran" || next === "sonuc" || next === "deger");
       if (next !== "bulten") {
         document.getElementById("second").innerHTML = "";
       } else if (picked) {
@@ -492,6 +498,7 @@
     document.getElementById("tab-ucoran").onclick = () => showTab("ucoran");
     document.getElementById("tab-bulten").onclick = () => showTab("bulten");
     document.getElementById("tab-sonuc").onclick = () => showTab("sonuc");
+    document.getElementById("tab-deger").onclick = () => showTab("deger");
     document.getElementById("ara").onclick = search;
     KEYS.forEach((key) => { const el = document.getElementById(key); if (el) el.addEventListener("input", readManual); });
     document.getElementById("tol").onclick = (event) => {
@@ -661,6 +668,21 @@
           + (day.tutmayan || []).map((item) => row(item, false)).join("");
       }).join("");
     }
+
+    function paintDeger() {
+      const box = document.getElementById("deger-list");
+      const meta = document.getElementById("deger-meta");
+      const rows = [];
+      for (const match of bulletin) {
+        if (cupMatch(match) || match.ust25 == null || !match.ust) continue;
+        const ev = (match.ust25 / 100) * match.ust - 1;
+        if (ev <= 0.05) continue;
+        rows.push({ match, ev });
+      }
+      rows.sort((a, b) => b.ev - a.ev);
+      if (meta) meta.textContent = rows.length + " maç · 2.5 üst değer %5 üstü";
+      box.innerHTML = rows.map(({ match, ev }) => `<div class="satir"><span>${match.time || ""} ${match.home} – ${match.away}<br><span class="lockline">xG ${match.xgH}-${match.xgA} · model %${match.ust25} · oran ${match.ust}</span></span><b class="ok">+%${Math.round(ev * 100)}</b></div>`).join("") || `<p class="meta">Değer yok</p>`;
+    }
     function loadSonuc() {
       fetch("sonuc.json").then((res) => res.json()).then(paintSonuc).catch(() => {
         const meta = document.getElementById("sonuc-meta");
@@ -672,6 +694,7 @@
         bulletin = data.matches || [];
         drawBulletin();
         scanGreens();
+        paintDeger();
       }).catch(() => { document.getElementById("bmeta").textContent = "Bülten açılmadı"; });
     }
     if (document.getElementById("o1")) readManual();
