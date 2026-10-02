@@ -388,11 +388,11 @@
         if (tab === "bulten") {
           const bands = [0.05, 0.08, 0.12];
           let chosen = find(raw, tol);
-          chosen.good = greenSide(chosen);
+          chosen.good = allowGreen(raw) ? greenSide(chosen) : "";
           for (const band of bands) {
             const found = find(raw, band);
             const good = greenSide(found);
-            if (good) {
+            if (good && allowGreen(raw)) {
               found.good = good;
               chosen = found;
               document.querySelectorAll("#tol button").forEach((item) => item.classList.toggle("on", Number(item.dataset.t) === band));
@@ -424,6 +424,19 @@
     const openHours = new Set();
     let greenFlags = {};
     const CUP = new Set(["ÇEKK","ESTK","MEKKA","PARK","ARJK","ARJKŞ","BAELK","ALKB","ARJPBN","AFCAG"]);
+    function allowGreen(match) {
+      const lig = String(match.league || "");
+      const blob = `${match.home || ""} ${match.away || ""} ${lig}`;
+      if (lig === "HAZ" || /hazırlık|hazirlik|dostluk|friendly/i.test(blob)) return false;
+      const o1 = Number(match.o1) || 0;
+      const o2 = Number(match.o2) || 0;
+      if (o1 > 1.80 && o2 - o1 < 0.90) return false;
+      if ((/\(K\)/.test(match.home || "") || /\(K\)/.test(match.away || "")) && o1 > 1.60) return false;
+      const hr = match.homeTable && match.homeTable.rank;
+      const ar = match.awayTable && match.awayTable.rank;
+      if (hr > 0 && ar > 0 && (ar - hr) < 3 && o1 > 1.70) return false;
+      return true;
+    }
     function cupMatch(match) {
       const lig = String(match.league || "").toUpperCase();
       const blob = `${match.home || ""} ${match.away || ""} ${match.league || ""}`.toUpperCase();
@@ -449,7 +462,7 @@
         for (const band of [0.05, 0.08, 0.12]) {
           const found = find(match, band);
           const good = greenSide(found);
-          if (!good) continue;
+          if (!good || !allowGreen(match)) continue;
           const fav = found.active.filter((m) => m.short === "1" || m.short === "X" || m.short === "2")
             .reduce((best, m) => (!best || m.iddaa < best.iddaa ? m : best), null);
           hit = { side: good, n: found.hits.length, band, odd: fav ? fav.iddaa : null };
