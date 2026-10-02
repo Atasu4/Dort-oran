@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-02T09:03+03:00",
+  "updated": "2026-10-02T12:50+03:00",
   "days": [
     {
       "date": "30.09.2026",
@@ -57,11 +57,6 @@
           "not": "1.27"
         },
         {
-          "mac": "Sharjah – Dhafra",
-          "skor": "2-1",
-          "not": "1.37"
-        },
-        {
           "mac": "Stuttgart – Greuther Fürth",
           "skor": "5-0",
           "not": "1.18"
@@ -70,21 +65,6 @@
           "mac": "Macaristan U21 – Litvanya U21",
           "skor": "2-1",
           "not": "1.30"
-        },
-        {
-          "mac": "Qatar SC – Al Bidda",
-          "skor": "1-0",
-          "not": "1.43"
-        },
-        {
-          "mac": "Al Shamal – Al Muaidar",
-          "skor": "2-0",
-          "not": "1.27"
-        },
-        {
-          "mac": "Sporting Cristal – ADT",
-          "skor": "5-0",
-          "not": "1.33"
         }
       ],
       "tutmayan": [
@@ -97,11 +77,6 @@
           "mac": "Man City (K) – Real Madrid (K)",
           "skor": "1-1",
           "not": "1.44"
-        },
-        {
-          "mac": "Olimpia – Sportivo Luqueño",
-          "skor": "1-1",
-          "not": "penaltıda elendi"
         }
       ]
     }
