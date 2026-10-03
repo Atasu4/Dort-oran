@@ -134,18 +134,11 @@
     <div class="tabs">
       <button id="tab-bulten" class="on" type="button">Bülten</button>
       <button id="tab-sonuc" type="button">Sonuç</button>
-      <button id="tab-ucoran" type="button">youtube</button>
     </div>
 
     <section id="panel-sonuc" class="hide">
       <p class="meta" id="sonuc-meta">Yeşil kilitlerin günü.</p>
       <div id="sonuc-list"></div>
-    </section>
-
-    <section id="panel-ucoran" class="hide">
-      <p class="meta" id="uc-meta">Beş ayrı filtre: 1,5 üst · 4,5 üst · 2/1 · İY 2-1 · iki yarı KG.</p>
-      <div id="uc-sum"></div>
-      <div id="uc-list"></div>
     </section>
 
     <section id="panel-bulten">
@@ -412,12 +405,12 @@
     }
     function showTab(next) {
       tab = next;
-      ["ucoran","bulten","sonuc"].forEach(function(name){
+      ["bulten","sonuc"].forEach(function(name){
         document.getElementById("tab-"+name).classList.toggle("on", name===next);
         document.getElementById("panel-"+name).classList.toggle("hide", name!==next);
       });
       const tools = document.getElementById("analiz-tools");
-      if (tools) tools.classList.toggle("hide", next === "ucoran" || next === "sonuc");
+      if (tools) tools.classList.toggle("hide", next === "sonuc");
       if (next !== "bulten") {
         document.getElementById("second").innerHTML = "";
       } else if (picked) {
@@ -528,7 +521,6 @@
       if (selected) selected.scrollIntoView({ block: "center", behavior: "smooth" });
     }
 
-    document.getElementById("tab-ucoran").onclick = () => showTab("ucoran");
     document.getElementById("tab-bulten").onclick = () => showTab("bulten");
     document.getElementById("tab-sonuc").onclick = () => showTab("sonuc");
     document.getElementById("ara").onclick = search;
@@ -659,26 +651,6 @@
             ).join("")
           : "<article class='meta'>Bu filtrede maç yok</article>");
     }
-    function loadUc() {
-      fetch("uc_oran.json").then((res) => res.json()).then(paintUc).catch(() => {
-        document.getElementById("uc-meta").textContent = "Üç oran listesi açılmadı";
-      });
-    }
-    let macs = { drops: [], series: [] };
-    function paintTaktik(list){
-      const gol=list.filter(m=>num(m.ust)!=null&&num(m.ust)<1.3);
-      const kisa=list.filter(m=>{ const f=fav(m); return f&&f[0]!=="X"&&f[1]<1.1; });
-      const dusen=(macs.drops||[]).map(m=>card(m,"MS "+m.side+" · "+Number(m.first).toFixed(2)+" → "+Number(m.now).toFixed(2)+" (−%"+Number(m.pct).toFixed(1)+")"));
-      const seriler=(macs.series||[]).map(m=>card(m,(m.who||"")+" · "+(m.market||"")+" "+(m.pick||"")+" · "+m.seri+" · "+Number(m.odd).toFixed(2)));
-      const block=(title,note,body)=>"<p class='meta'><b>"+title+"</b></p>"+(note?"<p class='meta'>"+note+"</p>":"")+(body||"<article class='meta'>Yok</article>");
-      document.getElementById("taktik-list").innerHTML =
-        block("Yeşil kutu","Bülten maçına basınca 200+ eşleşme ve %55 alt sınır bakılır.","") +
-        block("Avrupa önde","",EUROPE.map(m=>card(m,"MS "+m.side+" · Avrupa "+m.europe+" / İddaa "+m.iddaa)).join("")) +
-        block("İddaa düşen oran","MS en az %5 kısalma",dusen.length?dusen.join(""):"") +
-        block("Seri 5+","Aynı lig 180 gün, oran ≥ 1,20",seriler.length?seriler.join(""):"") +
-        block("İlk yarı gol","Üst 2,5 < 1,30",gol.length?gol.map(m=>card(m,"Üst "+Number(m.ust).toFixed(2))).join(""):"") +
-        block("Kısa favori","MS 1 veya 2 < 1,10",kisa.length?kisa.map(m=>{ const f=fav(m); return card(m,"MS "+f[0]+" "+f[1].toFixed(2)); }).join(""):"");
-    }
     function loadMacs() {
       fetch("macsonuclari.json").then((res) => res.json()).then((data) => {
         macs = data || macs;
@@ -735,7 +707,7 @@
     const PASS_TEXT = "OranAnaliz27";
     function unlock() {
       document.getElementById("lock").classList.add("hide");
-      if (!unlock.done) { unlock.done = true; loadBulletin(); loadUc(); loadMacs(); loadSonuc(); }
+      if (!unlock.done) { unlock.done = true; loadBulletin(); loadSonuc(); }
     }
     if (localStorage.getItem("oran-kapi") === PASS_TEXT) unlock();
     document.getElementById("lock-form").onsubmit = (event) => {
