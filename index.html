@@ -69,6 +69,7 @@
     .satir { display:flex; justify-content:space-between; gap:8px; padding:7px 0; border-bottom:1px solid rgba(201,162,39,0.25); font-size:14px; }
     .satir b { font-weight:600; }
     .ok { color:#3dd68c; }
+    .mavi { color:#5aa7ff; }
     .no { color:#e85d4c; }
     #bulten-list button.on .lockline { color: rgba(255,255,255,0.8); }
 
@@ -711,7 +712,7 @@
         const rows = (data && data.matches) || [];
         if (meta) meta.textContent = rows.length + " maç · biri tuttu";
         box.innerHTML = rows.map((m) => {
-          const color = m.blue && !(m.tags || []).length ? "s" : "ok";
+          const color = m.blue && !(m.tags || []).length ? "mavi" : "ok";
           const label = m.blue && (m.tags || []).length ? "yeşil · mavi" : m.blue ? "mavi" : "yeşil";
           const note = [(m.tags || []).join(" · "), m.blue ? "KG yok + İY 1.5 alt" : ""].filter(Boolean).join(" · ");
           return `<div class="satir"><span>${m.time || ""} ${m.home} – ${m.away}<br><span class="lockline">${note}</span></span><b class="${color}">${label}</b></div>`;
