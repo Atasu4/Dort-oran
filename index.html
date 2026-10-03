@@ -425,14 +425,15 @@
     let greenFlags = {};
     const CUP = new Set(["ÇEKK","ESTK","MEKKA","PARK","ARJK","ARJKŞ","BAELK","ALKB","ARJPBN","AFCAG","KOLPB","GALFAW"]);
     function allowGreen(match) {
-      const lig = String(match.league || "");
-      const blob = `${match.home || ""} ${match.away || ""} ${lig}`;
+      const lig = String(match.league || "").toUpperCase();
+      const blob = `${match.home || ""} ${match.away || ""} ${lig}`.toUpperCase();
       if (cupMatch(match)) return false;
-      if (lig === "HAZ" || /hazırlık|hazirlik|dostluk|friendly/i.test(blob)) return false;
+      if (lig === "HAZ" || /HAZIRLIK|HAZIRLIK|DOSTLUK|FRIENDLY/.test(blob)) return false;
+      if (/U19|U20|U21|U23|\(K\)|KADIN/.test(blob)) return false;
+      if (/^U19|^U20|^U21|^U23|HU19|HU20|HU21|HU23/.test(lig)) return false;
       const o1 = Number(match.o1) || 0;
       const o2 = Number(match.o2) || 0;
       if (o1 > 1.80 && o2 - o1 < 0.90) return false;
-      if ((/\(K\)/.test(match.home || "") || /\(K\)/.test(match.away || "")) && o1 > 1.60) return false;
       const hr = match.homeTable && match.homeTable.rank;
       const ar = match.awayTable && match.awayTable.rank;
       if (hr > 0 && ar > 0 && (ar - hr) < 3 && o1 > 1.70) return false;
