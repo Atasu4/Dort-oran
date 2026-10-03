@@ -423,6 +423,8 @@
     function allowGreen(match) {
       const lig = String(match.league || "").toUpperCase();
       const blob = `${match.home || ""} ${match.away || ""} ${lig}`.toUpperCase();
+      const TOP = new Set(["ARJ","BR1","KOL","ŞİL","URU","UKR","FAS","NOR1","BLR1","İN1","KİRL","TR1","ING1","ISP1","ITA1","ALM1","FRA1","HOL1","POR1","BEL1","ABD","JAP1","MEK1","AVUL"]);
+      if (!TOP.has(lig)) return false;
       if (cupMatch(match)) return false;
       if (lig === "HAZ" || /HAZIRLIK|HAZIRLIK|DOSTLUK|FRIENDLY/.test(blob)) return false;
       if (/U19|U20|U21|U23|\(K\)|KADIN/.test(blob)) return false;
