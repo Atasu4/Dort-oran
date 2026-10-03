@@ -377,9 +377,12 @@
     }
     async function ensureArchive() {
       if (archive) return;
-      document.getElementById("meta").textContent = "Arşiv yükleniyor";
-      const data = await fetch("arsiv.json").then((res) => res.json());
-      archive = data;
+      const meta = document.getElementById("meta");
+      if (meta) meta.textContent = "Arşiv yükleniyor";
+      const res = await fetch("arsiv.json");
+      if (!res.ok) throw new Error("arsiv");
+      archive = await res.json();
+      if (meta) meta.textContent = "Arşiv hazır";
     }
     async function search() {
       try {
@@ -723,7 +726,6 @@
       fetch("bulten.json").then((res) => res.json()).then((data) => {
         bulletin = data.matches || [];
         drawBulletin();
-        scanGreens();
       }).catch(() => { document.getElementById("bmeta").textContent = "Bülten açılmadı"; });
     }
     if (document.getElementById("o1")) readManual();
