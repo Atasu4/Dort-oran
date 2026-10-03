@@ -134,8 +134,13 @@
     <div class="tabs">
       <button id="tab-bulten" class="on" type="button">Bülten</button>
       <button id="tab-sonuc" type="button">Sonuç</button>
+      <button id="tab-oran" type="button">Oran</button>
     </div>
 
+    <section id="panel-oran" class="hide">
+      <p class="meta" id="oran-meta">Altı orandan biri tutarsa yeşil.</p>
+      <div id="oran-list"></div>
+    </section>
     <section id="panel-sonuc" class="hide">
       <p class="meta" id="sonuc-meta">Yeşil kilitlerin günü.</p>
       <div id="sonuc-list"></div>
@@ -405,12 +410,12 @@
     }
     function showTab(next) {
       tab = next;
-      ["bulten","sonuc"].forEach(function(name){
+      ["bulten","sonuc","oran"].forEach(function(name){
         document.getElementById("tab-"+name).classList.toggle("on", name===next);
         document.getElementById("panel-"+name).classList.toggle("hide", name!==next);
       });
       const tools = document.getElementById("analiz-tools");
-      if (tools) tools.classList.toggle("hide", next === "sonuc");
+      if (tools) tools.classList.toggle("hide", next === "sonuc" || next === "oran");
       if (next !== "bulten") {
         document.getElementById("second").innerHTML = "";
       } else if (picked) {
@@ -530,6 +535,7 @@
 
     document.getElementById("tab-bulten").onclick = () => showTab("bulten");
     document.getElementById("tab-sonuc").onclick = () => showTab("sonuc");
+    document.getElementById("tab-oran").onclick = () => showTab("oran");
     document.getElementById("ara").onclick = search;
     KEYS.forEach((key) => { const el = document.getElementById(key); if (el) el.addEventListener("input", readManual); });
     document.getElementById("tol").onclick = (event) => {
@@ -698,6 +704,15 @@
       }
       return { "1": p1, "X": px, "2": p2 };
     }
+    function loadOran() {
+      fetch("oran_sayfa.json").then((res) => res.json()).then((data) => {
+        const box = document.getElementById("oran-list");
+        const meta = document.getElementById("oran-meta");
+        const rows = (data && data.matches) || [];
+        if (meta) meta.textContent = rows.length + " maç · biri tuttu";
+        box.innerHTML = rows.map((m) => `<div class="satir"><span>${m.time || ""} ${m.home} – ${m.away}<br><span class="lockline">${(m.tags || []).join(" · ")}</span></span><b class="ok">yeşil</b></div>`).join("") || `<p class="meta">Gelen yok</p>`;
+      }).catch(() => {});
+    }
     function loadSonuc() {
       fetch("sonuc.json").then((res) => res.json()).then(paintSonuc).catch(() => {
         const meta = document.getElementById("sonuc-meta");
@@ -714,7 +729,7 @@
     const PASS_TEXT = "OranAnaliz27";
     function unlock() {
       document.getElementById("lock").classList.add("hide");
-      if (!unlock.done) { unlock.done = true; loadBulletin(); loadSonuc(); }
+      if (!unlock.done) { unlock.done = true; loadBulletin(); loadSonuc(); loadOran(); }
     }
     if (localStorage.getItem("oran-kapi") === PASS_TEXT) unlock();
     document.getElementById("lock-form").onsubmit = (event) => {
