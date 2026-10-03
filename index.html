@@ -500,7 +500,9 @@
       }
       const rank = (m) => greenFlags[m.id] === "g" ? 2 : greenFlags[m.id] === "s" ? 1 : 0;
       groups.forEach((group) => group.items.sort((a, b) => rank(b) - rank(a)));
-      document.getElementById("bulten-list").innerHTML = groups.map((group) => {
+      const greens = rows.filter((m) => greenFlags[m.id] === "g");
+      const greenRow = greens.length ? `<div class="gun"><span>Yeşil</span><span class="ok">${greens.length}</span></div>` + greens.map((m) => `<div class="satir"><span>${m.time || ""} ${m.home} – ${m.away}</span><b class="ok">${m.o1 || ""}</b></div>`).join("") : "";
+      document.getElementById("bulten-list").innerHTML = greenRow + groups.map((group) => {
         const open = openHours.has(group.label);
         const matches = group.items.map((match) => {
           const flag = greenFlags[match.id] || "";
