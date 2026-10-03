@@ -712,10 +712,10 @@
         const rows = (data && data.matches) || [];
         if (meta) meta.textContent = rows.length + " maç · biri tuttu";
         box.innerHTML = rows.map((m) => {
-          const color = m.blue && !(m.tags || []).length ? "mavi" : "ok";
-          const label = m.blue && (m.tags || []).length ? "yeşil · KG var" : m.blue ? "KG var" : "yeşil";
-          const note = (m.tags || []).join(" · ");
-          return `<div class="satir"><span>${m.time || ""} ${m.home} – ${m.away}<br><span class="lockline">${note}</span></span><b class="${color}">${label}</b></div>`;
+          const names = (m.tags || []).join(" · ");
+          const label = names && m.blue ? names + " · KG var" : names || "KG var";
+          const color = names ? "ok" : "mavi";
+          return `<div class="satir"><span>${m.time || ""} ${m.home} – ${m.away}</span><b class="${color}">${label}</b></div>`;
         }).join("") || `<p class="meta">Gelen yok</p>`;
       }).catch(() => {});
     }
