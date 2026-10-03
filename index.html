@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Oran Analiz</title>
+  <title>GÖKÇEN ANALİZ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root { --bg:#0b0d10; --surface:#14181d; --fg:#f3f0e8; --muted:#9a9386; --red:#9c2b2b; --line:#2a261f; --gold:#e4d0a2; --green:#1f7a45; }
     * { box-sizing:border-box; }
@@ -26,10 +26,10 @@
     h1 {
       margin:10px 0 0;
       text-align:center;
-      font-family:"Cormorant Garamond",Georgia,serif;
+      font-family:"Bodoni Moda",Georgia,serif;
       font-weight:500;
-      font-size:24px;
-      letter-spacing:0.18em;
+      font-size:28px;
+      letter-spacing:0.22em;
       text-transform:uppercase;
       color:var(--gold);
     }
@@ -70,6 +70,7 @@
     .satir b { font-weight:600; }
     .ok { color:#3dd68c; }
     .mavi { color:#5aa7ff; }
+    .turuncu { color:#e39a3c; }
     .no { color:#e85d4c; }
     #bulten-list button.on .lockline { color: rgba(255,255,255,0.8); }
 
@@ -121,7 +122,7 @@
 <body>
   <div id="lock">
     <form id="lock-form">
-      <h1>Oran Analiz</h1>
+      <h1>GÖKÇEN ANALİZ</h1>
       <div class="rule"></div>
       <input id="lock-key" type="password" placeholder="Şifre" autocomplete="current-password">
       <button class="go" type="submit">Gir</button>
@@ -130,17 +131,22 @@
   </div>
   <div class="frame">
   <main>
-    <h1>Oran Analiz</h1>
+    <h1>GÖKÇEN ANALİZ</h1>
     <div class="rule"></div>
     <div class="tabs">
       <button id="tab-bulten" class="on" type="button">Bülten</button>
-      <button id="tab-sonuc" type="button">Sonuç</button>
+      <button id="tab-sonuc" type="button">Bülten sonuç</button>
       <button id="tab-oran" type="button">Oran</button>
+      <button id="tab-analiz" type="button">Analiz Sonuç</button>
     </div>
 
     <section id="panel-oran" class="hide">
       <p class="meta" id="oran-meta">Altı oran yeşil. KG yok ve İY 1.5 alt birlikteyse mavi.</p>
       <div id="oran-list"></div>
+    </section>
+    <section id="panel-analiz" class="hide">
+      <p class="meta" id="analiz-meta">Oran sinyallerinin bitenleri.</p>
+      <div id="analiz-list"></div>
     </section>
     <section id="panel-sonuc" class="hide">
       <p class="meta" id="sonuc-meta">Yeşil kilitlerin günü.</p>
@@ -411,12 +417,12 @@
     }
     function showTab(next) {
       tab = next;
-      ["bulten","sonuc","oran"].forEach(function(name){
+      ["bulten","sonuc","oran","analiz"].forEach(function(name){
         document.getElementById("tab-"+name).classList.toggle("on", name===next);
         document.getElementById("panel-"+name).classList.toggle("hide", name!==next);
       });
       const tools = document.getElementById("analiz-tools");
-      if (tools) tools.classList.toggle("hide", next === "sonuc" || next === "oran");
+      if (tools) tools.classList.toggle("hide", next === "sonuc" || next === "oran" || next === "analiz");
       if (next !== "bulten") {
         document.getElementById("second").innerHTML = "";
       } else if (picked) {
@@ -429,8 +435,6 @@
     function allowGreen(match) {
       const lig = String(match.league || "").toUpperCase();
       const blob = `${match.home || ""} ${match.away || ""} ${lig}`.toUpperCase();
-      const TOP = new Set(["ARJ","BR1","KOL","ŞİL","URU","UKR","FAS","NOR1","BLR1","İN1","KİRL","TR1","ING1","ISP1","ITA1","ALM1","FRA1","HOL1","POR1","BEL1","ABD","JAP1","MEK1","AVUL"]);
-      if (!TOP.has(lig)) return false;
       if (cupMatch(match)) return false;
       if (lig === "HAZ" || /HAZIRLIK|HAZIRLIK|DOSTLUK|FRIENDLY/.test(blob)) return false;
       if (/U19|U20|U21|U23|\(K\)|KADIN/.test(blob)) return false;
@@ -537,6 +541,7 @@
     document.getElementById("tab-bulten").onclick = () => showTab("bulten");
     document.getElementById("tab-sonuc").onclick = () => showTab("sonuc");
     document.getElementById("tab-oran").onclick = () => showTab("oran");
+    document.getElementById("tab-analiz").onclick = () => showTab("analiz");
     document.getElementById("ara").onclick = search;
     KEYS.forEach((key) => { const el = document.getElementById(key); if (el) el.addEventListener("input", readManual); });
     document.getElementById("tol").onclick = (event) => {
@@ -705,6 +710,16 @@
       }
       return { "1": p1, "X": px, "2": p2 };
     }
+    function loadAnaliz() {
+      fetch("analiz_sonuc.json").then((res) => res.json()).then((data) => {
+        const box = document.getElementById("analiz-list");
+        const meta = document.getElementById("analiz-meta");
+        const rows = (data && data.matches) || [];
+        const hit = rows.filter((m) => m.ok).length;
+        if (meta) meta.textContent = hit + " tuttu · " + (rows.length - hit) + " tutmadı";
+        box.innerHTML = rows.slice(0, 80).map((m) => `<div class="satir"><span>${m.date || ""} ${m.home} – ${m.away} ${m.skor}<br><span class="lockline">${(m.calls || []).join(" · ")}</span></span><b class="${m.ok ? "ok" : "no"}">${m.ok ? "tuttu" : "tutmadı"}</b></div>`).join("") || `<p class="meta">Biten yok</p>`;
+      }).catch(() => {});
+    }
     function loadOran() {
       fetch("oran_sayfa.json").then((res) => res.json()).then((data) => {
         const box = document.getElementById("oran-list");
@@ -714,8 +729,8 @@
         box.innerHTML = rows.map((m) => {
           const green = (m.tags || []).join(" · ");
           const blue = Array.isArray(m.blue) ? m.blue.join(" · ") : (m.blue ? "KG var" : "");
-          const label = [green, blue].filter(Boolean).join(" · ");
-          return `<div class="satir"><span>${m.time || ""} ${m.home} – ${m.away}</span><b>${green ? `<b class="ok">${green}</b>` : ""}${green && blue ? " · " : ""}${blue ? `<b class="mavi">${blue}</b>` : ""}</b></div>`;
+          const orange = m.orange ? "MS 1" : "";
+          return `<div class="satir"><span>${m.time || ""} ${m.home} – ${m.away}</span><b>${green ? `<b class="ok">${green}</b>` : ""}${green && (blue || orange) ? " · " : ""}${blue ? `<b class="mavi">${blue}</b>` : ""}${blue && orange ? " · " : ""}${orange ? `<b class="turuncu">${orange}</b>` : ""}</b></div>`;
         }).join("") || `<p class="meta">Gelen yok</p>`;
       }).catch(() => {});
     }
@@ -735,7 +750,7 @@
     const PASS_TEXT = "OranAnaliz27";
     function unlock() {
       document.getElementById("lock").classList.add("hide");
-      if (!unlock.done) { unlock.done = true; loadBulletin(); loadSonuc(); loadOran(); }
+      if (!unlock.done) { unlock.done = true; loadBulletin(); loadSonuc(); loadOran(); loadAnaliz(); }
     }
     if (localStorage.getItem("oran-kapi") === PASS_TEXT) unlock();
     document.getElementById("lock-form").onsubmit = (event) => {

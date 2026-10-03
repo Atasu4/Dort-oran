@@ -24,7 +24,7 @@ jobs:
         run: |
           git config user.name "Atasu4"
           git config user.email "atasugokcen@gmail.com"
-          git add bulten.json uc_oran.json macsonuclari.json oran_sayfa.json app_summary.json
+          git add bulten.json uc_oran.json macsonuclari.json oran_sayfa.json analiz_sonuc.json app_summary.json
           git diff --cached --quiet && exit 0
           git commit -m "Bulteni, uc oran ve macsonuclari listesini guncelle"
           git pull --rebase origin main

@@ -13,7 +13,7 @@ def odd(value):
         parsed = float(str(value).replace(",", "."))
     except ValueError:
         return None
-    if parsed <= 1.01 or parsed >= 80:
+    if parsed < 1.00 or parsed >= 80:
         return None
     return round(parsed, 2)
 
@@ -64,9 +64,51 @@ for day in data["m"]:
             blue.append("MS 1")
         if hit(markets["ms1"], 1.20, 1.29) and hit(markets["iy15alt"], 1.40, 1.49):
             blue.append("MS 1")
-        if not tags and not blue:
+        orange = hit(markets["ms1"], 1.00, 1.09) and hit(markets["25ust"], 1.10, 1.19)
+        if not tags and not blue and not orange:
             continue
-        rows.append({"date": date, "time": time, "home": str(row[1]).strip(), "away": str(row[3]).strip(), "league": str(row[26] or ""), "tags": tags, "blue": blue, **markets})
+        rows.append({"date": date, "time": time, "home": str(row[1]).strip(), "away": str(row[3]).strip(), "league": str(row[26] or ""), "tags": tags, "blue": blue, "orange": orange, **markets})
 out = {"updated": now.strftime("%Y-%m-%dT%H:%M+03:00"), "count": len(rows), "matches": rows}
 Path("oran_sayfa.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
 print(len(rows))
+
+
+def goals(value):
+    try:
+        return int(str(value))
+    except (TypeError, ValueError):
+        return None
+
+scored = []
+for day in data["m"]:
+    for row in day["m"]:
+        fh, fa = goals(row[8]), goals(row[9])
+        if fh is None or fa is None:
+            continue
+        markets = {
+            "35alt": odd(row[46]) if len(row) > 46 else None,
+            "kg": odd(row[39]) if len(row) > 39 else None,
+            "15ust": odd(row[45]) if len(row) > 45 else None,
+            "25alt": odd(row[22]) if len(row) > 22 else None,
+            "25ust": odd(row[23]) if len(row) > 23 else None,
+            "iy15": odd(row[43]) if len(row) > 43 else None,
+            "kgyok": odd(row[40]) if len(row) > 40 else None,
+            "iy15alt": odd(row[42]) if len(row) > 42 else None,
+            "ms1": odd(row[16]) if len(row) > 16 else None,
+        }
+        calls = []
+        if hit(markets["35alt"], 1.05, 1.07): calls.append(("3.5 alt", fh+fa < 4))
+        if markets["kg"] == 1.52: calls.append(("KG", fh>0 and fa>0))
+        if hit(markets["15ust"], 1.25, 1.29): calls.append(("1.5 üst", fh+fa >= 2))
+        if markets["25alt"] == 1.48: calls.append(("2.5 alt", fh+fa < 3))
+        if hit(markets["25ust"], 1.16, 1.17): calls.append(("2.5 üst", fh+fa >= 3))
+        if hit(markets["kgyok"], 1.80, 1.89) and hit(markets["iy15alt"], 1.20, 1.29): calls.append(("2.5 alt", fh+fa < 3))
+        if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.30, 1.39): calls.append(("2.5 üst", fh+fa >= 3))
+        if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49): calls.append(("MS 1", fh>fa))
+        if hit(markets["ms1"], 1.00, 1.09) and hit(markets["25ust"], 1.10, 1.19): calls.append(("MS 1", fh>fa))
+        if not calls:
+            continue
+        ok = all(flag for _, flag in calls)
+        scored.append({"date": str(row[7]), "time": str(row[6]), "home": str(row[1]).strip(), "away": str(row[3]).strip(), "skor": f"{fh}-{fa}", "calls": [name for name,_ in calls], "ok": ok})
+Path("analiz_sonuc.json").write_text(json.dumps({"updated": now.strftime("%Y-%m-%dT%H:%M+03:00"), "count": len(scored), "hit": sum(1 for x in scored if x["ok"]), "matches": scored}, ensure_ascii=False, indent=2), encoding="utf-8")
+print("analiz", len(scored))
