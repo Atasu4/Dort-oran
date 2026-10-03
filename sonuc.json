@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-02T19:41+03:00",
+  "updated": "2026-10-03T15:41+03:00",
   "days": [
     {
       "date": "30.09.2026",
@@ -90,6 +90,61 @@
           "skor": "1-1",
           "not": "1.44",
           "oran": "1.44"
+        }
+      ]
+    },
+    {
+      "date": "03.10.2026",
+      "tutan": [
+        {
+          "mac": "Boca Juniors – Union",
+          "skor": "3-0",
+          "oran": "1.27",
+          "not": "lig"
+        },
+        {
+          "mac": "Deportivo Cali – Alianza",
+          "skor": "3-1",
+          "oran": "1.30",
+          "not": "lig"
+        },
+        {
+          "mac": "Tepatitlan – Jaiba Brava",
+          "skor": "3-1",
+          "oran": "1.33",
+          "not": "lig"
+        }
+      ],
+      "tutmayan": [
+        {
+          "mac": "Matsumoto – Gainare",
+          "skor": "0-1",
+          "oran": "1.43",
+          "not": "lig"
+        },
+        {
+          "mac": "La Paz – Venados",
+          "skor": "1-2",
+          "oran": "1.35",
+          "not": "lig"
+        },
+        {
+          "mac": "Fortaleza – Nautico",
+          "skor": "1-1",
+          "oran": "1.34",
+          "not": "lig"
+        },
+        {
+          "mac": "Correcaminos – Cruz Azul",
+          "skor": "0-0",
+          "oran": "1.22",
+          "not": "lig"
+        },
+        {
+          "mac": "Pocheon – Chuncheon",
+          "skor": "0-0",
+          "oran": "1.33",
+          "not": "lig"
         }
       ]
     }
