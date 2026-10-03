@@ -50,7 +50,20 @@ for day in data["m"]:
         if markets["25alt"] == 1.48: tags.append("2.5 alt")
         if hit(markets["25ust"], 1.16, 1.17): tags.append("2.5 üst")
         if hit(markets["iy15"], 1.55, 1.57): tags.append("İY 1.5")
-        blue = hit(markets["kgyok"], 2.10, 2.19) and hit(markets["iy15alt"], 1.40, 1.49)
+        markets["ms1"] = odd(row[16]) if len(row) > 16 else None
+        blue = []
+        if hit(markets["kgyok"], 2.10, 2.19) and hit(markets["iy15alt"], 1.40, 1.49):
+            blue.append("KG var")
+        if hit(markets["kgyok"], 1.80, 1.89) and hit(markets["iy15alt"], 1.20, 1.29):
+            blue.append("2.5 alt")
+        if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.30, 1.39):
+            blue.append("2.5 üst")
+        if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.40, 1.49):
+            blue.append("İY 1.5 alt")
+        if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49):
+            blue.append("MS 1")
+        if hit(markets["ms1"], 1.20, 1.29) and hit(markets["iy15alt"], 1.40, 1.49):
+            blue.append("MS 1")
         if not tags and not blue:
             continue
         rows.append({"date": date, "time": time, "home": str(row[1]).strip(), "away": str(row[3]).strip(), "league": str(row[26] or ""), "tags": tags, "blue": blue, **markets})
