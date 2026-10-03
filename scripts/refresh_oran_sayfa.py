@@ -41,6 +41,8 @@ for day in data["m"]:
             "25ust": odd(row[23]) if len(row) > 23 else None,
             "iy15": odd(row[43]) if len(row) > 43 else None,
         }
+        markets["kgyok"] = odd(row[40]) if len(row) > 40 else None
+        markets["iy15alt"] = odd(row[42]) if len(row) > 42 else None
         tags = []
         if hit(markets["35alt"], 1.05, 1.07): tags.append("3.5 alt")
         if markets["kg"] == 1.52: tags.append("KG")
@@ -48,9 +50,10 @@ for day in data["m"]:
         if markets["25alt"] == 1.48: tags.append("2.5 alt")
         if hit(markets["25ust"], 1.16, 1.17): tags.append("2.5 üst")
         if hit(markets["iy15"], 1.55, 1.57): tags.append("İY 1.5")
-        if not tags:
+        blue = hit(markets["kgyok"], 2.10, 2.19) and hit(markets["iy15alt"], 1.40, 1.49)
+        if not tags and not blue:
             continue
-        rows.append({"date": date, "time": time, "home": str(row[1]).strip(), "away": str(row[3]).strip(), "league": str(row[26] or ""), "tags": tags, **markets})
+        rows.append({"date": date, "time": time, "home": str(row[1]).strip(), "away": str(row[3]).strip(), "league": str(row[26] or ""), "tags": tags, "blue": blue, **markets})
 out = {"updated": now.strftime("%Y-%m-%dT%H:%M+03:00"), "count": len(rows), "matches": rows}
 Path("oran_sayfa.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
 print(len(rows))

@@ -138,7 +138,7 @@
     </div>
 
     <section id="panel-oran" class="hide">
-      <p class="meta" id="oran-meta">Altı orandan biri tutarsa yeşil.</p>
+      <p class="meta" id="oran-meta">Altı oran yeşil. KG yok ve İY 1.5 alt birlikteyse mavi.</p>
       <div id="oran-list"></div>
     </section>
     <section id="panel-sonuc" class="hide">
@@ -710,7 +710,12 @@
         const meta = document.getElementById("oran-meta");
         const rows = (data && data.matches) || [];
         if (meta) meta.textContent = rows.length + " maç · biri tuttu";
-        box.innerHTML = rows.map((m) => `<div class="satir"><span>${m.time || ""} ${m.home} – ${m.away}<br><span class="lockline">${(m.tags || []).join(" · ")}</span></span><b class="ok">yeşil</b></div>`).join("") || `<p class="meta">Gelen yok</p>`;
+        box.innerHTML = rows.map((m) => {
+          const color = m.blue && !(m.tags || []).length ? "s" : "ok";
+          const label = m.blue && (m.tags || []).length ? "yeşil · mavi" : m.blue ? "mavi" : "yeşil";
+          const note = [(m.tags || []).join(" · "), m.blue ? "KG yok + İY 1.5 alt" : ""].filter(Boolean).join(" · ");
+          return `<div class="satir"><span>${m.time || ""} ${m.home} – ${m.away}<br><span class="lockline">${note}</span></span><b class="${color}">${label}</b></div>`;
+        }).join("") || `<p class="meta">Gelen yok</p>`;
       }).catch(() => {});
     }
     function loadSonuc() {
