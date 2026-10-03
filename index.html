@@ -479,6 +479,7 @@
       greenFlags = flags;
       bulletin.forEach((match) => { if (flags[match.id]) openHours.add(hourOf(match)); });
       drawBulletin();
+      scanGreens();
     }
     function hourOf(match) {
       return (match.date || "") + " " + (match.time || "00:00").slice(0, 2) + ":00";
