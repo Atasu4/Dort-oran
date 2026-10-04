@@ -128,11 +128,8 @@ for day in data["m"]:
         if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49): calls.append(("MS 1", fh>fa))
         if hit(markets["ms1"], 1.00, 1.09) and hit(markets["25ust"], 1.10, 1.19): calls.append(("MS 1", fh>fa))
         day, month, year = str(row[7]).split(".")
-        if (year, month, day, str(row[6])) < ("2026", "10", "04", "00:00"):
-            continue
-        if (year, month, day, str(row[6])) > now.strftime("%Y-%m-%d-%H:%M").split("-")[0:3] + [now.strftime("%H:%M")]:
-            continue
-        if (year, month, day) == now.strftime("%Y-%m-%d").split("-") and str(row[6]) > now.strftime("%H:%M"):
+        stamp = f"{year}-{month}-{day} {row[6]}"
+        if stamp < "2026-10-04 00:00" or stamp > now.strftime("%Y-%m-%d %H:%M"):
             continue
         if not calls:
             continue
