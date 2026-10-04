@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-04T02:57+03:00",
-  "count": 79,
+  "updated": "2026-10-04T08:31+03:00",
+  "count": 82,
   "matches": [
     {
       "date": "04.10.2026",
@@ -33,7 +33,7 @@
         "1.5 üst"
       ],
       "blue": [
-        "2.5 üst"
+        "2.5 alt"
       ],
       "orange": false,
       "35alt": 1.0,
@@ -70,32 +70,11 @@
     {
       "date": "04.10.2026",
       "time": "02:00",
-      "home": "Westchester Sc",
-      "away": "Alta",
-      "league": "USL1",
-      "tags": [],
-      "blue": [
-        "KG var"
-      ],
-      "orange": false,
-      "35alt": 1.44,
-      "kg": 1.3,
-      "15ust": null,
-      "25alt": null,
-      "25ust": null,
-      "iy15": 1.86,
-      "kgyok": 2.19,
-      "iy15alt": 1.46,
-      "ms1": 1.57
-    },
-    {
-      "date": "04.10.2026",
-      "time": "02:00",
       "home": "Detroit City",
       "away": "Birmingham Legi",
       "league": "USLP",
       "tags": [
-        "KG"
+        "KG yok"
       ],
       "blue": [],
       "orange": false,
@@ -132,6 +111,27 @@
     },
     {
       "date": "04.10.2026",
+      "time": "02:00",
+      "home": "Westchester Sc",
+      "away": "Alta",
+      "league": "USL1",
+      "tags": [],
+      "blue": [
+        "KG var"
+      ],
+      "orange": false,
+      "35alt": 1.44,
+      "kg": 1.3,
+      "15ust": null,
+      "25alt": null,
+      "25ust": null,
+      "iy15": 1.86,
+      "kgyok": 2.19,
+      "iy15alt": 1.46,
+      "ms1": 1.57
+    },
+    {
+      "date": "04.10.2026",
       "time": "02:30",
       "home": "Tampa Bay Rowd",
       "away": "Miami Fc",
@@ -162,7 +162,7 @@
         "1.5 üst"
       ],
       "blue": [
-        "2.5 üst"
+        "2.5 alt"
       ],
       "orange": false,
       "35alt": 1.05,
@@ -178,23 +178,24 @@
     {
       "date": "04.10.2026",
       "time": "04:00",
-      "home": "Durango",
-      "away": "Zacatecas",
+      "home": "Monarcas",
+      "away": "Tlaxcala",
       "league": "MEK2",
-      "tags": [
-        "KG"
+      "tags": [],
+      "blue": [
+        "MS 1",
+        "MS 1"
       ],
-      "blue": [],
       "orange": false,
-      "35alt": null,
-      "kg": 1.52,
+      "35alt": 1.37,
+      "kg": 1.49,
       "15ust": null,
-      "25alt": 1.66,
-      "25ust": 1.61,
-      "iy15": 2.33,
-      "kgyok": 1.77,
-      "iy15alt": 1.26,
-      "ms1": 1.71
+      "25alt": 2.05,
+      "25ust": 1.37,
+      "iy15": 1.91,
+      "kgyok": 1.82,
+      "iy15alt": 1.43,
+      "ms1": 1.27
     },
     {
       "date": "04.10.2026",
@@ -203,19 +204,19 @@
       "away": "Fransiz Guyanas",
       "league": "CON",
       "tags": [
-        "3.5 alt"
+        "1.5 üst"
       ],
       "blue": [
-        "2.5 üst"
+        "2.5 alt"
       ],
       "orange": false,
-      "35alt": 1.05,
-      "kg": 1.74,
-      "15ust": 1.24,
-      "25alt": 1.39,
-      "25ust": 1.99,
+      "35alt": 1.0,
+      "kg": 1.8,
+      "15ust": 1.27,
+      "25alt": 1.35,
+      "25ust": 2.07,
       "iy15": null,
-      "kgyok": 1.54,
+      "kgyok": 1.5,
       "iy15alt": null,
       "ms1": 2.64
     },
@@ -273,56 +274,14 @@
       ],
       "orange": false,
       "35alt": null,
-      "kg": 1.45,
+      "kg": 1.47,
       "15ust": null,
       "25alt": 1.71,
       "25ust": 1.58,
       "iy15": 2.28,
-      "kgyok": 1.87,
+      "kgyok": 1.84,
       "iy15alt": 1.28,
-      "ms1": 2.17
-    },
-    {
-      "date": "04.10.2026",
-      "time": "07:00",
-      "home": "Maruyasu Indus",
-      "away": "Reinmeer Aomori",
-      "league": "JAPF",
-      "tags": [],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "35alt": null,
-      "kg": 1.69,
-      "15ust": null,
-      "25alt": 1.43,
-      "25ust": 1.93,
-      "iy15": null,
-      "kgyok": 1.58,
-      "iy15alt": null,
-      "ms1": 2.62
-    },
-    {
-      "date": "04.10.2026",
-      "time": "08:00",
-      "home": "Kamatamare San",
-      "away": "Tochigi Sc",
-      "league": "JAP3",
-      "tags": [
-        "KG"
-      ],
-      "blue": [],
-      "orange": false,
-      "35alt": null,
-      "kg": 1.52,
-      "15ust": null,
-      "25alt": 1.66,
-      "25ust": 1.61,
-      "iy15": 2.33,
-      "kgyok": 1.77,
-      "iy15alt": 1.26,
-      "ms1": 3.11
+      "ms1": 1.83
     },
     {
       "date": "04.10.2026",
@@ -340,10 +299,52 @@
       "15ust": null,
       "25alt": 1.65,
       "25ust": 1.62,
-      "iy15": 2.34,
+      "iy15": 2.35,
       "kgyok": 1.81,
+      "iy15alt": 1.25,
+      "ms1": 2.67
+    },
+    {
+      "date": "04.10.2026",
+      "time": "08:00",
+      "home": "Kamatamare San",
+      "away": "Tochigi Sc",
+      "league": "JAP3",
+      "tags": [
+        "KG yok"
+      ],
+      "blue": [],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.52,
+      "15ust": null,
+      "25alt": 1.66,
+      "25ust": 1.61,
+      "iy15": 2.33,
+      "kgyok": 1.77,
       "iy15alt": 1.26,
-      "ms1": 2.83
+      "ms1": 3.11
+    },
+    {
+      "date": "04.10.2026",
+      "time": "12:00",
+      "home": "Kagoshima Unit",
+      "away": "Fukushima Unite",
+      "league": "JAP3",
+      "tags": [],
+      "blue": [
+        "MS 1"
+      ],
+      "orange": false,
+      "35alt": 1.43,
+      "kg": 1.51,
+      "15ust": null,
+      "25alt": 1.99,
+      "25ust": 1.39,
+      "iy15": 1.84,
+      "kgyok": 1.79,
+      "iy15alt": 1.47,
+      "ms1": 1.2
     },
     {
       "date": "04.10.2026",
@@ -357,14 +358,14 @@
       ],
       "orange": false,
       "35alt": null,
-      "kg": 1.69,
+      "kg": 1.71,
       "15ust": null,
       "25alt": 1.4,
       "25ust": 1.97,
       "iy15": null,
       "kgyok": 1.58,
       "iy15alt": null,
-      "ms1": 2.35
+      "ms1": 2.21
     },
     {
       "date": "04.10.2026",
@@ -390,23 +391,23 @@
     {
       "date": "04.10.2026",
       "time": "13:00",
-      "home": "Granada (K)",
-      "away": "Eibar (K)",
-      "league": "İSKPR",
+      "home": "Levante U19",
+      "away": "Académico Murci",
+      "league": "ISPU18",
       "tags": [],
       "blue": [
-        "İY 1.5 alt"
+        "MS 1"
       ],
       "orange": false,
-      "35alt": null,
-      "kg": 1.76,
+      "35alt": 1.38,
+      "kg": 1.47,
       "15ust": null,
-      "25alt": 1.42,
-      "25ust": 1.93,
+      "25alt": 2.04,
+      "25ust": 1.37,
       "iy15": null,
-      "kgyok": 1.53,
+      "kgyok": 1.84,
       "iy15alt": null,
-      "ms1": 1.69
+      "ms1": 1.28
     },
     {
       "date": "04.10.2026",
@@ -419,15 +420,120 @@
         "KG var"
       ],
       "orange": false,
-      "35alt": 1.44,
-      "kg": 1.32,
+      "35alt": 1.38,
+      "kg": 1.33,
       "15ust": null,
       "25alt": null,
       "25ust": null,
-      "iy15": 1.86,
-      "kgyok": 2.15,
-      "iy15alt": 1.46,
-      "ms1": 1.51
+      "iy15": 1.93,
+      "kgyok": 2.13,
+      "iy15alt": 1.42,
+      "ms1": 1.63
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:00",
+      "home": "Huetor Vega",
+      "away": "Atletico Mancha",
+      "league": "İSTL",
+      "tags": [],
+      "blue": [
+        "2.5 alt"
+      ],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.74,
+      "15ust": null,
+      "25alt": 1.38,
+      "25ust": 2.0,
+      "iy15": null,
+      "kgyok": 1.54,
+      "iy15alt": null,
+      "ms1": 1.97
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:00",
+      "home": "Granada (K)",
+      "away": "Eibar (K)",
+      "league": "İSKPR",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.72,
+      "15ust": null,
+      "25alt": 1.42,
+      "25ust": 1.93,
+      "iy15": null,
+      "kgyok": 1.56,
+      "iy15alt": null,
+      "ms1": 1.84
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:00",
+      "home": "Getafe Ii",
+      "away": "Numancia",
+      "league": "İS4",
+      "tags": [],
+      "blue": [
+        "2.5 alt"
+      ],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.8,
+      "15ust": null,
+      "25alt": 1.33,
+      "25ust": 2.14,
+      "iy15": null,
+      "kgyok": 1.5,
+      "iy15alt": null,
+      "ms1": 2.74
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:00",
+      "home": "Ss Reyes",
+      "away": "Real Avila",
+      "league": "İS4",
+      "tags": [],
+      "blue": [
+        "2.5 alt"
+      ],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.76,
+      "15ust": null,
+      "25alt": 1.39,
+      "25ust": 1.99,
+      "iy15": null,
+      "kgyok": 1.53,
+      "iy15alt": null,
+      "ms1": 1.86
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:00",
+      "home": "Águilas Ii",
+      "away": "Unión Molinense",
+      "league": "İSTL",
+      "tags": [
+        "2.5 alt"
+      ],
+      "blue": [],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.61,
+      "15ust": null,
+      "25alt": 1.48,
+      "25ust": 1.82,
+      "iy15": null,
+      "kgyok": 1.66,
+      "iy15alt": null,
+      "ms1": 2.65
     },
     {
       "date": "04.10.2026",
@@ -469,28 +575,7 @@
       "iy15": null,
       "kgyok": 1.58,
       "iy15alt": null,
-      "ms1": 2.73
-    },
-    {
-      "date": "04.10.2026",
-      "time": "13:00",
-      "home": "Huetor Vega",
-      "away": "Atletico Mancha",
-      "league": "İSTL",
-      "tags": [],
-      "blue": [
-        "2.5 üst"
-      ],
-      "orange": false,
-      "35alt": null,
-      "kg": 1.74,
-      "15ust": null,
-      "25alt": 1.38,
-      "25ust": 2.0,
-      "iy15": null,
-      "kgyok": 1.54,
-      "iy15alt": null,
-      "ms1": 1.97
+      "ms1": 2.76
     },
     {
       "date": "04.10.2026",
@@ -498,20 +583,20 @@
       "home": "Ibiza Islas Pi",
       "away": "Formentera",
       "league": "İSTL",
-      "tags": [
-        "2.5 alt"
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
       ],
-      "blue": [],
       "orange": false,
       "35alt": null,
-      "kg": 1.67,
+      "kg": 1.72,
       "15ust": null,
-      "25alt": 1.48,
-      "25ust": 1.84,
+      "25alt": 1.44,
+      "25ust": 1.9,
       "iy15": null,
-      "kgyok": 1.6,
+      "kgyok": 1.55,
       "iy15alt": null,
-      "ms1": 1.7
+      "ms1": 1.72
     },
     {
       "date": "04.10.2026",
@@ -520,7 +605,7 @@
       "away": "Ud Ibiza",
       "league": "İS3",
       "tags": [
-        "KG"
+        "KG yok"
       ],
       "blue": [],
       "orange": false,
@@ -557,90 +642,6 @@
     },
     {
       "date": "04.10.2026",
-      "time": "13:00",
-      "home": "Intercity",
-      "away": "Yeclano",
-      "league": "İS4",
-      "tags": [],
-      "blue": [
-        "2.5 üst"
-      ],
-      "orange": false,
-      "35alt": null,
-      "kg": 1.8,
-      "15ust": null,
-      "25alt": 1.35,
-      "25ust": 2.08,
-      "iy15": null,
-      "kgyok": 1.5,
-      "iy15alt": null,
-      "ms1": 1.86
-    },
-    {
-      "date": "04.10.2026",
-      "time": "13:00",
-      "home": "Águilas Ii",
-      "away": "Unión Molinense",
-      "league": "İSTL",
-      "tags": [
-        "2.5 alt"
-      ],
-      "blue": [],
-      "orange": false,
-      "35alt": null,
-      "kg": 1.61,
-      "15ust": null,
-      "25alt": 1.48,
-      "25ust": 1.82,
-      "iy15": null,
-      "kgyok": 1.66,
-      "iy15alt": null,
-      "ms1": 2.65
-    },
-    {
-      "date": "04.10.2026",
-      "time": "13:00",
-      "home": "Ss Reyes",
-      "away": "Real Avila",
-      "league": "İS4",
-      "tags": [],
-      "blue": [
-        "2.5 üst"
-      ],
-      "orange": false,
-      "35alt": null,
-      "kg": 1.76,
-      "15ust": null,
-      "25alt": 1.39,
-      "25ust": 1.99,
-      "iy15": null,
-      "kgyok": 1.53,
-      "iy15alt": null,
-      "ms1": 1.86
-    },
-    {
-      "date": "04.10.2026",
-      "time": "13:00",
-      "home": "Getafe Ii",
-      "away": "Numancia",
-      "league": "İS4",
-      "tags": [],
-      "blue": [
-        "2.5 üst"
-      ],
-      "orange": false,
-      "35alt": null,
-      "kg": 1.8,
-      "15ust": null,
-      "25alt": 1.33,
-      "25ust": 2.14,
-      "iy15": null,
-      "kgyok": 1.5,
-      "iy15alt": null,
-      "ms1": 2.74
-    },
-    {
-      "date": "04.10.2026",
       "time": "13:15",
       "home": "Astur",
       "away": "Mosconia",
@@ -664,24 +665,22 @@
     },
     {
       "date": "04.10.2026",
-      "time": "13:30",
-      "home": "Napoli (K)",
-      "away": "Como (K)",
-      "league": "İTKSA",
+      "time": "13:15",
+      "home": "Twente (K)",
+      "away": "Utrecht (K)",
+      "league": "HOLK1",
       "tags": [],
-      "blue": [
-        "2.5 alt"
-      ],
-      "orange": false,
-      "35alt": null,
-      "kg": 1.5,
+      "blue": [],
+      "orange": true,
+      "35alt": 1.72,
+      "kg": 2.26,
       "15ust": null,
-      "25alt": 1.64,
-      "25ust": 1.64,
-      "iy15": 2.38,
-      "kgyok": 1.8,
-      "iy15alt": 1.24,
-      "ms1": 2.17
+      "25alt": 2.94,
+      "25ust": 1.13,
+      "iy15": 1.59,
+      "kgyok": 1.28,
+      "iy15alt": 1.68,
+      "ms1": 1.0
     },
     {
       "date": "04.10.2026",
@@ -705,6 +704,27 @@
       "kgyok": 1.53,
       "iy15alt": null,
       "ms1": 3.58
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:30",
+      "home": "Napoli (K)",
+      "away": "Como (K)",
+      "league": "İTKSA",
+      "tags": [],
+      "blue": [
+        "2.5 alt"
+      ],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.5,
+      "15ust": null,
+      "25alt": 1.64,
+      "25ust": 1.64,
+      "iy15": 2.37,
+      "kgyok": 1.8,
+      "iy15alt": 1.25,
+      "ms1": 2.08
     },
     {
       "date": "04.10.2026",
@@ -793,27 +813,6 @@
     {
       "date": "04.10.2026",
       "time": "15:00",
-      "home": "Ahlafors If",
-      "away": "Motala Aif Fk",
-      "league": "İSÇ4",
-      "tags": [],
-      "blue": [
-        "KG var"
-      ],
-      "orange": false,
-      "35alt": 1.44,
-      "kg": 1.32,
-      "15ust": null,
-      "25alt": null,
-      "25ust": null,
-      "iy15": 1.86,
-      "kgyok": 2.14,
-      "iy15alt": 1.45,
-      "ms1": 1.51
-    },
-    {
-      "date": "04.10.2026",
-      "time": "15:00",
       "home": "Real Sociedad",
       "away": "Granada",
       "league": "İS2",
@@ -879,27 +878,6 @@
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Vvv Venlo",
-      "away": "Roda",
-      "league": "HOL2",
-      "tags": [],
-      "blue": [
-        "KG var"
-      ],
-      "orange": false,
-      "35alt": 1.37,
-      "kg": 1.3,
-      "15ust": 1.0,
-      "25alt": 2.07,
-      "25ust": 1.36,
-      "iy15": 1.97,
-      "kgyok": 2.19,
-      "iy15alt": 1.4,
-      "ms1": 2.08
-    },
-    {
-      "date": "04.10.2026",
-      "time": "15:30",
       "home": "Cosenza",
       "away": "Foggia",
       "league": "İTC",
@@ -929,14 +907,14 @@
         "2.5 alt"
       ],
       "orange": false,
-      "35alt": 1.17,
-      "kg": 1.5,
-      "15ust": 1.12,
-      "25alt": 1.64,
-      "25ust": 1.64,
-      "iy15": 2.36,
-      "kgyok": 1.81,
-      "iy15alt": 1.25,
+      "35alt": 1.19,
+      "kg": 1.46,
+      "15ust": 1.1,
+      "25alt": 1.68,
+      "25ust": 1.59,
+      "iy15": 2.3,
+      "kgyok": 1.86,
+      "iy15alt": 1.27,
       "ms1": 2.03
     },
     {
@@ -947,7 +925,7 @@
       "league": "URU",
       "tags": [],
       "blue": [
-        "2.5 üst"
+        "2.5 alt"
       ],
       "orange": false,
       "35alt": null,
@@ -959,6 +937,27 @@
       "kgyok": 1.51,
       "iy15alt": null,
       "ms1": 1.78
+    },
+    {
+      "date": "04.10.2026",
+      "time": "17:00",
+      "home": "Getafe U18",
+      "away": "Trival Valderas",
+      "league": "ISPU18",
+      "tags": [
+        "KG yok"
+      ],
+      "blue": [],
+      "orange": false,
+      "35alt": 1.42,
+      "kg": 1.52,
+      "15ust": null,
+      "25alt": null,
+      "25ust": null,
+      "iy15": null,
+      "kgyok": 1.77,
+      "iy15alt": null,
+      "ms1": 1.19
     },
     {
       "date": "04.10.2026",
@@ -1013,15 +1012,36 @@
       ],
       "blue": [],
       "orange": false,
-      "35alt": 1.76,
-      "kg": 1.77,
+      "35alt": 1.75,
+      "kg": 1.7,
       "15ust": null,
       "25alt": null,
       "25ust": null,
       "iy15": 1.57,
-      "kgyok": 1.52,
-      "iy15alt": 1.72,
-      "ms1": 14.65
+      "kgyok": 1.58,
+      "iy15alt": 1.71,
+      "ms1": 12.95
+    },
+    {
+      "date": "04.10.2026",
+      "time": "17:30",
+      "home": "Al Arabi",
+      "away": "Al Urooba",
+      "league": "BAECK",
+      "tags": [
+        "KG yok"
+      ],
+      "blue": [],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.52,
+      "15ust": null,
+      "25alt": 1.59,
+      "25ust": 1.68,
+      "iy15": 2.43,
+      "kgyok": 1.78,
+      "iy15alt": 1.23,
+      "ms1": 2.14
     },
     {
       "date": "04.10.2026",
@@ -1040,9 +1060,30 @@
       "25alt": null,
       "25ust": null,
       "iy15": 1.83,
-      "kgyok": 2.12,
+      "kgyok": 2.13,
       "iy15alt": 1.48,
       "ms1": 1.43
+    },
+    {
+      "date": "04.10.2026",
+      "time": "18:00",
+      "home": "Bergantinos",
+      "away": "Coruxo",
+      "league": "İS4",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.7,
+      "15ust": null,
+      "25alt": 1.44,
+      "25ust": 1.9,
+      "iy15": null,
+      "kgyok": 1.58,
+      "iy15alt": null,
+      "ms1": 1.85
     },
     {
       "date": "04.10.2026",
@@ -1051,7 +1092,7 @@
       "away": "Vianes",
       "league": "İSTL",
       "tags": [
-        "KG"
+        "KG yok"
       ],
       "blue": [],
       "orange": false,
@@ -1064,6 +1105,27 @@
       "kgyok": 1.78,
       "iy15alt": null,
       "ms1": 1.51
+    },
+    {
+      "date": "04.10.2026",
+      "time": "18:00",
+      "home": "Fc Iberia",
+      "away": "Dinamo Tiflis",
+      "league": "GUR",
+      "tags": [
+        "KG yok"
+      ],
+      "blue": [],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.52,
+      "15ust": null,
+      "25alt": 1.58,
+      "25ust": 1.69,
+      "iy15": 2.43,
+      "kgyok": 1.77,
+      "iy15alt": 1.23,
+      "ms1": 2.06
     },
     {
       "date": "04.10.2026",
@@ -1094,7 +1156,7 @@
       "league": "İSTL",
       "tags": [],
       "blue": [
-        "2.5 üst"
+        "2.5 alt"
       ],
       "orange": false,
       "35alt": null,
@@ -1131,8 +1193,8 @@
     {
       "date": "04.10.2026",
       "time": "18:00",
-      "home": "Bergantinos",
-      "away": "Coruxo",
+      "home": "Compostela",
+      "away": "Real Oviedo Ii",
       "league": "İS4",
       "tags": [],
       "blue": [
@@ -1140,14 +1202,35 @@
       ],
       "orange": false,
       "35alt": null,
-      "kg": 1.7,
+      "kg": 1.72,
       "15ust": null,
-      "25alt": 1.44,
-      "25ust": 1.9,
+      "25alt": 1.41,
+      "25ust": 1.95,
+      "iy15": null,
+      "kgyok": 1.57,
+      "iy15alt": null,
+      "ms1": 1.91
+    },
+    {
+      "date": "04.10.2026",
+      "time": "18:00",
+      "home": "Barbastro",
+      "away": "Utebo",
+      "league": "İS4",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.69,
+      "15ust": null,
+      "25alt": 1.43,
+      "25ust": 1.92,
       "iy15": null,
       "kgyok": 1.58,
       "iy15alt": null,
-      "ms1": 1.85
+      "ms1": 1.99
     },
     {
       "date": "04.10.2026",
@@ -1172,48 +1255,6 @@
     },
     {
       "date": "04.10.2026",
-      "time": "18:00",
-      "home": "Compostela",
-      "away": "Real Oviedo Ii",
-      "league": "İS4",
-      "tags": [],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "35alt": null,
-      "kg": 1.72,
-      "15ust": null,
-      "25alt": 1.41,
-      "25ust": 1.95,
-      "iy15": null,
-      "kgyok": 1.57,
-      "iy15alt": null,
-      "ms1": 1.91
-    },
-    {
-      "date": "04.10.2026",
-      "time": "18:00",
-      "home": "Gornik Leczna",
-      "away": "Chojniczanka",
-      "league": "POL2",
-      "tags": [],
-      "blue": [
-        "KG var"
-      ],
-      "orange": false,
-      "35alt": 1.37,
-      "kg": 1.33,
-      "15ust": 1.0,
-      "25alt": 2.06,
-      "25ust": 1.36,
-      "iy15": 1.96,
-      "kgyok": 2.12,
-      "iy15alt": 1.4,
-      "ms1": 1.69
-    },
-    {
-      "date": "04.10.2026",
       "time": "18:30",
       "home": "Dolomiti Bellu",
       "away": "Novara",
@@ -1222,39 +1263,18 @@
         "1.5 üst"
       ],
       "blue": [
-        "2.5 üst"
+        "2.5 alt"
       ],
       "orange": false,
       "35alt": 1.0,
-      "kg": 1.79,
+      "kg": 1.8,
       "15ust": 1.29,
       "25alt": 1.32,
       "25ust": 2.14,
       "iy15": null,
-      "kgyok": 1.51,
+      "kgyok": 1.5,
       "iy15alt": null,
-      "ms1": 2.42
-    },
-    {
-      "date": "04.10.2026",
-      "time": "19:00",
-      "home": "Bunol",
-      "away": "Torrent",
-      "league": "İSTL",
-      "tags": [],
-      "blue": [
-        "2.5 üst"
-      ],
-      "orange": false,
-      "35alt": null,
-      "kg": 1.75,
-      "15ust": null,
-      "25alt": 1.37,
-      "25ust": 2.04,
-      "iy15": null,
-      "kgyok": 1.53,
-      "iy15alt": null,
-      "ms1": 2.91
+      "ms1": 2.48
     },
     {
       "date": "04.10.2026",
@@ -1264,7 +1284,7 @@
       "league": "İSTL",
       "tags": [],
       "blue": [
-        "2.5 üst"
+        "2.5 alt"
       ],
       "orange": false,
       "35alt": null,
@@ -1276,6 +1296,50 @@
       "kgyok": 1.53,
       "iy15alt": null,
       "ms1": 2.45
+    },
+    {
+      "date": "04.10.2026",
+      "time": "19:00",
+      "home": "Terrassa",
+      "away": "Girona Ii",
+      "league": "İS4",
+      "tags": [
+        "2.5 alt"
+      ],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.69,
+      "15ust": null,
+      "25alt": 1.48,
+      "25ust": 1.84,
+      "iy15": null,
+      "kgyok": 1.58,
+      "iy15alt": null,
+      "ms1": 1.68
+    },
+    {
+      "date": "04.10.2026",
+      "time": "19:00",
+      "home": "Ontinyent 1931",
+      "away": "Villarreal Iii",
+      "league": "İSTL",
+      "tags": [],
+      "blue": [
+        "2.5 alt"
+      ],
+      "orange": false,
+      "35alt": null,
+      "kg": 1.72,
+      "15ust": null,
+      "25alt": 1.39,
+      "25ust": 1.99,
+      "iy15": null,
+      "kgyok": 1.56,
+      "iy15alt": null,
+      "ms1": 2.79
     },
     {
       "date": "04.10.2026",
@@ -1301,46 +1365,23 @@
     {
       "date": "04.10.2026",
       "time": "19:00",
-      "home": "Ontinyent 1931",
-      "away": "Villarreal Iii",
-      "league": "İSTL",
+      "home": "Tavernes",
+      "away": "Maracena",
+      "league": "İSPK",
       "tags": [],
       "blue": [
-        "2.5 üst"
-      ],
-      "orange": false,
-      "35alt": null,
-      "kg": 1.72,
-      "15ust": null,
-      "25alt": 1.39,
-      "25ust": 1.99,
-      "iy15": null,
-      "kgyok": 1.56,
-      "iy15alt": null,
-      "ms1": 2.79
-    },
-    {
-      "date": "04.10.2026",
-      "time": "19:00",
-      "home": "Terrassa",
-      "away": "Girona Ii",
-      "league": "İS4",
-      "tags": [
         "2.5 alt"
       ],
-      "blue": [
-        "İY 1.5 alt"
-      ],
       "orange": false,
       "35alt": null,
-      "kg": 1.7,
+      "kg": 1.46,
       "15ust": null,
-      "25alt": 1.48,
-      "25ust": 1.84,
-      "iy15": null,
-      "kgyok": 1.58,
-      "iy15alt": null,
-      "ms1": 1.65
+      "25alt": 1.72,
+      "25ust": 1.57,
+      "iy15": 2.26,
+      "kgyok": 1.86,
+      "iy15alt": 1.29,
+      "ms1": 1.79
     },
     {
       "date": "04.10.2026",
@@ -1414,7 +1455,7 @@
       "away": "Concepcion",
       "league": "ŞİLİK",
       "tags": [
-        "KG"
+        "KG yok"
       ],
       "blue": [],
       "orange": false,
@@ -1430,13 +1471,34 @@
     },
     {
       "date": "04.10.2026",
+      "time": "21:45",
+      "home": "Yunanistan",
+      "away": "Almanya",
+      "league": "AVUL",
+      "tags": [],
+      "blue": [
+        "KG var"
+      ],
+      "orange": false,
+      "35alt": 1.37,
+      "kg": 1.43,
+      "15ust": 1.06,
+      "25alt": 2.06,
+      "25ust": 1.44,
+      "iy15": 2.11,
+      "kgyok": 2.1,
+      "iy15alt": 1.42,
+      "ms1": 3.65
+    },
+    {
+      "date": "04.10.2026",
       "time": "22:00",
       "home": "Cerro",
       "away": "Montevideo Wand",
       "league": "URU",
       "tags": [],
       "blue": [
-        "2.5 üst"
+        "2.5 alt"
       ],
       "orange": false,
       "35alt": null,
@@ -1455,17 +1517,19 @@
       "home": "Guyana",
       "away": "Dominika",
       "league": "CON",
-      "tags": [],
+      "tags": [
+        "2.5 üst"
+      ],
       "blue": [],
       "orange": true,
-      "35alt": 1.81,
-      "kg": 1.73,
+      "35alt": 1.7,
+      "kg": 1.84,
       "15ust": null,
-      "25alt": 3.06,
-      "25ust": 1.11,
-      "iy15": 1.53,
-      "kgyok": 1.55,
-      "iy15alt": 1.75,
+      "25alt": 2.83,
+      "25ust": 1.16,
+      "iy15": 1.6,
+      "kgyok": 1.48,
+      "iy15alt": 1.67,
       "ms1": 1.0
     },
     {
@@ -1476,7 +1540,7 @@
       "league": "ARJKŞ",
       "tags": [],
       "blue": [
-        "2.5 üst"
+        "2.5 alt"
       ],
       "orange": false,
       "35alt": null,
@@ -1496,7 +1560,7 @@
       "away": "Mallorca",
       "league": "İS2",
       "tags": [
-        "KG"
+        "KG yok"
       ],
       "blue": [],
       "orange": false,
@@ -1541,7 +1605,7 @@
         "3.5 alt"
       ],
       "blue": [
-        "2.5 üst"
+        "2.5 alt"
       ],
       "orange": false,
       "35alt": 1.05,
@@ -1581,19 +1645,17 @@
       "home": "Porto Riko",
       "away": "Kayman",
       "league": "CON",
-      "tags": [
-        "İY 1.5"
-      ],
+      "tags": [],
       "blue": [],
       "orange": true,
       "35alt": 1.79,
-      "kg": 2.16,
+      "kg": 2.09,
       "15ust": null,
-      "25alt": 3.07,
-      "25ust": 1.11,
-      "iy15": 1.55,
-      "kgyok": 1.31,
-      "iy15alt": 1.73,
+      "25alt": 3.05,
+      "25ust": 1.12,
+      "iy15": 1.54,
+      "kgyok": 1.35,
+      "iy15alt": 1.74,
       "ms1": 1.0
     },
     {
@@ -1627,18 +1689,18 @@
         "3.5 alt"
       ],
       "blue": [
-        "2.5 üst"
+        "2.5 alt"
       ],
       "orange": false,
-      "35alt": 1.06,
-      "kg": 1.85,
+      "35alt": 1.07,
+      "kg": 1.84,
       "15ust": 1.3,
       "25alt": 1.39,
       "25ust": 2.17,
-      "iy15": 3.18,
+      "iy15": 3.16,
       "kgyok": 1.58,
       "iy15alt": 1.16,
-      "ms1": 2.22
+      "ms1": 2.16
     },
     {
       "date": "05.10.2026",
@@ -1651,15 +1713,15 @@
         "2.5 alt"
       ],
       "orange": false,
-      "35alt": 1.18,
-      "kg": 1.59,
-      "15ust": 1.16,
-      "25alt": 1.65,
-      "25ust": 1.75,
-      "iy15": 2.58,
-      "kgyok": 1.82,
-      "iy15alt": 1.27,
-      "ms1": 2.88
+      "35alt": 1.2,
+      "kg": 1.55,
+      "15ust": 1.15,
+      "25alt": 1.7,
+      "25ust": 1.7,
+      "iy15": 2.51,
+      "kgyok": 1.88,
+      "iy15alt": 1.29,
+      "ms1": 2.7
     },
     {
       "date": "05.10.2026",
