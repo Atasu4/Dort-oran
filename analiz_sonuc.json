@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-04T21:35+03:00",
-  "count": 27,
-  "hit": 16,
+  "updated": "2026-10-04T23:29+03:00",
+  "count": 32,
+  "hit": 20,
   "matches": [
     {
       "date": "04.10.2026",
@@ -139,17 +139,6 @@
     {
       "date": "04.10.2026",
       "time": "13:15",
-      "home": "Astur",
-      "away": "Mosconia",
-      "skor": "0-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "04.10.2026",
-      "time": "13:15",
       "home": "Twente (K)",
       "away": "Utrecht (K)",
       "skor": "2-0",
@@ -157,6 +146,17 @@
         "ters x2"
       ],
       "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:15",
+      "home": "Astur",
+      "away": "Mosconia",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
     },
     {
       "date": "04.10.2026",
@@ -295,9 +295,65 @@
       "time": "20:00",
       "home": "Lucena",
       "away": "Atlético Paso",
+      "skor": "1-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "21:45",
+      "home": "Galler",
+      "away": "Danimarka",
+      "skor": "0-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "22:00",
+      "home": "Hartford Athle",
+      "away": "Louisville City",
+      "skor": "0-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "22:00",
+      "home": "Girona",
+      "away": "Mallorca",
       "skor": "0-0",
       "calls": [
         "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "22:00",
+      "home": "Guyana",
+      "away": "Dominika",
+      "skor": "7-1",
+      "calls": [
+        "2.5 üst",
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "23:00",
+      "home": "Talleres",
+      "away": "Belgrano",
+      "skor": "0-0",
+      "calls": [
+        "3.5 alt"
       ],
       "ok": true
     }

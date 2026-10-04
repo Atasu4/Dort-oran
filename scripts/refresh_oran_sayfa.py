@@ -54,7 +54,7 @@ for day in data["m"]:
         tags = []
         if hit(markets["35alt"], 1.05, 1.07): tags.append("3.5 alt")
         if hit(markets["15ust"], 1.25, 1.29): tags.append("1.5 üst")
-        if markets["25alt"] == 1.48: tags.append("2.5 alt")
+        if markets["25alt"] == 1.48: tags.append("3.5 alt")
         if hit(markets["25ust"], 1.16, 1.17): tags.append("2.5 üst")
         if hit(markets["iy15"], 1.55, 1.57): tags.append("İY 1.5")
         markets["ms1"] = odd(row[16]) if len(row) > 16 else None
@@ -62,7 +62,7 @@ for day in data["m"]:
         if hit(markets["kgyok"], 2.10, 2.19) and hit(markets["iy15alt"], 1.40, 1.49):
             blue.append("KG var")
         if hit(markets["kgyok"], 1.80, 1.89) and hit(markets["iy15alt"], 1.20, 1.29):
-            blue.append("2.5 alt")
+            blue.append("3.5 alt")
         if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.40, 1.49):
             blue.append("İY 1.5 alt")
         if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49):
@@ -79,6 +79,12 @@ for day in data["m"]:
             if any(x == "2.5 alt" for x in tags + blue) and gap < 5:
                 tags = [x for x in tags if x != "2.5 alt"]
                 blue = [x for x in blue if x != "2.5 alt"]
+        blob = f"{home} {away} {row[26]}".upper()
+        women = "(K)" in home.upper() or "(K)" in away.upper() or "KADIN" in blob
+        asia = str(row[26] or "") in ("YZL1","YZLK","AVUL","AVU2","KOR2","KOR3","K3","JAP2","JAP3") or any(x in blob for x in ("YENI ZELANDA","YENİ ZELANDA","AVUSTRALYA","KORE"))
+        if women or asia:
+            tags = [x for x in tags if x not in ("2.5 alt","3.5 alt")]
+            blue = [x for x in blue if x not in ("2.5 alt","3.5 alt","İY 1.5 alt")]
         if not tags and not blue and not orange:
             continue
         rows.append({"date": date, "time": time, "home": home, "away": away, "league": str(row[26] or ""), "tags": tags, "blue": blue, "orange": orange, "gap": gap, **markets})
