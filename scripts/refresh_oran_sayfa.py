@@ -69,20 +69,16 @@ for day in data["m"]:
         if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.40, 1.49):
             blue.append("İY 1.5 alt")
         if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49):
-            blue.append("MS 1")
+            blue.append("ters x2")
         if hit(markets["ms1"], 1.20, 1.29) and hit(markets["iy15alt"], 1.40, 1.49):
-            blue.append("MS 1")
-        orange = hit(markets["ms1"], 1.00, 1.09) and hit(markets["25ust"], 1.10, 1.19)
+            blue.append("ters x2")
+        orange = False
         home, away = str(row[1]).strip(), str(row[3]).strip()
         table = tables.get((date, home, away))
         gap = None
         if table and table["hr"] and table["ar"]:
             gap = table["ar"] - table["hr"]
             away_bad = table["aw"] <= table["al"]
-            if "MS 1" in blue and not (gap >= 4 and away_bad):
-                blue = [x for x in blue if x != "MS 1"]
-            if orange and not (gap >= 4 and away_bad):
-                orange = False
             if any(x == "2.5 alt" for x in tags + blue) and gap < 5:
                 tags = [x for x in tags if x != "2.5 alt"]
                 blue = [x for x in blue if x != "2.5 alt"]
@@ -125,8 +121,8 @@ for day in data["m"]:
         if hit(markets["25ust"], 1.16, 1.17): calls.append(("2.5 üst", fh+fa >= 3))
         if hit(markets["kgyok"], 1.80, 1.89) and hit(markets["iy15alt"], 1.20, 1.29): calls.append(("2.5 alt", fh+fa < 3))
         if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.30, 1.39): calls.append(("ters alt", fh+fa < 3))
-        if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49): calls.append(("MS 1", fh>fa))
-        if hit(markets["ms1"], 1.00, 1.09) and hit(markets["25ust"], 1.10, 1.19): calls.append(("MS 1", fh>fa))
+        if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49): calls.append(("ters x2", fh<=fa))
+        if hit(markets["ms1"], 1.00, 1.09) and hit(markets["25ust"], 1.10, 1.19): calls.append(("ters x2", fh<=fa))
         day, month, year = str(row[7]).split(".")
         stamp = f"{year}-{month}-{day} {row[6]}"
         if stamp < "2026-10-04 00:00" or stamp > now.strftime("%Y-%m-%d %H:%M"):
