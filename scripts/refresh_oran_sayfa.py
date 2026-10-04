@@ -27,6 +27,14 @@ data = json.loads(text)
 now = datetime.now(ZoneInfo("Europe/Istanbul"))
 today = now.strftime("%d.%m.%Y")
 tomorrow = (now + timedelta(days=1)).strftime("%d.%m.%Y")
+tables = {}
+try:
+    bulletin = json.loads(Path("bulten.json").read_text(encoding="utf-8"))
+    for match in bulletin.get("matches") or []:
+        ht, at = match.get("homeTable") or {}, match.get("awayTable") or {}
+        tables[(match.get("date"), match.get("home"), match.get("away"))] = {"hr": ht.get("rank") or 0, "ar": at.get("rank") or 0, "aw": (at.get("away") or {}).get("w") or 0, "al": (at.get("away") or {}).get("l") or 0}
+except Exception:
+    tables = {}
 rows = []
 for day in data["m"]:
     for row in day["m"]:
@@ -65,9 +73,22 @@ for day in data["m"]:
         if hit(markets["ms1"], 1.20, 1.29) and hit(markets["iy15alt"], 1.40, 1.49):
             blue.append("MS 1")
         orange = hit(markets["ms1"], 1.00, 1.09) and hit(markets["25ust"], 1.10, 1.19)
+        home, away = str(row[1]).strip(), str(row[3]).strip()
+        table = tables.get((date, home, away))
+        gap = None
+        if table and table["hr"] and table["ar"]:
+            gap = table["ar"] - table["hr"]
+            away_bad = table["aw"] <= table["al"]
+            if "MS 1" in blue and not (gap >= 4 and away_bad):
+                blue = [x for x in blue if x != "MS 1"]
+            if orange and not (gap >= 4 and away_bad):
+                orange = False
+            if any(x == "2.5 alt" for x in tags + blue) and gap < 5:
+                tags = [x for x in tags if x != "2.5 alt"]
+                blue = [x for x in blue if x != "2.5 alt"]
         if not tags and not blue and not orange:
             continue
-        rows.append({"date": date, "time": time, "home": str(row[1]).strip(), "away": str(row[3]).strip(), "league": str(row[26] or ""), "tags": tags, "blue": blue, "orange": orange, **markets})
+        rows.append({"date": date, "time": time, "home": home, "away": away, "league": str(row[26] or ""), "tags": tags, "blue": blue, "orange": orange, "gap": gap, **markets})
 out = {"updated": now.strftime("%Y-%m-%dT%H:%M+03:00"), "count": len(rows), "matches": rows}
 Path("oran_sayfa.json").write_text(json.dumps(out, ensure_ascii=False, indent=2), encoding="utf-8")
 print(len(rows))
