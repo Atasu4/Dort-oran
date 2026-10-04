@@ -53,8 +53,7 @@ for day in data["m"]:
         markets["iy15alt"] = odd(row[42]) if len(row) > 42 else None
         tags = []
         if hit(markets["35alt"], 1.05, 1.07): tags.append("3.5 alt")
-        if markets["kg"] == 1.52: tags.append("ters kg")
-        if hit(markets["15ust"], 1.25, 1.29): tags.append("1.5 üst")
+                if hit(markets["15ust"], 1.25, 1.29): tags.append("1.5 üst")
         if markets["25alt"] == 1.48: tags.append("2.5 alt")
         if hit(markets["25ust"], 1.16, 1.17): tags.append("2.5 üst")
         if hit(markets["iy15"], 1.55, 1.57): tags.append("İY 1.5")
@@ -64,9 +63,7 @@ for day in data["m"]:
             blue.append("KG var")
         if hit(markets["kgyok"], 1.80, 1.89) and hit(markets["iy15alt"], 1.20, 1.29):
             blue.append("2.5 alt")
-        if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.30, 1.39):
-            blue.append("ters alt")
-        if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.40, 1.49):
+                if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.40, 1.49):
             blue.append("İY 1.5 alt")
         if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49):
             blue.append("ters x2")
@@ -115,13 +112,11 @@ for day in data["m"]:
         }
         calls = []
         if hit(markets["35alt"], 1.05, 1.07): calls.append(("3.5 alt", fh+fa < 4))
-        if markets["kg"] == 1.52: calls.append(("ters kg", not (fh>0 and fa>0)))
-        if hit(markets["15ust"], 1.25, 1.29): calls.append(("1.5 üst", fh+fa >= 2))
+                if hit(markets["15ust"], 1.25, 1.29): calls.append(("1.5 üst", fh+fa >= 2))
         if markets["25alt"] == 1.48: calls.append(("2.5 alt", fh+fa < 3))
         if hit(markets["25ust"], 1.16, 1.17): calls.append(("2.5 üst", fh+fa >= 3))
         if hit(markets["kgyok"], 1.80, 1.89) and hit(markets["iy15alt"], 1.20, 1.29): calls.append(("2.5 alt", fh+fa < 3))
-        if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.30, 1.39): calls.append(("ters alt", fh+fa < 3))
-        if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49): calls.append(("ters x2", fh<=fa))
+                if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49): calls.append(("ters x2", fh<=fa))
         if hit(markets["ms1"], 1.00, 1.09) and hit(markets["25ust"], 1.10, 1.19): calls.append(("ters x2", fh<=fa))
         day, month, year = str(row[7]).split(".")
         stamp = f"{year}-{month}-{day} {row[6]}"
