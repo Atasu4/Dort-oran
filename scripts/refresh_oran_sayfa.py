@@ -127,7 +127,8 @@ for day in data["m"]:
         if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.30, 1.39): calls.append(("ters alt", fh+fa < 3))
         if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49): calls.append(("MS 1", fh>fa))
         if hit(markets["ms1"], 1.00, 1.09) and hit(markets["25ust"], 1.10, 1.19): calls.append(("MS 1", fh>fa))
-        if str(row[7]) < "04.10.2026":
+        day, month, year = str(row[7]).split(".")
+        if (year, month, day) < ("2026", "10", "04"):
             continue
         if not calls:
             continue
