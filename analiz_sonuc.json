@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-04T23:29+03:00",
-  "count": 32,
-  "hit": 20,
+  "updated": "2026-10-05T02:55+03:00",
+  "count": 34,
+  "hit": 21,
   "matches": [
     {
       "date": "04.10.2026",
@@ -227,22 +227,22 @@
     {
       "date": "04.10.2026",
       "time": "18:00",
-      "home": "Motherwell (K)",
-      "away": "",
-      "skor": "1-0",
+      "home": "Fc Iberia",
+      "away": "Dinamo Tiflis",
+      "skor": "1-2",
       "calls": [
-        "ters x2"
+        "2.5 alt"
       ],
       "ok": false
     },
     {
       "date": "04.10.2026",
       "time": "18:00",
-      "home": "Fc Iberia",
-      "away": "Dinamo Tiflis",
-      "skor": "1-2",
+      "home": "Motherwell (K)",
+      "away": "",
+      "skor": "1-0",
       "calls": [
-        "2.5 alt"
+        "ters x2"
       ],
       "ok": false
     },
@@ -339,7 +339,7 @@
       "time": "22:00",
       "home": "Guyana",
       "away": "Dominika",
-      "skor": "7-1",
+      "skor": "8-1",
       "calls": [
         "2.5 üst",
         "ters x2"
@@ -351,11 +351,33 @@
       "time": "23:00",
       "home": "Talleres",
       "away": "Belgrano",
-      "skor": "0-0",
+      "skor": "0-1",
       "calls": [
         "3.5 alt"
       ],
       "ok": true
+    },
+    {
+      "date": "05.10.2026",
+      "time": "01:00",
+      "home": "Molynes United",
+      "away": "Racing United",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "05.10.2026",
+      "time": "01:00",
+      "home": "Porto Riko",
+      "away": "Kayman",
+      "skor": "1-0",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
     }
   ]
 }
