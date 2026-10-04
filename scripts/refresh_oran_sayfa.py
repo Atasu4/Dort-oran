@@ -53,7 +53,7 @@ for day in data["m"]:
         markets["iy15alt"] = odd(row[42]) if len(row) > 42 else None
         tags = []
         if hit(markets["35alt"], 1.05, 1.07): tags.append("3.5 alt")
-        if markets["kg"] == 1.52: tags.append("KG yok")
+        if markets["kg"] == 1.52: tags.append("ters kg")
         if hit(markets["15ust"], 1.25, 1.29): tags.append("1.5 üst")
         if markets["25alt"] == 1.48: tags.append("2.5 alt")
         if hit(markets["25ust"], 1.16, 1.17): tags.append("2.5 üst")
