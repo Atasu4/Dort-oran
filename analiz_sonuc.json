@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-04T12:15+03:00",
-  "count": 12,
-  "hit": 8,
+  "updated": "2026-10-04T17:40+03:00",
+  "count": 27,
+  "hit": 16,
   "matches": [
     {
       "date": "04.10.2026",
@@ -133,6 +133,171 @@
       "time": "08:00",
       "home": "Kamatamare San",
       "away": "Tochigi Sc",
+      "skor": "0-0",
+      "calls": [
+        "ters kg"
+      ],
+      "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "12:30",
+      "home": "Sevilla B",
+      "away": "Cd Badajoz",
+      "skor": "2-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "12:30",
+      "home": "Valencia Ii",
+      "away": "Pena Deportiva",
+      "skor": "3-2",
+      "calls": [
+        "ters kg"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:00",
+      "home": "Getafe Ii",
+      "away": "Numancia",
+      "skor": "0-0",
+      "calls": [
+        "ters alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:00",
+      "home": "Huetor Vega",
+      "away": "Atletico Mancha",
+      "skor": "3-0",
+      "calls": [
+        "ters alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:00",
+      "home": "Intercity",
+      "away": "Yeclano",
+      "skor": "1-1",
+      "calls": [
+        "ters alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:00",
+      "home": "Águilas Ii",
+      "away": "Unión Molinense",
+      "skor": "1-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:15",
+      "home": "Twente (K)",
+      "away": "Utrecht (K)",
+      "skor": "2-0",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:15",
+      "home": "Astur",
+      "away": "Mosconia",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:30",
+      "home": "Napoli (K)",
+      "away": "Como (K)",
+      "skor": "1-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:30",
+      "home": "Lecco",
+      "away": "Union Brescia",
+      "skor": "2-2",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "15:00",
+      "home": "Real Sociedad",
+      "away": "Granada",
+      "skor": "2-3",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "15:30",
+      "home": "Nuova Monteros",
+      "away": "Pineto",
+      "skor": "1-0",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "15:30",
+      "home": "Cosenza",
+      "away": "Foggia",
+      "skor": "0-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "15:30",
+      "home": "Campobasso",
+      "away": "Sassari Torres",
+      "skor": "1-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "17:30",
+      "home": "Al Arabi",
+      "away": "Al Urooba",
       "skor": "0-0",
       "calls": [
         "ters kg"
