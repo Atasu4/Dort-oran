@@ -65,7 +65,7 @@ for day in data["m"]:
         if hit(markets["kgyok"], 1.80, 1.89) and hit(markets["iy15alt"], 1.20, 1.29):
             blue.append("2.5 alt")
         if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.30, 1.39):
-            blue.append("2.5 alt")
+            blue.append("ters alt")
         if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.40, 1.49):
             blue.append("İY 1.5 alt")
         if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49):
