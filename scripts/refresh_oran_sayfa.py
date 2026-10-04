@@ -119,14 +119,16 @@ for day in data["m"]:
         }
         calls = []
         if hit(markets["35alt"], 1.05, 1.07): calls.append(("3.5 alt", fh+fa < 4))
-        if markets["kg"] == 1.52: calls.append(("KG", fh>0 and fa>0))
+        if markets["kg"] == 1.52: calls.append(("ters kg", not (fh>0 and fa>0)))
         if hit(markets["15ust"], 1.25, 1.29): calls.append(("1.5 üst", fh+fa >= 2))
         if markets["25alt"] == 1.48: calls.append(("2.5 alt", fh+fa < 3))
         if hit(markets["25ust"], 1.16, 1.17): calls.append(("2.5 üst", fh+fa >= 3))
         if hit(markets["kgyok"], 1.80, 1.89) and hit(markets["iy15alt"], 1.20, 1.29): calls.append(("2.5 alt", fh+fa < 3))
-        if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.30, 1.39): calls.append(("2.5 üst", fh+fa >= 3))
+        if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.30, 1.39): calls.append(("ters alt", fh+fa < 3))
         if hit(markets["ms1"], 1.20, 1.29) and hit(markets["kg"], 1.40, 1.49): calls.append(("MS 1", fh>fa))
         if hit(markets["ms1"], 1.00, 1.09) and hit(markets["25ust"], 1.10, 1.19): calls.append(("MS 1", fh>fa))
+        if str(row[7]) < "04.10.2026":
+            continue
         if not calls:
             continue
         ok = all(flag for _, flag in calls)
