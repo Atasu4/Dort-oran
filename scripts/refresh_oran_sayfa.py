@@ -39,7 +39,7 @@ rows = []
 for day in data["m"]:
     for row in day["m"]:
         date, time = str(row[7]), str(row[6])
-        if date != today and not (date == tomorrow and time <= "23:59"):
+        if date != today or time < now.strftime("%H:%M"):
             continue
         markets = {
             "35alt": odd(row[46]) if len(row) > 46 else None,
