@@ -59,8 +59,6 @@ for day in data["m"]:
         if hit(markets["iy15"], 1.55, 1.57): tags.append("İY 1.5")
         markets["ms1"] = odd(row[16]) if len(row) > 16 else None
         blue = []
-        if hit(markets["kgyok"], 2.10, 2.19) and hit(markets["iy15alt"], 1.40, 1.49):
-            blue.append("KG var")
         if hit(markets["kgyok"], 1.80, 1.89) and hit(markets["iy15alt"], 1.20, 1.29):
             blue.append("3.5 alt")
         if hit(markets["kgyok"], 1.50, 1.59) and hit(markets["25alt"], 1.40, 1.49):

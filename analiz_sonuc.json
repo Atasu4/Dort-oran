@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05T13:50+03:00",
+  "updated": "2026-10-05T15:10+03:00",
   "count": 35,
   "hit": 22,
   "matches": [
@@ -139,17 +139,6 @@
     {
       "date": "04.10.2026",
       "time": "13:15",
-      "home": "Astur",
-      "away": "Mosconia",
-      "skor": "0-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "04.10.2026",
-      "time": "13:15",
       "home": "Twente (K)",
       "away": "Utrecht (K)",
       "skor": "2-0",
@@ -157,6 +146,17 @@
         "ters x2"
       ],
       "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:15",
+      "home": "Astur",
+      "away": "Mosconia",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
     },
     {
       "date": "04.10.2026",
@@ -260,8 +260,8 @@
     {
       "date": "04.10.2026",
       "time": "19:00",
-      "home": "Boston River",
-      "away": "Juventud Dl Pie",
+      "home": "Terrassa",
+      "away": "Girona Ii",
       "skor": "0-0",
       "calls": [
         "2.5 alt"
@@ -271,8 +271,8 @@
     {
       "date": "04.10.2026",
       "time": "19:00",
-      "home": "Terrassa",
-      "away": "Girona Ii",
+      "home": "Boston River",
+      "away": "Juventud Dl Pie",
       "skor": "0-0",
       "calls": [
         "2.5 alt"
@@ -315,9 +315,9 @@
     {
       "date": "04.10.2026",
       "time": "22:00",
-      "home": "Hartford Athle",
-      "away": "Louisville City",
-      "skor": "0-1",
+      "home": "Girona",
+      "away": "Mallorca",
+      "skor": "0-0",
       "calls": [
         "2.5 alt"
       ],
@@ -326,9 +326,9 @@
     {
       "date": "04.10.2026",
       "time": "22:00",
-      "home": "Girona",
-      "away": "Mallorca",
-      "skor": "0-0",
+      "home": "Hartford Athle",
+      "away": "Louisville City",
+      "skor": "0-1",
       "calls": [
         "2.5 alt"
       ],

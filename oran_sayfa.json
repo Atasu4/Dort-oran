@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-05T13:50+03:00",
-  "count": 21,
+  "updated": "2026-10-05T15:10+03:00",
+  "count": 17,
   "matches": [
     {
       "date": "05.10.2026",
@@ -48,50 +48,6 @@
     },
     {
       "date": "05.10.2026",
-      "time": "14:00",
-      "home": "İngiltere (U19",
-      "away": "Belçika (U19)",
-      "league": "HU19",
-      "tags": [],
-      "blue": [
-        "ters x2"
-      ],
-      "orange": false,
-      "gap": null,
-      "35alt": 1.54,
-      "kg": 1.41,
-      "15ust": null,
-      "25alt": null,
-      "25ust": null,
-      "iy15": null,
-      "kgyok": 1.95,
-      "iy15alt": null,
-      "ms1": 1.22
-    },
-    {
-      "date": "05.10.2026",
-      "time": "16:00",
-      "home": "Uganda",
-      "away": "Demokratik Kong",
-      "league": "HAZ",
-      "tags": [],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "gap": null,
-      "35alt": null,
-      "kg": 1.81,
-      "15ust": null,
-      "25alt": 1.4,
-      "25ust": 1.97,
-      "iy15": null,
-      "kgyok": 1.5,
-      "iy15alt": null,
-      "ms1": 3.54
-    },
-    {
-      "date": "05.10.2026",
       "time": "21:45",
       "home": "İtalya",
       "away": "Türkiye",
@@ -103,14 +59,14 @@
       "orange": false,
       "gap": 1,
       "35alt": 1.4,
-      "kg": 1.63,
+      "kg": 1.66,
       "15ust": 1.0,
       "25alt": 2.17,
       "25ust": 1.39,
-      "iy15": 2.02,
-      "kgyok": 1.78,
+      "iy15": 2.01,
+      "kgyok": 1.74,
       "iy15alt": 1.47,
-      "ms1": 1.23
+      "ms1": 1.22
     },
     {
       "date": "06.10.2026",
@@ -147,14 +103,14 @@
       "orange": false,
       "gap": -3,
       "35alt": null,
-      "kg": 1.69,
+      "kg": 1.71,
       "15ust": null,
-      "25alt": 1.43,
+      "25alt": 1.44,
       "25ust": 1.91,
       "iy15": null,
       "kgyok": 1.58,
       "iy15alt": null,
-      "ms1": 2.95
+      "ms1": 3.02
     },
     {
       "date": "06.10.2026",
@@ -198,7 +154,7 @@
       "iy15": 2.92,
       "kgyok": 1.6,
       "iy15alt": 1.2,
-      "ms1": 3.64
+      "ms1": 3.79
     },
     {
       "date": "06.10.2026",
@@ -213,13 +169,13 @@
       "orange": false,
       "gap": -1,
       "35alt": null,
-      "kg": 1.45,
+      "kg": 1.47,
       "15ust": null,
-      "25alt": 1.72,
-      "25ust": 1.56,
-      "iy15": 2.27,
-      "kgyok": 1.86,
-      "iy15alt": 1.28,
+      "25alt": 1.7,
+      "25ust": 1.58,
+      "iy15": 2.29,
+      "kgyok": 1.84,
+      "iy15alt": 1.27,
       "ms1": 2.7
     },
     {
@@ -264,31 +220,29 @@
       "iy15": 2.26,
       "kgyok": 1.84,
       "iy15alt": 1.29,
-      "ms1": 3.01
+      "ms1": 3.0
     },
     {
       "date": "06.10.2026",
       "time": "19:30",
-      "home": "Bulgaristan U2",
-      "away": "İskoçya (U21)",
+      "home": "Danimarka (U21",
+      "away": "Belçika (U21)",
       "league": "U21",
-      "tags": [
-        "3.5 alt"
-      ],
+      "tags": [],
       "blue": [
         "İY 1.5 alt"
       ],
       "orange": false,
       "gap": null,
-      "35alt": 1.07,
-      "kg": 1.71,
-      "15ust": 1.23,
+      "35alt": 1.08,
+      "kg": 1.68,
+      "15ust": 1.22,
       "25alt": 1.43,
       "25ust": 1.91,
       "iy15": null,
-      "kgyok": 1.58,
+      "kgyok": 1.59,
       "iy15alt": null,
-      "ms1": 2.08
+      "ms1": 2.29
     },
     {
       "date": "06.10.2026",
@@ -311,28 +265,6 @@
       "kgyok": 2.12,
       "iy15alt": 1.65,
       "ms1": 1.2
-    },
-    {
-      "date": "06.10.2026",
-      "time": "21:00",
-      "home": "Wycombe",
-      "away": "Bristol Rovers",
-      "league": "İNTK",
-      "tags": [],
-      "blue": [
-        "KG var"
-      ],
-      "orange": false,
-      "gap": null,
-      "35alt": 1.39,
-      "kg": 1.33,
-      "15ust": null,
-      "25alt": 2.11,
-      "25ust": 1.34,
-      "iy15": 1.92,
-      "kgyok": 2.12,
-      "iy15alt": 1.43,
-      "ms1": 1.58
     },
     {
       "date": "06.10.2026",
@@ -377,28 +309,6 @@
       "kgyok": 1.83,
       "iy15alt": 1.28,
       "ms1": 2.94
-    },
-    {
-      "date": "06.10.2026",
-      "time": "21:00",
-      "home": "Accrington",
-      "away": "Salford City",
-      "league": "İNTK",
-      "tags": [],
-      "blue": [
-        "KG var"
-      ],
-      "orange": false,
-      "gap": null,
-      "35alt": 1.37,
-      "kg": 1.33,
-      "15ust": null,
-      "25alt": 2.05,
-      "25ust": 1.36,
-      "iy15": 1.96,
-      "kgyok": 2.12,
-      "iy15alt": 1.4,
-      "ms1": 3.04
     },
     {
       "date": "06.10.2026",
