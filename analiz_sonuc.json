@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-05T02:55+03:00",
-  "count": 34,
-  "hit": 21,
+  "updated": "2026-10-05T12:53+03:00",
+  "count": 35,
+  "hit": 22,
   "matches": [
     {
       "date": "04.10.2026",
@@ -139,17 +139,6 @@
     {
       "date": "04.10.2026",
       "time": "13:15",
-      "home": "Twente (K)",
-      "away": "Utrecht (K)",
-      "skor": "2-0",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
-    {
-      "date": "04.10.2026",
-      "time": "13:15",
       "home": "Astur",
       "away": "Mosconia",
       "skor": "0-0",
@@ -160,12 +149,12 @@
     },
     {
       "date": "04.10.2026",
-      "time": "13:30",
-      "home": "Napoli (K)",
-      "away": "Como (K)",
-      "skor": "1-2",
+      "time": "13:15",
+      "home": "Twente (K)",
+      "away": "Utrecht (K)",
+      "skor": "2-0",
       "calls": [
-        "2.5 alt"
+        "ters x2"
       ],
       "ok": false
     },
@@ -177,6 +166,17 @@
       "skor": "2-2",
       "calls": [
         "3.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:30",
+      "home": "Napoli (K)",
+      "away": "Como (K)",
+      "skor": "1-2",
+      "calls": [
+        "2.5 alt"
       ],
       "ok": false
     },
@@ -378,6 +378,17 @@
         "ters x2"
       ],
       "ok": false
+    },
+    {
+      "date": "05.10.2026",
+      "time": "12:00",
+      "home": "Malezya",
+      "away": "Vietnam",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
     }
   ]
 }
