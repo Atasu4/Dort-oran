@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-05T12:53+03:00",
+  "updated": "2026-10-05T13:50+03:00",
   "count": 35,
   "hit": 22,
   "matches": [
@@ -360,17 +360,6 @@
     {
       "date": "05.10.2026",
       "time": "01:00",
-      "home": "Molynes United",
-      "away": "Racing United",
-      "skor": "0-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "05.10.2026",
-      "time": "01:00",
       "home": "Porto Riko",
       "away": "Kayman",
       "skor": "1-0",
@@ -381,10 +370,21 @@
     },
     {
       "date": "05.10.2026",
+      "time": "01:00",
+      "home": "Molynes United",
+      "away": "Racing United",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "05.10.2026",
       "time": "12:00",
       "home": "Malezya",
       "away": "Vietnam",
-      "skor": "0-0",
+      "skor": "1-0",
       "calls": [
         "2.5 alt"
       ],
