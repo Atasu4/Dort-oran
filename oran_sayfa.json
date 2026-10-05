@@ -1,28 +1,28 @@
 {
-  "updated": "2026-10-05T16:28+03:00",
+  "updated": "2026-10-05T20:59+03:00",
   "count": 1,
   "matches": [
     {
       "date": "05.10.2026",
       "time": "21:45",
-      "home": "İtalya",
-      "away": "Türkiye",
+      "home": "Ukrayna",
+      "away": "Macaristan",
       "league": "AVUL",
-      "tags": [],
-      "blue": [
-        "ters x2"
+      "tags": [
+        "1.5 üst"
       ],
+      "blue": [],
       "orange": false,
       "gap": 1,
-      "35alt": 1.4,
-      "kg": 1.65,
-      "15ust": 1.0,
-      "25alt": 2.17,
-      "25ust": 1.39,
-      "iy15": 2.01,
-      "kgyok": 1.76,
-      "iy15alt": 1.47,
-      "ms1": 1.23
+      "35alt": 1.09,
+      "kg": 1.73,
+      "15ust": 1.25,
+      "25alt": 1.45,
+      "25ust": 2.05,
+      "iy15": 2.97,
+      "kgyok": 1.66,
+      "iy15alt": 1.19,
+      "ms1": 2.45
     }
   ]
 }
