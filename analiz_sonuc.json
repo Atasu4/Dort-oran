@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-06T04:43+03:00",
-  "count": 42,
-  "hit": 26,
+  "updated": "2026-10-06T12:41+03:00",
+  "count": 43,
+  "hit": 28,
   "matches": [
     {
       "date": "04.10.2026",
@@ -450,11 +450,11 @@
       "time": "03:15",
       "home": "Banfield",
       "away": "Rosario Central",
-      "skor": "1-0",
+      "skor": "1-1",
       "calls": [
         "1.5 üst"
       ],
-      "ok": false
+      "ok": true
     },
     {
       "date": "06.10.2026",
@@ -464,6 +464,17 @@
       "skor": "0-0",
       "calls": [
         "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "06.10.2026",
+      "time": "05:00",
+      "home": "Honduras",
+      "away": "Jamaika",
+      "skor": "1-1",
+      "calls": [
+        "3.5 alt"
       ],
       "ok": true
     }
