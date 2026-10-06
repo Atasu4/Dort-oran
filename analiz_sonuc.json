@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-06T18:43+03:00",
-  "count": 44,
-  "hit": 29,
+  "updated": "2026-10-06T23:06+03:00",
+  "count": 51,
+  "hit": 31,
   "matches": [
     {
       "date": "04.10.2026",
@@ -461,7 +461,7 @@
       "time": "04:00",
       "home": "Arnett Gardens",
       "away": "Portmore United",
-      "skor": "0-0",
+      "skor": "1-1",
       "calls": [
         "2.5 alt"
       ],
@@ -486,6 +486,85 @@
       "skor": "0-2",
       "calls": [
         "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "06.10.2026",
+      "time": "19:45",
+      "home": "Hollanda (U21)",
+      "away": "Bosna Hersek (U",
+      "skor": "4-0",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "06.10.2026",
+      "time": "20:00",
+      "home": "İspanya (U21)",
+      "away": "Romanya (U21)",
+      "skor": "7-1",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "06.10.2026",
+      "time": "21:45",
+      "home": "İskoçya",
+      "away": "Slovenya",
+      "skor": "1-1",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "06.10.2026",
+      "time": "21:45",
+      "home": "İngiltere",
+      "away": "Çekya",
+      "skor": "3-0",
+      "calls": [
+        "2.5 üst",
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "06.10.2026",
+      "time": "21:45",
+      "home": "Arnavutluk",
+      "away": "San Marino",
+      "skor": "1-0",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "06.10.2026",
+      "time": "21:45",
+      "home": "Belarus",
+      "away": "Finlandiya",
+      "skor": "1-0",
+      "calls": [
+        "3.5 alt",
+        "1.5 üst"
+      ],
+      "ok": false
+    },
+    {
+      "date": "06.10.2026",
+      "time": "22:00",
+      "home": "Angola",
+      "away": "Malavi",
+      "skor": "2-1",
+      "calls": [
+        "1.5 üst"
       ],
       "ok": true
     }
