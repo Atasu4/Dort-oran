@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-06T12:41+03:00",
-  "count": 43,
-  "hit": 28,
+  "updated": "2026-10-06T18:43+03:00",
+  "count": 44,
+  "hit": 29,
   "matches": [
     {
       "date": "04.10.2026",
@@ -84,17 +84,6 @@
     {
       "date": "04.10.2026",
       "time": "07:00",
-      "home": "Elfen Saitama",
-      "away": "Jef United (K)",
-      "skor": "2-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "04.10.2026",
-      "time": "07:00",
       "home": "J-Lease Fc",
       "away": "Tiamo Hirakata",
       "skor": "1-1",
@@ -102,6 +91,17 @@
         "2.5 alt"
       ],
       "ok": true
+    },
+    {
+      "date": "04.10.2026",
+      "time": "07:00",
+      "home": "Elfen Saitama",
+      "away": "Jef United (K)",
+      "skor": "2-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
     },
     {
       "date": "04.10.2026",
@@ -139,6 +139,17 @@
     {
       "date": "04.10.2026",
       "time": "13:15",
+      "home": "Twente (K)",
+      "away": "Utrecht (K)",
+      "skor": "2-0",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:15",
       "home": "Astur",
       "away": "Mosconia",
       "skor": "0-0",
@@ -149,12 +160,12 @@
     },
     {
       "date": "04.10.2026",
-      "time": "13:15",
-      "home": "Twente (K)",
-      "away": "Utrecht (K)",
-      "skor": "2-0",
+      "time": "13:30",
+      "home": "Napoli (K)",
+      "away": "Como (K)",
+      "skor": "1-2",
       "calls": [
-        "ters x2"
+        "2.5 alt"
       ],
       "ok": false
     },
@@ -166,17 +177,6 @@
       "skor": "2-2",
       "calls": [
         "3.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "04.10.2026",
-      "time": "13:30",
-      "home": "Napoli (K)",
-      "away": "Como (K)",
-      "skor": "1-2",
-      "calls": [
-        "2.5 alt"
       ],
       "ok": false
     },
@@ -205,22 +205,22 @@
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Nuova Monteros",
-      "away": "Pineto",
-      "skor": "1-0",
+      "home": "Campobasso",
+      "away": "Sassari Torres",
+      "skor": "1-1",
       "calls": [
-        "3.5 alt"
+        "2.5 alt"
       ],
       "ok": true
     },
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Campobasso",
-      "away": "Sassari Torres",
-      "skor": "1-1",
+      "home": "Nuova Monteros",
+      "away": "Pineto",
+      "skor": "1-0",
       "calls": [
-        "2.5 alt"
+        "3.5 alt"
       ],
       "ok": true
     },
@@ -475,6 +475,17 @@
       "skor": "1-1",
       "calls": [
         "3.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "06.10.2026",
+      "time": "14:30",
+      "home": "Shenzhen 2028",
+      "away": "Shandong Taisha",
+      "skor": "0-2",
+      "calls": [
+        "2.5 alt"
       ],
       "ok": true
     }
