@@ -1,28 +1,5 @@
 {
-  "updated": "2026-10-07T19:13+03:00",
-  "count": 1,
-  "matches": [
-    {
-      "date": "07.10.2026",
-      "time": "21:30",
-      "home": "Cerrito",
-      "away": "Montevideo Wand",
-      "league": "URUK",
-      "tags": [],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "gap": null,
-      "35alt": null,
-      "kg": 1.74,
-      "15ust": null,
-      "25alt": 1.42,
-      "25ust": 1.93,
-      "iy15": null,
-      "kgyok": 1.54,
-      "iy15alt": null,
-      "ms1": 1.79
-    }
-  ]
+  "updated": "2026-10-07T23:30+03:00",
+  "count": 0,
+  "matches": []
 }

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-07T19:13+03:00",
+  "updated": "2026-10-07T23:30+03:00",
   "count": 55,
   "hit": 32,
   "matches": [
@@ -194,11 +194,11 @@
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Cosenza",
-      "away": "Foggia",
-      "skor": "0-2",
+      "home": "Nuova Monteros",
+      "away": "Pineto",
+      "skor": "1-0",
       "calls": [
-        "2.5 alt"
+        "3.5 alt"
       ],
       "ok": true
     },
@@ -216,24 +216,13 @@
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Nuova Monteros",
-      "away": "Pineto",
-      "skor": "1-0",
+      "home": "Cosenza",
+      "away": "Foggia",
+      "skor": "0-2",
       "calls": [
-        "3.5 alt"
+        "2.5 alt"
       ],
       "ok": true
-    },
-    {
-      "date": "04.10.2026",
-      "time": "18:00",
-      "home": "Motherwell (K)",
-      "away": "",
-      "skor": "1-0",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
     },
     {
       "date": "04.10.2026",
@@ -243,6 +232,17 @@
       "skor": "1-2",
       "calls": [
         "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "18:00",
+      "home": "Motherwell (K)",
+      "away": "",
+      "skor": "1-0",
+      "calls": [
+        "ters x2"
       ],
       "ok": false
     },
@@ -315,14 +315,13 @@
     {
       "date": "04.10.2026",
       "time": "22:00",
-      "home": "Guyana",
-      "away": "Dominika",
-      "skor": "8-1",
+      "home": "Hartford Athle",
+      "away": "Louisville City",
+      "skor": "0-1",
       "calls": [
-        "2.5 üst",
-        "ters x2"
+        "2.5 alt"
       ],
-      "ok": false
+      "ok": true
     },
     {
       "date": "04.10.2026",
@@ -338,13 +337,14 @@
     {
       "date": "04.10.2026",
       "time": "22:00",
-      "home": "Hartford Athle",
-      "away": "Louisville City",
-      "skor": "0-1",
+      "home": "Guyana",
+      "away": "Dominika",
+      "skor": "8-1",
       "calls": [
-        "2.5 alt"
+        "2.5 üst",
+        "ters x2"
       ],
-      "ok": true
+      "ok": false
     },
     {
       "date": "04.10.2026",
