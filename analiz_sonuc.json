@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-07T12:38+03:00",
+  "updated": "2026-10-07T19:13+03:00",
   "count": 55,
   "hit": 32,
   "matches": [
@@ -194,9 +194,9 @@
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Campobasso",
-      "away": "Sassari Torres",
-      "skor": "1-1",
+      "home": "Cosenza",
+      "away": "Foggia",
+      "skor": "0-2",
       "calls": [
         "2.5 alt"
       ],
@@ -205,9 +205,9 @@
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Cosenza",
-      "away": "Foggia",
-      "skor": "0-2",
+      "home": "Campobasso",
+      "away": "Sassari Torres",
+      "skor": "1-1",
       "calls": [
         "2.5 alt"
       ],
@@ -260,8 +260,8 @@
     {
       "date": "04.10.2026",
       "time": "19:00",
-      "home": "Terrassa",
-      "away": "Girona Ii",
+      "home": "Boston River",
+      "away": "Juventud Dl Pie",
       "skor": "0-0",
       "calls": [
         "2.5 alt"
@@ -271,8 +271,8 @@
     {
       "date": "04.10.2026",
       "time": "19:00",
-      "home": "Boston River",
-      "away": "Juventud Dl Pie",
+      "home": "Terrassa",
+      "away": "Girona Ii",
       "skor": "0-0",
       "calls": [
         "2.5 alt"
@@ -315,6 +315,18 @@
     {
       "date": "04.10.2026",
       "time": "22:00",
+      "home": "Guyana",
+      "away": "Dominika",
+      "skor": "8-1",
+      "calls": [
+        "2.5 üst",
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "22:00",
       "home": "Girona",
       "away": "Mallorca",
       "skor": "0-0",
@@ -333,18 +345,6 @@
         "2.5 alt"
       ],
       "ok": true
-    },
-    {
-      "date": "04.10.2026",
-      "time": "22:00",
-      "home": "Guyana",
-      "away": "Dominika",
-      "skor": "8-1",
-      "calls": [
-        "2.5 üst",
-        "ters x2"
-      ],
-      "ok": false
     },
     {
       "date": "04.10.2026",
@@ -606,7 +606,7 @@
       "time": "12:30",
       "home": "Avispa Fukuoka",
       "away": "Yokohama Fc",
-      "skor": "0-0",
+      "skor": "0-1",
       "calls": [
         "1.5 üst"
       ],

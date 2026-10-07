@@ -1,95 +1,7 @@
 {
-  "updated": "2026-10-07T12:38+03:00",
-  "count": 6,
+  "updated": "2026-10-07T19:13+03:00",
+  "count": 1,
   "matches": [
-    {
-      "date": "07.10.2026",
-      "time": "17:00",
-      "home": "Asyut Petroleu",
-      "away": "Al Ahly",
-      "league": "MSRLK",
-      "tags": [
-        "3.5 alt"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": -2,
-      "35alt": 1.06,
-      "kg": 1.99,
-      "15ust": 1.23,
-      "25alt": 1.41,
-      "25ust": 1.94,
-      "iy15": null,
-      "kgyok": 1.39,
-      "iy15alt": null,
-      "ms1": 5.04
-    },
-    {
-      "date": "07.10.2026",
-      "time": "18:00",
-      "home": "Al Mosul",
-      "away": "Al Jawiya",
-      "league": "IRAK",
-      "tags": [],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "gap": -2,
-      "35alt": null,
-      "kg": 1.68,
-      "15ust": null,
-      "25alt": 1.45,
-      "25ust": 1.88,
-      "iy15": null,
-      "kgyok": 1.59,
-      "iy15alt": null,
-      "ms1": 3.14
-    },
-    {
-      "date": "07.10.2026",
-      "time": "20:00",
-      "home": "Ceramica Cleop",
-      "away": "Masryal Masry P",
-      "league": "MSRLK",
-      "tags": [
-        "1.5 üst"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": -1,
-      "35alt": 1.0,
-      "kg": 1.8,
-      "15ust": 1.28,
-      "25alt": 1.34,
-      "25ust": 2.1,
-      "iy15": null,
-      "kgyok": 1.5,
-      "iy15alt": null,
-      "ms1": 2.69
-    },
-    {
-      "date": "07.10.2026",
-      "time": "20:00",
-      "home": "Es Ben Aknoun",
-      "away": "Js El Biar",
-      "league": "CZYR",
-      "tags": [
-        "1.5 üst"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": 6,
-      "35alt": 1.0,
-      "kg": 1.83,
-      "15ust": 1.29,
-      "25alt": 1.33,
-      "25ust": 2.13,
-      "iy15": null,
-      "kgyok": 1.48,
-      "iy15alt": null,
-      "ms1": 1.91
-    },
     {
       "date": "07.10.2026",
       "time": "21:30",
@@ -103,38 +15,14 @@
       "orange": false,
       "gap": null,
       "35alt": null,
-      "kg": 1.77,
+      "kg": 1.74,
       "15ust": null,
-      "25alt": 1.41,
-      "25ust": 1.96,
+      "25alt": 1.42,
+      "25ust": 1.93,
       "iy15": null,
-      "kgyok": 1.52,
+      "kgyok": 1.54,
       "iy15alt": null,
       "ms1": 1.79
-    },
-    {
-      "date": "07.10.2026",
-      "time": "21:30",
-      "home": "Cartagena",
-      "away": "Murcia",
-      "league": "İS3",
-      "tags": [
-        "3.5 alt"
-      ],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "gap": -6,
-      "35alt": 1.07,
-      "kg": 1.69,
-      "15ust": 1.23,
-      "25alt": 1.41,
-      "25ust": 1.95,
-      "iy15": null,
-      "kgyok": 1.58,
-      "iy15alt": null,
-      "ms1": 2.28
     }
   ]
 }
