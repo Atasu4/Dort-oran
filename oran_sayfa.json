@@ -1,5 +1,273 @@
 {
-  "updated": "2026-10-06T23:06+03:00",
-  "count": 0,
-  "matches": []
+  "updated": "2026-10-07T03:34+03:00",
+  "count": 12,
+  "matches": [
+    {
+      "date": "07.10.2026",
+      "time": "05:00",
+      "home": "Fransiz Guyana",
+      "away": "Belize",
+      "league": "CON",
+      "tags": [
+        "3.5 alt",
+        "1.5 üst"
+      ],
+      "blue": [],
+      "orange": false,
+      "gap": 1,
+      "35alt": 1.05,
+      "kg": 1.77,
+      "15ust": 1.25,
+      "25alt": 1.37,
+      "25ust": 2.01,
+      "iy15": null,
+      "kgyok": 1.52,
+      "iy15alt": null,
+      "ms1": 1.93
+    },
+    {
+      "date": "07.10.2026",
+      "time": "14:30",
+      "home": "Haimen Codion",
+      "away": "Xiamen Feilu",
+      "league": "ÇİN2",
+      "tags": [
+        "3.5 alt"
+      ],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "gap": -1,
+      "35alt": null,
+      "kg": 1.71,
+      "15ust": null,
+      "25alt": 1.48,
+      "25ust": 1.84,
+      "iy15": null,
+      "kgyok": 1.58,
+      "iy15alt": null,
+      "ms1": 1.63
+    },
+    {
+      "date": "07.10.2026",
+      "time": "17:00",
+      "home": "Asyut Petroleu",
+      "away": "Al Ahly",
+      "league": "MSRLK",
+      "tags": [
+        "3.5 alt"
+      ],
+      "blue": [],
+      "orange": false,
+      "gap": -2,
+      "35alt": 1.07,
+      "kg": 1.94,
+      "15ust": 1.23,
+      "25alt": 1.41,
+      "25ust": 1.95,
+      "iy15": null,
+      "kgyok": 1.41,
+      "iy15alt": null,
+      "ms1": 4.87
+    },
+    {
+      "date": "07.10.2026",
+      "time": "17:00",
+      "home": "Pyramids Fc",
+      "away": "Al Qanah",
+      "league": "MSRLK",
+      "tags": [
+        "3.5 alt"
+      ],
+      "blue": [],
+      "orange": false,
+      "gap": -3,
+      "35alt": 1.07,
+      "kg": 1.9,
+      "15ust": 1.23,
+      "25alt": 1.42,
+      "25ust": 1.93,
+      "iy15": null,
+      "kgyok": 1.44,
+      "iy15alt": null,
+      "ms1": 1.47
+    },
+    {
+      "date": "07.10.2026",
+      "time": "18:00",
+      "home": "Al Mosul",
+      "away": "Al Jawiya",
+      "league": "IRAK",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "gap": -2,
+      "35alt": null,
+      "kg": 1.72,
+      "15ust": null,
+      "25alt": 1.42,
+      "25ust": 1.93,
+      "iy15": null,
+      "kgyok": 1.56,
+      "iy15alt": null,
+      "ms1": 3.14
+    },
+    {
+      "date": "07.10.2026",
+      "time": "19:00",
+      "home": "Kups Ak.",
+      "away": "Inter Turku Ii",
+      "league": "FINY",
+      "tags": [
+        "İY 1.5"
+      ],
+      "blue": [],
+      "orange": false,
+      "gap": -2,
+      "35alt": 1.86,
+      "kg": 1.12,
+      "15ust": null,
+      "25alt": 3.13,
+      "25ust": 1.11,
+      "iy15": 1.56,
+      "kgyok": 3.02,
+      "iy15alt": 1.72,
+      "ms1": 2.26
+    },
+    {
+      "date": "07.10.2026",
+      "time": "20:00",
+      "home": "Ceramica Cleop",
+      "away": "Masryal Masry P",
+      "league": "MSRLK",
+      "tags": [
+        "1.5 üst"
+      ],
+      "blue": [],
+      "orange": false,
+      "gap": -1,
+      "35alt": 1.0,
+      "kg": 1.81,
+      "15ust": 1.28,
+      "25alt": 1.34,
+      "25ust": 2.1,
+      "iy15": null,
+      "kgyok": 1.49,
+      "iy15alt": null,
+      "ms1": 2.46
+    },
+    {
+      "date": "07.10.2026",
+      "time": "20:00",
+      "home": "Es Ben Aknoun",
+      "away": "Js El Biar",
+      "league": "CZYR",
+      "tags": [
+        "1.5 üst"
+      ],
+      "blue": [],
+      "orange": false,
+      "gap": 6,
+      "35alt": 1.0,
+      "kg": 1.8,
+      "15ust": 1.28,
+      "25alt": 1.33,
+      "25ust": 2.13,
+      "iy15": null,
+      "kgyok": 1.5,
+      "iy15alt": null,
+      "ms1": 2.0
+    },
+    {
+      "date": "07.10.2026",
+      "time": "21:30",
+      "home": "Cerrito",
+      "away": "Montevideo Wand",
+      "league": "URUK",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "gap": null,
+      "35alt": null,
+      "kg": 1.76,
+      "15ust": null,
+      "25alt": 1.41,
+      "25ust": 1.96,
+      "iy15": null,
+      "kgyok": 1.53,
+      "iy15alt": null,
+      "ms1": 1.83
+    },
+    {
+      "date": "07.10.2026",
+      "time": "21:30",
+      "home": "Cartagena",
+      "away": "Murcia",
+      "league": "İS3",
+      "tags": [
+        "3.5 alt"
+      ],
+      "blue": [],
+      "orange": false,
+      "gap": -6,
+      "35alt": 1.06,
+      "kg": 1.72,
+      "15ust": 1.23,
+      "25alt": 1.39,
+      "25ust": 2.0,
+      "iy15": null,
+      "kgyok": 1.56,
+      "iy15alt": null,
+      "ms1": 2.12
+    },
+    {
+      "date": "07.10.2026",
+      "time": "22:30",
+      "home": "Mineros",
+      "away": "Monagas",
+      "league": "VENK",
+      "tags": [
+        "3.5 alt"
+      ],
+      "blue": [],
+      "orange": false,
+      "gap": null,
+      "35alt": null,
+      "kg": 1.65,
+      "15ust": null,
+      "25alt": 1.48,
+      "25ust": 1.83,
+      "iy15": null,
+      "kgyok": 1.63,
+      "iy15alt": null,
+      "ms1": 3.08
+    },
+    {
+      "date": "07.10.2026",
+      "time": "23:00",
+      "home": "Urena Fc",
+      "away": "Trujillanos",
+      "league": "VENK",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "gap": -2,
+      "35alt": null,
+      "kg": 1.68,
+      "15ust": null,
+      "25alt": 1.44,
+      "25ust": 1.9,
+      "iy15": null,
+      "kgyok": 1.59,
+      "iy15alt": null,
+      "ms1": 2.62
+    }
+  ]
 }

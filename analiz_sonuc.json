@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-06T23:06+03:00",
-  "count": 51,
-  "hit": 31,
+  "updated": "2026-10-07T03:34+03:00",
+  "count": 53,
+  "hit": 32,
   "matches": [
     {
       "date": "04.10.2026",
@@ -194,11 +194,11 @@
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Cosenza",
-      "away": "Foggia",
-      "skor": "0-2",
+      "home": "Nuova Monteros",
+      "away": "Pineto",
+      "skor": "1-0",
       "calls": [
-        "2.5 alt"
+        "3.5 alt"
       ],
       "ok": true
     },
@@ -216,24 +216,13 @@
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Nuova Monteros",
-      "away": "Pineto",
-      "skor": "1-0",
+      "home": "Cosenza",
+      "away": "Foggia",
+      "skor": "0-2",
       "calls": [
-        "3.5 alt"
+        "2.5 alt"
       ],
       "ok": true
-    },
-    {
-      "date": "04.10.2026",
-      "time": "18:00",
-      "home": "Motherwell (K)",
-      "away": "",
-      "skor": "1-0",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
     },
     {
       "date": "04.10.2026",
@@ -243,6 +232,17 @@
       "skor": "1-2",
       "calls": [
         "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "18:00",
+      "home": "Motherwell (K)",
+      "away": "",
+      "skor": "1-0",
+      "calls": [
+        "ters x2"
       ],
       "ok": false
     },
@@ -516,7 +516,7 @@
       "time": "21:45",
       "home": "İskoçya",
       "away": "Slovenya",
-      "skor": "1-1",
+      "skor": "1-2",
       "calls": [
         "3.5 alt"
       ],
@@ -539,7 +539,7 @@
       "time": "21:45",
       "home": "Arnavutluk",
       "away": "San Marino",
-      "skor": "1-0",
+      "skor": "2-1",
       "calls": [
         "ters x2"
       ],
@@ -562,9 +562,31 @@
       "time": "22:00",
       "home": "Angola",
       "away": "Malavi",
-      "skor": "2-1",
+      "skor": "3-1",
       "calls": [
         "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "07.10.2026",
+      "time": "00:00",
+      "home": "Saint Vincent",
+      "away": "Sint Maarten",
+      "skor": "4-0",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "07.10.2026",
+      "time": "02:30",
+      "home": "Goias",
+      "away": "Athletic Club",
+      "skor": "0-0",
+      "calls": [
+        "3.5 alt"
       ],
       "ok": true
     }
