@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-08T03:54+03:00",
-  "count": 9,
+  "updated": "2026-10-08T12:48+03:00",
+  "count": 10,
   "matches": [
     {
       "date": "08.10.2026",
@@ -14,59 +14,15 @@
       "blue": [],
       "orange": false,
       "gap": -2,
-      "35alt": 1.65,
-      "kg": 1.51,
+      "35alt": 1.69,
+      "kg": 1.47,
       "15ust": null,
-      "25alt": 2.69,
-      "25ust": 1.17,
-      "iy15": 1.64,
-      "kgyok": 1.79,
-      "iy15alt": 1.64,
+      "25alt": 2.8,
+      "25ust": 1.16,
+      "iy15": 1.61,
+      "kgyok": 1.85,
+      "iy15alt": 1.65,
       "ms1": 1.09
-    },
-    {
-      "date": "08.10.2026",
-      "time": "16:30",
-      "home": "Tractor Fc",
-      "away": "Esteghlal",
-      "league": "IRAN",
-      "tags": [
-        "1.5 üst"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": 1,
-      "35alt": 1.0,
-      "kg": 1.81,
-      "15ust": 1.29,
-      "25alt": 1.32,
-      "25ust": 2.14,
-      "iy15": null,
-      "kgyok": 1.5,
-      "iy15alt": null,
-      "ms1": 2.18
-    },
-    {
-      "date": "08.10.2026",
-      "time": "17:00",
-      "home": "Al Mokawloon A",
-      "away": "El Gounah",
-      "league": "MSRLK",
-      "tags": [
-        "1.5 üst"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": 1,
-      "35alt": 1.0,
-      "kg": 1.96,
-      "15ust": 1.28,
-      "25alt": 1.33,
-      "25ust": 2.13,
-      "iy15": null,
-      "kgyok": 1.41,
-      "iy15alt": null,
-      "ms1": 1.58
     },
     {
       "date": "08.10.2026",
@@ -83,14 +39,80 @@
       "orange": false,
       "gap": 2,
       "35alt": 1.07,
-      "kg": 1.68,
+      "kg": 1.69,
       "15ust": 1.23,
       "25alt": 1.4,
       "25ust": 1.97,
       "iy15": null,
       "kgyok": 1.59,
       "iy15alt": null,
-      "ms1": 2.21
+      "ms1": 2.38
+    },
+    {
+      "date": "08.10.2026",
+      "time": "18:00",
+      "home": "Duhok",
+      "away": "Al Zawraa",
+      "league": "IRAK",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "gap": -7,
+      "35alt": null,
+      "kg": 1.68,
+      "15ust": null,
+      "25alt": 1.47,
+      "25ust": 1.84,
+      "iy15": null,
+      "kgyok": 1.59,
+      "iy15alt": null,
+      "ms1": 3.38
+    },
+    {
+      "date": "08.10.2026",
+      "time": "18:15",
+      "home": "Sepahan",
+      "away": "Fajr Sepasi",
+      "league": "IRAN",
+      "tags": [
+        "1.5 üst"
+      ],
+      "blue": [],
+      "orange": false,
+      "gap": 6,
+      "35alt": 1.0,
+      "kg": 2.03,
+      "15ust": 1.26,
+      "25alt": 1.37,
+      "25ust": 2.05,
+      "iy15": null,
+      "kgyok": 1.37,
+      "iy15alt": null,
+      "ms1": 1.44
+    },
+    {
+      "date": "08.10.2026",
+      "time": "18:30",
+      "home": "Foolad Khuzest",
+      "away": "Mes Shahr-E Bab",
+      "league": "IRAN",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "gap": 10,
+      "35alt": 1.08,
+      "kg": 1.79,
+      "15ust": 1.22,
+      "25alt": 1.42,
+      "25ust": 1.93,
+      "iy15": null,
+      "kgyok": 1.51,
+      "iy15alt": null,
+      "ms1": 1.59
     },
     {
       "date": "08.10.2026",
@@ -104,15 +126,15 @@
       ],
       "orange": false,
       "gap": 5,
-      "35alt": 1.36,
-      "kg": 1.52,
+      "35alt": 1.34,
+      "kg": 1.53,
       "15ust": 1.0,
-      "25alt": 2.07,
-      "25ust": 1.36,
-      "iy15": 1.93,
-      "kgyok": 1.77,
-      "iy15alt": 1.42,
-      "ms1": 1.25
+      "25alt": 2.03,
+      "25ust": 1.37,
+      "iy15": 1.95,
+      "kgyok": 1.75,
+      "iy15alt": 1.41,
+      "ms1": 1.26
     },
     {
       "date": "08.10.2026",
@@ -140,28 +162,6 @@
     {
       "date": "08.10.2026",
       "time": "20:00",
-      "home": "Ghazl El Mehal",
-      "away": "Abu Qair",
-      "league": "MSRLK",
-      "tags": [
-        "1.5 üst"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": -1,
-      "35alt": 1.0,
-      "kg": 1.8,
-      "15ust": 1.29,
-      "25alt": 1.32,
-      "25ust": 2.14,
-      "iy15": null,
-      "kgyok": 1.5,
-      "iy15alt": null,
-      "ms1": 2.09
-    },
-    {
-      "date": "08.10.2026",
-      "time": "20:00",
       "home": "Modern Sc",
       "away": "National Bank O",
       "league": "MSRLK",
@@ -172,14 +172,38 @@
       "orange": false,
       "gap": 1,
       "35alt": 1.0,
-      "kg": 1.82,
-      "15ust": 1.29,
+      "kg": 1.81,
+      "15ust": 1.28,
       "25alt": 1.33,
       "25ust": 2.12,
       "iy15": null,
       "kgyok": 1.49,
       "iy15alt": null,
-      "ms1": 2.93
+      "ms1": 2.85
+    },
+    {
+      "date": "08.10.2026",
+      "time": "20:30",
+      "home": "Al Talaba",
+      "away": "Al Shorta",
+      "league": "IRAK",
+      "tags": [
+        "3.5 alt"
+      ],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "gap": -11,
+      "35alt": null,
+      "kg": 1.7,
+      "15ust": null,
+      "25alt": 1.48,
+      "25ust": 1.83,
+      "iy15": null,
+      "kgyok": 1.58,
+      "iy15alt": null,
+      "ms1": 3.53
     },
     {
       "date": "08.10.2026",
@@ -194,14 +218,14 @@
       "orange": false,
       "gap": -2,
       "35alt": null,
-      "kg": 1.49,
+      "kg": 1.48,
       "15ust": null,
       "25alt": 1.68,
       "25ust": 1.59,
       "iy15": 2.31,
-      "kgyok": 1.82,
+      "kgyok": 1.83,
       "iy15alt": 1.27,
-      "ms1": 2.91
+      "ms1": 2.75
     }
   ]
 }
