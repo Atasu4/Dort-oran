@@ -1,63 +1,8 @@
 {
-  "updated": "2026-10-08T19:10+03:00",
-  "count": 58,
-  "hit": 35,
+  "updated": "2026-10-08T23:34+03:00",
+  "count": 54,
+  "hit": 32,
   "matches": [
-    {
-      "date": "04.10.2026",
-      "time": "04:00",
-      "home": "Monarcas",
-      "away": "Tlaxcala",
-      "skor": "1-1",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": true
-    },
-    {
-      "date": "04.10.2026",
-      "time": "05:00",
-      "home": "Belize",
-      "away": "Fransiz Guyanas",
-      "skor": "0-2",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "04.10.2026",
-      "time": "05:30",
-      "home": "Las Vegas Ligh",
-      "away": "San Antonio",
-      "skor": "1-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "04.10.2026",
-      "time": "07:00",
-      "home": "J-Lease Fc",
-      "away": "Tiamo Hirakata",
-      "skor": "1-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "04.10.2026",
-      "time": "07:00",
-      "home": "Elfen Saitama",
-      "away": "Jef United (K)",
-      "skor": "2-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
     {
       "date": "04.10.2026",
       "time": "08:00",
@@ -215,8 +160,8 @@
     {
       "date": "04.10.2026",
       "time": "19:00",
-      "home": "Boston River",
-      "away": "Juventud Dl Pie",
+      "home": "Terrassa",
+      "away": "Girona Ii",
       "skor": "0-0",
       "calls": [
         "2.5 alt"
@@ -226,8 +171,8 @@
     {
       "date": "04.10.2026",
       "time": "19:00",
-      "home": "Terrassa",
-      "away": "Girona Ii",
+      "home": "Boston River",
+      "away": "Juventud Dl Pie",
       "skor": "0-0",
       "calls": [
         "2.5 alt"
@@ -582,17 +527,6 @@
     {
       "date": "08.10.2026",
       "time": "01:30",
-      "home": "Internacional",
-      "away": "Corinthians",
-      "skor": "2-1",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "08.10.2026",
-      "time": "01:30",
       "home": "Fundacion Lara",
       "away": "Aragua",
       "skor": "1-4",
@@ -600,6 +534,17 @@
         "2.5 alt"
       ],
       "ok": false
+    },
+    {
+      "date": "08.10.2026",
+      "time": "01:30",
+      "home": "Internacional",
+      "away": "Corinthians",
+      "skor": "2-1",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": true
     },
     {
       "date": "08.10.2026",
@@ -617,18 +562,18 @@
       "time": "18:00",
       "home": "Shabab Al Ordo",
       "away": "Al Baqaa",
-      "skor": "0-1",
+      "skor": "0-3",
       "calls": [
         "2.5 alt"
       ],
-      "ok": true
+      "ok": false
     },
     {
       "date": "08.10.2026",
       "time": "18:15",
       "home": "Sepahan",
       "away": "Fajr Sepasi",
-      "skor": "2-1",
+      "skor": "6-1",
       "calls": [
         "1.5 üst"
       ],
@@ -639,11 +584,22 @@
       "time": "18:30",
       "home": "Foolad Khuzest",
       "away": "Mes Shahr-E Bab",
-      "skor": "0-0",
+      "skor": "2-1",
       "calls": [
         "1.5 üst"
       ],
-      "ok": false
+      "ok": true
+    },
+    {
+      "date": "08.10.2026",
+      "time": "21:00",
+      "home": "Deportivo Moqu",
+      "away": "Cienciano",
+      "skor": "0-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
     }
   ]
 }

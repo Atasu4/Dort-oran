@@ -1,52 +1,5 @@
 {
-  "updated": "2026-10-08T19:10+03:00",
-  "count": 2,
-  "matches": [
-    {
-      "date": "08.10.2026",
-      "time": "20:30",
-      "home": "Al Talaba",
-      "away": "Al Shorta",
-      "league": "IRAK",
-      "tags": [
-        "3.5 alt"
-      ],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "gap": -11,
-      "35alt": null,
-      "kg": 1.7,
-      "15ust": null,
-      "25alt": 1.48,
-      "25ust": 1.83,
-      "iy15": null,
-      "kgyok": 1.58,
-      "iy15alt": null,
-      "ms1": 3.53
-    },
-    {
-      "date": "08.10.2026",
-      "time": "21:00",
-      "home": "Deportivo Moqu",
-      "away": "Cienciano",
-      "league": "PER",
-      "tags": [],
-      "blue": [
-        "3.5 alt"
-      ],
-      "orange": false,
-      "gap": -2,
-      "35alt": null,
-      "kg": 1.47,
-      "15ust": null,
-      "25alt": 1.68,
-      "25ust": 1.59,
-      "iy15": 2.3,
-      "kgyok": 1.85,
-      "iy15alt": 1.27,
-      "ms1": 2.69
-    }
-  ]
+  "updated": "2026-10-08T23:34+03:00",
+  "count": 0,
+  "matches": []
 }
