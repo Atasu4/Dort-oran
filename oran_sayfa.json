@@ -1,186 +1,7 @@
 {
-  "updated": "2026-10-08T12:48+03:00",
-  "count": 10,
+  "updated": "2026-10-08T19:10+03:00",
+  "count": 2,
   "matches": [
-    {
-      "date": "08.10.2026",
-      "time": "16:10",
-      "home": "Al Ahli Dubai",
-      "away": "Dubai United",
-      "league": "BAELK",
-      "tags": [
-        "2.5 üst"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": -2,
-      "35alt": 1.69,
-      "kg": 1.47,
-      "15ust": null,
-      "25alt": 2.8,
-      "25ust": 1.16,
-      "iy15": 1.61,
-      "kgyok": 1.85,
-      "iy15alt": 1.65,
-      "ms1": 1.09
-    },
-    {
-      "date": "08.10.2026",
-      "time": "17:00",
-      "home": "Al Ittihad Al",
-      "away": "Wadi Degla",
-      "league": "MSRLK",
-      "tags": [
-        "3.5 alt"
-      ],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "gap": 2,
-      "35alt": 1.07,
-      "kg": 1.69,
-      "15ust": 1.23,
-      "25alt": 1.4,
-      "25ust": 1.97,
-      "iy15": null,
-      "kgyok": 1.59,
-      "iy15alt": null,
-      "ms1": 2.38
-    },
-    {
-      "date": "08.10.2026",
-      "time": "18:00",
-      "home": "Duhok",
-      "away": "Al Zawraa",
-      "league": "IRAK",
-      "tags": [],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "gap": -7,
-      "35alt": null,
-      "kg": 1.68,
-      "15ust": null,
-      "25alt": 1.47,
-      "25ust": 1.84,
-      "iy15": null,
-      "kgyok": 1.59,
-      "iy15alt": null,
-      "ms1": 3.38
-    },
-    {
-      "date": "08.10.2026",
-      "time": "18:15",
-      "home": "Sepahan",
-      "away": "Fajr Sepasi",
-      "league": "IRAN",
-      "tags": [
-        "1.5 üst"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": 6,
-      "35alt": 1.0,
-      "kg": 2.03,
-      "15ust": 1.26,
-      "25alt": 1.37,
-      "25ust": 2.05,
-      "iy15": null,
-      "kgyok": 1.37,
-      "iy15alt": null,
-      "ms1": 1.44
-    },
-    {
-      "date": "08.10.2026",
-      "time": "18:30",
-      "home": "Foolad Khuzest",
-      "away": "Mes Shahr-E Bab",
-      "league": "IRAN",
-      "tags": [],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "gap": 10,
-      "35alt": 1.08,
-      "kg": 1.79,
-      "15ust": 1.22,
-      "25alt": 1.42,
-      "25ust": 1.93,
-      "iy15": null,
-      "kgyok": 1.51,
-      "iy15alt": null,
-      "ms1": 1.59
-    },
-    {
-      "date": "08.10.2026",
-      "time": "18:45",
-      "home": "Al Nasr",
-      "away": "Hatta Dubai",
-      "league": "BAELK",
-      "tags": [],
-      "blue": [
-        "ters x2"
-      ],
-      "orange": false,
-      "gap": 5,
-      "35alt": 1.34,
-      "kg": 1.53,
-      "15ust": 1.0,
-      "25alt": 2.03,
-      "25ust": 1.37,
-      "iy15": 1.95,
-      "kgyok": 1.75,
-      "iy15alt": 1.41,
-      "ms1": 1.26
-    },
-    {
-      "date": "08.10.2026",
-      "time": "19:00",
-      "home": "Uts Rabat",
-      "away": "Rsb Berkane",
-      "league": "FAS",
-      "tags": [
-        "3.5 alt",
-        "1.5 üst"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": 10,
-      "35alt": 1.05,
-      "kg": 1.75,
-      "15ust": 1.25,
-      "25alt": 1.37,
-      "25ust": 2.03,
-      "iy15": null,
-      "kgyok": 1.53,
-      "iy15alt": null,
-      "ms1": 2.9
-    },
-    {
-      "date": "08.10.2026",
-      "time": "20:00",
-      "home": "Modern Sc",
-      "away": "National Bank O",
-      "league": "MSRLK",
-      "tags": [
-        "1.5 üst"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": 1,
-      "35alt": 1.0,
-      "kg": 1.81,
-      "15ust": 1.28,
-      "25alt": 1.33,
-      "25ust": 2.12,
-      "iy15": null,
-      "kgyok": 1.49,
-      "iy15alt": null,
-      "ms1": 2.85
-    },
     {
       "date": "08.10.2026",
       "time": "20:30",
@@ -218,14 +39,14 @@
       "orange": false,
       "gap": -2,
       "35alt": null,
-      "kg": 1.48,
+      "kg": 1.47,
       "15ust": null,
       "25alt": 1.68,
       "25ust": 1.59,
-      "iy15": 2.31,
-      "kgyok": 1.83,
+      "iy15": 2.3,
+      "kgyok": 1.85,
       "iy15alt": 1.27,
-      "ms1": 2.75
+      "ms1": 2.69
     }
   ]
 }

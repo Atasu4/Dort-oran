@@ -1,53 +1,8 @@
 {
-  "updated": "2026-10-08T12:48+03:00",
+  "updated": "2026-10-08T19:10+03:00",
   "count": 58,
-  "hit": 34,
+  "hit": 35,
   "matches": [
-    {
-      "date": "04.10.2026",
-      "time": "00:00",
-      "home": "Export Sebaco",
-      "away": "Matagalpa",
-      "skor": "0-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "04.10.2026",
-      "time": "00:30",
-      "home": "Botafogo Ribei",
-      "away": "Vila Nova",
-      "skor": "0-1",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": false
-    },
-    {
-      "date": "04.10.2026",
-      "time": "01:30",
-      "home": "Eastern Suburb",
-      "away": "Auckland City",
-      "skor": "2-4",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "04.10.2026",
-      "time": "03:00",
-      "home": "Tulsa Roughnec",
-      "away": "Sacramento Repu",
-      "skor": "1-1",
-      "calls": [
-        "3.5 alt",
-        "1.5 üst"
-      ],
-      "ok": true
-    },
     {
       "date": "04.10.2026",
       "time": "04:00",
@@ -139,17 +94,6 @@
     {
       "date": "04.10.2026",
       "time": "13:15",
-      "home": "Twente (K)",
-      "away": "Utrecht (K)",
-      "skor": "2-0",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
-    {
-      "date": "04.10.2026",
-      "time": "13:15",
       "home": "Astur",
       "away": "Mosconia",
       "skor": "0-0",
@@ -160,12 +104,12 @@
     },
     {
       "date": "04.10.2026",
-      "time": "13:30",
-      "home": "Napoli (K)",
-      "away": "Como (K)",
-      "skor": "1-2",
+      "time": "13:15",
+      "home": "Twente (K)",
+      "away": "Utrecht (K)",
+      "skor": "2-0",
       "calls": [
-        "2.5 alt"
+        "ters x2"
       ],
       "ok": false
     },
@@ -177,6 +121,17 @@
       "skor": "2-2",
       "calls": [
         "3.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "13:30",
+      "home": "Napoli (K)",
+      "away": "Como (K)",
+      "skor": "1-2",
+      "calls": [
+        "2.5 alt"
       ],
       "ok": false
     },
@@ -194,11 +149,11 @@
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Nuova Monteros",
-      "away": "Pineto",
-      "skor": "1-0",
+      "home": "Cosenza",
+      "away": "Foggia",
+      "skor": "0-2",
       "calls": [
-        "3.5 alt"
+        "2.5 alt"
       ],
       "ok": true
     },
@@ -216,24 +171,13 @@
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Cosenza",
-      "away": "Foggia",
-      "skor": "0-2",
+      "home": "Nuova Monteros",
+      "away": "Pineto",
+      "skor": "1-0",
       "calls": [
-        "2.5 alt"
+        "3.5 alt"
       ],
       "ok": true
-    },
-    {
-      "date": "04.10.2026",
-      "time": "18:00",
-      "home": "Fc Iberia",
-      "away": "Dinamo Tiflis",
-      "skor": "1-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
     },
     {
       "date": "04.10.2026",
@@ -243,6 +187,17 @@
       "skor": "1-0",
       "calls": [
         "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "04.10.2026",
+      "time": "18:00",
+      "home": "Fc Iberia",
+      "away": "Dinamo Tiflis",
+      "skor": "1-2",
+      "calls": [
+        "2.5 alt"
       ],
       "ok": false
     },
@@ -294,7 +249,7 @@
       "date": "04.10.2026",
       "time": "20:00",
       "home": "Lucena",
-      "away": "Atlético Paso",
+      "away": "Puente Genil",
       "skor": "1-0",
       "calls": [
         "2.5 alt"
@@ -315,9 +270,9 @@
     {
       "date": "04.10.2026",
       "time": "22:00",
-      "home": "Hartford Athle",
-      "away": "Louisville City",
-      "skor": "0-1",
+      "home": "Girona",
+      "away": "Mallorca",
+      "skor": "0-0",
       "calls": [
         "2.5 alt"
       ],
@@ -326,9 +281,9 @@
     {
       "date": "04.10.2026",
       "time": "22:00",
-      "home": "Girona",
-      "away": "Mallorca",
-      "skor": "0-0",
+      "home": "Hartford Athle",
+      "away": "Louisville City",
+      "skor": "0-1",
       "calls": [
         "2.5 alt"
       ],
@@ -615,17 +570,6 @@
     {
       "date": "08.10.2026",
       "time": "01:30",
-      "home": "Internacional",
-      "away": "Corinthians",
-      "skor": "2-1",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "08.10.2026",
-      "time": "01:30",
       "home": "Avai",
       "away": "Londrina",
       "skor": "2-1",
@@ -638,11 +582,66 @@
     {
       "date": "08.10.2026",
       "time": "01:30",
+      "home": "Internacional",
+      "away": "Corinthians",
+      "skor": "2-1",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "08.10.2026",
+      "time": "01:30",
       "home": "Fundacion Lara",
       "away": "Aragua",
       "skor": "1-4",
       "calls": [
         "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "08.10.2026",
+      "time": "16:10",
+      "home": "Al Ahli Dubai",
+      "away": "Dubai United",
+      "skor": "2-1",
+      "calls": [
+        "2.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "08.10.2026",
+      "time": "18:00",
+      "home": "Shabab Al Ordo",
+      "away": "Al Baqaa",
+      "skor": "0-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "08.10.2026",
+      "time": "18:15",
+      "home": "Sepahan",
+      "away": "Fajr Sepasi",
+      "skor": "2-1",
+      "calls": [
+        "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "08.10.2026",
+      "time": "18:30",
+      "home": "Foolad Khuzest",
+      "away": "Mes Shahr-E Bab",
+      "skor": "0-0",
+      "calls": [
+        "1.5 üst"
       ],
       "ok": false
     }
