@@ -6,31 +6,31 @@
   <title>GÖKÇEN ANALİZ</title>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#0b0d10; --surface:#14181d; --fg:#f3f0e8; --muted:#9a9386; --line:#2a261f; --gold:#e4d0a2; }
+    :root { --bg:#0b0d10; --surface:#14181d; --fg:#f3f0e8; --muted:#9a9386; --line:#2a261f; --gold:#e4d0a2; --green:#1f7a45; }
     * { box-sizing:border-box; }
     html, body { margin:0; background:var(--bg); color:var(--fg); }
     body { font-family:Manrope, sans-serif; padding:10px; }
     .frame { min-height:calc(100vh - 20px); border:1px solid var(--gold); box-shadow:inset 0 0 0 5px var(--bg), inset 0 0 0 6px rgba(228,208,162,.55); padding:10px 8px 28px; }
     main { width:min(720px,100%); margin:0 auto; }
-    h1, h2 { font-family:"Bodoni Moda", Georgia, serif; font-weight:500; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); }
+    h1, h2 { font-family:"Bodoni Moda", Georgia, serif; font-weight:500; letter-spacing:.12em; text-transform:uppercase; color:var(--gold); }
     h1 { margin:10px 0 0; text-align:center; font-size:24px; }
     h2 { margin:16px 0 6px; font-size:14px; }
     .rule { width:88px; height:1px; margin:10px auto 14px; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
     .meta { color:var(--muted); font-size:13px; }
-    input, textarea, button { width:100%; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:12px; font:inherit; }
-    input, textarea { padding:12px 14px; margin:6px 0; }
-    textarea { min-height:64px; }
-    button { height:44px; background:#2a2418; color:var(--gold); }
-    .row { display:flex; gap:8px; }
-    .row button { flex:1; }
-    article { background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px; margin-top:8px; }
-    article b { display:block; font-size:16px; }
-    .pick { color:#3dd68c; margin:4px 0; }
-    article button { width:auto; height:32px; padding:0 12px; margin-top:8px; }
-    pre { white-space:pre-wrap; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px; font-size:12px; color:var(--gold); }
+    .sum { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
+    .sum div { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:8px; font-size:13px; }
+    .sum .ok { border-color:var(--green); }
+    .sum .no { border-color:#9c2b2b; }
+    article { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:8px; margin-top:6px; }
+    .top { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }
+    .teams { margin:2px 0; font-size:14px; font-weight:600; }
+    .pick { color:#3dd68c; font-size:13px; }
     #lock { position:fixed; inset:0; z-index:30; background:#0b0d10; display:flex; align-items:center; justify-content:center; padding:24px; }
     #lock.hide { display:none; }
     #lock form { width:min(320px,100%); }
+    input, button { width:100%; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:12px; font:inherit; }
+    input { height:44px; padding:0 14px; margin:8px 0; }
+    button { height:44px; background:#2a2418; color:var(--gold); }
   </style>
 </head>
 <body>
@@ -46,78 +46,45 @@
   <div class="frame"><main>
     <h1>GÖKÇEN ANALİZ</h1>
     <div class="rule"></div>
-    <p class="meta">Telegram betiğindeki rapor. Eski yeşil ve oran dosyası yok.</p>
-    <h2>Analiz</h2>
-    <input id="mac" placeholder="Maç">
-    <input id="tahmin" placeholder="Tahmin">
-    <textarea id="form" placeholder="Form ve momentum"></textarea>
-    <div class="row">
-      <button id="ekle" type="button">Ekle</button>
-      <button id="indir" type="button">JSON indir</button>
+    <h2>Geçmiş test</h2>
+    <div class="sum">
+      <div class="ok">3.5 alt 10/11</div>
+      <div class="no">Ters X2 0/9</div>
+      <div>2.5 alt 17/25</div>
+      <div>1.5 üst 7/10</div>
+      <div>Yeşil MS 13/21</div>
+      <div>1.40 üstü yeşil 2/7</div>
     </div>
-    <div id="liste"></div>
-    <h2>Gönderim</h2>
-    <pre id="rapor"></pre>
+    <p class="meta">4-9 Ekim sinyal dosyası ve 30 Eylül-3 Ekim yeşil listesi. Ters X2 ve 1.40 üstü yeşil çıktı.</p>
+    <h2>Kalan tercihler</h2>
+    <p class="meta" id="meta">Yükleniyor</p>
+    <div id="list"></div>
   </main></div>
   <script>
     const PASS_TEXT = "OranAnaliz27";
-    const KEY = "telegram-analiz";
-    const ORNEK = [
-      { mac: "Galatasaray - Fenerbahçe", tahmin: "KG Var / 2.5 Üst", form: "Ev sahibi son 5 maçta ortalama 2.1 xG. Deplasman hücum verimliliği %84." },
-      { mac: "Arsenal - Chelsea", tahmin: "İY 0.5 Üst", form: "İlk 30 dakikada baskı endeksi %78." },
-      { mac: "Real Madrid - Barcelona", tahmin: "Maç Sonucu 1", form: "Ev sahibinin iç saha galibiyet serisi devam ediyor." }
-    ];
-    function rows() {
-      try { return JSON.parse(localStorage.getItem(KEY) || "null") || ORNEK; }
-      catch (e) { return ORNEK; }
+    function paint(signals, greens) {
+      const kept = (signals || []).map((m) => {
+        const tags = (m.tags || []).filter((t) => t !== "ters x2");
+        const blue = (m.blue || []).filter((t) => t !== "ters x2" && t !== "İY 1.5 alt");
+        return { ...m, tags, blue };
+      }).filter((m) => m.tags.length || m.blue.length);
+      const short = (greens || []).map((row) => {
+        const [when, odd] = row.split("|");
+        const parts = when.split(" ");
+        return { when: parts[0] + " " + parts[1], name: parts.slice(2).join(" "), odd: Number(odd) };
+      }).filter((row) => row.odd <= 1.3);
+      document.getElementById("meta").textContent = kept.length + " sinyal · " + short.length + " kısa yeşil";
+      document.getElementById("list").innerHTML =
+        kept.map((m) => `<article><div class="top"><span>${m.date} ${m.time}</span><span>${m.league}</span></div><div class="teams">${m.home} - ${m.away}</div><div class="pick">${m.tags.concat(m.blue).join(" · ")}</div></article>`).join("") +
+        short.map((row) => `<article><div class="top"><span>${row.when}</span><span>yeşil</span></div><div class="teams">${row.name}</div><div class="pick">MS ${row.odd.toFixed(2)}</div></article>`).join("");
     }
-    function save(list) { localStorage.setItem(KEY, JSON.stringify(list)); draw(); }
-    function rapor(list) {
-      const tarih = new Date().toLocaleDateString("tr-TR");
-      const lines = ["ATASU Intelligence - Günlük Maç Analiz Raporu", "Tarih: " + tarih, "-----------------------------"];
-      list.forEach((row) => {
-        lines.push("Maç: " + row.mac);
-        lines.push("Tahmin: " + row.tahmin);
-        lines.push("Form: " + row.form);
-        lines.push("");
-      });
-      lines.push("Not: Analizler yapay zeka algoritması tarafından üretilmiştir.");
-      return lines.join("\n");
+    function load() {
+      Promise.all([
+        fetch("oran_sayfa.json").then((r) => r.json()).catch(() => ({ matches: [] })),
+        fetch("yesil_son.json").then((r) => r.json()).catch(() => ({ greens: [] }))
+      ]).then(([o, g]) => paint(o.matches || [], g.greens || []));
     }
-    function draw() {
-      const list = rows();
-      document.getElementById("liste").innerHTML = list.map((row, i) => `<article>
-        <b>${row.mac}</b>
-        <div class="pick">${row.tahmin}</div>
-        <p class="meta">${row.form}</p>
-        <button type="button" data-i="${i}">Sil</button>
-      </article>`).join("");
-      document.getElementById("rapor").textContent = rapor(list);
-    }
-    document.getElementById("ekle").onclick = () => {
-      const mac = document.getElementById("mac").value.trim();
-      const tahmin = document.getElementById("tahmin").value.trim();
-      const form = document.getElementById("form").value.trim();
-      if (!mac || !tahmin) return;
-      save(rows().concat([{ mac, tahmin, form }]));
-      document.getElementById("mac").value = "";
-      document.getElementById("tahmin").value = "";
-      document.getElementById("form").value = "";
-    };
-    document.getElementById("liste").onclick = (event) => {
-      if (event.target.dataset.i == null) return;
-      const list = rows();
-      list.splice(Number(event.target.dataset.i), 1);
-      save(list);
-    };
-    document.getElementById("indir").onclick = () => {
-      const blob = new Blob([JSON.stringify({ maclar: rows() }, null, 2)], { type: "application/json" });
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "gunluk.json";
-      a.click();
-    };
-    function unlock() { document.getElementById("lock").classList.add("hide"); draw(); }
+    function unlock() { document.getElementById("lock").classList.add("hide"); load(); }
     if (localStorage.getItem("oran-kapi") === PASS_TEXT) unlock();
     document.getElementById("lock-form").onsubmit = (event) => {
       event.preventDefault();
