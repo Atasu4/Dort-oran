@@ -4,45 +4,34 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GÖKÇEN ANALİZ</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root { --bg:#0b0d10; --surface:#14181d; --fg:#f3f0e8; --muted:#9a9386; --line:#2a261f; --gold:#e4d0a2; }
     * { box-sizing:border-box; }
     html, body { margin:0; background:var(--bg); color:var(--fg); }
-    body { font-family:Manrope, "Segoe UI", sans-serif; line-height:1.4; min-height:100vh; padding:10px; }
-    .frame {
-      min-height:calc(100vh - 20px);
-      border:1px solid var(--gold);
-      box-shadow:inset 0 0 0 5px var(--bg), inset 0 0 0 6px rgba(228,208,162,0.55);
-      padding:10px 8px 28px;
-    }
-    main { width:min(720px, 100%); margin:0 auto; }
-    h1, h2 {
-      text-align:center;
-      font-family:"Bodoni Moda", Georgia, serif;
-      font-weight:500;
-      letter-spacing:0.18em;
-      text-transform:uppercase;
-      color:var(--gold);
-    }
-    h1 { margin:10px 0 0; font-size:26px; }
-    h2 { margin:22px 0 8px; font-size:16px; letter-spacing:0.14em; text-align:left; }
-    .rule { width:88px; height:1px; margin:10px auto 18px; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
+    body { font-family:Manrope, sans-serif; padding:10px; }
+    .frame { min-height:calc(100vh - 20px); border:1px solid var(--gold); box-shadow:inset 0 0 0 5px var(--bg), inset 0 0 0 6px rgba(228,208,162,.55); padding:10px 8px 28px; }
+    main { width:min(720px,100%); margin:0 auto; }
+    h1 { margin:10px 0 0; text-align:center; font-family:"Bodoni Moda", Georgia, serif; font-weight:500; font-size:24px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); }
+    .rule { width:88px; height:1px; margin:10px auto 14px; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
     .meta { color:var(--muted); font-size:13px; }
-    input, textarea, button { width:100%; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:12px; font:inherit; }
-    input, textarea { padding:12px 14px; margin:6px 0; }
-    textarea { min-height:72px; }
-    button { height:44px; background:#2a2418; color:var(--gold); border-color:rgba(228,208,162,0.5); }
-    .row { display:flex; gap:8px; }
-    .row button { flex:1; }
-    article { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:12px 14px; margin-top:8px; }
-    article b { display:block; margin-bottom:4px; }
-    article button { width:auto; height:32px; padding:0 12px; margin-top:8px; }
-    pre { white-space:pre-wrap; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px; font-size:12px; color:var(--gold); }
+    input, button { width:100%; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:12px; font:inherit; }
+    input { height:44px; padding:0 14px; margin-bottom:8px; }
+    button.go { height:44px; background:#2a2418; color:var(--gold); }
+    .hour { width:100%; margin:6px 0 0; padding:8px 10px; border-radius:8px; border:1px solid var(--line); background:var(--surface); color:var(--fg); text-align:left; font-size:13px; }
+    .slot { display:none; }
+    .slot.open { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin-top:4px; }
+    article { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:6px 8px; min-width:0; }
+    .top { display:flex; justify-content:space-between; color:var(--muted); font-size:10px; }
+    .teams { margin:1px 0; font-size:12px; font-weight:600; line-height:1.2; }
+    .odds { display:grid; grid-template-columns:repeat(5,1fr); gap:2px; margin-top:4px; }
+    .odds b, .odds span { display:block; text-align:center; }
+    .odds b { color:var(--muted); font-size:9px; font-weight:500; }
+    .odds span { background:var(--bg); border-radius:6px; padding:3px 0; font-size:11px; }
+    .gun { display:flex; justify-content:space-between; margin:14px 0 4px; font-size:12px; color:var(--muted); }
     #lock { position:fixed; inset:0; z-index:30; background:#0b0d10; display:flex; align-items:center; justify-content:center; padding:24px; }
     #lock.hide { display:none; }
-    #lock form { width:min(320px, 100%); }
+    #lock form { width:min(320px,100%); }
   </style>
 </head>
 <body>
@@ -51,77 +40,60 @@
       <h1>GÖKÇEN ANALİZ</h1>
       <div class="rule"></div>
       <input id="lock-key" type="password" placeholder="Şifre" autocomplete="current-password">
-      <button type="submit">Gir</button>
+      <button class="go" type="submit">Gir</button>
       <p class="meta" id="lock-msg"></p>
     </form>
   </div>
-  <div class="frame">
-    <main>
-      <h1>GÖKÇEN ANALİZ</h1>
-      <div class="rule"></div>
-      <p class="meta">Günlük sayfa. Eski sekmeler kapalı. Bülten, arşiv ve sonuç dosyaları duruyor.</p>
-      <h2>Günlük liste</h2>
-      <input id="mac" placeholder="Maç">
-      <input id="tahmin" placeholder="Tahmin">
-      <textarea id="not" placeholder="Not"></textarea>
-      <div class="row">
-        <button id="ekle" type="button">Ekle</button>
-        <button id="indir" type="button">JSON indir</button>
-      </div>
-      <div id="liste"></div>
-      <h2>PythonAnywhere</h2>
-      <pre>cd ~
-wget -O script.py https://raw.githubusercontent.com/Atasu4/Dort-oran/main/scripts/telegram_gonder.py
-python3 script.py
-
-Tasks komutu:
-/usr/bin/python3 /home/Ata/script.py
-
-Ortam:
-TELEGRAM_TOKEN
-TELEGRAM_CHAT_ID</pre>
-    </main>
-  </div>
+  <div class="frame"><main>
+    <h1>GÖKÇEN ANALİZ</h1>
+    <div class="rule"></div>
+    <input id="q" placeholder="Takım veya lig">
+    <p class="meta" id="meta">Bülten yükleniyor</p>
+    <div id="list"></div>
+  </main></div>
   <script>
     const PASS_TEXT = "OranAnaliz27";
-    const KEY = "gunluk-liste";
-    function rows() { try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) { return []; } }
-    function save(list) { localStorage.setItem(KEY, JSON.stringify(list)); draw(); }
+    let matches = [];
+    function n(v) { return v == null ? "—" : Number(v).toFixed(2); }
     function draw() {
-      const list = rows();
-      document.getElementById("liste").innerHTML = list.map((row, i) => `
-        <article>
-          <b>${row.mac}</b>
-          <div>${row.tahmin}</div>
-          <p class="meta">${row.not || ""}</p>
-          <button type="button" data-i="${i}">Sil</button>
-        </article>`).join("") || `<p class="meta">Liste boş.</p>`;
+      const q = document.getElementById("q").value.trim().toLowerCase();
+      const rows = matches.filter((m) => !q || (m.home + " " + m.away + " " + m.league).toLowerCase().includes(q));
+      const days = {};
+      rows.forEach((m) => {
+        const hour = (m.time || "00:00").slice(0, 2);
+        days[m.date] = days[m.date] || {};
+        days[m.date][hour] = days[m.date][hour] || [];
+        days[m.date][hour].push(m);
+      });
+      document.getElementById("meta").textContent = rows.length + " maç";
+      document.getElementById("list").innerHTML = Object.keys(days).map((day) => {
+        const hours = Object.keys(days[day]).sort();
+        return `<div class="gun"><span>${day}</span><span>${hours.reduce((s, h) => s + days[day][h].length, 0)} maç</span></div>` +
+          hours.map((hour) => {
+            const id = day + hour;
+            const cards = days[day][hour].map((m) => `<article>
+              <div class="top"><span>${m.time}</span><span>${m.league}</span></div>
+              <div class="teams">${m.home} - ${m.away}</div>
+              <div class="odds"><b>1</b><b>X</b><b>2</b><b>A</b><b>Ü</b><span>${n(m.o1)}</span><span>${n(m.ox)}</span><span>${n(m.o2)}</span><span>${n(m.alt)}</span><span>${n(m.ust)}</span></div>
+            </article>`).join("");
+            return `<button class="hour" type="button" data-id="${id}">${hour}:00 · ${days[day][hour].length} maç</button><div class="slot" id="${id}">${cards}</div>`;
+          }).join("");
+      }).join("") || `<p class="meta">Maç yok</p>`;
     }
-    document.getElementById("ekle").onclick = () => {
-      const mac = document.getElementById("mac").value.trim();
-      const tahmin = document.getElementById("tahmin").value.trim();
-      const not = document.getElementById("not").value.trim();
-      if (!mac || !tahmin) return;
-      save(rows().concat([{ mac, tahmin, not }]));
-      document.getElementById("mac").value = "";
-      document.getElementById("tahmin").value = "";
-      document.getElementById("not").value = "";
+    document.getElementById("list").onclick = (event) => {
+      const button = event.target.closest(".hour");
+      if (!button) return;
+      document.getElementById(button.dataset.id).classList.toggle("open");
     };
-    document.getElementById("liste").onclick = (event) => {
-      const i = event.target.dataset.i;
-      if (i == null) return;
-      const list = rows();
-      list.splice(Number(i), 1);
-      save(list);
-    };
-    document.getElementById("indir").onclick = () => {
-      const blob = new Blob([JSON.stringify({ tarih: new Date().toISOString().slice(0, 10), maclar: rows() }, null, 2)], { type: "application/json" });
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "gunluk.json";
-      a.click();
-    };
-    function unlock() { document.getElementById("lock").classList.add("hide"); draw(); }
+    document.getElementById("q").oninput = draw;
+    function load() {
+      fetch("bulten.json").then((res) => res.json()).then((data) => {
+        matches = data.matches || [];
+        document.getElementById("meta").textContent = (data.updated || "") + " · " + matches.length + " maç";
+        draw();
+      }).catch(() => { document.getElementById("meta").textContent = "Bülten açılmadı"; });
+    }
+    function unlock() { document.getElementById("lock").classList.add("hide"); load(); }
     if (localStorage.getItem("oran-kapi") === PASS_TEXT) unlock();
     document.getElementById("lock-form").onsubmit = (event) => {
       event.preventDefault();
