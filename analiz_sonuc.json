@@ -1,19 +1,8 @@
 {
-  "updated": "2026-10-08T23:34+03:00",
+  "updated": "2026-10-09T04:10+03:00",
   "count": 54,
-  "hit": 32,
+  "hit": 33,
   "matches": [
-    {
-      "date": "04.10.2026",
-      "time": "08:00",
-      "home": "Mokpo City",
-      "away": "Busan Transport",
-      "skor": "3-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
     {
       "date": "04.10.2026",
       "time": "12:30",
@@ -105,22 +94,22 @@
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Campobasso",
-      "away": "Sassari Torres",
-      "skor": "1-1",
+      "home": "Nuova Monteros",
+      "away": "Pineto",
+      "skor": "1-0",
       "calls": [
-        "2.5 alt"
+        "3.5 alt"
       ],
       "ok": true
     },
     {
       "date": "04.10.2026",
       "time": "15:30",
-      "home": "Nuova Monteros",
-      "away": "Pineto",
-      "skor": "1-0",
+      "home": "Campobasso",
+      "away": "Sassari Torres",
+      "skor": "1-1",
       "calls": [
-        "3.5 alt"
+        "2.5 alt"
       ],
       "ok": true
     },
@@ -215,9 +204,9 @@
     {
       "date": "04.10.2026",
       "time": "22:00",
-      "home": "Girona",
-      "away": "Mallorca",
-      "skor": "0-0",
+      "home": "Hartford Athle",
+      "away": "Louisville City",
+      "skor": "0-1",
       "calls": [
         "2.5 alt"
       ],
@@ -226,9 +215,9 @@
     {
       "date": "04.10.2026",
       "time": "22:00",
-      "home": "Hartford Athle",
-      "away": "Louisville City",
-      "skor": "0-1",
+      "home": "Girona",
+      "away": "Mallorca",
+      "skor": "0-0",
       "calls": [
         "2.5 alt"
       ],
@@ -527,17 +516,6 @@
     {
       "date": "08.10.2026",
       "time": "01:30",
-      "home": "Fundacion Lara",
-      "away": "Aragua",
-      "skor": "1-4",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "08.10.2026",
-      "time": "01:30",
       "home": "Internacional",
       "away": "Corinthians",
       "skor": "2-1",
@@ -545,6 +523,17 @@
         "3.5 alt"
       ],
       "ok": true
+    },
+    {
+      "date": "08.10.2026",
+      "time": "01:30",
+      "home": "Fundacion Lara",
+      "away": "Aragua",
+      "skor": "1-4",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
     },
     {
       "date": "08.10.2026",
@@ -598,6 +587,17 @@
       "skor": "0-2",
       "calls": [
         "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "09.10.2026",
+      "time": "01:30",
+      "home": "Ceara",
+      "away": "Criciuma",
+      "skor": "1-0",
+      "calls": [
+        "3.5 alt"
       ],
       "ok": true
     }
