@@ -114,8 +114,10 @@
     };
     document.getElementById("q").oninput = draw;
     function load() {
-      fetch("yesil_son.json").then((r) => r.json()).then((d) => { greens = d.greens || []; }).catch(() => {});
-      fetch("oran_sayfa.json").then((r) => r.json()).then((d) => paintPicks(d.matches || [])).catch(() => paintPicks([]));
+      Promise.all([
+        fetch("yesil_son.json").then((r) => r.json()).catch(() => ({ greens: [] })),
+        fetch("oran_sayfa.json").then((r) => r.json()).catch(() => ({ matches: [] }))
+      ]).then(([g, o]) => { greens = g.greens || []; paintPicks(o.matches || []); });
       fetch("bulten.json").then((r) => r.json()).then((d) => {
         matches = d.matches || [];
         document.getElementById("meta").textContent = (d.updated || "") + " · " + matches.length + " maç";
