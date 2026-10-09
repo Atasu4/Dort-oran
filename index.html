@@ -7,116 +7,42 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#0b0d10; --surface:#14181d; --fg:#f3f0e8; --muted:#9a9386; --red:#9c2b2b; --line:#2a261f; --gold:#e4d0a2; --green:#1f7a45; }
+    :root { --bg:#0b0d10; --surface:#14181d; --fg:#f3f0e8; --muted:#9a9386; --line:#2a261f; --gold:#e4d0a2; }
     * { box-sizing:border-box; }
     html, body { margin:0; background:var(--bg); color:var(--fg); }
-    body {
-      font-family:"Source Sans 3","Segoe UI",sans-serif;
-      line-height:1.4;
-      min-height:100vh;
-      padding:10px;
-    }
+    body { font-family:Manrope, "Segoe UI", sans-serif; line-height:1.4; min-height:100vh; padding:10px; }
     .frame {
       min-height:calc(100vh - 20px);
       border:1px solid var(--gold);
       box-shadow:inset 0 0 0 5px var(--bg), inset 0 0 0 6px rgba(228,208,162,0.55);
       padding:10px 8px 28px;
     }
-    main { width:min(720px, 100%); margin:0 auto; padding:6px 0 40px; }
-    h1 {
-      margin:10px 0 0;
+    main { width:min(720px, 100%); margin:0 auto; }
+    h1, h2 {
       text-align:center;
-      font-family:"Bodoni Moda",Georgia,serif;
+      font-family:"Bodoni Moda", Georgia, serif;
       font-weight:500;
-      font-size:28px;
-      letter-spacing:0.22em;
+      letter-spacing:0.18em;
       text-transform:uppercase;
       color:var(--gold);
     }
-    .rule { width:88px; height:1px; margin:10px auto 0; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
-    .tabs { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:4px; background:var(--surface); padding:4px; border-radius:16px; margin:16px 0; }
-    .hide { display:none !important; }
-    .tabs button, button.go { height:44px; border:0; border-radius:12px; font-size:13px; }
-    .tabs button { background:transparent; color:var(--muted); }
-    .tabs button.on { background:#2a2418; color:var(--gold); }
-    input, button.go { width:100%; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:12px; }
-    input { height:48px; text-align:center; font-size:18px; }
-    .sheet { display:grid; grid-template-columns:repeat(5,1fr); border:1px solid var(--line); border-radius:14px; overflow:hidden; }
-    .sheet div, .sheet input { border-right:1px solid var(--line); }
-    .sheet div:last-child, .sheet input:last-child { border-right:0; }
-    .sheet .h, .sheet .lift { text-align:center; font-size:12px; color:var(--muted); padding:8px 2px; background:var(--surface); }
-    .row { display:flex; gap:8px; margin:12px 0; flex-wrap:wrap; }
-    .row button { height:40px; border-radius:999px; border:1px solid var(--line); background:var(--surface); color:var(--fg); padding:0 14px; }
-    .row button.on { background:#2a2418; border-color:var(--gold); color:var(--gold); }
-    button.go { background:#2a2418; color:var(--gold); border:1px solid rgba(228,208,162,0.5); font-weight:600; letter-spacing:0.04em; }
-    .meta { color:var(--muted); font-size:14px; }
+    h1 { margin:10px 0 0; font-size:26px; }
+    h2 { margin:22px 0 8px; font-size:16px; letter-spacing:0.14em; text-align:left; }
+    .rule { width:88px; height:1px; margin:10px auto 18px; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .meta { color:var(--muted); font-size:13px; }
+    input, textarea, button { width:100%; border:1px solid var(--line); background:var(--bg); color:var(--fg); border-radius:12px; font:inherit; }
+    input, textarea { padding:12px 14px; margin:6px 0; }
+    textarea { min-height:72px; }
+    button { height:44px; background:#2a2418; color:var(--gold); border-color:rgba(228,208,162,0.5); }
+    .row { display:flex; gap:8px; }
+    .row button { flex:1; }
     article { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:12px 14px; margin-top:8px; }
-    article.pick { width:100%; text-align:left; color:inherit; }
-    article.on { outline:1px solid var(--gold); }
-    #bulten-list button.on {
-      background: var(--red);
-      border-color: var(--red);
-      color: #fff;
-      outline: 0;
-    }
-    #bulten-list button.on .top { color: rgba(255,255,255,0.8); }
-    .dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:6px; }
-    .dot.g { background: var(--green); }
-    .dot.s { background: #e6b325; }
-    #bulten-list button.sondu { border-color: #e6b325; }
-    .lockline { margin: 2px 0 0; font-size: 11px; color: var(--muted); }
-    .gun { display:flex; justify-content:space-between; margin:14px 0 6px; font-size:12px; color:var(--muted); }
-    .satir { display:flex; justify-content:space-between; gap:8px; padding:7px 0; border-bottom:1px solid rgba(201,162,39,0.25); font-size:14px; }
-    .satir b { font-weight:600; }
-    .ok { color:#3dd68c; }
-    .mavi { color:#5aa7ff; }
-    .turuncu { color:#e39a3c; }
-    .no { color:#e85d4c; }
-    #bulten-list button.on .lockline { color: rgba(255,255,255,0.8); }
-
-    .top { display:flex; justify-content:space-between; gap:8px; color:var(--muted); font-size:13px; }
-    .teams { margin:4px 0; font-size:17px; font-weight:600; }
-    .odds { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; margin-top:8px; }
-    .odds b, .odds span { display:block; text-align:center; }
-    .odds b { color:var(--muted); font-size:11px; font-weight:500; }
-    .odds span { background:var(--bg); border-radius:8px; padding:6px 0; }
-    .chip { display:inline-block; margin:4px 4px 0 0; padding:3px 8px; border-radius:999px; background:var(--bg); font-size:11px; color:var(--muted); }
-    .chip.on { background:var(--green); color:#fff; }
-    #uc-list article { padding:10px 12px; margin:0 0 6px; }
-    .uc-grid { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin:8px 0; }
-    .uc-grid div { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:6px 8px; font-size:12px; }
-    .odds span.hit { background:var(--green); color:#fff; }
-    #lock {
-      position:fixed; inset:0; z-index:30; background:#0b0d10;
-      display:flex; align-items:center; justify-content:center; padding:24px;
-    }
+    article b { display:block; margin-bottom:4px; }
+    article button { width:auto; height:32px; padding:0 12px; margin-top:8px; }
+    pre { white-space:pre-wrap; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:12px; font-size:12px; color:var(--gold); }
+    #lock { position:fixed; inset:0; z-index:30; background:#0b0d10; display:flex; align-items:center; justify-content:center; padding:24px; }
     #lock.hide { display:none; }
     #lock form { width:min(320px, 100%); }
-    #lock input { margin:18px 0 10px; }
-    #bulten-list article { padding: 4px 6px; margin: 0; border-radius: 8px; min-width: 0; }
-    #bulten-list .top { font-size: 10px; }
-    #bulten-list .teams { margin: 0; font-size: 12px; font-weight: 600; line-height: 1.2; }
-    .hour {
-      width: 100%;
-      margin: 6px 0 0;
-      padding: 6px 8px;
-      border-radius: 8px;
-      border: 1px solid var(--line);
-      background: var(--surface);
-      color: var(--fg);
-      text-align: left;
-      font-size: 12px;
-    }
-    .slot { display: none; }
-    .slot.open { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; margin-top: 4px; }
-    #second { display:grid; grid-template-columns:1fr 1fr; gap:4px; margin:8px 0; }
-    #second div { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:6px 8px; font-size:12px; }
-    #second strong { font-weight:600; }
-    #hits article { padding: 6px 8px; margin: 0; border-radius: 8px; }
-    #hits .top { font-size: 12px; }
-    #hits .sum { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; padding: 0; background: transparent; border: 0; }
-    #hits .sum div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 6px 8px; }
-    #hits .sum div.good, #hits .sum div.good span { background: var(--green); color: #fff; border-color: var(--green); }
   </style>
 </head>
 <body>
@@ -125,638 +51,81 @@
       <h1>GÖKÇEN ANALİZ</h1>
       <div class="rule"></div>
       <input id="lock-key" type="password" placeholder="Şifre" autocomplete="current-password">
-      <button class="go" type="submit">Gir</button>
+      <button type="submit">Gir</button>
       <p class="meta" id="lock-msg"></p>
     </form>
   </div>
   <div class="frame">
-  <main>
-    <h1>GÖKÇEN ANALİZ</h1>
-    <div class="rule"></div>
-    <div class="tabs">
-      <button id="tab-bulten" class="on" type="button">Bülten</button>
-      <button id="tab-sonuc" type="button">Bülten sonuç</button>
-      <button id="tab-oran" type="button">Oran</button>
-      <button id="tab-analiz" type="button">Analiz Sonuç</button>
-    </div>
+    <main>
+      <h1>GÖKÇEN ANALİZ</h1>
+      <div class="rule"></div>
+      <p class="meta">Günlük sayfa. Eski sekmeler kapalı. Bülten, arşiv ve sonuç dosyaları duruyor.</p>
+      <h2>Günlük liste</h2>
+      <input id="mac" placeholder="Maç">
+      <input id="tahmin" placeholder="Tahmin">
+      <textarea id="not" placeholder="Not"></textarea>
+      <div class="row">
+        <button id="ekle" type="button">Ekle</button>
+        <button id="indir" type="button">JSON indir</button>
+      </div>
+      <div id="liste"></div>
+      <h2>PythonAnywhere</h2>
+      <pre>cd ~
+wget -O script.py https://raw.githubusercontent.com/Atasu4/Dort-oran/main/scripts/telegram_gonder.py
+python3 script.py
 
-    <section id="panel-oran" class="hide">
-      <p class="meta" id="oran-meta">Altı oran yeşil. KG yok ve İY 1.5 alt birlikteyse mavi.</p>
-      <div id="oran-list"></div>
-    </section>
-    <section id="panel-analiz" class="hide">
-      <p class="meta" id="analiz-meta">Bugünden itibaren biten sinyaller.</p>
-      <div id="analiz-list"></div>
-    </section>
-    <section id="panel-sonuc" class="hide">
-      <p class="meta" id="sonuc-meta">Yeşil kilitlerin günü.</p>
-      <div id="sonuc-list"></div>
-    </section>
+Tasks komutu:
+/usr/bin/python3 /home/Ata/script.py
 
-    <section id="panel-bulten">
-      <input id="q" placeholder="Takım veya lig" style="text-align:left;padding:0 14px;margin-bottom:8px">
-      <p class="meta" id="bmeta">Bülten yükleniyor</p>
-      <div id="bulten-list"></div>
-    </section>
-
-    <div id="analiz-tools">
-    <div class="row" id="tol">
-      <button type="button" data-t="0.05">Sıkı ±0.05</button>
-      <button type="button" data-t="0.08" class="on">Yakın ±0.08</button>
-      <button type="button" data-t="0.12">Geniş ±0.12</button>
-    </div>
-    <button class="go" id="ara" type="button">Eski maçları bul</button>
-    <p class="meta" id="aranan"></p>
-    <div id="second"></div>
-    <p class="meta" id="meta">Bültende üç tolerans otomatik. Biri yeşilse yeşil yazar. Dört oran doluysa en az dört tutmalı.</p>
-    <div id="hits"></div>
-    </div>
-  </main>
+Ortam:
+TELEGRAM_TOKEN
+TELEGRAM_CHAT_ID</pre>
+    </main>
+  </div>
   <script>
-    const BANDS = [
-      [1.2, 1.053], [1.4, 0.902], [1.6, 0.893], [1.8, 0.886], [2.1, 0.89],
-      [2.5, 0.875], [3, 0.86], [3.8, 0.906], [5, 0.85], [7, 0.833], [10, 0.786], [1e9, 0.658]
-    ];
-    const KEYS = ["o1", "ox", "o2", "alt", "ust"];
-    const LIFT = ["l1", "lx", "l2", "la", "lu"];
-    const SHORT = ["1", "X", "2", "A2.5", "Ü2.5"];
-    let tab = "bulten";
-    const EUROPE = [
-      { home:"Raelingen", away:"Lyn Oslo B", time:"19:00", side:"2", iddaa:6.82, europe:2.15, gap:30 },
-      { home:"Guadeloupe", away:"Barbados", time:"22:00", side:"1", iddaa:2.14, europe:1.90, gap:10 },
-      { home:"Atletico Tembe", away:"Paraguari", time:"23:00", side:"2", iddaa:2.25, europe:2.02, gap:8 },
-      { home:"Leixoes U23", away:"Vizela U23", time:"18:00", side:"1", iddaa:2.16, europe:1.99, gap:7 },
-      { home:"C Espanol", away:"Cambaceres", time:"21:00", side:"1", iddaa:1.68, europe:1.62, gap:7 }
-    ];
-    let tol = 0.08;
-    let archive = null;
-    let bulletin = [];
-    let picked = null;
-
-    function band(price) {
-      for (const row of BANDS) if (price < row[0]) return row[1];
-      return 0.658;
-    }
-    function lift(iddaa) {
-      let guess = iddaa / 0.88;
-      for (let i = 0; i < 5; i++) guess = iddaa / band(guess);
-      return Math.round(guess * 100) / 100;
-    }
-    function num(value) {
-      const n = parseFloat(String(value).replace(",", "."));
-      return Number.isFinite(n) && n > 1 ? n : null;
-    }
-    function activeFrom(raw) {
-      return KEYS.map((key, index) => {
-        const iddaa = num(raw[key]);
-        return iddaa == null ? null : { index: index + 5, iddaa, bet365: lift(iddaa), short: SHORT[index] };
-      }).filter(Boolean);
-    }
-    function readManual() {
-      const raw = {};
-      KEYS.forEach((key, i) => {
-        raw[key] = document.getElementById(key).value;
-        const n = num(raw[key]);
-        document.getElementById(LIFT[i]).textContent = n == null ? "—" : lift(n).toFixed(2);
-      });
-      return raw;
-    }
-    function scoreOf(row) {
-      const [h, a] = String(row[4] || "").split("-").map(Number);
-      if (!Number.isFinite(h) || !Number.isFinite(a)) return "";
-      return h > a ? "MS 1" : h === a ? "MS X" : "MS 2";
-    }
-    function minimumFor(count) {
-      return count >= 4 ? 4 : 2;
-    }
-    function find(raw, band) {
-      const width = band != null ? band : tol;
-      const active = activeFrom(raw);
-      const minimum = minimumFor(active.length);
-      if (active.length < 2) return { active, hits: [], need: true, minimum, band: width };
-      const hits = [];
-      for (const row of archive) {
-        let matched = 0, gap = 0;
-        const flags = [];
-        for (const market of active) {
-          const price = row[market.index];
-          const ok = typeof price === "number" && Math.abs(price - market.bet365) <= width + 0.001;
-          flags.push(ok);
-          if (ok) { matched += 1; gap += Math.abs(price - market.bet365); }
-        }
-        if (matched >= minimum) hits.push({ row, matched, gap, flags });
-      }
-      hits.sort((a, b) => b.matched - a.matched || a.gap - b.gap);
-      return { active, hits, minimum, band: width };
-    }
-    function greenSide(found) {
-      if (!found || found.need) return "";
-      let home = 0, draw = 0, away = 0;
-      for (const hit of found.hits) {
-        const result = scoreOf(hit.row);
-        if (result === "MS 1") home += 1;
-        else if (result === "MS X") draw += 1;
-        else if (result === "MS 2") away += 1;
-      }
-      const total = found.hits.length;
-      const counts = { "1": home, "X": draw, "2": away };
-      const trio = found.active.filter((market) => market.short === "1" || market.short === "X" || market.short === "2");
-      const favorite = trio.reduce((best, market) => (!best || market.iddaa < best.iddaa ? market : best), null);
-      const leader = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
-      const low = wilsonLower(leader ? leader[1] : 0, total);
-      return favorite && leader && total >= 200 && leader[0] === favorite.short && low > 0.55 ? leader[0] : "";
-    }
-    function wilsonLower(hits, n) {
-      if (!n) return 0;
-      const z = 1.96;
-      const p = hits / n;
-      const den = 1 + (z * z) / n;
-      const centre = p + (z * z) / (2 * n);
-      const marg = z * Math.sqrt((p * (1 - p)) / n + (z * z) / (4 * n * n));
-      return (centre - marg) / den;
-    }
-    function poissonP(k, lambda) {
-      let fact = 1;
-      for (let i = 2; i <= k; i++) fact *= i;
-      return Math.exp(-lambda) * Math.pow(lambda, k) / fact;
-    }
-    function secondModel(match) {
-      const home = match.homeTable && match.homeTable.home;
-      const away = match.awayTable && match.awayTable.away;
-      if (!home || !away || !home.played || !away.played || !match.lgH || !match.lgA) return null;
-      const hs = home.gf / home.played;
-      const hc = home.ga / home.played;
-      const awayScored = away.gf / away.played;
-      const awayConceded = away.ga / away.played;
-      const lamH = hs * awayConceded / match.lgH;
-      const lamA = awayScored * hc / match.lgA;
-      let best = { score: "0-0", p: -1 };
-      for (let h = 0; h <= 5; h++) {
-        for (let a = 0; a <= 5; a++) {
-          const p = poissonP(h, lamH) * poissonP(a, lamA);
-          if (p > best.p) best = { score: h + "-" + a, p };
-        }
-      }
-      const diff = (home.gf - home.ga) - (away.gf - away.ga);
-      return {
-        lamH, lamA,
-        poisson: lamH > lamA ? "1" : lamA > lamH ? "2" : "X",
-        rating: diff > 0 ? "1" : diff < 0 ? "2" : "X",
-        score: best.score,
-        line: `Ev ${home.played} maç ${home.gf}-${home.ga} · Dep ${away.played} maç ${away.gf}-${away.ga}`,
-      };
-    }
-    function paintSecond(leader) {
-      const box = document.getElementById("second");
-      if (!box) return;
-      if (tab !== "bulten" || !picked) { box.innerHTML = ""; return; }
-      const model = secondModel(picked);
-      if (!model) { box.innerHTML = `<div>İkinci analiz için gol verisi yok</div>`; return; }
-      const same = model.poisson === model.rating && model.poisson === leader;
-      box.innerHTML = `
-        <div>${model.line}</div>
-        <div>Poisson <strong>${model.poisson}</strong> · ${model.lamH.toFixed(2)}-${model.lamA.toFixed(2)}</div>
-        <div>Reyting <strong>${model.rating}</strong></div>
-        <div>Skor <strong>${model.score}</strong></div>
-        <div>Eşleşme <strong>${same ? "VAR" : "YOK"}</strong></div>
-        <div>Adil <strong>${shinLine(match)}</strong></div>`;
-    }
-    function shinLine(match) {
-      const odds = [match.o1, match.ox, match.o2].filter((n) => n > 1);
-      if (odds.length < 3) return "yok";
-      const implied = odds.map((o) => 1 / o);
-      const s = implied.reduce((a, b) => a + b, 0);
-      let low = 0, high = 0.4, z = 0;
-      for (let i = 0; i < 40; i++) {
-        z = (low + high) / 2;
-        const val = implied.reduce((sum, pi) => sum + Math.sqrt(z * z + 4 * (1 - z) * pi * pi / s), 0);
-        if (val > 1 + z) low = z;
-        else high = z;
-      }
-      z = (low + high) / 2;
-      const fair = implied.map((pi) => (Math.sqrt(z * z + 4 * (1 - z) * pi * pi / s) - z) / (2 * (1 - z)));
-      const total = fair.reduce((a, b) => a + b, 0);
-      const pct = fair.map((p) => Math.round(100 * p / total));
-      return `1 %${pct[0]} · X %${pct[1]} · 2 %${pct[2]}`;
-    }
-    function paint(found) {
-      const box = document.getElementById("hits");
-      const meta = document.getElementById("meta");
-      const ask = document.getElementById("aranan");
-      if (!archive) { meta.textContent = "Arşiv yükleniyor"; box.innerHTML = ""; return; }
-      if (found.need) { meta.textContent = "En az iki oran gerekli."; ask.textContent = ""; box.innerHTML = ""; return; }
-      const target = found.active.map((market) => market.short + " " + market.bet365.toFixed(2)).join("  ·  ");
-      const name = tab === "bulten" && picked && picked.name ? picked.name : "Yazdığın oranlar";
-      ask.textContent = name + "  →  " + target;
-      const scores = new Map();
-      let home = 0, draw = 0, away = 0;
-      for (const hit of found.hits) {
-        const score = hit.row[4] || "skor yok";
-        scores.set(score, (scores.get(score) || 0) + 1);
-        const result = scoreOf(hit.row);
-        if (result === "MS 1") home += 1;
-        else if (result === "MS X") draw += 1;
-        else if (result === "MS 2") away += 1;
-      }
-      const total = found.hits.length;
-      const pct = (n) => (total ? Math.round((n / total) * 100) : 0);
-      const counts = { "1": home, "X": draw, "2": away };
-      const shares = { "1": pct(home), "X": pct(draw), "2": pct(away) };
-      const trio = found.active.filter((market) => market.short === "1" || market.short === "X" || market.short === "2");
-      const favorite = trio.reduce((best, market) => (!best || market.iddaa < best.iddaa ? market : best), null);
-      const leader = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
-      const low = wilsonLower(leader ? leader[1] : 0, total);
-      const good = found.good != null ? found.good : (favorite && leader && total >= 200 && leader[0] === favorite.short && low > 0.55 ? leader[0] : "");
-      paintSecond(leader ? leader[0] : "");
-      const bandTxt = found.band != null ? " · ±" + String(found.band).replace(".", ",") : "";
-      meta.textContent = total + " maçta skor dağılımı" + bandTxt + (good ? " · yeşil" : "");
-      const rows = [...scores.entries()].sort((a, b) => b[1] - a[1]);
-      const cell = (label, value) => `<div class="top${good === label ? " good" : ""}"><span>${label}</span><span>%${value}</span></div>`;
-      box.innerHTML = `
-        <div class="sum">
-          ${cell("1", shares["1"])}
-          ${cell("X", shares.X)}
-          ${cell("2", shares["2"])}
-        </div>
-        ${rows.map(([score, n]) => `<article><div class="top"><strong>${score}</strong><span>%${pct(n)}</span></div></article>`).join("")}`;
-    }
-    async function ensureArchive() {
-      if (archive) return;
-      const meta = document.getElementById("meta");
-      if (meta) meta.textContent = "Arşiv yükleniyor";
-      const res = await fetch("arsiv.json");
-      if (!res.ok) throw new Error("arsiv");
-      archive = await res.json();
-      if (meta) meta.textContent = "Arşiv hazır";
-    }
-    async function search() {
-      try {
-        await ensureArchive();
-        const raw = tab === "manuel" ? readManual() : (picked || {});
-        if (tab === "bulten") {
-          const bands = [0.05, 0.08, 0.12];
-          let chosen = find(raw, tol);
-          chosen.good = allowGreen(raw) ? greenSide(chosen) : "";
-          for (const band of bands) {
-            const found = find(raw, band);
-            const good = greenSide(found);
-            if (good && allowGreen(raw)) {
-              found.good = good;
-              chosen = found;
-              document.querySelectorAll("#tol button").forEach((item) => item.classList.toggle("on", Number(item.dataset.t) === band));
-              break;
-            }
-          }
-          paint(chosen);
-        } else {
-          paint(find(raw, tol));
-        }
-      } catch (err) {
-        document.getElementById("meta").textContent = "Arşiv açılmadı";
-      }
-    }
-    function showTab(next) {
-      tab = next;
-      ["bulten","sonuc","oran","analiz"].forEach(function(name){
-        document.getElementById("tab-"+name).classList.toggle("on", name===next);
-        document.getElementById("panel-"+name).classList.toggle("hide", name!==next);
-      });
-      const tools = document.getElementById("analiz-tools");
-      if (tools) tools.classList.toggle("hide", next === "sonuc" || next === "oran" || next === "analiz");
-      if (next !== "bulten") {
-        document.getElementById("second").innerHTML = "";
-      } else if (picked) {
-        search();
-      }
-    }
-    const openHours = new Set();
-    let greenFlags = {};
-    const CUP = new Set(["ÇEKK","ESTK","MEKKA","PARK","ARJK","ARJKŞ","BAELK","ALKB","ARJPBN","AFCAG","KOLPB","GALFAW"]);
-    function allowGreen(match) {
-      const lig = String(match.league || "").toUpperCase();
-      const blob = `${match.home || ""} ${match.away || ""} ${lig}`.toUpperCase();
-      if (cupMatch(match)) return false;
-      if (lig === "HAZ" || /HAZIRLIK|HAZIRLIK|DOSTLUK|FRIENDLY/.test(blob)) return false;
-      if (/U19|U20|U21|U23|\(K\)|KADIN/.test(blob)) return false;
-      if (/^U19|^U20|^U21|^U23|HU19|HU20|HU21|HU23/.test(lig)) return false;
-      const o1 = Number(match.o1) || 0;
-      const ox = Number(match.ox) || 0;
-      const o2 = Number(match.o2) || 0;
-      if (!(o1 >= 1.20 && o1 <= 1.35 && ox >= 3.80)) return false;
-      if (ox >= 3.40 && ox <= 3.60) return false;
-      if (o1 > 1.80 && o2 - o1 < 0.90) return false;
-      const hr = match.homeTable && match.homeTable.rank;
-      const ar = match.awayTable && match.awayTable.rank;
-      if (hr > 0 && ar > 0 && (ar - hr) < 3 && o1 > 1.70) return false;
-      return true;
-    }
-    function cupMatch(match) {
-      const lig = String(match.league || "").toUpperCase();
-      const blob = `${match.home || ""} ${match.away || ""} ${match.league || ""}`.toUpperCase();
-      if (CUP.has(lig) || /K$|KŞ$/.test(lig)) return true;
-      return /KUPA|\bCUP\b|KUP |PLAYOFF|ELEME|PENALTI|UZATMA/.test(blob);
-    }
-    function lockMap() {
-      try { return JSON.parse(localStorage.getItem("yesil-kilit") || "{}"); }
-      catch (e) { return {}; }
-    }
-    async function scanGreens() {
-      const meta = document.getElementById("bmeta");
-      if (meta) meta.textContent = "Arşiv bakılıyor";
-      try { await ensureArchive(); }
-      catch (e) { if (meta) meta.textContent = "Arşiv açılmadı"; return; }
-      const locks = lockMap();
-      const flags = {};
-      const ids = new Set();
-      for (const match of bulletin) {
-        ids.add(String(match.id));
-        if (cupMatch(match)) { delete locks[match.id]; continue; }
-        let hit = null;
-        for (const band of [0.05, 0.08, 0.12]) {
-          const found = find(match, band);
-          const good = greenSide(found);
-          if (!good || !allowGreen(match)) continue;
-          const fav = found.active.filter((m) => m.short === "1" || m.short === "X" || m.short === "2")
-            .reduce((best, m) => (!best || m.iddaa < best.iddaa ? m : best), null);
-          hit = { side: good, n: found.hits.length, band, odd: fav ? fav.iddaa : null };
-          break;
-        }
-        if (hit && !locks[match.id]) {
-          locks[match.id] = Object.assign({ at: new Date().toISOString(), home: match.home, away: match.away, date: match.date, time: match.time }, hit);
-        }
-        flags[match.id] = hit ? "g" : (locks[match.id] ? "s" : "");
-      }
-      Object.keys(locks).forEach((id) => { if (!ids.has(String(id))) delete locks[id]; });
-      localStorage.setItem("yesil-kilit", JSON.stringify(locks));
-      greenFlags = flags;
-      bulletin.forEach((match) => { if (flags[match.id]) openHours.add(hourOf(match)); });
-      drawBulletin();
-      scanGreens();
-    }
-    function hourOf(match) {
-      return (match.date || "") + " " + (match.time || "00:00").slice(0, 2) + ":00";
-    }
-    function drawBulletin() {
-      const needle = document.getElementById("q").value.trim().toLocaleLowerCase("tr");
-      const rows = needle ? bulletin.filter((m) => `${m.home} ${m.away} ${m.league}`.toLocaleLowerCase("tr").includes(needle)) : bulletin;
-      const live = bulletin.filter((m) => greenFlags[m.id] === "g").length;
-      const dead = bulletin.filter((m) => greenFlags[m.id] === "s").length;
-      document.getElementById("bmeta").textContent = needle
-        ? rows.length + " maç"
-        : rows.length + " maç. Yeşil " + live + " · söndü " + dead + ".";
-      const groups = [];
-      for (const match of rows) {
-        const label = hourOf(match);
-        if (!groups.length || groups[groups.length - 1].label !== label) groups.push({ label, items: [] });
-        groups[groups.length - 1].items.push(match);
-      }
-      const rank = (m) => greenFlags[m.id] === "g" ? 2 : greenFlags[m.id] === "s" ? 1 : 0;
-      groups.forEach((group) => group.items.sort((a, b) => rank(b) - rank(a)));
-      const greens = rows.filter((m) => greenFlags[m.id] === "g");
-      const aday = rows.filter((m) => !greenFlags[m.id] && allowGreen(m));
-      const greenRow = (greens.length ? `<div class="gun"><span>Yeşil</span><span class="ok">${greens.length}</span></div>` + greens.map((m) => `<div class="satir"><span>${m.time || ""} ${m.home} – ${m.away}</span><b class="ok">${m.o1 || ""}</b></div>`).join("") : "")
-        + (aday.length ? `<div class="gun"><span>Aday</span><span>${aday.length}</span></div>` + aday.map((m) => `<div class="satir"><span>${m.time || ""} ${m.home} – ${m.away}</span><b>${m.o1 || ""} · X ${m.ox || ""}</b></div>`).join("") : "");
-      document.getElementById("bulten-list").innerHTML = greenRow + groups.map((group) => {
-        const open = openHours.has(group.label);
-        const matches = group.items.map((match) => {
-          const flag = greenFlags[match.id] || "";
-          const lock = lockMap()[match.id];
-          const mark = flag === "g" ? "<i class='dot g'></i>" : flag === "s" ? "<i class='dot s'></i>" : "";
-          const line = lock ? `<div class="lockline">${flag === "s" ? "söndü · " : ""}kilit ${String(lock.at || "").slice(11, 16)} · MS ${lock.side || ""} ${lock.odd || ""} · ${lock.n || "?"} maç</div>` : "";
-          return `<button class="pick article ${picked && picked.id === match.id ? "on" : ""} ${flag === "s" ? "sondu" : ""}" data-i="${bulletin.indexOf(match)}" type="button">
-          <div class="top"><span>${match.time || ""}</span><span>${match.league || ""}</span></div>
-          <div class="teams">${mark}${match.home} – ${match.away}</div>
-          ${line}
-        </button>`;
-        }).join("");
-        const g = group.items.filter((m) => greenFlags[m.id] === "g").length;
-        const s = group.items.filter((m) => greenFlags[m.id] === "s").length;
-        const extra = (g ? " · " + g + " yeşil" : "") + (s ? " · " + s + " söndü" : "");
-        return `<button class="hour" type="button" data-hour="${group.label}">${open ? "−" : "+"} ${group.label} · ${group.items.length}${extra}</button><div class="slot${open ? " open" : ""}">${matches}</div>`;
-      }).join("");
-      const selected = document.querySelector("#bulten-list button.on");
-      if (selected) selected.scrollIntoView({ block: "center", behavior: "smooth" });
-    }
-
-    document.getElementById("tab-bulten").onclick = () => showTab("bulten");
-    document.getElementById("tab-sonuc").onclick = () => showTab("sonuc");
-    document.getElementById("tab-oran").onclick = () => showTab("oran");
-    document.getElementById("tab-analiz").onclick = () => showTab("analiz");
-    document.getElementById("ara").onclick = search;
-    KEYS.forEach((key) => { const el = document.getElementById(key); if (el) el.addEventListener("input", readManual); });
-    document.getElementById("tol").onclick = (event) => {
-      const button = event.target.closest("button");
-      if (!button) return;
-      tol = Number(button.dataset.t);
-      document.querySelectorAll("#tol button").forEach((item) => item.classList.toggle("on", item === button));
-    };
-    document.getElementById("q").addEventListener("input", drawBulletin);
-    document.getElementById("bulten-list").onclick = (event) => {
-      const hourButton = event.target.closest(".hour");
-      if (hourButton) {
-        const label = hourButton.dataset.hour;
-        if (openHours.has(label)) openHours.delete(label);
-        else openHours.add(label);
-        drawBulletin();
-        return;
-      }
-      const button = event.target.closest("button.pick");
-      if (!button) return;
-      const match = bulletin[Number(button.dataset.i)];
-      openHours.add(hourOf(match));
-      picked = {
-        id: match.id,
-        name: match.home + " – " + match.away,
-        o1: match.o1, ox: match.ox, o2: match.o2, alt: match.alt, ust: match.ust,
-        homeTable: match.homeTable, awayTable: match.awayTable, lgH: match.lgH, lgA: match.lgA,
-      };
-      drawBulletin();
-      search();
-    };
-    function fav(m){
-      const s=[["1",num(m.o1)],["X",num(m.ox)],["2",num(m.o2)]].filter(x=>x[1]);
-      s.sort((a,b)=>a[1]-b[1]);
-      return s[0]||null;
-    }
-    function card(m, extra){
-      return "<article><div class='top'><span>"+(m.time||"")+"</span><span>"+extra+"</span></div><div class='teams'>"+m.home+" – "+m.away+"</div></article>";
-    }
-    function paintUc(data) {
-      const box = document.getElementById("uc-list");
-      const meta = document.getElementById("uc-meta");
-      const sum = document.getElementById("uc-sum");
-      const rows = ((data && data.matches) || []).filter((m) => (m.n || 0) >= 2);
-      const rules = (data && data.rules) || {};
-      const counts = data && data.counts ? data.counts : {
-        iki15: rows.filter((m) => m.iki15 != null).length,
-        iySkorDiger: rows.filter((m) => m.iySkorDiger != null).length,
-        iyKgVar: rows.filter((m) => m.iyKgVar != null).length,
-        cift: rows.filter((m) => m.n >= 2).length
-      };
-      const tol = data && data.tol != null ? " · ±" + String(data.tol).replace(".", ",") : " · ±0,10";
-      meta.textContent = "3 ayrı filtre · " + ((data && data.updated) || "").replace("T", " ").slice(0, 16);
-      const line = (key, text) => {
-        const rule = rules[key] || {};
-        const lo = rule.min != null ? String(rule.min).replace(".", ",") : "";
-        const hi = rule.max != null ? String(rule.max).replace(".", ",") : "";
-        return "<div>" + text + " <strong>" + (counts[key] || 0) + "</strong><div class='meta'>" + lo + "–" + hi + "</div></div>";
-      };
-      sum.innerHTML = "<div class='uc-grid'>" +
-        "<div>İki yarı 1,5 üst <strong>" + rows.length + "</strong><div class='meta'>min 2 kural ±0,10</div></div>" +
-        "<div>4,5 üst <strong>" + (((data && data.ust45) || []).length) + "</strong><div class='meta'>min 2 kural</div></div>" +
-        "<div>2/1 <strong>" + (((data && data.yari12) || []).length) + "</strong><div class='meta'>Δ ≤ 0,20</div></div>" +
-        "<div>İY 2-1 <strong>" + (((data && data.iy21) || []).length) + "</strong><div class='meta'>min 2 kural</div></div>" +
-        "<div>İki yarı KG <strong>" + (((data && data.kg2y) || []).length) + "</strong><div class='meta'>min 2 kural</div></div></div>";
-      const chip = (ok, label, value) => {
-        if (value == null) return "<span class='chip'>" + label + " —</span>";
-        return "<span class='chip" + (ok ? " on" : "") + "'>" + label + " " + Number(value).toFixed(2).replace(".", ",") + "</span>";
-      };
-      const card15 = (m) =>
-        "<article>" +
-          "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n || 2) + " kural</span></div>" +
-          "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
-          chip(m.iki15 != null, "İki 1,5", m.iki15) +
-          chip(m.iySkorDiger != null, "İY skor", m.iySkorDiger) +
-          chip(m.iyKgVar != null, "İY KG", m.iyKgVar) +
-        "</article>";
-      const card45 = (m) =>
-        "<article>" +
-          "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n || 2) + " kural</span></div>" +
-          "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
-          chip(m.ust45 != null, "4,5 üst", m.ust45) +
-          chip(m.iy1ust != null, "İY 1+üst", m.iy1ust) +
-          chip(m.gol45 != null, "4-5 gol", m.gol45) +
-        "</article>";
-      const u45 = (data && data.ust45) || [];
-      const y12 = (data && data.yari12) || [];
-      const y12body = y12.length ? y12.map((m) =>
-        "<article>" +
-          "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>2/1 Δ" + Number(m.msGap).toFixed(2).replace(".", ",") + "</span></div>" +
-          "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
-          chip(true, "MS 1", m.ms1) + chip(true, "MS 2", m.ms2) +
-          chip(true, "İY 1", m.iy1) + chip(true, "İY 2", m.iy2) +
-          chip(true, "1X", m.cs1x) + chip(true, "12", m.cs12) + chip(true, "X2", m.csx2) +
-        "</article>"
-      ).join("") : "<article class='meta'>2/1 filtresinde maç yok</article>";
-      box.innerHTML =
-        "<p class='meta'><b>İki yarıda 1,5 üst</b> 4,20–4,32 · İY skor 12,80–13,50 · İY KG 3,55–3,65 · ±0,10 · en az iki</p>" +
-        (rows.length ? rows.map(card15).join("") : "<article class='meta'>Bu filtrede maç yok</article>") +
-        "<p class='meta'><b>4,5 üst</b> 4,20–5,10 · İY 1 ve üst 5,40–6,20 · 4-5 gol 2,80–3,10 · en az iki</p>" +
-        (u45.length ? u45.map(card45).join("") : "<article class='meta'>Bu filtrede maç yok</article>") +
-        "<p class='meta'><b>2/1</b> MS ve İY ev-dep farkı en fazla 0,20 · çifte şans üçü açık, 1X ile X2 yakın</p>" +
-        y12body +
-        "<p class='meta'><b>İY 2-1</b> İY skor 2-1 17,90–18,90 · İY/MS 4+/4+ 14,80–16,20 · 2-3 gol 1,82–1,90 · en az iki</p>" +
-        ((((data && data.iy21) || []).length)
-          ? (data.iy21).map((m) =>
-              "<article>" +
-                "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n || 2) + " kural</span></div>" +
-                "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
-                chip(m.iy21 != null, "İY 2-1", m.iy21) +
-                chip(m.plus4 != null, "4+/4+", m.plus4) +
-                chip(m.gol23 != null, "2-3 gol", m.gol23) +
-              "</article>"
-            ).join("")
-          : "<article class='meta'>Bu filtrede maç yok</article>") +
-        "<p class='meta'><b>İki yarıda KG var</b> İY/2Y Evet-Evet 11,50–12,50 · 3,5 üst 2,45–2,60 · İY 2 ve KG 18,45–19,50 · en az iki</p>" +
-        ((((data && data.kg2y) || []).length)
-          ? data.kg2y.map((m) =>
-              "<article>" +
-                "<div class='top'><span>" + (m.date || "") + " " + (m.time || "") + "</span><span>" + (m.n || 2) + " kural</span></div>" +
-                "<div class='teams'>" + m.home + " – " + m.away + "</div>" +
-                chip(m.yy != null, "E/E", m.yy) +
-                chip(m.ust35 != null, "3,5 üst", m.ust35) +
-                chip(m.iy2kg != null, "İY 2+KG", m.iy2kg) +
-              "</article>"
-            ).join("")
-          : "<article class='meta'>Bu filtrede maç yok</article>");
-    }
-    function loadMacs() {
-      fetch("macsonuclari.json").then((res) => res.json()).then((data) => {
-        macs = data || macs;
-      }).catch(() => {});
-    }
-
-    function paintSonuc(data) {
-      const box = document.getElementById("sonuc-list");
-      const meta = document.getElementById("sonuc-meta");
-      const days = (data && data.days) || [];
-      let hit = 0, miss = 0;
-      days.forEach((day) => { hit += (day.tutan || []).length; miss += (day.tutmayan || []).length; });
-      if (meta) meta.textContent = hit + " tuttu · " + miss + " tutmadı";
-      const row = (item, ok) => `<div class="satir"><span>${item.mac} ${item.skor}</span><span>${item.oran || ""} <b class="${ok ? "ok" : "no"}">${ok ? "tuttu" : "tutmadı"}</b></span></div>`;
-      box.innerHTML = days.map((day) => {
-        const t = (day.tutan || []).length, m = (day.tutmayan || []).length;
-        return `<div class="gun"><span>${day.date}</span><span><b class="ok">${t} tuttu</b> · <b class="no">${m} tutmadı</b></span></div>`
-          + (day.tutan || []).map((item) => row(item, true)).join("")
-          + (day.tutmayan || []).map((item) => row(item, false)).join("");
-      }).join("");
-    }
-
-    function poissonP(k, lam) {
-      if (lam <= 0) return k === 0 ? 1 : 0;
-      let f = 1;
-      for (let i = 2; i <= k; i++) f *= i;
-      return Math.exp(-lam) * Math.pow(lam, k) / f;
-    }
-    function sideProbs(match) {
-      let p1 = 0, px = 0, p2 = 0;
-      for (let h = 0; h <= 5; h++) {
-        for (let a = 0; a <= 5; a++) {
-          const p = poissonP(h, match.xgH) * poissonP(a, match.xgA);
-          if (h > a) p1 += p;
-          else if (h === a) px += p;
-          else p2 += p;
-        }
-      }
-      return { "1": p1, "X": px, "2": p2 };
-    }
-    function loadAnaliz() {
-      fetch("analiz_sonuc.json").then((res) => res.json()).then((data) => {
-        const box = document.getElementById("analiz-list");
-        const meta = document.getElementById("analiz-meta");
-        const rows = (data && data.matches) || [];
-        const hit = rows.filter((m) => m.ok).length;
-        if (meta) meta.textContent = hit + " tuttu · " + (rows.length - hit) + " tutmadı";
-        box.innerHTML = rows.slice(0, 80).map((m) => `<div class="satir"><span>${m.date || ""} ${m.home} – ${m.away} ${m.skor}<br><span class="lockline">${(m.calls || []).join(" · ")}</span></span><b class="${m.ok ? "ok" : "no"}">${m.ok ? "tuttu" : "tutmadı"}</b></div>`).join("") || `<p class="meta">Biten yok</p>`;
-      }).catch(() => {});
-    }
-    function loadOran() {
-      fetch("oran_sayfa.json").then((res) => res.json()).then((data) => {
-        const box = document.getElementById("oran-list");
-        const meta = document.getElementById("oran-meta");
-        const rows = (data && data.matches) || [];
-        if (meta) meta.textContent = rows.length + " maç · biri tuttu";
-        box.innerHTML = rows.map((m) => {
-          const green = (m.tags || []).join(" · ");
-          const blue = Array.isArray(m.blue) ? m.blue.join(" · ") : (m.blue ? "KG var" : "");
-          const orange = m.orange ? "MS 1" : "";
-          return `<div class="satir"><span>${m.time || ""} ${m.home} – ${m.away}</span><b>${green ? `<b class="ok">${green}</b>` : ""}${green && (blue || orange) ? " · " : ""}${blue ? `<b class="mavi">${blue}</b>` : ""}${blue && orange ? " · " : ""}${orange ? `<b class="turuncu">${orange}</b>` : ""}</b></div>`;
-        }).join("") || `<p class="meta">Gelen yok</p>`;
-      }).catch(() => {});
-    }
-    function loadSonuc() {
-      fetch("sonuc.json").then((res) => res.json()).then(paintSonuc).catch(() => {
-        const meta = document.getElementById("sonuc-meta");
-        if (meta) meta.textContent = "Sonuç açılmadı";
-      });
-    }
-    function loadBulletin() {
-      fetch("bulten.json").then((res) => res.json()).then((data) => {
-        bulletin = data.matches || [];
-        drawBulletin();
-      }).catch(() => { document.getElementById("bmeta").textContent = "Bülten açılmadı"; });
-    }
-    if (document.getElementById("o1")) readManual();
     const PASS_TEXT = "OranAnaliz27";
-    function unlock() {
-      document.getElementById("lock").classList.add("hide");
-      if (!unlock.done) { unlock.done = true; loadBulletin(); loadSonuc(); loadOran(); loadAnaliz(); }
+    const KEY = "gunluk-liste";
+    function rows() { try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch (e) { return []; } }
+    function save(list) { localStorage.setItem(KEY, JSON.stringify(list)); draw(); }
+    function draw() {
+      const list = rows();
+      document.getElementById("liste").innerHTML = list.map((row, i) => `
+        <article>
+          <b>${row.mac}</b>
+          <div>${row.tahmin}</div>
+          <p class="meta">${row.not || ""}</p>
+          <button type="button" data-i="${i}">Sil</button>
+        </article>`).join("") || `<p class="meta">Liste boş.</p>`;
     }
+    document.getElementById("ekle").onclick = () => {
+      const mac = document.getElementById("mac").value.trim();
+      const tahmin = document.getElementById("tahmin").value.trim();
+      const not = document.getElementById("not").value.trim();
+      if (!mac || !tahmin) return;
+      save(rows().concat([{ mac, tahmin, not }]));
+      document.getElementById("mac").value = "";
+      document.getElementById("tahmin").value = "";
+      document.getElementById("not").value = "";
+    };
+    document.getElementById("liste").onclick = (event) => {
+      const i = event.target.dataset.i;
+      if (i == null) return;
+      const list = rows();
+      list.splice(Number(i), 1);
+      save(list);
+    };
+    document.getElementById("indir").onclick = () => {
+      const blob = new Blob([JSON.stringify({ tarih: new Date().toISOString().slice(0, 10), maclar: rows() }, null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "gunluk.json";
+      a.click();
+    };
+    function unlock() { document.getElementById("lock").classList.add("hide"); draw(); }
     if (localStorage.getItem("oran-kapi") === PASS_TEXT) unlock();
     document.getElementById("lock-form").onsubmit = (event) => {
       event.preventDefault();
-      const raw = document.getElementById("lock-key").value.trim();
-      if (raw !== PASS_TEXT) {
+      if (document.getElementById("lock-key").value.trim() !== PASS_TEXT) {
         document.getElementById("lock-msg").textContent = "Şifre yanlış";
         return;
       }
@@ -764,6 +133,5 @@
       unlock();
     };
   </script>
-  </div>
 </body>
 </html>
