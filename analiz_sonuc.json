@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-09T19:11+03:00",
-  "count": 39,
-  "hit": 26,
+  "updated": "2026-10-09T23:26+03:00",
+  "count": 53,
+  "hit": 35,
   "matches": [
     {
       "date": "05.10.2026",
@@ -138,29 +138,6 @@
     {
       "date": "06.10.2026",
       "time": "21:45",
-      "home": "İskoçya",
-      "away": "Slovenya",
-      "skor": "1-2",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "06.10.2026",
-      "time": "21:45",
-      "home": "İngiltere",
-      "away": "Çekya",
-      "skor": "3-0",
-      "calls": [
-        "2.5 üst",
-        "ters x2"
-      ],
-      "ok": false
-    },
-    {
-      "date": "06.10.2026",
-      "time": "21:45",
       "home": "Arnavutluk",
       "away": "San Marino",
       "skor": "2-1",
@@ -180,6 +157,29 @@
         "1.5 üst"
       ],
       "ok": false
+    },
+    {
+      "date": "06.10.2026",
+      "time": "21:45",
+      "home": "İngiltere",
+      "away": "Çekya",
+      "skor": "3-0",
+      "calls": [
+        "2.5 üst",
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "06.10.2026",
+      "time": "21:45",
+      "home": "İskoçya",
+      "away": "Slovenya",
+      "skor": "1-2",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": true
     },
     {
       "date": "06.10.2026",
@@ -239,6 +239,17 @@
     {
       "date": "08.10.2026",
       "time": "01:30",
+      "home": "Fundacion Lara",
+      "away": "Aragua",
+      "skor": "1-4",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "08.10.2026",
+      "time": "01:30",
       "home": "Avai",
       "away": "Londrina",
       "skor": "2-1",
@@ -258,17 +269,6 @@
         "3.5 alt"
       ],
       "ok": true
-    },
-    {
-      "date": "08.10.2026",
-      "time": "01:30",
-      "home": "Fundacion Lara",
-      "away": "Aragua",
-      "skor": "1-4",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
     },
     {
       "date": "08.10.2026",
@@ -426,10 +426,164 @@
     },
     {
       "date": "09.10.2026",
-      "time": "17:30",
+      "time": "17:32",
       "home": "Be1 Nfa",
       "away": "Fk Dainava",
+      "skor": "2-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "09.10.2026",
+      "time": "20:00",
+      "home": "Ümraniyespor",
+      "away": "Sarıyer",
+      "skor": "1-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "09.10.2026",
+      "time": "20:05",
+      "home": "Kazma",
+      "away": "Al Arabi",
+      "skor": "1-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "09.10.2026",
+      "time": "20:45",
+      "home": "Moreirense",
+      "away": "Gil Vicente",
+      "skor": "0-1",
+      "calls": [
+        "1.5 üst"
+      ],
+      "ok": false
+    },
+    {
+      "date": "09.10.2026",
+      "time": "21:00",
+      "home": "Dender",
+      "away": "Club Brugge Ii",
+      "skor": "3-0",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "09.10.2026",
+      "time": "21:00",
+      "home": "Sochaux",
+      "away": "Boulogne",
+      "skor": "1-1",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "09.10.2026",
+      "time": "21:00",
+      "home": "Wolverhampton",
+      "away": "Fleetwood Town",
+      "skor": "1-1",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": true
+    },
+    {
+      "date": "09.10.2026",
+      "time": "21:00",
+      "home": "Ajax (B)",
+      "away": "Vvv Venlo",
+      "skor": "0-3",
+      "calls": [
+        "2.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "09.10.2026",
+      "time": "21:00",
+      "home": "De Graafschap",
+      "away": "Utrecht (Ii)",
+      "skor": "2-1",
+      "calls": [
+        "2.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "09.10.2026",
+      "time": "21:00",
+      "home": "Al Nassr (Riya",
+      "away": "Diriyah",
+      "skor": "3-0",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "09.10.2026",
+      "time": "21:00",
+      "home": "Breda",
+      "away": "Maastricht",
+      "skor": "1-0",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "09.10.2026",
+      "time": "21:30",
+      "home": "P. Bielsko",
+      "away": "Pogon Siedlce",
+      "skor": "1-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "09.10.2026",
+      "time": "21:45",
+      "home": "Cobh Ramblers",
+      "away": "Kerry",
       "skor": "0-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "09.10.2026",
+      "time": "22:00",
+      "home": "Ud Ibiza",
+      "away": "Real Madrid Ii",
+      "skor": "1-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "09.10.2026",
+      "time": "22:00",
+      "home": "Malaga",
+      "away": "Espanyol",
+      "skor": "0-1",
       "calls": [
         "2.5 alt"
       ],
