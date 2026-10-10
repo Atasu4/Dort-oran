@@ -52,7 +52,7 @@
       <div>Malaga 20. sıra, 4 puan, 0 galibiyet</div>
       <div>Espanyol 15. sıra, 7 puan</div>
     </div>
-    <p class="meta">Kural: deplasman 2.30-2.50, beraberlik 2.75-2.95, ev 2.35-2.55. Ev son dörtte. Dep 11-16. Alt 1.50-1.65.</p>
+    <p class="meta">Kural: deplasman 2.25-2.55, beraberlik 2.70-3.00, ev 2.30-2.60. Fark en fazla 0.20. Ev son beşte. Dep 10-17. Alt 1.45-1.70.</p>
     <h2>Liste</h2>
     <p class="meta" id="meta">Yükleniyor</p>
     <div id="list"></div>
@@ -63,7 +63,7 @@
       const o1 = m.o1, ox = m.ox, o2 = m.o2, alt = m.alt;
       const hr = m.homeTable && m.homeTable.rank;
       const ar = m.awayTable && m.awayTable.rank;
-      return o2 >= 2.30 && o2 <= 2.50 && ox >= 2.75 && ox <= 2.95 && o1 >= 2.35 && o1 <= 2.55 && o2 <= o1 && Math.abs(o1 - o2) <= 0.15 && hr >= 17 && ar >= 11 && ar <= 16 && alt >= 1.50 && alt <= 1.65;
+      return o2 >= 2.25 && o2 <= 2.55 && ox >= 2.70 && ox <= 3.00 && o1 >= 2.30 && o1 <= 2.60 && o2 <= o1 && Math.abs(o1 - o2) <= 0.20 && hr >= 16 && ar >= 10 && ar <= 17 && alt >= 1.45 && alt <= 1.70;
     }
     function paint(matches) {
       const rows = matches.filter(ok);
