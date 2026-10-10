@@ -1,29 +1,18 @@
 {
-  "updated": "2026-10-10T03:46+03:00",
-  "count": 54,
-  "hit": 36,
+  "updated": "2026-10-10T13:07+03:00",
+  "count": 57,
+  "hit": 38,
   "matches": [
     {
       "date": "05.10.2026",
-      "time": "12:00",
-      "home": "Malezya",
-      "away": "Vietnam",
+      "time": "21:45",
+      "home": "Bosna Hersek",
+      "away": "Polonya",
       "skor": "1-0",
       "calls": [
         "2.5 alt"
       ],
       "ok": true
-    },
-    {
-      "date": "05.10.2026",
-      "time": "19:00",
-      "home": "G. Kıbrıs Rum",
-      "away": "Letonya",
-      "skor": "2-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
     },
     {
       "date": "05.10.2026",
@@ -33,17 +22,6 @@
       "skor": "1-2",
       "calls": [
         "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "05.10.2026",
-      "time": "21:45",
-      "home": "Bosna Hersek",
-      "away": "Polonya",
-      "skor": "1-0",
-      "calls": [
-        "2.5 alt"
       ],
       "ok": true
     },
@@ -597,6 +575,62 @@
       "skor": "1-1",
       "calls": [
         "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "10.10.2026",
+      "time": "04:00",
+      "home": "Puebla",
+      "away": "Club Leon",
+      "skor": "1-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "10.10.2026",
+      "time": "08:00",
+      "home": "Jeonnam Dragon",
+      "away": "Yongin",
+      "skor": "2-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "10.10.2026",
+      "time": "09:00",
+      "home": "Avispa Fukuoka",
+      "away": "Fagiano Okayama",
+      "skor": "2-1",
+      "calls": [
+        "3.5 alt",
+        "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "10.10.2026",
+      "time": "10:00",
+      "home": "Ska-Khabarovsk",
+      "away": "Kamaz",
+      "skor": "3-3",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "10.10.2026",
+      "time": "13:00",
+      "home": "Kolos Kovalivk",
+      "away": "Epitsentr Dunay",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
       ],
       "ok": true
     }
