@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-09T23:26+03:00",
-  "count": 53,
-  "hit": 35,
+  "updated": "2026-10-10T03:46+03:00",
+  "count": 54,
+  "hit": 36,
   "matches": [
     {
       "date": "05.10.2026",
@@ -572,7 +572,7 @@
       "time": "22:00",
       "home": "Ud Ibiza",
       "away": "Real Madrid Ii",
-      "skor": "1-0",
+      "skor": "1-1",
       "calls": [
         "2.5 alt"
       ],
@@ -583,9 +583,20 @@
       "time": "22:00",
       "home": "Malaga",
       "away": "Espanyol",
-      "skor": "0-1",
+      "skor": "1-1",
       "calls": [
         "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "10.10.2026",
+      "time": "00:00",
+      "home": "Gimnasia La Pl",
+      "away": "Atletico Tucuma",
+      "skor": "1-1",
+      "calls": [
+        "1.5 üst"
       ],
       "ok": true
     }
