@@ -6,7 +6,7 @@
   <title>GÖKÇEN ANALİZ</title>
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#0b0d10; --surface:#14181d; --fg:#f3f0e8; --muted:#9a9386; --line:#2a261f; --gold:#e4d0a2; --green:#1f7a45; }
+    :root { --bg:#0b0d10; --surface:#14181d; --fg:#f3f0e8; --muted:#9a9386; --line:#2a261f; --gold:#e4d0a2; }
     * { box-sizing:border-box; }
     html, body { margin:0; background:var(--bg); color:var(--fg); }
     body { font-family:Manrope, sans-serif; padding:10px; }
@@ -19,8 +19,6 @@
     .meta { color:var(--muted); font-size:13px; }
     .sum { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
     .sum div { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:8px; font-size:13px; }
-    .sum .ok { border-color:var(--green); }
-    .sum .no { border-color:#9c2b2b; }
     article { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:8px; margin-top:6px; }
     .top { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }
     .teams { margin:2px 0; font-size:14px; font-weight:600; }
@@ -46,43 +44,41 @@
   <div class="frame"><main>
     <h1>GÖKÇEN ANALİZ</h1>
     <div class="rule"></div>
-    <h2>Geçmiş test</h2>
+    <h2>0/2</h2>
+    <p class="meta">Eski filtre yok. Kalıp dünkü Malaga–Espanyol. İY 2, MS beraberlik. 0-1, sonra 1-1.</p>
     <div class="sum">
-      <div class="ok">3.5 alt 10/11</div>
-      <div class="no">Ters X2 0/9</div>
-      <div>2.5 alt 17/25</div>
-      <div>1.5 üst 7/10</div>
-      <div>Yeşil MS 13/21</div>
-      <div>1.40 üstü yeşil 2/7</div>
+      <div>İddaa 2.45 / 2.84 / 2.40</div>
+      <div>Alt 1.57 · Üst 1.86</div>
+      <div>Malaga 20. sıra, 4 puan, 0 galibiyet</div>
+      <div>Espanyol 15. sıra, 7 puan</div>
     </div>
-    <p class="meta">4-9 Ekim sinyal dosyası ve 30 Eylül-3 Ekim yeşil listesi. Ters X2 ve 1.40 üstü yeşil çıktı.</p>
-    <h2>Kalan tercihler</h2>
+    <p class="meta">Kural: deplasman 2.30-2.50, beraberlik 2.75-2.95, ev 2.35-2.55. Ev son dörtte. Dep 11-16. Alt 1.50-1.65.</p>
+    <h2>Liste</h2>
     <p class="meta" id="meta">Yükleniyor</p>
     <div id="list"></div>
   </main></div>
   <script>
     const PASS_TEXT = "OranAnaliz27";
-    function paint(signals, greens) {
-      const kept = (signals || []).map((m) => {
-        const tags = (m.tags || []).filter((t) => t !== "ters x2");
-        const blue = (m.blue || []).filter((t) => t !== "ters x2" && t !== "İY 1.5 alt");
-        return { ...m, tags, blue };
-      }).filter((m) => m.tags.length || m.blue.length);
-      const short = (greens || []).map((row) => {
-        const [when, odd] = row.split("|");
-        const parts = when.split(" ");
-        return { when: parts[0] + " " + parts[1], name: parts.slice(2).join(" "), odd: Number(odd) };
-      }).filter((row) => row.odd <= 1.3);
-      document.getElementById("meta").textContent = kept.length + " sinyal · " + short.length + " kısa yeşil";
-      document.getElementById("list").innerHTML =
-        kept.map((m) => `<article><div class="top"><span>${m.date} ${m.time}</span><span>${m.league}</span></div><div class="teams">${m.home} - ${m.away}</div><div class="pick">${m.tags.concat(m.blue).join(" · ")}</div></article>`).join("") +
-        short.map((row) => `<article><div class="top"><span>${row.when}</span><span>yeşil</span></div><div class="teams">${row.name}</div><div class="pick">MS ${row.odd.toFixed(2)}</div></article>`).join("");
+    function ok(m) {
+      const o1 = m.o1, ox = m.ox, o2 = m.o2, alt = m.alt;
+      const hr = m.homeTable && m.homeTable.rank;
+      const ar = m.awayTable && m.awayTable.rank;
+      return o2 >= 2.30 && o2 <= 2.50 && ox >= 2.75 && ox <= 2.95 && o1 >= 2.35 && o1 <= 2.55 && o2 <= o1 && Math.abs(o1 - o2) <= 0.15 && hr >= 17 && ar >= 11 && ar <= 16 && alt >= 1.50 && alt <= 1.65;
+    }
+    function paint(matches) {
+      const rows = matches.filter(ok);
+      document.getElementById("meta").textContent = rows.length + " maç";
+      document.getElementById("list").innerHTML = rows.map((m) => `<article>
+        <div class="top"><span>${m.date} ${m.time}</span><span>${m.league}</span></div>
+        <div class="teams">${m.home} - ${m.away}</div>
+        <div class="pick">0/2 · ${m.o1} / ${m.ox} / ${m.o2} · alt ${m.alt}</div>
+        <p class="meta">Sıra ${m.homeTable.rank}-${m.awayTable.rank}</p>
+      </article>`).join("") || `<p class="meta">Bu bültende 0/2 yok. Son eşleşme Malaga.</p>`;
     }
     function load() {
-      Promise.all([
-        fetch("oran_sayfa.json").then((r) => r.json()).catch(() => ({ matches: [] })),
-        fetch("yesil_son.json").then((r) => r.json()).catch(() => ({ greens: [] }))
-      ]).then(([o, g]) => paint(o.matches || [], g.greens || []));
+      fetch("bulten.json").then((r) => r.json()).then((d) => paint(d.matches || [])).catch(() => {
+        document.getElementById("meta").textContent = "Bülten açılmadı";
+      });
     }
     function unlock() { document.getElementById("lock").classList.add("hide"); load(); }
     if (localStorage.getItem("oran-kapi") === PASS_TEXT) unlock();
