@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-11T19:10+03:00",
-  "count": 147,
-  "hit": 83,
+  "updated": "2026-10-11T23:14+03:00",
+  "count": 157,
+  "hit": 91,
   "matches": [
     {
       "date": "07.10.2026",
@@ -1628,6 +1628,116 @@
         "2.5 alt"
       ],
       "ok": true
+    },
+    {
+      "date": "11.10.2026",
+      "time": "19:45",
+      "home": "Rayo Majadahon",
+      "away": "Murcia",
+      "skor": "0-0",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "11.10.2026",
+      "time": "21:00",
+      "home": "Ssc Farul",
+      "away": "Petrolul 52",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "11.10.2026",
+      "time": "21:00",
+      "home": "Coquimbo Unido",
+      "away": "Colo Colo",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "11.10.2026",
+      "time": "21:15",
+      "home": "Odra Opole",
+      "away": "Miedz Legnica",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "11.10.2026",
+      "time": "21:45",
+      "home": "Orense",
+      "away": "Deportivo Cuenc",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "11.10.2026",
+      "time": "22:00",
+      "home": "One Knoxville",
+      "away": "Spokane Velocit",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "11.10.2026",
+      "time": "22:00",
+      "home": "Atl Madrid Ii",
+      "away": "Zaragoza",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "11.10.2026",
+      "time": "22:15",
+      "home": "Breidablik",
+      "away": "Keflavik",
+      "skor": "0-0",
+      "calls": [
+        "2.5 üst"
+      ],
+      "ok": false
+    },
+    {
+      "date": "11.10.2026",
+      "time": "23:00",
+      "home": "Wydad Casablan",
+      "away": "Codm Meknes",
+      "skor": "0-0",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "11.10.2026",
+      "time": "23:00",
+      "home": "Rosario Centra",
+      "away": "Rivadavia",
+      "skor": "0-0",
+      "calls": [
+        "1.5 üst"
+      ],
+      "ok": false
     }
   ]
 }
