@@ -1,12 +1,10 @@
 {
-  "updated": "2026-10-12T19:17+03:00",
+  "updated": "2026-10-12T20:16+03:00",
   "greens": [
-    "12.10.2026 00:00 Balboa – Deportivo Fas|1.35",
     "12.10.2026 00:30 Caracas Fc – Zamora|1.3",
-    "12.10.2026 00:30 Central Espano – Nacional Df|1.38",
     "12.10.2026 00:30 Cuiaba – Avai|1.42",
-    "12.10.2026 00:30 Ldu Quito – Barcelona Gua|1.37",
     "12.10.2026 01:30 Bahia – Mirassol|1.48",
+    "12.10.2026 02:10 Pachuca – Necaxa|1.49",
     "12.10.2026 02:15 Olancho – Atlético Indepe|1.29",
     "12.10.2026 04:10 Antigua Guatem – Coban Imperial|1.37",
     "12.10.2026 04:15 America De Cal – Independiente M|1.39",
@@ -16,10 +14,11 @@
     "12.10.2026 20:00 Al Wahda – Al Taee|1.44",
     "12.10.2026 20:00 Ludogorets – Arda Kardzhali|1.3",
     "12.10.2026 20:00 Malmö – Kalmar|1.53",
+    "12.10.2026 20:00 Oskarshamns Ai – Ifk Berga|1.48",
     "12.10.2026 20:00 Pyramids Fc – Ceramica Cleopa|1.37",
     "12.10.2026 20:00 Sarpsborg 08 I – Raelingen|1.23",
     "12.10.2026 21:00 Bristol City U – Exeter City U21|1.32",
-    "12.10.2026 21:15 Al Jawiya – Al Ain|1.31",
+    "12.10.2026 21:00 C Espanol – Nuevo|1.25",
     "12.10.2026 23:00 Univ. De Şili – Atletico Nublen|1.32"
   ]
 }
