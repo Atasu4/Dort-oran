@@ -1,72 +1,28 @@
 {
-  "updated": "2026-10-12T03:26+03:00",
-  "count": 9,
+  "updated": "2026-10-12T13:06+03:00",
+  "count": 7,
   "matches": [
     {
       "date": "12.10.2026",
-      "time": "03:30",
-      "home": "Talleres",
-      "away": "Independiente",
-      "league": "ARJ",
+      "time": "17:15",
+      "home": "Burgos",
+      "away": "Granada",
+      "league": "İS2",
       "tags": [
-        "1.5 üst"
+        "3.5 alt"
       ],
       "blue": [],
       "orange": false,
-      "gap": -7,
-      "35alt": 1.09,
-      "kg": 1.8,
-      "15ust": 1.27,
-      "25alt": 1.43,
-      "25ust": 2.1,
-      "iy15": 3.04,
-      "kgyok": 1.61,
-      "iy15alt": 1.18,
-      "ms1": 2.0
-    },
-    {
-      "date": "12.10.2026",
-      "time": "11:00",
-      "home": "Guangzhou Dand",
-      "away": "Shanghai Segend",
-      "league": "ÇİN2",
-      "tags": [],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "gap": 2,
-      "35alt": null,
-      "kg": 1.76,
-      "15ust": null,
-      "25alt": 1.43,
-      "25ust": 1.93,
-      "iy15": null,
-      "kgyok": 1.53,
-      "iy15alt": null,
-      "ms1": 1.64
-    },
-    {
-      "date": "12.10.2026",
-      "time": "15:00",
-      "home": "Valladolid",
-      "away": "Albacete",
-      "league": "İS2",
-      "tags": [],
-      "blue": [
-        "3.5 alt"
-      ],
-      "orange": false,
-      "gap": 5,
-      "35alt": 1.19,
-      "kg": 1.59,
-      "15ust": 1.15,
-      "25alt": 1.67,
-      "25ust": 1.72,
-      "iy15": 2.52,
-      "kgyok": 1.82,
-      "iy15alt": 1.28,
-      "ms1": 1.81
+      "gap": 1,
+      "35alt": 1.1,
+      "kg": 1.72,
+      "15ust": 1.24,
+      "25alt": 1.48,
+      "25ust": 2.0,
+      "iy15": 2.92,
+      "kgyok": 1.67,
+      "iy15alt": 1.2,
+      "ms1": 2.22
     },
     {
       "date": "12.10.2026",
@@ -92,25 +48,25 @@
     },
     {
       "date": "12.10.2026",
-      "time": "19:00",
-      "home": "Strindheim",
-      "away": "Rosenborg 2",
-      "league": "NOR4",
+      "time": "18:30",
+      "home": "Inter Turku Ii",
+      "away": "Fc Jazz",
+      "league": "FINY",
       "tags": [
         "İY 1.5"
       ],
       "blue": [],
       "orange": false,
-      "gap": 5,
-      "35alt": 1.82,
-      "kg": 1.18,
+      "gap": -2,
+      "35alt": 1.86,
+      "kg": 1.12,
       "15ust": null,
-      "25alt": null,
-      "25ust": null,
-      "iy15": 1.57,
-      "kgyok": 2.63,
+      "25alt": 3.1,
+      "25ust": 1.11,
+      "iy15": 1.56,
+      "kgyok": 3.0,
       "iy15alt": 1.72,
-      "ms1": 1.41
+      "ms1": 1.79
     },
     {
       "date": "12.10.2026",
@@ -125,14 +81,14 @@
       "orange": false,
       "gap": -9,
       "35alt": 1.09,
-      "kg": 1.75,
+      "kg": 1.74,
       "15ust": 1.25,
       "25alt": 1.46,
       "25ust": 2.02,
       "iy15": 2.95,
-      "kgyok": 1.65,
+      "kgyok": 1.66,
       "iy15alt": 1.19,
-      "ms1": 2.07
+      "ms1": 2.14
     },
     {
       "date": "12.10.2026",
@@ -147,9 +103,9 @@
       "orange": false,
       "gap": 5,
       "35alt": 1.5,
-      "kg": 1.45,
+      "kg": 1.44,
       "15ust": null,
-      "25alt": 2.35,
+      "25alt": 2.36,
       "25ust": 1.25,
       "iy15": 1.78,
       "kgyok": 1.88,
@@ -159,48 +115,47 @@
     {
       "date": "12.10.2026",
       "time": "21:30",
-      "home": "Lugo",
-      "away": "Ud Logrones",
-      "league": "İS3",
+      "home": "Barletta",
+      "away": "Cavese",
+      "league": "İTC",
       "tags": [
-        "3.5 alt"
+        "3.5 alt",
+        "1.5 üst"
       ],
-      "blue": [
-        "İY 1.5 alt"
-      ],
+      "blue": [],
       "orange": false,
-      "gap": -1,
-      "35alt": 1.06,
-      "kg": 1.72,
-      "15ust": 1.23,
-      "25alt": 1.4,
-      "25ust": 1.97,
-      "iy15": null,
-      "kgyok": 1.57,
-      "iy15alt": null,
-      "ms1": 2.11
+      "gap": -6,
+      "35alt": 1.05,
+      "kg": 1.77,
+      "15ust": 1.25,
+      "25alt": 1.38,
+      "25ust": 2.01,
+      "iy15": 2.42,
+      "kgyok": 1.52,
+      "iy15alt": 1.23,
+      "ms1": 2.05
     },
     {
       "date": "12.10.2026",
-      "time": "23:30",
-      "home": "Orsomarso",
-      "away": "Centauros",
-      "league": "KOLPB",
+      "time": "22:00",
+      "home": "Shamrock Rover",
+      "away": "Bohemian",
+      "league": "İRL",
       "tags": [],
       "blue": [
-        "İY 1.5 alt"
+        "3.5 alt"
       ],
       "orange": false,
-      "gap": -12,
-      "35alt": null,
-      "kg": 1.72,
-      "15ust": null,
-      "25alt": 1.4,
-      "25ust": 1.98,
-      "iy15": null,
-      "kgyok": 1.57,
-      "iy15alt": null,
-      "ms1": 1.86
+      "gap": null,
+      "35alt": 1.22,
+      "kg": 1.44,
+      "15ust": 1.09,
+      "25alt": 1.73,
+      "25ust": 1.55,
+      "iy15": 2.25,
+      "kgyok": 1.89,
+      "iy15alt": 1.29,
+      "ms1": 1.95
     }
   ]
 }
