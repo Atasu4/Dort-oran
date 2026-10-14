@@ -1,5 +1,160 @@
 {
-  "updated": "2026-10-14T22:16+03:00",
-  "count": 0,
-  "matches": []
+  "updated": "2026-10-15T02:50+03:00",
+  "count": 7,
+  "matches": [
+    {
+      "date": "15.10.2026",
+      "time": "03:00",
+      "home": "Deportivo Mald",
+      "away": "Albion",
+      "league": "URUK",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "gap": null,
+      "35alt": null,
+      "kg": 1.74,
+      "15ust": null,
+      "25alt": 1.4,
+      "25ust": 1.97,
+      "iy15": null,
+      "kgyok": 1.54,
+      "iy15alt": null,
+      "ms1": 1.81
+    },
+    {
+      "date": "15.10.2026",
+      "time": "16:00",
+      "home": "Maan",
+      "away": "Jerash",
+      "league": "ÜRD1",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "gap": 3,
+      "35alt": null,
+      "kg": 1.71,
+      "15ust": null,
+      "25alt": 1.4,
+      "25ust": 1.96,
+      "iy15": null,
+      "kgyok": 1.58,
+      "iy15alt": null,
+      "ms1": 2.55
+    },
+    {
+      "date": "15.10.2026",
+      "time": "19:30",
+      "home": "Pogon Siedlce",
+      "away": "Puszcza Niepolo",
+      "league": "POL1",
+      "tags": [],
+      "blue": [
+        "3.5 alt"
+      ],
+      "orange": false,
+      "gap": 8,
+      "35alt": 1.17,
+      "kg": 1.48,
+      "15ust": 1.11,
+      "25alt": 1.64,
+      "25ust": 1.64,
+      "iy15": 2.35,
+      "kgyok": 1.84,
+      "iy15alt": 1.25,
+      "ms1": 2.28
+    },
+    {
+      "date": "15.10.2026",
+      "time": "19:45",
+      "home": "Universitatea",
+      "away": "Getafe",
+      "league": "AVKL",
+      "tags": [
+        "1.5 üst"
+      ],
+      "blue": [],
+      "orange": false,
+      "gap": -24,
+      "35alt": 1.09,
+      "kg": 1.77,
+      "15ust": 1.25,
+      "25alt": 1.46,
+      "25ust": 2.03,
+      "iy15": 2.97,
+      "kgyok": 1.64,
+      "iy15alt": 1.19,
+      "ms1": 2.91
+    },
+    {
+      "date": "15.10.2026",
+      "time": "19:45",
+      "home": "Khuraitiat",
+      "away": "Al Bidda",
+      "league": "KATQ",
+      "tags": [],
+      "blue": [
+        "3.5 alt"
+      ],
+      "orange": false,
+      "gap": -4,
+      "35alt": null,
+      "kg": 1.48,
+      "15ust": null,
+      "25alt": 1.67,
+      "25ust": 1.6,
+      "iy15": 2.33,
+      "kgyok": 1.84,
+      "iy15alt": 1.26,
+      "ms1": 2.08
+    },
+    {
+      "date": "15.10.2026",
+      "time": "22:00",
+      "home": "Atletico Fc",
+      "away": "Independiente J",
+      "league": "EKV2",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "gap": 1,
+      "35alt": null,
+      "kg": 1.72,
+      "15ust": null,
+      "25alt": 1.41,
+      "25ust": 1.95,
+      "iy15": null,
+      "kgyok": 1.56,
+      "iy15alt": null,
+      "ms1": 1.91
+    },
+    {
+      "date": "15.10.2026",
+      "time": "22:00",
+      "home": "Jagiellonia",
+      "away": "Ararat-Armenia",
+      "league": "AVL",
+      "tags": [],
+      "blue": [
+        "ters x2"
+      ],
+      "orange": false,
+      "gap": 12,
+      "35alt": 1.36,
+      "kg": 1.66,
+      "15ust": 1.06,
+      "25alt": 2.08,
+      "25ust": 1.44,
+      "iy15": 2.08,
+      "kgyok": 1.73,
+      "iy15alt": 1.44,
+      "ms1": 1.25
+    }
+  ]
 }
