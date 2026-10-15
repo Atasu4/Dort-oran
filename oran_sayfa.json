@@ -1,117 +1,7 @@
 {
-  "updated": "2026-10-15T17:01+03:00",
-  "count": 8,
+  "updated": "2026-10-15T21:57+03:00",
+  "count": 2,
   "matches": [
-    {
-      "date": "15.10.2026",
-      "time": "18:00",
-      "home": "Al Sahl Horan",
-      "away": "Ethad Ar",
-      "league": "ÜRD1",
-      "tags": [],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "gap": 5,
-      "35alt": null,
-      "kg": 1.68,
-      "15ust": null,
-      "25alt": 1.44,
-      "25ust": 1.9,
-      "iy15": null,
-      "kgyok": 1.59,
-      "iy15alt": null,
-      "ms1": 2.62
-    },
-    {
-      "date": "15.10.2026",
-      "time": "18:00",
-      "home": "Al Arabi",
-      "away": "Shabab Al Ordon",
-      "league": "ÜRD",
-      "tags": [
-        "3.5 alt"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": -1,
-      "35alt": null,
-      "kg": 1.61,
-      "15ust": null,
-      "25alt": 1.48,
-      "25ust": 1.83,
-      "iy15": null,
-      "kgyok": 1.66,
-      "iy15alt": null,
-      "ms1": 2.63
-    },
-    {
-      "date": "15.10.2026",
-      "time": "19:00",
-      "home": "Fc Tallinn",
-      "away": "Tartu Welco",
-      "league": "EST2",
-      "tags": [
-        "İY 1.5"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": -8,
-      "35alt": 1.85,
-      "kg": 1.21,
-      "15ust": null,
-      "25alt": null,
-      "25ust": null,
-      "iy15": 1.55,
-      "kgyok": 2.54,
-      "iy15alt": 1.73,
-      "ms1": 4.33
-    },
-    {
-      "date": "15.10.2026",
-      "time": "19:45",
-      "home": "Universitatea",
-      "away": "Getafe",
-      "league": "AVKL",
-      "tags": [
-        "3.5 alt"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": -24,
-      "35alt": 1.05,
-      "kg": 1.88,
-      "15ust": 1.33,
-      "25alt": 1.36,
-      "25ust": 2.27,
-      "iy15": 3.28,
-      "kgyok": 1.55,
-      "iy15alt": 1.15,
-      "ms1": 2.43
-    },
-    {
-      "date": "15.10.2026",
-      "time": "19:45",
-      "home": "Khuraitiat",
-      "away": "Al Bidda",
-      "league": "KATQ",
-      "tags": [],
-      "blue": [
-        "3.5 alt"
-      ],
-      "orange": false,
-      "gap": -4,
-      "35alt": null,
-      "kg": 1.47,
-      "15ust": null,
-      "25alt": 1.67,
-      "25ust": 1.6,
-      "iy15": 2.31,
-      "kgyok": 1.84,
-      "iy15alt": 1.27,
-      "ms1": 1.97
-    },
     {
       "date": "15.10.2026",
       "time": "22:00",
@@ -123,16 +13,16 @@
         "ters x2"
       ],
       "orange": false,
-      "gap": 12,
-      "35alt": 1.37,
-      "kg": 1.65,
+      "gap": 7,
+      "35alt": 1.39,
+      "kg": 1.58,
       "15ust": 1.05,
-      "25alt": 2.12,
-      "25ust": 1.42,
-      "iy15": 2.05,
-      "kgyok": 1.76,
-      "iy15alt": 1.45,
-      "ms1": 1.25
+      "25alt": 2.15,
+      "25ust": 1.4,
+      "iy15": 2.03,
+      "kgyok": 1.83,
+      "iy15alt": 1.46,
+      "ms1": 1.28
     },
     {
       "date": "15.10.2026",
@@ -147,36 +37,14 @@
       "orange": false,
       "gap": null,
       "35alt": 1.79,
-      "kg": 1.77,
+      "kg": 1.74,
       "15ust": 1.0,
       "25alt": 3.09,
       "25ust": 1.17,
       "iy15": 1.65,
-      "kgyok": 1.64,
+      "kgyok": 1.66,
       "iy15alt": 1.76,
       "ms1": 1.0
-    },
-    {
-      "date": "15.10.2026",
-      "time": "22:00",
-      "home": "Benfica",
-      "away": "Celtic",
-      "league": "AVL",
-      "tags": [
-        "2.5 üst"
-      ],
-      "blue": [],
-      "orange": false,
-      "gap": 21,
-      "35alt": 1.82,
-      "kg": 1.59,
-      "15ust": 1.0,
-      "25alt": 3.15,
-      "25ust": 1.16,
-      "iy15": 1.64,
-      "kgyok": 1.82,
-      "iy15alt": 1.77,
-      "ms1": 1.06
     }
   ]
 }
