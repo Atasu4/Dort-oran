@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Bulten uzerine Poisson xG ekler. Nesine ve Macsonuclari ayri betiklerde kalir."""
+"""Bülten üzerine Opta tarzı Poisson + 1X2 olasılık simülasyonu ekler.
+En yüksek ihtimalli maçları önceliklendirir."""
 from __future__ import annotations
 
 import json
@@ -19,6 +20,49 @@ def atomic_write_json(path: Path, data):
     os.replace(tmp, path)
 
 
+def poisson_prob(lam, k):
+    if lam is None or k < 0:
+        return 0.0
+    return math.exp(-lam) * (lam ** k) / math.factorial(k)
+
+
+def opta_probs(xg_h, xg_a, rho=0.05):
+    """Opta Supercomputer benzeri basit 1X2 + under olasılıkları."""
+    if xg_h is None or xg_a is None:
+        return None
+    p_home = p_draw = p_away = p_under = 0.0
+    for h in range(0, 10):
+        for a in range(0, 10):
+            p = poisson_prob(xg_h, h) * poisson_prob(xg_a, a)
+            if h == 0 and a == 0:
+                p *= (1 - rho)
+            elif h == 1 and a == 0:
+                p *= (1 + rho / 2)
+            elif h == 0 and a == 1:
+                p *= (1 + rho / 2)
+            elif h == 1 and a == 1:
+                p *= (1 - rho / 2)
+            if h > a:
+                p_home += p
+            elif h == a:
+                p_draw += p
+            else:
+                p_away += p
+            if h + a < 3:
+                p_under += p
+    total = p_home + p_draw + p_away
+    if total <= 0:
+        return None
+    return {
+        "opta_p1": round(p_home / total * 100, 1),
+        "opta_px": round(p_draw / total * 100, 1),
+        "opta_p2": round(p_away / total * 100, 1),
+        "opta_max": round(max(p_home, p_draw, p_away) / total * 100, 1),
+        "opta_under25": round(p_under / total * 100, 1),
+        "opta_fav": "1" if p_home >= p_draw and p_home >= p_away else ("X" if p_draw >= p_away else "2"),
+    }
+
+
 def poisson_xg(home, away, lg_h, lg_a):
     if not home or not away or not lg_h or not lg_a:
         return None
@@ -31,44 +75,53 @@ def poisson_xg(home, away, lg_h, lg_a):
     a_def = (away["ga"] / ap) / lg_h
     exp_home = round(h_att * a_def * lg_h, 2)
     exp_away = round(a_att * h_def * lg_a, 2)
-    under = 0.0
-    for h in range(4):
-        for a in range(4):
-            if h + a < 3:
-                under += (math.exp(-exp_home) * exp_home ** h / math.factorial(h)) * (
-                    math.exp(-exp_away) * exp_away ** a / math.factorial(a)
-                )
-    return {
-        "xgH": exp_home,
-        "xgA": exp_away,
-        "ust25": round((1 - under) * 100, 1),
-    }
+    return {"xgH": exp_home, "xgA": exp_away}
 
 
 def main():
     path = ROOT / "bulten.json"
     data = json.loads(path.read_text(encoding="utf-8"))
     filled = 0
+    high_prob = []
     for match in data.get("matches") or []:
         home = (match.get("homeTable") or {}).get("home")
         away = (match.get("awayTable") or {}).get("away")
         xg = poisson_xg(home, away, match.get("lgH"), match.get("lgA"))
         if not xg:
-            match.pop("xgH", None)
-            match.pop("xgA", None)
-            match.pop("ust25", None)
+            for k in ("xgH", "xgA", "opta_p1", "opta_px", "opta_p2", "opta_max", "opta_under25", "opta_fav"):
+                match.pop(k, None)
             continue
         match.update(xg)
-        filled += 1
+        probs = opta_probs(xg["xgH"], xg["xgA"])
+        if probs:
+            match.update(probs)
+            filled += 1
+            if probs["opta_max"] >= 55:
+                high_prob.append({
+                    "id": match.get("id"),
+                    "home": match.get("home"),
+                    "away": match.get("away"),
+                    "league": match.get("league"),
+                    "date": match.get("date"),
+                    "time": match.get("time"),
+                    "opta_max": probs["opta_max"],
+                    "opta_fav": probs["opta_fav"],
+                    "opta_p1": probs["opta_p1"],
+                    "opta_px": probs["opta_px"],
+                    "opta_p2": probs["opta_p2"],
+                })
+    high_prob.sort(key=lambda x: -x["opta_max"])
     data["xgUpdated"] = datetime.now(IST).isoformat(timespec="minutes")
+    data["optaHigh"] = high_prob[:30]
     atomic_write_json(path, data)
     atomic_write_json(ROOT / "app_summary.json", {
         "updated": data["xgUpdated"],
         "status": "success",
         "xg": filled,
         "matches": len(data.get("matches") or []),
+        "opta_high": len(high_prob),
     })
-    print(f"xG {filled}/{len(data.get('matches') or [])}")
+    print(f"Opta sim {filled}/{len(data.get('matches') or [])}, high-prob: {len(high_prob)}")
 
 
 if __name__ == "__main__":
