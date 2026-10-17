@@ -17,8 +17,6 @@
     h2 { margin:16px 0 6px; font-size:14px; }
     .rule { width:88px; height:1px; margin:10px auto 14px; background:linear-gradient(90deg, transparent, var(--gold), transparent); }
     .meta { color:var(--muted); font-size:13px; }
-    .sum { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
-    .sum div { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:8px; font-size:13px; }
     article { background:var(--surface); border:1px solid var(--line); border-radius:8px; padding:8px; margin-top:6px; }
     .top { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }
     .teams { margin:2px 0; font-size:14px; font-weight:600; }
@@ -44,70 +42,34 @@
   <div class="frame"><main>
     <h1>GÖKÇEN ANALİZ</h1>
     <div class="rule"></div>
-    <h2>0/2</h2>
-    <p class="meta">Eski filtre yok. Kalıp dünkü Malaga–Espanyol. İY 2, MS beraberlik. 0-1, sonra 1-1.</p>
-    <div class="sum">
-      <div>İddaa 2.45 / 2.84 / 2.40</div>
-      <div>Alt 1.57 · Üst 1.86</div>
-      <div>Malaga 20. sıra, 4 puan, 0 galibiyet</div>
-      <div>Espanyol 15. sıra, 7 puan</div>
-    </div>
-    <p class="meta">Kural: deplasman 2.25-2.55, beraberlik 2.70-3.00, ev 2.30-2.60. Fark en fazla 0.20. Ev son beşte. Dep 10-17. Alt 1.45-1.70.</p>
-    <h2>GS</h2>
-    <p class="meta">Galatasaray–Kasımpaşa. İY 1-0, MS 3-1. 10 kişi kaldı, 90 ve 90+6.</p>
-    <div class="sum">
-      <div>İddaa 1.12 / 5.74 / 9.19</div>
-      <div>Alt 2.49 · Üst 1.29</div>
-      <div>Galatasaray 2. sıra</div>
-      <div>Kasımpaşa 8. sıra</div>
-    </div>
-    <p class="meta">Kural: ev 1.08-1.18, beraberlik 5.20-6.30, deplasman 8.00-10.50. Üst 1.20-1.40. Ev ilk dörtte. Dep 5-12.</p>
     <h2>Öne Çıkan Analiz</h2>
-<div id="featured" class="meta">Yükleniyor...</div>
-<h2>Liste</h2>
+    <div id="featured" class="meta">Yükleniyor...</div>
+    <h2>Liste</h2>
     <p class="meta" id="meta">Yükleniyor</p>
     <div id="list"></div>
   </main></div>
   <script>
     const PASS_TEXT = "OranAnaliz27";
-    function ok(m) {
-      const o1 = m.o1, ox = m.ox, o2 = m.o2, alt = m.alt;
-      const hr = m.homeTable && m.homeTable.rank;
-      const ar = m.awayTable && m.awayTable.rank;
-      return o2 >= 2.25 && o2 <= 2.55 && ox >= 2.70 && ox <= 3.00 && o1 >= 2.30 && o1 <= 2.60 && o2 <= o1 && Math.abs(o1 - o2) <= 0.20 && hr >= 16 && ar >= 10 && ar <= 17 && alt >= 1.45 && alt <= 1.70;
-    }
-    function gs(m) {
-      const o1 = m.o1, ox = m.ox, o2 = m.o2, ust = m.ust;
-      const hr = m.homeTable && m.homeTable.rank;
-      const ar = m.awayTable && m.awayTable.rank;
-      return o1 >= 1.08 && o1 <= 1.18 && ox >= 5.20 && ox <= 6.30 && o2 >= 8.00 && o2 <= 10.50 && ust >= 1.20 && ust <= 1.40 && hr <= 4 && ar >= 5 && ar <= 12;
-    }
-    function card(m, name, extra) {
-      return `<article>
-        <div class="top"><span>${m.date} ${m.time}</span><span>${m.league}</span></div>
-        <div class="teams">${m.home} - ${m.away}</div>
-        <div class="pick">${name} · ${m.o1} / ${m.ox} / ${m.o2} · ${extra}</div>
-        <p class="meta">Sıra ${m.homeTable.rank}-${m.awayTable.rank}</p>
-      </article>`;
-    }
     function paint(matches) {
-      const a = matches.filter(ok);
-      const b = matches.filter(gs);
-      document.getElementById("meta").textContent = a.length + " adet 0/2 · " + b.length + " adet GS";
-      document.getElementById("list").innerHTML =
-        a.map((m) => card(m, "0/2", "alt " + m.alt)).join("") +
-        b.map((m) => card(m, "GS", "üst " + m.ust)).join("") ||
-        `<p class="meta">Bu bültende eşleşme yok.</p>`;
+      const filtered = matches.filter(m => !String(m.league||"").includes("MAC3") && m.o1 && m.o2);
+      document.getElementById("meta").textContent = filtered.length + " maç (filtreler kaldırıldı, mavi 3 maç şartlı atlandı)";
+      document.getElementById("list").innerHTML = filtered.slice(0, 100).map(m => `
+        <article>
+          <div class="top"><span>${m.date} ${m.time}</span><span>${m.league}</span></div>
+          <div class="teams">${m.home} - ${m.away}</div>
+          <div class="pick">${m.o1} / ${m.ox} / ${m.o2} · Alt ${m.alt||"-"} Üst ${m.ust||"-"}</div>
+          <p class="meta">Birleşik site yorumları + insan analizi: (Forebet/PredictZ/WinDrawWin/Statarea/SoccerVista birleştirilecek)</p>
+        </article>`).join("") || `<p class="meta">Maç yok.</p>`;
     }
     function load() {
-      fetch("bulten.json").then((r) => r.json()).then((d) => paint(d.matches || [])).catch(() => {
+      fetch("bulten.json").then(r => r.json()).then(d => paint(d.matches || [])).catch(() => {
         document.getElementById("meta").textContent = "Bülten açılmadı";
       });
     }
     function unlock() { document.getElementById("lock").classList.add("hide"); load(); }
     if (localStorage.getItem("oran-kapi") === PASS_TEXT) unlock();
-    document.getElementById("lock-form").onsubmit = (event) => {
-      event.preventDefault();
+    document.getElementById("lock-form").onsubmit = (e) => {
+      e.preventDefault();
       if (document.getElementById("lock-key").value.trim() !== PASS_TEXT) {
         document.getElementById("lock-msg").textContent = "Şifre yanlış";
         return;
@@ -115,7 +77,6 @@
       localStorage.setItem("oran-kapi", PASS_TEXT);
       unlock();
     };
-
     async function loadFeatured() {
       try {
         const r = await fetch("analizler/lyon-nice-2026-10-18.json");
