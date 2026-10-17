@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Bülten üzerine Opta tarzı Poisson + 1X2 olasılık simülasyonu ekler.
-En yüksek ihtimalli maçları önceliklendirir."""
+"""Bülten üzerine Opta Supercomputer tarzı Monte Carlo maç simülasyonu ekler.
+Her maç için binlerce simülasyon çalıştırır, en yüksek ihtimalli maçları önceliklendirir."""
 from __future__ import annotations
 
 import json
 import math
 import os
+import random
 from datetime import datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -20,46 +21,50 @@ def atomic_write_json(path: Path, data):
     os.replace(tmp, path)
 
 
-def poisson_prob(lam, k):
-    if lam is None or k < 0:
-        return 0.0
-    return math.exp(-lam) * (lam ** k) / math.factorial(k)
+def sample_poisson(lam: float) -> int:
+    if lam is None or lam <= 0:
+        return 0
+    L = math.exp(-lam)
+    k = 0
+    p = 1.0
+    while p > L:
+        k += 1
+        p *= random.random()
+        if k > 15:
+            break
+    return k - 1
 
 
-def opta_probs(xg_h, xg_a, rho=0.05):
-    """Opta Supercomputer benzeri basit 1X2 + under olasılıkları."""
+def opta_monte_carlo(xg_h: float, xg_a: float, n_sims: int = 15000) -> dict | None:
+    """Opta Supercomputer benzeri Monte Carlo simülasyonu."""
     if xg_h is None or xg_a is None:
         return None
-    p_home = p_draw = p_away = p_under = 0.0
-    for h in range(0, 10):
-        for a in range(0, 10):
-            p = poisson_prob(xg_h, h) * poisson_prob(xg_a, a)
-            if h == 0 and a == 0:
-                p *= (1 - rho)
-            elif h == 1 and a == 0:
-                p *= (1 + rho / 2)
-            elif h == 0 and a == 1:
-                p *= (1 + rho / 2)
-            elif h == 1 and a == 1:
-                p *= (1 - rho / 2)
-            if h > a:
-                p_home += p
-            elif h == a:
-                p_draw += p
-            else:
-                p_away += p
-            if h + a < 3:
-                p_under += p
-    total = p_home + p_draw + p_away
-    if total <= 0:
+    home_wins = draws = away_wins = under25 = 0
+    for _ in range(n_sims):
+        gh = sample_poisson(xg_h)
+        ga = sample_poisson(xg_a)
+        if gh > ga:
+            home_wins += 1
+        elif gh == ga:
+            draws += 1
+        else:
+            away_wins += 1
+        if gh + ga < 3:
+            under25 += 1
+    total = home_wins + draws + away_wins
+    if total == 0:
         return None
+    p1 = home_wins / total
+    px = draws / total
+    p2 = away_wins / total
     return {
-        "opta_p1": round(p_home / total * 100, 1),
-        "opta_px": round(p_draw / total * 100, 1),
-        "opta_p2": round(p_away / total * 100, 1),
-        "opta_max": round(max(p_home, p_draw, p_away) / total * 100, 1),
-        "opta_under25": round(p_under / total * 100, 1),
-        "opta_fav": "1" if p_home >= p_draw and p_home >= p_away else ("X" if p_draw >= p_away else "2"),
+        "opta_p1": round(p1 * 100, 1),
+        "opta_px": round(px * 100, 1),
+        "opta_p2": round(p2 * 100, 1),
+        "opta_max": round(max(p1, px, p2) * 100, 1),
+        "opta_under25": round(under25 / total * 100, 1),
+        "opta_fav": "1" if p1 >= px and p1 >= p2 else ("X" if px >= p2 else "2"),
+        "opta_sims": n_sims,
     }
 
 
@@ -88,11 +93,11 @@ def main():
         away = (match.get("awayTable") or {}).get("away")
         xg = poisson_xg(home, away, match.get("lgH"), match.get("lgA"))
         if not xg:
-            for k in ("xgH", "xgA", "opta_p1", "opta_px", "opta_p2", "opta_max", "opta_under25", "opta_fav"):
+            for k in ("xgH", "xgA", "opta_p1", "opta_px", "opta_p2", "opta_max", "opta_under25", "opta_fav", "opta_sims"):
                 match.pop(k, None)
             continue
         match.update(xg)
-        probs = opta_probs(xg["xgH"], xg["xgA"])
+        probs = opta_monte_carlo(xg["xgH"], xg["xgA"])
         if probs:
             match.update(probs)
             filled += 1
@@ -109,10 +114,12 @@ def main():
                     "opta_p1": probs["opta_p1"],
                     "opta_px": probs["opta_px"],
                     "opta_p2": probs["opta_p2"],
+                    "opta_sims": probs["opta_sims"],
                 })
     high_prob.sort(key=lambda x: -x["opta_max"])
     data["xgUpdated"] = datetime.now(IST).isoformat(timespec="minutes")
     data["optaHigh"] = high_prob[:30]
+    data["optaModel"] = "MonteCarlo-15000"
     atomic_write_json(path, data)
     atomic_write_json(ROOT / "app_summary.json", {
         "updated": data["xgUpdated"],
@@ -120,8 +127,9 @@ def main():
         "xg": filled,
         "matches": len(data.get("matches") or []),
         "opta_high": len(high_prob),
+        "model": "MonteCarlo",
     })
-    print(f"Opta sim {filled}/{len(data.get('matches') or [])}, high-prob: {len(high_prob)}")
+    print(f"Opta MC sim {filled}/{len(data.get('matches') or [])}, high-prob: {len(high_prob)}")
 
 
 if __name__ == "__main__":
