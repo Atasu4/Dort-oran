@@ -21,6 +21,7 @@
     .top { display:flex; justify-content:space-between; color:var(--muted); font-size:11px; }
     .teams { margin:2px 0; font-size:14px; font-weight:600; }
     .pick { color:#3dd68c; font-size:13px; }
+    .opta { color:#e4d0a2; font-weight:600; }
     #lock { position:fixed; inset:0; z-index:30; background:#0b0d10; display:flex; align-items:center; justify-content:center; padding:24px; }
     #lock.hide { display:none; }
     #lock form { width:min(320px,100%); }
@@ -44,7 +45,7 @@
     <div class="rule"></div>
     <h2>Öne Çıkan Analiz</h2>
     <div id="featured" class="meta">Yükleniyor...</div>
-    <h2>Liste</h2>
+    <h2>Opta Öncelikli Liste</h2>
     <p class="meta" id="meta">Yükleniyor</p>
     <div id="list"></div>
   </main></div>
@@ -52,14 +53,18 @@
     const PASS_TEXT = "OranAnaliz27";
     function paint(matches) {
       const filtered = matches.filter(m => !String(m.league||"").includes("MAC3") && m.o1 && m.o2);
-      document.getElementById("meta").textContent = filtered.length + " maç (filtreler kaldırıldı, mavi 3 maç şartlı atlandı)";
-      document.getElementById("list").innerHTML = filtered.slice(0, 100).map(m => `
-        <article>
+      // Opta max olasılığa göre sırala (yüksek öncelik)
+      filtered.sort((a,b) => (b.opta_max||0) - (a.opta_max||0));
+      document.getElementById("meta").textContent = filtered.length + " maç · Opta simülasyon öncelikli (en yüksek ihtimal üstte)";
+      document.getElementById("list").innerHTML = filtered.slice(0, 80).map(m => {
+        const opta = m.opta_max ? `<span class="opta">Opta ${m.opta_fav} %${m.opta_max}</span> (${m.opta_p1}/${m.opta_px}/${m.opta_p2})` : "Opta sim yok";
+        return `<article>
           <div class="top"><span>${m.date} ${m.time}</span><span>${m.league}</span></div>
           <div class="teams">${m.home} - ${m.away}</div>
-          <div class="pick">${m.o1} / ${m.ox} / ${m.o2} · Alt ${m.alt||"-"} Üst ${m.ust||"-"}</div>
-          <p class="meta">Birleşik site yorumları + insan analizi: (Forebet/PredictZ/WinDrawWin/Statarea/SoccerVista birleştirilecek)</p>
-        </article>`).join("") || `<p class="meta">Maç yok.</p>`;
+          <div class="pick">${m.o1} / ${m.ox} / ${m.o2} · ${opta}</div>
+          <p class="meta">Diğer sitelerle ortak karar: (Forebet/PredictZ/WinDrawWin/Statarea/SoccerVista konsensüsü eklenecek)</p>
+        </article>`;
+      }).join("") || `<p class="meta">Maç yok.</p>`;
     }
     function load() {
       fetch("bulten.json").then(r => r.json()).then(d => paint(d.matches || [])).catch(() => {
