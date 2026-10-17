@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Bülten üzerine Opta Supercomputer tarzı Monte Carlo maç simülasyonu ekler.
-Her maç için binlerce simülasyon çalıştırır, en yüksek ihtimalli maçları önceliklendirir."""
+"""Bülten üzerine Opta Supercomputer tarzı Monte Carlo + 5 site konsensüs katmanı.
+Her maç için binlerce simülasyon + ortak karar skoru."""
 from __future__ import annotations
 
 import json
@@ -9,10 +9,13 @@ import os
 import random
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 from zoneinfo import ZoneInfo
 
 IST = ZoneInfo("Europe/Istanbul")
 ROOT = Path(__file__).resolve().parent.parent
+
+SITES = ["Forebet", "PredictZ", "WinDrawWin", "Statarea", "SoccerVista"]
 
 
 def atomic_write_json(path: Path, data):
@@ -36,7 +39,6 @@ def sample_poisson(lam: float) -> int:
 
 
 def opta_monte_carlo(xg_h: float, xg_a: float, n_sims: int = 15000) -> dict | None:
-    """Opta Supercomputer benzeri Monte Carlo simülasyonu."""
     if xg_h is None or xg_a is None:
         return None
     home_wins = draws = away_wins = under25 = 0
@@ -68,6 +70,30 @@ def opta_monte_carlo(xg_h: float, xg_a: float, n_sims: int = 15000) -> dict | No
     }
 
 
+def consensus(opta_fav: Optional[str], site_picks: Optional[dict] = None) -> dict:
+    """5 site ile Opta ortak karar. site_picks yoksa beklemede."""
+    if not site_picks:
+        return {
+            "consensus": 0,
+            "agree": 0,
+            "total": 5,
+            "label": "site verisi bekleniyor",
+            "strong": False,
+            "sites": SITES,
+        }
+    agrees = sum(1 for p in site_picks.values() if p == opta_fav)
+    total = len(site_picks)
+    score = (agrees / total * 100) if total else 0
+    return {
+        "consensus": round(score),
+        "agree": agrees,
+        "total": total,
+        "label": f"{agrees}/{total} site Opta ile aynı",
+        "strong": score >= 60,
+        "sites": list(site_picks.keys()),
+    }
+
+
 def poisson_xg(home, away, lg_h, lg_a):
     if not home or not away or not lg_h or not lg_a:
         return None
@@ -93,13 +119,17 @@ def main():
         away = (match.get("awayTable") or {}).get("away")
         xg = poisson_xg(home, away, match.get("lgH"), match.get("lgA"))
         if not xg:
-            for k in ("xgH", "xgA", "opta_p1", "opta_px", "opta_p2", "opta_max", "opta_under25", "opta_fav", "opta_sims"):
+            for k in ("xgH", "xgA", "opta_p1", "opta_px", "opta_p2", "opta_max", "opta_under25", "opta_fav", "opta_sims", "consensus"):
                 match.pop(k, None)
             continue
         match.update(xg)
         probs = opta_monte_carlo(xg["xgH"], xg["xgA"])
         if probs:
             match.update(probs)
+            # site_picks alanı varsa kullan, yoksa beklemede
+            site_picks = match.get("site_picks")
+            cons = consensus(probs["opta_fav"], site_picks)
+            match["consensus"] = cons
             filled += 1
             if probs["opta_max"] >= 55:
                 high_prob.append({
@@ -111,15 +141,15 @@ def main():
                     "time": match.get("time"),
                     "opta_max": probs["opta_max"],
                     "opta_fav": probs["opta_fav"],
-                    "opta_p1": probs["opta_p1"],
-                    "opta_px": probs["opta_px"],
-                    "opta_p2": probs["opta_p2"],
-                    "opta_sims": probs["opta_sims"],
+                    "consensus": cons["consensus"],
+                    "consensus_label": cons["label"],
+                    "strong": cons["strong"],
                 })
-    high_prob.sort(key=lambda x: -x["opta_max"])
+    high_prob.sort(key=lambda x: (-x["opta_max"], -x["consensus"]))
     data["xgUpdated"] = datetime.now(IST).isoformat(timespec="minutes")
     data["optaHigh"] = high_prob[:30]
-    data["optaModel"] = "MonteCarlo-15000"
+    data["optaModel"] = "MonteCarlo-15000 + Consensus"
+    data["consensusSites"] = SITES
     atomic_write_json(path, data)
     atomic_write_json(ROOT / "app_summary.json", {
         "updated": data["xgUpdated"],
@@ -127,9 +157,9 @@ def main():
         "xg": filled,
         "matches": len(data.get("matches") or []),
         "opta_high": len(high_prob),
-        "model": "MonteCarlo",
+        "model": "MonteCarlo+Consensus",
     })
-    print(f"Opta MC sim {filled}/{len(data.get('matches') or [])}, high-prob: {len(high_prob)}")
+    print(f"Opta MC + Konsensüs {filled}/{len(data.get('matches') or [])}, high-prob: {len(high_prob)}")
 
 
 if __name__ == "__main__":
