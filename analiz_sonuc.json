@@ -1,52 +1,8 @@
 {
-  "updated": "2026-10-17T02:30+03:00",
-  "count": 59,
+  "updated": "2026-10-17T10:31+03:00",
+  "count": 61,
   "hit": 25,
   "matches": [
-    {
-      "date": "12.10.2026",
-      "time": "16:00",
-      "home": "Cagliari U20",
-      "away": "Monza U20",
-      "skor": "1-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "12.10.2026",
-      "time": "17:15",
-      "home": "Burgos",
-      "away": "Granada",
-      "skor": "0-1",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": false
-    },
-    {
-      "date": "12.10.2026",
-      "time": "17:55",
-      "home": "Al Adalah",
-      "away": "Al Anwar",
-      "skor": "1-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "12.10.2026",
-      "time": "18:00",
-      "home": "Argesul Pitest",
-      "away": "Cfr Cluj",
-      "skor": "0-1",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": false
-    },
     {
       "date": "12.10.2026",
       "time": "19:30",
@@ -636,8 +592,42 @@
     {
       "date": "17.10.2026",
       "time": "01:00",
+      "home": "Defensa Justic",
+      "away": "Instituto Cordo",
+      "skor": "0-1",
+      "calls": [
+        "3.5 alt",
+        "1.5 üst"
+      ],
+      "ok": false
+    },
+    {
+      "date": "17.10.2026",
+      "time": "01:00",
       "home": "Sportivo Carap",
       "away": "Resistencia",
+      "skor": "1-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "17.10.2026",
+      "time": "07:00",
+      "home": "Sutherland Sha",
+      "away": "South Melbourne",
+      "skor": "0-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "07:00",
+      "home": "Vonds Ichihara",
+      "away": "Okinawa Sv",
       "skor": "1-1",
       "calls": [
         "2.5 alt"
@@ -646,12 +636,44 @@
     },
     {
       "date": "17.10.2026",
-      "time": "01:00",
-      "home": "Defensa Justic",
-      "away": "Instituto Cordo",
-      "skor": "0-1",
+      "time": "07:00",
+      "home": "Honda Lock",
+      "away": "J-Lease Fc",
+      "skor": "0-3",
       "calls": [
-        "3.5 alt",
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "17.10.2026",
+      "time": "08:00",
+      "home": "Oita Trinita",
+      "away": "Niigata",
+      "skor": "5-1",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "17.10.2026",
+      "time": "08:00",
+      "home": "Jef Utd Chiba",
+      "away": "Yokohama Marino",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "10:00",
+      "home": "Lanzhou Longyu",
+      "away": "Guangzhou Dande",
+      "skor": "0-0",
+      "calls": [
         "1.5 üst"
       ],
       "ok": false
