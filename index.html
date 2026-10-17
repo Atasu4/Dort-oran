@@ -45,7 +45,7 @@
     <div class="rule"></div>
     <h2>Öne Çıkan Analiz</h2>
     <div id="featured" class="meta">Yükleniyor...</div>
-    <h2>Opta Öncelikli Liste</h2>
+    <h2>Opta Monte Carlo Simülasyon</h2>
     <p class="meta" id="meta">Yükleniyor</p>
     <div id="list"></div>
   </main></div>
@@ -53,11 +53,12 @@
     const PASS_TEXT = "OranAnaliz27";
     function paint(matches) {
       const filtered = matches.filter(m => !String(m.league||"").includes("MAC3") && m.o1 && m.o2);
-      // Opta max olasılığa göre sırala (yüksek öncelik)
       filtered.sort((a,b) => (b.opta_max||0) - (a.opta_max||0));
-      document.getElementById("meta").textContent = filtered.length + " maç · Opta simülasyon öncelikli (en yüksek ihtimal üstte)";
+      document.getElementById("meta").textContent = filtered.length + " maç · Opta Supercomputer tarzı Monte Carlo (15.000 sim/maç) — en yüksek ihtimal üstte";
       document.getElementById("list").innerHTML = filtered.slice(0, 80).map(m => {
-        const opta = m.opta_max ? `<span class="opta">Opta ${m.opta_fav} %${m.opta_max}</span> (${m.opta_p1}/${m.opta_px}/${m.opta_p2})` : "Opta sim yok";
+        const opta = m.opta_max 
+          ? `<span class="opta">Opta MC ${m.opta_fav} %${m.opta_max}</span> (${m.opta_p1}/${m.opta_px}/${m.opta_p2}) · ${m.opta_sims||""} sim` 
+          : "Opta sim yok";
         return `<article>
           <div class="top"><span>${m.date} ${m.time}</span><span>${m.league}</span></div>
           <div class="teams">${m.home} - ${m.away}</div>
