@@ -1,64 +1,8 @@
 {
-  "updated": "2026-10-17T10:31+03:00",
-  "count": 61,
-  "hit": 25,
+  "updated": "2026-10-17T15:47+03:00",
+  "count": 79,
+  "hit": 42,
   "matches": [
-    {
-      "date": "12.10.2026",
-      "time": "19:30",
-      "home": "Oviedo",
-      "away": "Eibar",
-      "skor": "3-1",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "12.10.2026",
-      "time": "20:00",
-      "home": "Pyramids Fc",
-      "away": "Ceramica Cleopa",
-      "skor": "4-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "12.10.2026",
-      "time": "21:30",
-      "home": "Barletta",
-      "away": "Cavese",
-      "skor": "1-1",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "12.10.2026",
-      "time": "22:00",
-      "home": "Lanus",
-      "away": "Velez Sarsfield",
-      "skor": "2-0",
-      "calls": [
-        "3.5 alt",
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "12.10.2026",
-      "time": "22:15",
-      "home": "Al Nassr (Riya",
-      "away": "Neftchi Fargona",
-      "skor": "3-1",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
     {
       "date": "13.10.2026",
       "time": "00:30",
@@ -677,6 +621,259 @@
         "1.5 üst"
       ],
       "ok": false
+    },
+    {
+      "date": "17.10.2026",
+      "time": "11:00",
+      "home": "Gloria Popesti",
+      "away": "Afumati",
+      "skor": "2-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "11:00",
+      "home": "Dalian Kewei",
+      "away": "Guizhou Zhuchen",
+      "skor": "2-1",
+      "calls": [
+        "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "12:00",
+      "home": "Wuhan Three To",
+      "away": "Taian Tiankuang",
+      "skor": "2-0",
+      "calls": [
+        "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "12:00",
+      "home": "Kagoshima Unit",
+      "away": "Ehime Fc",
+      "skor": "4-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "17.10.2026",
+      "time": "12:00",
+      "home": "Ryukyu",
+      "away": "Tochigi Sc",
+      "skor": "1-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "13:00",
+      "home": "Atletico Madri",
+      "away": "G.Segoviana",
+      "skor": "1-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "13:00",
+      "home": "Tegevajaro Miy",
+      "away": "Iwata",
+      "skor": "1-1",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "13:00",
+      "home": "Thanh Hoa",
+      "away": "M Nam Dinh",
+      "skor": "0-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "14:00",
+      "home": "Ningbo",
+      "away": "Suzhou Dongwu",
+      "skor": "1-1",
+      "calls": [
+        "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "14:00",
+      "home": "Wolfsburg",
+      "away": "Heidenheim",
+      "skor": "3-1",
+      "calls": [
+        "2.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "14:00",
+      "home": "Zhetysu",
+      "away": "Kaisar",
+      "skor": "0-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "14:00",
+      "home": "",
+      "away": "Bss Monor",
+      "skor": "3-1",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "17.10.2026",
+      "time": "14:00",
+      "home": "Wuxi Wugou",
+      "away": "Heilongjiang Ls",
+      "skor": "0-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "14:30",
+      "home": "Watford",
+      "away": "Charlton",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "14:30",
+      "home": "Jiangx Beidame",
+      "away": "Shanghai Port I",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "14:30",
+      "home": "Anderlecht (K)",
+      "away": "Oh Leuven (K)",
+      "skor": "3-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "17.10.2026",
+      "time": "15:00",
+      "home": "Fc Bocholt",
+      "away": "Sportfreunde Lo",
+      "skor": "0-0",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "15:00",
+      "home": "Ham Kam",
+      "away": "Bodo Glimt",
+      "skor": "0-2",
+      "calls": [
+        "2.5 üst"
+      ],
+      "ok": false
+    },
+    {
+      "date": "17.10.2026",
+      "time": "15:00",
+      "home": "Naesby",
+      "away": "Vanlose",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "15:15",
+      "home": "Gornik Leczna",
+      "away": "Stal S Wola",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "15:30",
+      "home": "Internazionale",
+      "away": "Ss Monopoli 196",
+      "skor": "1-1",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "15:30",
+      "home": "Pianese",
+      "away": "Pineto",
+      "skor": "0-0",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "17.10.2026",
+      "time": "15:45",
+      "home": "Concarneau",
+      "away": "Bastia",
+      "skor": "0-0",
+      "calls": [
+        "3.5 alt"
+      ],
+      "ok": true
     }
   ]
 }
