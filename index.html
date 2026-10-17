@@ -22,7 +22,7 @@
     .teams { margin:2px 0; font-size:14px; font-weight:600; }
     .pick { color:#3dd68c; font-size:13px; }
     .opta { color:#e4d0a2; font-weight:600; }
-    .strong { color:#3dd68c; }
+    .yorum { margin-top:4px; font-size:13px; line-height:1.4; }
     #lock { position:fixed; inset:0; z-index:30; background:#0b0d10; display:flex; align-items:center; justify-content:center; padding:24px; }
     #lock.hide { display:none; }
     #lock form { width:min(320px,100%); }
@@ -53,22 +53,18 @@
   <script>
     const PASS_TEXT = "OranAnaliz27";
     function paint(matches) {
-      const filtered = matches.filter(m => !String(m.league||"").includes("MAC3") && m.o1 && m.o2);
-      filtered.sort((a,b) => (b.opta_max||0) - (a.opta_max||0) || (b.consensus?.consensus||0) - (a.consensus?.consensus||0));
-      document.getElementById("meta").textContent = filtered.length + " maç · Opta MC (15.000 sim) + 5 site konsensüs — yüksek ihtimal + ortak karar üstte";
-      document.getElementById("list").innerHTML = filtered.slice(0, 80).map(m => {
-        const opta = m.opta_max 
-          ? `<span class="opta">Opta MC ${m.opta_fav} %${m.opta_max}</span> (${m.opta_p1}/${m.opta_px}/${m.opta_p2})` 
-          : "Opta sim yok";
-        const cons = m.consensus;
-        const consText = cons 
-          ? `<span class="${cons.strong ? 'strong' : ''}">${cons.label}</span>` 
-          : "konsensüs yok";
+      const filtered = matches.filter(m => m.o1 && m.o2);
+      filtered.sort((a,b) => (b.opta_max||0) - (a.opta_max||0));
+      document.getElementById("meta").textContent = filtered.length + " maç · Opta MC + yorum";
+      document.getElementById("list").innerHTML = filtered.map(m => {
+        const opta = m.opta_max ? `<span class="opta">Opta ${m.opta_fav} %${m.opta_max}</span> (${m.opta_p1||"-"}/${m.opta_px||"-"}/${m.opta_p2||"-"})` : "";
+        const yorum = m.yorum ? `<p class="yorum"><strong>Yorum:</strong> ${m.yorum}</p>` : "";
         return `<article>
           <div class="top"><span>${m.date} ${m.time}</span><span>${m.league}</span></div>
           <div class="teams">${m.home} - ${m.away}</div>
           <div class="pick">${m.o1} / ${m.ox} / ${m.o2} · ${opta}</div>
-          <p class="meta">Konsensüs: ${consText} (Forebet · PredictZ · WinDrawWin · Statarea · SoccerVista)</p>
+          ${yorum}
+          <p class="meta">Konsensüs: ${m.consensus?.label || "site verisi bekleniyor"}</p>
         </article>`;
       }).join("") || `<p class="meta">Maç yok.</p>`;
     }
