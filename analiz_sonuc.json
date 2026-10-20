@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-19T23:27+03:00",
+  "updated": "2026-10-20T03:13+03:00",
   "count": 159,
   "hit": 91,
   "matches": [
@@ -1317,17 +1317,6 @@
     {
       "date": "18.10.2026",
       "time": "14:00",
-      "home": "Beijing Guoan",
-      "away": "Qingdao West Co",
-      "skor": "1-0",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
-    {
-      "date": "18.10.2026",
-      "time": "14:00",
       "home": "Sisaket United",
       "away": "Bg Pathum Unite",
       "skor": "1-1",
@@ -1349,14 +1338,14 @@
     },
     {
       "date": "18.10.2026",
-      "time": "15:00",
-      "home": "Vasteras",
-      "away": "Mjallby",
+      "time": "14:00",
+      "home": "Beijing Guoan",
+      "away": "Qingdao West Co",
       "skor": "1-0",
       "calls": [
-        "2.5 alt"
+        "ters x2"
       ],
-      "ok": true
+      "ok": false
     },
     {
       "date": "18.10.2026",
@@ -1368,6 +1357,28 @@
         "2.5 alt"
       ],
       "ok": false
+    },
+    {
+      "date": "18.10.2026",
+      "time": "15:00",
+      "home": "Vasteras",
+      "away": "Mjallby",
+      "skor": "1-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "18.10.2026",
+      "time": "15:30",
+      "home": "Ravenna",
+      "away": "Spezia",
+      "skor": "0-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
     },
     {
       "date": "18.10.2026",
@@ -1390,17 +1401,6 @@
         "2.5 alt"
       ],
       "ok": false
-    },
-    {
-      "date": "18.10.2026",
-      "time": "15:30",
-      "home": "Ravenna",
-      "away": "Spezia",
-      "skor": "0-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
     },
     {
       "date": "18.10.2026",
@@ -1427,17 +1427,6 @@
     {
       "date": "18.10.2026",
       "time": "16:00",
-      "home": "Bournemouth",
-      "away": "Sunderland",
-      "skor": "2-0",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "18.10.2026",
-      "time": "16:00",
       "home": "Benjamin Aceva",
       "away": "Sol De America",
       "skor": "0-1",
@@ -1452,6 +1441,17 @@
       "home": "Ibri",
       "away": "Dhofar Scsc",
       "skor": "2-3",
+      "calls": [
+        "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "18.10.2026",
+      "time": "16:00",
+      "home": "Bournemouth",
+      "away": "Sunderland",
+      "skor": "2-0",
       "calls": [
         "1.5 üst"
       ],
@@ -1526,17 +1526,6 @@
     {
       "date": "18.10.2026",
       "time": "19:00",
-      "home": "Jablonec",
-      "away": "Viktoria Plzen",
-      "skor": "2-3",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "18.10.2026",
-      "time": "19:00",
       "home": "İstanbulspor",
       "away": "Antalyaspor",
       "skor": "0-2",
@@ -1544,6 +1533,17 @@
         "2.5 alt"
       ],
       "ok": true
+    },
+    {
+      "date": "18.10.2026",
+      "time": "19:00",
+      "home": "Jablonec",
+      "away": "Viktoria Plzen",
+      "skor": "2-3",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
     },
     {
       "date": "18.10.2026",
@@ -1614,11 +1614,34 @@
     {
       "date": "19.10.2026",
       "time": "00:00",
-      "home": "Cincinnati",
-      "away": "Columbus",
-      "skor": "0-2",
+      "home": "Estudiantes Lp",
+      "away": "San Lorenzo",
+      "skor": "1-2",
       "calls": [
-        "2.5 üst"
+        "3.5 alt",
+        "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "19.10.2026",
+      "time": "00:00",
+      "home": "Genesis Pn",
+      "away": "Estrella Roja",
+      "skor": "1-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "19.10.2026",
+      "time": "00:00",
+      "home": "Export Sebaco",
+      "away": "Jalapa",
+      "skor": "1-4",
+      "calls": [
+        "2.5 alt"
       ],
       "ok": false
     },
@@ -1636,34 +1659,11 @@
     {
       "date": "19.10.2026",
       "time": "00:00",
-      "home": "Estudiantes Lp",
-      "away": "San Lorenzo",
-      "skor": "1-2",
+      "home": "Cincinnati",
+      "away": "Columbus",
+      "skor": "0-2",
       "calls": [
-        "3.5 alt",
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "19.10.2026",
-      "time": "00:00",
-      "home": "Export Sebaco",
-      "away": "Jalapa",
-      "skor": "1-4",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "19.10.2026",
-      "time": "00:00",
-      "home": "Genesis Pn",
-      "away": "Estrella Roja",
-      "skor": "1-2",
-      "calls": [
-        "2.5 alt"
+        "2.5 üst"
       ],
       "ok": false
     },
@@ -1750,7 +1750,7 @@
       "time": "21:45",
       "home": "Aveley",
       "away": "Maldon And Tipt",
-      "skor": "1-1",
+      "skor": "1-2",
       "calls": [
         "ters x2"
       ],
