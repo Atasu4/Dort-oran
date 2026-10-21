@@ -1,76 +1,7 @@
 {
-  "updated": "2026-10-21T11:11+03:00",
-  "count": 7,
+  "updated": "2026-10-21T17:22+03:00",
+  "count": 6,
   "matches": [
-    {
-      "date": "21.10.2026",
-      "time": "11:30",
-      "home": "Bali United",
-      "away": "Garudayaksa",
-      "league": "ENDL1",
-      "tags": [],
-      "blue": [
-        "ters x2"
-      ],
-      "orange": false,
-      "gap": 6,
-      "35alt": 1.47,
-      "kg": 1.38,
-      "15ust": null,
-      "25alt": null,
-      "25ust": null,
-      "iy15": 1.79,
-      "kgyok": 1.97,
-      "iy15alt": 1.48,
-      "ms1": 1.28
-    },
-    {
-      "date": "21.10.2026",
-      "time": "13:00",
-      "home": "Yokohama Marin",
-      "away": "Tokyo Verdy",
-      "league": "JAP",
-      "tags": [],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "gap": null,
-      "35alt": 1.09,
-      "kg": 1.85,
-      "15ust": 1.23,
-      "25alt": 1.47,
-      "25ust": 1.98,
-      "iy15": 2.87,
-      "kgyok": 1.55,
-      "iy15alt": 1.19,
-      "ms1": 1.62
-    },
-    {
-      "date": "21.10.2026",
-      "time": "13:00",
-      "home": "Shimizu",
-      "away": "Machida Zelvia",
-      "league": "JAP",
-      "tags": [
-        "3.5 alt",
-        "1.5 üst"
-      ],
-      "blue": [
-        "İY 1.5 alt"
-      ],
-      "orange": false,
-      "gap": null,
-      "35alt": 1.07,
-      "kg": 1.85,
-      "15ust": 1.27,
-      "25alt": 1.42,
-      "25ust": 2.07,
-      "iy15": 3.02,
-      "kgyok": 1.54,
-      "iy15alt": 1.17,
-      "ms1": 3.47
-    },
     {
       "date": "21.10.2026",
       "time": "18:00",
@@ -82,7 +13,7 @@
         "3.5 alt"
       ],
       "orange": false,
-      "gap": -1,
+      "gap": null,
       "35alt": null,
       "kg": 1.45,
       "15ust": null,
@@ -106,37 +37,37 @@
       "blue": [],
       "orange": false,
       "gap": null,
-      "35alt": 1.07,
-      "kg": 1.77,
-      "15ust": 1.27,
-      "25alt": 1.41,
-      "25ust": 2.1,
-      "iy15": 3.03,
-      "kgyok": 1.6,
-      "iy15alt": 1.16,
-      "ms1": 2.84
+      "35alt": 1.06,
+      "kg": 1.8,
+      "15ust": 1.28,
+      "25alt": 1.39,
+      "25ust": 2.14,
+      "iy15": 3.09,
+      "kgyok": 1.58,
+      "iy15alt": 1.15,
+      "ms1": 2.92
     },
     {
       "date": "21.10.2026",
       "time": "20:00",
-      "home": "Sogndal",
-      "away": "Raufoss",
-      "league": "NOR1",
-      "tags": [
-        "2.5 üst"
+      "home": "Ceramica Cleop",
+      "away": "Petrojet",
+      "league": "MSR",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
       ],
-      "blue": [],
       "orange": false,
-      "gap": null,
-      "35alt": 1.65,
-      "kg": 1.28,
-      "15ust": null,
-      "25alt": 2.7,
-      "25ust": 1.16,
-      "iy15": 1.63,
-      "kgyok": 2.21,
-      "iy15alt": 1.61,
-      "ms1": 1.27
+      "gap": 5,
+      "35alt": 1.08,
+      "kg": 1.7,
+      "15ust": 1.18,
+      "25alt": 1.45,
+      "25ust": 1.84,
+      "iy15": 2.6,
+      "kgyok": 1.55,
+      "iy15alt": 1.18,
+      "ms1": 1.61
     },
     {
       "date": "21.10.2026",
@@ -149,7 +80,7 @@
         "İY 1.5 alt"
       ],
       "orange": false,
-      "gap": null,
+      "gap": -4,
       "35alt": null,
       "kg": 1.68,
       "15ust": null,
@@ -159,6 +90,50 @@
       "kgyok": 1.56,
       "iy15alt": null,
       "ms1": 3.63
+    },
+    {
+      "date": "21.10.2026",
+      "time": "22:00",
+      "home": "Aston Villa",
+      "away": "Viking",
+      "league": "ŞMP",
+      "tags": [
+        "İY 1.5"
+      ],
+      "blue": [],
+      "orange": false,
+      "gap": null,
+      "35alt": 1.93,
+      "kg": 1.44,
+      "15ust": 1.0,
+      "25alt": 3.39,
+      "25ust": 1.12,
+      "iy15": 1.56,
+      "kgyok": 2.03,
+      "iy15alt": 1.83,
+      "ms1": 1.08
+    },
+    {
+      "date": "21.10.2026",
+      "time": "22:00",
+      "home": "Liverpool Mont",
+      "away": "Cerro Largo",
+      "league": "URUK",
+      "tags": [],
+      "blue": [
+        "İY 1.5 alt"
+      ],
+      "orange": false,
+      "gap": null,
+      "35alt": null,
+      "kg": 1.69,
+      "15ust": null,
+      "25alt": 1.42,
+      "25ust": 1.89,
+      "iy15": null,
+      "kgyok": 1.55,
+      "iy15alt": null,
+      "ms1": 1.87
     }
   ]
 }
