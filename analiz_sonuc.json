@@ -1,867 +1,8 @@
 {
-  "updated": "2026-10-21T17:22+03:00",
-  "count": 155,
-  "hit": 92,
+  "updated": "2026-10-22T17:23+03:00",
+  "count": 90,
+  "hit": 54,
   "matches": [
-    {
-      "date": "17.10.2026",
-      "time": "07:00",
-      "home": "Sutherland Sha",
-      "away": "South Melbourne",
-      "skor": "0-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "07:00",
-      "home": "Vonds Ichihara",
-      "away": "Okinawa Sv",
-      "skor": "1-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "07:00",
-      "home": "Honda Lock",
-      "away": "J-Lease Fc",
-      "skor": "0-3",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "08:00",
-      "home": "Oita Trinita",
-      "away": "Niigata",
-      "skor": "5-1",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "08:00",
-      "home": "Jef Utd Chiba",
-      "away": "Yokohama Marino",
-      "skor": "0-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "10:00",
-      "home": "Lanzhou Longyu",
-      "away": "Guangzhou Dande",
-      "skor": "0-0",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "11:00",
-      "home": "Gloria Popesti",
-      "away": "Afumati",
-      "skor": "2-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "11:00",
-      "home": "Dalian Kewei",
-      "away": "Guizhou Zhuchen",
-      "skor": "2-1",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "12:00",
-      "home": "Wuhan Three To",
-      "away": "Taian Tiankuang",
-      "skor": "2-0",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "12:00",
-      "home": "Ryukyu",
-      "away": "Tochigi Sc",
-      "skor": "1-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "12:00",
-      "home": "Kagoshima Unit",
-      "away": "Ehime Fc",
-      "skor": "4-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "13:00",
-      "home": "Atletico Madri",
-      "away": "G.Segoviana",
-      "skor": "1-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "13:00",
-      "home": "Tegevajaro Miy",
-      "away": "Iwata",
-      "skor": "1-1",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "13:00",
-      "home": "Thanh Hoa",
-      "away": "M Nam Dinh",
-      "skor": "0-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "14:00",
-      "home": "Zhetysu",
-      "away": "Kaisar",
-      "skor": "2-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "14:00",
-      "home": "Ningbo",
-      "away": "Suzhou Dongwu",
-      "skor": "1-1",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "14:00",
-      "home": "",
-      "away": "Bss Monor",
-      "skor": "4-1",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "14:00",
-      "home": "Wuxi Wugou",
-      "away": "Heilongjiang Ls",
-      "skor": "0-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "14:00",
-      "home": "Wolfsburg",
-      "away": "Heidenheim",
-      "skor": "3-1",
-      "calls": [
-        "2.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "14:30",
-      "home": "Watford",
-      "away": "Charlton",
-      "skor": "2-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "14:30",
-      "home": "Anderlecht (K)",
-      "away": "Oh Leuven (K)",
-      "skor": "3-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "14:30",
-      "home": "Jiangx Beidame",
-      "away": "Shanghai Port I",
-      "skor": "0-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "15:00",
-      "home": "Fc Bocholt",
-      "away": "Sportfreunde Lo",
-      "skor": "1-0",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "15:00",
-      "home": "Ham Kam",
-      "away": "Bodo Glimt",
-      "skor": "0-2",
-      "calls": [
-        "2.5 üst"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "15:00",
-      "home": "Naesby",
-      "away": "Vanlose",
-      "skor": "2-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "15:15",
-      "home": "Gornik Leczna",
-      "away": "Stal S Wola",
-      "skor": "1-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "15:30",
-      "home": "Pianese",
-      "away": "Pineto",
-      "skor": "0-0",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "15:30",
-      "home": "Internazionale",
-      "away": "Ss Monopoli 196",
-      "skor": "2-4",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "15:45",
-      "home": "Concarneau",
-      "away": "Bastia",
-      "skor": "1-1",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "16:00",
-      "home": "Falkenberg",
-      "away": "Landskrona",
-      "skor": "4-3",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "16:00",
-      "home": "Pk-35 Ry",
-      "away": "Sjk Ii",
-      "skor": "3-2",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "16:00",
-      "home": "Sk Artis Brno",
-      "away": "Bohemians 1905",
-      "skor": "0-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "16:00",
-      "home": "Jippo Joensuu",
-      "away": "Haka",
-      "skor": "2-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "16:00",
-      "home": "Al Thaid",
-      "away": "Al Jazira Al Ha",
-      "skor": "1-2",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "16:00",
-      "home": "Lokomotiv Taşk",
-      "away": "Nasaf Qarshi",
-      "skor": "0-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "16:00",
-      "home": "Atlético Tembe",
-      "away": "Depor Capiata",
-      "skor": "1-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "16:30",
-      "home": "Chippa United",
-      "away": "Kruger United",
-      "skor": "0-1",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "16:30",
-      "home": "Bistrica",
-      "away": "Nd Primorje",
-      "skor": "1-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "16:30",
-      "home": "Floridsdorfer",
-      "away": "Admira Wacker",
-      "skor": "0-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "16:30",
-      "home": "Golden Arrows",
-      "away": "Milford",
-      "skor": "0-1",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Macclesfield",
-      "away": "Anstey Nomads",
-      "skor": "1-1",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Salisbury",
-      "away": "Eastbourne Boro",
-      "skor": "3-0",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Port Vale",
-      "away": "Chesterfield",
-      "skor": "1-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Manchester Cit",
-      "away": "Ipswich",
-      "skor": "3-2",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Derby County",
-      "away": "Stoke",
-      "skor": "0-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Hednesford Tow",
-      "away": "Brackley Town",
-      "skor": "3-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Bangor Fc",
-      "away": "Dungannon",
-      "skor": "0-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Birmingham",
-      "away": "Qpr",
-      "skor": "3-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Southam",
-      "away": "Bolton",
-      "skor": "0-0",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Bradford",
-      "away": "Stevenage",
-      "skor": "2-0",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Dinamo Brest",
-      "away": "Gomel",
-      "skor": "2-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Stenhousemuir",
-      "away": "Raith Rovers",
-      "skor": "1-1",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Kelty Hearts",
-      "away": "Forfar",
-      "skor": "2-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Salford City",
-      "away": "Crawley",
-      "skor": "2-1",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:00",
-      "home": "Aktobe",
-      "away": "Ordabasy",
-      "skor": "1-3",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:15",
-      "home": "Villarreal",
-      "away": "Elche",
-      "skor": "0-0",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "17:30",
-      "home": "Barakaldo",
-      "away": "Mirandes",
-      "skor": "2-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "18:30",
-      "home": "Mura",
-      "away": "Nafta",
-      "skor": "0-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "19:00",
-      "home": "Sekhukhune Uni",
-      "away": "Marumo Gallants",
-      "skor": "2-1",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "19:00",
-      "home": "Sigma Olomouc",
-      "away": "Slovan Liberec",
-      "skor": "1-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "19:00",
-      "home": "Cs Constantine",
-      "away": "Js El Biar",
-      "skor": "2-4",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "19:00",
-      "home": "Montpellier (K",
-      "away": "Le Havre (K)",
-      "skor": "1-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "19:30",
-      "home": "Sporting Gijon",
-      "away": "Albacete",
-      "skor": "2-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "19:45",
-      "home": "Cd Aguilas",
-      "away": "Ud Ibiza",
-      "skor": "1-2",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "19:45",
-      "home": "Zamora",
-      "away": "Ponferradina",
-      "skor": "1-1",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "19:45",
-      "home": "Extremadura 19",
-      "away": "Union Irun",
-      "skor": "2-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "20:30",
-      "home": "Gent (K)",
-      "away": "",
-      "skor": "1-4",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "21:00",
-      "home": "Mc Oran",
-      "away": "Usm Khenchela",
-      "skor": "1-0",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "21:00",
-      "home": "Diriyah",
-      "away": "Al Taawon",
-      "skor": "1-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "21:07",
-      "home": "Sportivo",
-      "away": "Arsenal Sarandi",
-      "skor": "0-0",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "21:15",
-      "home": "Cracovia Krako",
-      "away": "Legia Varşova",
-      "skor": "1-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "21:30",
-      "home": "Philadelphia",
-      "away": "Charlotte",
-      "skor": "2-2",
-      "calls": [
-        "2.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "22:30",
-      "home": "Ceara",
-      "away": "Juventude",
-      "skor": "2-2",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "23:00",
-      "home": "Cavalry",
-      "away": "Pacific Fc",
-      "skor": "4-2",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
-    {
-      "date": "17.10.2026",
-      "time": "23:00",
-      "home": "Juan Pablo Ii",
-      "away": "Sport Boys",
-      "skor": "2-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "17.10.2026",
-      "time": "23:30",
-      "home": "Rivadavia",
-      "away": "Tigre",
-      "skor": "2-2",
-      "calls": [
-        "3.5 alt",
-        "1.5 üst"
-      ],
-      "ok": false
-    },
-    {
-      "date": "18.10.2026",
-      "time": "00:00",
-      "home": "Botafogo",
-      "away": "Chapecoense",
-      "skor": "1-0",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
-    {
-      "date": "18.10.2026",
-      "time": "01:00",
-      "home": "Forward Madiso",
-      "away": "Portland Hearts",
-      "skor": "2-0",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": false
-    },
     {
       "date": "18.10.2026",
       "time": "01:30",
@@ -1085,6 +226,17 @@
     {
       "date": "18.10.2026",
       "time": "15:30",
+      "home": "Cavese",
+      "away": "Casarano",
+      "skor": "5-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "18.10.2026",
+      "time": "15:30",
       "home": "Ravenna",
       "away": "Spezia",
       "skor": "0-1",
@@ -1106,32 +258,10 @@
     },
     {
       "date": "18.10.2026",
-      "time": "15:30",
-      "home": "Cavese",
-      "away": "Casarano",
-      "skor": "5-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "18.10.2026",
       "time": "15:45",
       "home": "Zaglebie Lubin",
       "away": "Jagiellonia",
       "skor": "1-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "18.10.2026",
-      "time": "16:00",
-      "home": "Leeds Utd",
-      "away": "Man. Utd",
-      "skor": "1-1",
       "calls": [
         "2.5 alt"
       ],
@@ -1145,6 +275,17 @@
       "skor": "2-0",
       "calls": [
         "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "18.10.2026",
+      "time": "16:00",
+      "home": "Leeds Utd",
+      "away": "Man. Utd",
+      "skor": "1-1",
+      "calls": [
+        "2.5 alt"
       ],
       "ok": true
     },
@@ -1195,8 +336,8 @@
     {
       "date": "18.10.2026",
       "time": "18:00",
-      "home": "Soroksar",
-      "away": "Mol Vidi",
+      "home": "Cd Badajoz",
+      "away": "Sanluqueno",
       "skor": "1-0",
       "calls": [
         "2.5 alt"
@@ -1206,8 +347,8 @@
     {
       "date": "18.10.2026",
       "time": "18:00",
-      "home": "Cd Badajoz",
-      "away": "Sanluqueno",
+      "home": "Soroksar",
+      "away": "Mol Vidi",
       "skor": "1-0",
       "calls": [
         "2.5 alt"
@@ -1560,24 +701,13 @@
     {
       "date": "20.10.2026",
       "time": "21:45",
-      "home": "Afc Wimbledon",
-      "away": "Mansfield",
-      "skor": "0-3",
+      "home": "Stevenage",
+      "away": "Plymouth",
+      "skor": "3-0",
       "calls": [
         "2.5 alt"
       ],
       "ok": false
-    },
-    {
-      "date": "20.10.2026",
-      "time": "21:45",
-      "home": "Barnet",
-      "away": "Swindon",
-      "skor": "1-3",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": true
     },
     {
       "date": "20.10.2026",
@@ -1615,9 +745,20 @@
     {
       "date": "20.10.2026",
       "time": "21:45",
-      "home": "Stevenage",
-      "away": "Plymouth",
-      "skor": "3-0",
+      "home": "Barnet",
+      "away": "Swindon",
+      "skor": "1-3",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": true
+    },
+    {
+      "date": "20.10.2026",
+      "time": "21:45",
+      "home": "Afc Wimbledon",
+      "away": "Mansfield",
+      "skor": "0-3",
       "calls": [
         "2.5 alt"
       ],
@@ -1705,9 +846,153 @@
       "time": "17:00",
       "home": "Internazionale",
       "away": "S. Donetsk U19",
-      "skor": "0-0",
+      "skor": "2-0",
       "calls": [
         "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "21.10.2026",
+      "time": "18:30",
+      "home": "Pk-35 Ry",
+      "away": "Jaro",
+      "skor": "1-1",
+      "calls": [
+        "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "21.10.2026",
+      "time": "21:00",
+      "home": "Levante",
+      "away": "Athletic Bilbao",
+      "skor": "3-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "21.10.2026",
+      "time": "22:00",
+      "home": "Aston Villa",
+      "away": "Viking",
+      "skor": "3-1",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "21.10.2026",
+      "time": "22:00",
+      "home": "Inter",
+      "away": "Shakhtar Donets",
+      "skor": "1-0",
+      "calls": [
+        "2.5 üst"
+      ],
+      "ok": false
+    },
+    {
+      "date": "22.10.2026",
+      "time": "00:00",
+      "home": "Mixco",
+      "away": "Municipal",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "22.10.2026",
+      "time": "00:00",
+      "home": "Export Sebaco",
+      "away": "Matagalpa",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "22.10.2026",
+      "time": "03:30",
+      "home": "Palmeiras",
+      "away": "Fluminense",
+      "skor": "0-1",
+      "calls": [
+        "3.5 alt",
+        "1.5 üst"
+      ],
+      "ok": false
+    },
+    {
+      "date": "22.10.2026",
+      "time": "04:00",
+      "home": "Puebla",
+      "away": "Monterrey",
+      "skor": "1-4",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "22.10.2026",
+      "time": "05:30",
+      "home": "Cs Cartagines",
+      "away": "Depor. Olimpia",
+      "skor": "1-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "22.10.2026",
+      "time": "15:00",
+      "home": "Sama Al Sarhan",
+      "away": "Amman",
+      "skor": "1-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "22.10.2026",
+      "time": "15:30",
+      "home": "Mega Sport",
+      "away": "Tanta",
+      "skor": "2-1",
+      "calls": [
+        "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "22.10.2026",
+      "time": "16:00",
+      "home": "Bihor",
+      "away": "Csm Resita",
+      "skor": "2-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "22.10.2026",
+      "time": "16:40",
+      "home": "Al Hazm",
+      "away": "Al Feiha",
+      "skor": "1-0",
+      "calls": [
+        "2.5 alt"
       ],
       "ok": true
     }
