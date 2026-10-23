@@ -1,7 +1,7 @@
 {
-  "updated": "2026-10-23T17:09+03:00",
-  "count": 50,
-  "hit": 28,
+  "updated": "2026-10-23T21:57+03:00",
+  "count": 64,
+  "hit": 38,
   "matches": [
     {
       "date": "19.10.2026",
@@ -549,11 +549,165 @@
       "time": "16:15",
       "home": "Chadormalu",
       "away": "Esteghlal",
-      "skor": "0-1",
+      "skor": "1-1",
+      "calls": [
+        "1.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "23.10.2026",
+      "time": "17:15",
+      "home": "Js El Biar",
+      "away": "Mc Oran",
+      "skor": "0-0",
       "calls": [
         "1.5 üst"
       ],
       "ok": false
+    },
+    {
+      "date": "23.10.2026",
+      "time": "17:30",
+      "home": "Minsk",
+      "away": "Baranovichi",
+      "skor": "1-3",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "23.10.2026",
+      "time": "19:00",
+      "home": "Cska 1948 Sofi",
+      "away": "Botev Plovdiv",
+      "skor": "4-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "23.10.2026",
+      "time": "19:00",
+      "home": "Hobro",
+      "away": "Vendsyssel",
+      "skor": "2-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": false
+    },
+    {
+      "date": "23.10.2026",
+      "time": "19:30",
+      "home": "Akhmat Grozny",
+      "away": "Orenburg",
+      "skor": "0-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "23.10.2026",
+      "time": "19:30",
+      "home": "Amstetten",
+      "away": "Rapid Vienna (A",
+      "skor": "3-2",
+      "calls": [
+        "2.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "23.10.2026",
+      "time": "20:00",
+      "home": "Fa 2000",
+      "away": "Hellerup Ik",
+      "skor": "0-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "23.10.2026",
+      "time": "21:00",
+      "home": "Francs Borains",
+      "away": "Dender",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "23.10.2026",
+      "time": "21:00",
+      "home": "Volendam",
+      "away": "Utrecht (Ii)",
+      "skor": "3-1",
+      "calls": [
+        "2.5 üst"
+      ],
+      "ok": true
+    },
+    {
+      "date": "23.10.2026",
+      "time": "21:00",
+      "home": "Hunedoara",
+      "away": "Universitatea C",
+      "skor": "0-1",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "23.10.2026",
+      "time": "21:15",
+      "home": "Winterthur",
+      "away": "Stade Nyonnais",
+      "skor": "3-0",
+      "calls": [
+        "ters x2"
+      ],
+      "ok": false
+    },
+    {
+      "date": "23.10.2026",
+      "time": "21:30",
+      "home": "Perugia",
+      "away": "Pescara",
+      "skor": "1-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "23.10.2026",
+      "time": "21:30",
+      "home": "Widzew Lodz",
+      "away": "Gornik Zabrze",
+      "skor": "1-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "23.10.2026",
+      "time": "21:45",
+      "home": "Torino",
+      "away": "Monza",
+      "skor": "0-0",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
     }
   ]
 }
