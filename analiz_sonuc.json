@@ -1,130 +1,8 @@
 {
-  "updated": "2026-10-23T11:13+03:00",
-  "count": 59,
-  "hit": 33,
+  "updated": "2026-10-23T17:09+03:00",
+  "count": 50,
+  "hit": 28,
   "matches": [
-    {
-      "date": "18.10.2026",
-      "time": "19:15",
-      "home": "Murcia",
-      "away": "Zaragoza",
-      "skor": "0-0",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "18.10.2026",
-      "time": "19:45",
-      "home": "Temouchent",
-      "away": "Aso Chlef",
-      "skor": "1-1",
-      "calls": [
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "18.10.2026",
-      "time": "20:00",
-      "home": "Ml Vitebsk",
-      "away": "Neman Grodno",
-      "skor": "1-0",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "18.10.2026",
-      "time": "21:00",
-      "home": "Leones Negros",
-      "away": "Alebrijes",
-      "skor": "1-2",
-      "calls": [
-        "ters x2"
-      ],
-      "ok": true
-    },
-    {
-      "date": "18.10.2026",
-      "time": "22:00",
-      "home": "Rionegro Aguil",
-      "away": "Deportes Tolima",
-      "skor": "2-1",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "18.10.2026",
-      "time": "22:00",
-      "home": "Sao Bernardo",
-      "away": "Criciuma",
-      "skor": "0-1",
-      "calls": [
-        "3.5 alt"
-      ],
-      "ok": true
-    },
-    {
-      "date": "19.10.2026",
-      "time": "00:00",
-      "home": "Balboa",
-      "away": "Aguila",
-      "skor": "2-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "19.10.2026",
-      "time": "00:00",
-      "home": "Estudiantes Lp",
-      "away": "San Lorenzo",
-      "skor": "1-2",
-      "calls": [
-        "3.5 alt",
-        "1.5 üst"
-      ],
-      "ok": true
-    },
-    {
-      "date": "19.10.2026",
-      "time": "00:00",
-      "home": "Export Sebaco",
-      "away": "Jalapa",
-      "skor": "1-4",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "19.10.2026",
-      "time": "00:00",
-      "home": "Genesis Pn",
-      "away": "Estrella Roja",
-      "skor": "1-2",
-      "calls": [
-        "2.5 alt"
-      ],
-      "ok": false
-    },
-    {
-      "date": "19.10.2026",
-      "time": "00:00",
-      "home": "Cincinnati",
-      "away": "Columbus",
-      "skor": "0-2",
-      "calls": [
-        "2.5 üst"
-      ],
-      "ok": false
-    },
     {
       "date": "19.10.2026",
       "time": "15:00",
@@ -654,6 +532,28 @@
         "2.5 üst"
       ],
       "ok": true
+    },
+    {
+      "date": "23.10.2026",
+      "time": "13:00",
+      "home": "Lg Hn Acb",
+      "away": "Slna",
+      "skor": "0-2",
+      "calls": [
+        "2.5 alt"
+      ],
+      "ok": true
+    },
+    {
+      "date": "23.10.2026",
+      "time": "16:15",
+      "home": "Chadormalu",
+      "away": "Esteghlal",
+      "skor": "0-1",
+      "calls": [
+        "1.5 üst"
+      ],
+      "ok": false
     }
   ]
 }
