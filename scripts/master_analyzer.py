@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
-"""Bülten üzerine Opta Supercomputer tarzı Monte Carlo + 5 site konsensüs katmanı.
-Power de-vig + model edge + lig filtresi + minimum played + edge cap.
+"""Bülten üzerine geliştirilmiş model:
+- Power de-vig
+- Dixon-Coles düzeltilmiş Poisson
+- Lig filtresi + min played + edge cap
+- Home advantage
 """
 from __future__ import annotations
 
@@ -17,11 +20,11 @@ IST = ZoneInfo("Europe/Istanbul")
 ROOT = Path(__file__).resolve().parent.parent
 
 SITES = ["Forebet", "PredictZ", "WinDrawWin", "Statarea", "SoccerVista"]
-MIN_EDGE = 0.05          # %5 minimum edge
-MAX_EDGE = 0.25          # %25 üstü muhtemel artifact, at
-MIN_PLAYED = 6           # Her iki takım da en az 6 maç oynamış olmalı
+MIN_EDGE = 0.05
+MAX_EDGE = 0.22
+MIN_PLAYED = 6
+RHO = -0.13  # Dixon-Coles rho
 
-# Kaliteli ligler
 ALLOWED_LEAGUES = {
     "TSL", "T1L",
     "İNP", "INGPL2",
@@ -39,55 +42,53 @@ ALLOWED_LEAGUES = {
 }
 
 def is_allowed_league(league: str) -> bool:
-    if not league:
-        return False
-    return league.upper() in {l.upper() for l in ALLOWED_LEAGUES}
+    return bool(league) and league.upper() in {l.upper() for l in ALLOWED_LEAGUES}
 
 def enough_played(home, away) -> bool:
     if not home or not away:
         return False
-    hp = home.get("played") or 0
-    ap = away.get("played") or 0
-    return hp >= MIN_PLAYED and ap >= MIN_PLAYED
-
+    return (home.get("played") or 0) >= MIN_PLAYED and (away.get("played") or 0) >= MIN_PLAYED
 
 def atomic_write_json(path: Path, data):
     tmp = path.with_suffix(".tmp")
     tmp.write_text(json.dumps(data, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     os.replace(tmp, path)
 
+def poisson_pmf(k: int, lam: float) -> float:
+    if lam <= 0:
+        return 1.0 if k == 0 else 0.0
+    return math.exp(-lam) * (lam ** k) / math.factorial(k)
 
-def sample_poisson(lam: float) -> int:
-    if lam is None or lam <= 0:
-        return 0
-    L = math.exp(-lam)
-    k = 0
-    p = 1.0
-    while p > L:
-        k += 1
-        p *= random.random()
-        if k > 15:
-            break
-    return k - 1
-
-
-def opta_monte_carlo(xg_h: float, xg_a: float, n_sims: int = 15000) -> dict | None:
-    if xg_h is None or xg_a is None:
+def dixon_coles_probs(xg_h: float, xg_a: float, rho: float = RHO, max_goals: int = 8) -> dict | None:
+    if xg_h is None or xg_a is None or xg_h < 0 or xg_a < 0:
         return None
-    home_wins = draws = away_wins = under25 = 0
-    for _ in range(n_sims):
-        gh = sample_poisson(xg_h)
-        ga = sample_poisson(xg_a)
-        if gh > ga:
-            home_wins += 1
-        elif gh == ga:
-            draws += 1
-        else:
-            away_wins += 1
-        if gh + ga < 3:
-            under25 += 1
-    total = home_wins + draws + away_wins
-    if total == 0:
+    home_wins = draws = away_wins = under25 = 0.0
+    total = 0.0
+    for h in range(max_goals + 1):
+        for a in range(max_goals + 1):
+            p = poisson_pmf(h, xg_h) * poisson_pmf(a, xg_a)
+            # Dixon-Coles tau
+            if h == 0 and a == 0:
+                tau = 1 - xg_h * xg_a * rho
+            elif h == 0 and a == 1:
+                tau = 1 + xg_h * rho
+            elif h == 1 and a == 0:
+                tau = 1 + xg_a * rho
+            elif h == 1 and a == 1:
+                tau = 1 - rho
+            else:
+                tau = 1.0
+            p *= max(tau, 0.0)
+            total += p
+            if h > a:
+                home_wins += p
+            elif h == a:
+                draws += p
+            else:
+                away_wins += p
+            if h + a < 3:
+                under25 += p
+    if total <= 0:
         return None
     p1 = home_wins / total
     px = draws / total
@@ -99,9 +100,8 @@ def opta_monte_carlo(xg_h: float, xg_a: float, n_sims: int = 15000) -> dict | No
         "opta_max": round(max(p1, px, p2) * 100, 1),
         "opta_under25": round(under25 / total * 100, 1),
         "opta_fav": "1" if p1 >= px and p1 >= p2 else ("X" if px >= p2 else "2"),
-        "opta_sims": n_sims,
+        "opta_sims": "DixonColes-matrix",
     }
-
 
 def power_devig(odds: list[float]) -> tuple[list[float], float] | None:
     if any(o is None or o <= 1.01 for o in odds):
@@ -123,29 +123,20 @@ def power_devig(odds: list[float]) -> tuple[list[float], float] | None:
     fair = [x / s for x in fair]
     return fair, k
 
-
 def consensus(opta_fav: Optional[str], site_picks: Optional[dict] = None) -> dict:
     if not site_picks:
         return {
-            "consensus": 0,
-            "agree": 0,
-            "total": 5,
-            "label": "site verisi bekleniyor",
-            "strong": False,
-            "sites": SITES,
+            "consensus": 0, "agree": 0, "total": 5,
+            "label": "site verisi bekleniyor", "strong": False, "sites": SITES,
         }
     agrees = sum(1 for p in site_picks.values() if p == opta_fav)
     total = len(site_picks)
     score = (agrees / total * 100) if total else 0
     return {
-        "consensus": round(score),
-        "agree": agrees,
-        "total": total,
+        "consensus": round(score), "agree": agrees, "total": total,
         "label": f"{agrees}/{total} site Opta ile aynı",
-        "strong": score >= 60,
-        "sites": list(site_picks.keys()),
+        "strong": score >= 60, "sites": list(site_picks.keys()),
     }
-
 
 def poisson_xg(home, away, lg_h, lg_a):
     if not home or not away or not lg_h or not lg_a:
@@ -153,15 +144,13 @@ def poisson_xg(home, away, lg_h, lg_a):
     hp, ap = home.get("played") or 0, away.get("played") or 0
     if hp <= 0 or ap <= 0:
         return None
-    # Basit home advantage çarpanı
     h_att = (home["gf"] / hp) / lg_h
     h_def = (home["ga"] / hp) / lg_a
     a_att = (away["gf"] / ap) / lg_a
     a_def = (away["ga"] / ap) / lg_h
-    exp_home = round(h_att * a_def * lg_h * 1.12, 2)  # ~%12 home edge
-    exp_away = round(a_att * h_def * lg_a * 0.92, 2)
+    exp_home = round(h_att * a_def * lg_h * 1.10, 2)
+    exp_away = round(a_att * h_def * lg_a * 0.90, 2)
     return {"xgH": exp_home, "xgA": exp_away}
-
 
 def main():
     path = ROOT / "bulten.json"
@@ -172,7 +161,6 @@ def main():
     for match in data.get("matches") or []:
         league = match.get("league") or ""
         allowed = is_allowed_league(league)
-
         home_tbl = (match.get("homeTable") or {}).get("home")
         away_tbl = (match.get("awayTable") or {}).get("away")
         played_ok = enough_played(home_tbl, away_tbl)
@@ -184,7 +172,7 @@ def main():
                 match.pop(k, None)
             continue
         match.update(xg)
-        probs = opta_monte_carlo(xg["xgH"], xg["xgA"])
+        probs = dixon_coles_probs(xg["xgH"], xg["xgA"])
         if probs:
             match.update(probs)
             site_picks = match.get("site_picks")
@@ -193,17 +181,10 @@ def main():
             filled += 1
             if probs["opta_max"] >= 55 and allowed:
                 high_prob.append({
-                    "id": match.get("id"),
-                    "home": match.get("home"),
-                    "away": match.get("away"),
-                    "league": league,
-                    "date": match.get("date"),
-                    "time": match.get("time"),
-                    "opta_max": probs["opta_max"],
-                    "opta_fav": probs["opta_fav"],
-                    "consensus": cons["consensus"],
-                    "consensus_label": cons["label"],
-                    "strong": cons["strong"],
+                    "id": match.get("id"), "home": match.get("home"), "away": match.get("away"),
+                    "league": league, "date": match.get("date"), "time": match.get("time"),
+                    "opta_max": probs["opta_max"], "opta_fav": probs["opta_fav"],
+                    "consensus": cons["consensus"], "consensus_label": cons["label"], "strong": cons["strong"],
                 })
 
         odds = [match.get("o1"), match.get("ox"), match.get("o2")]
@@ -221,23 +202,14 @@ def main():
             match["edge_x"] = round(ex * 100, 1)
             match["edge_2"] = round(e2 * 100, 1)
             max_edge = max(e1, ex, e2)
-            # Edge filtresi: min + max cap
             match["has_edge"] = MIN_EDGE <= max_edge <= MAX_EDGE
             if match["has_edge"]:
                 high_edge.append({
-                    "id": match.get("id"),
-                    "home": match.get("home"),
-                    "away": match.get("away"),
-                    "league": league,
-                    "date": match.get("date"),
-                    "time": match.get("time"),
-                    "opta_fav": probs["opta_fav"],
-                    "max_edge": round(max_edge * 100, 1),
-                    "o1": match.get("o1"),
-                    "ox": match.get("ox"),
-                    "o2": match.get("o2"),
-                    "fair_p1": match["fair_p1"],
-                    "opta_p1": probs["opta_p1"],
+                    "id": match.get("id"), "home": match.get("home"), "away": match.get("away"),
+                    "league": league, "date": match.get("date"), "time": match.get("time"),
+                    "opta_fav": probs["opta_fav"], "max_edge": round(max_edge * 100, 1),
+                    "o1": match.get("o1"), "ox": match.get("ox"), "o2": match.get("o2"),
+                    "fair_p1": match["fair_p1"], "opta_p1": probs["opta_p1"],
                 })
 
     high_prob.sort(key=lambda x: (-x["opta_max"], -x["consensus"]))
@@ -245,11 +217,12 @@ def main():
     data["xgUpdated"] = datetime.now(IST).isoformat(timespec="minutes")
     data["optaHigh"] = high_prob[:20]
     data["edgeHigh"] = high_edge[:20]
-    data["optaModel"] = "MonteCarlo-15000 + PowerDeVig + LeagueFilter + MinPlayed + EdgeCap"
+    data["optaModel"] = "DixonColes + PowerDeVig + LeagueFilter + MinPlayed + EdgeCap"
     data["consensusSites"] = SITES
     data["minEdge"] = MIN_EDGE
     data["maxEdge"] = MAX_EDGE
     data["minPlayed"] = MIN_PLAYED
+    data["rho"] = RHO
     data["allowedLeagues"] = sorted(ALLOWED_LEAGUES)
     atomic_write_json(path, data)
     atomic_write_json(ROOT / "app_summary.json", {
@@ -259,10 +232,9 @@ def main():
         "matches": len(data.get("matches") or []),
         "opta_high": len(high_prob),
         "edge_high": len(high_edge),
-        "model": "MonteCarlo+PowerDeVig+LeagueFilter+MinPlayed+EdgeCap",
+        "model": "DixonColes+PowerDeVig+LeagueFilter+MinPlayed+EdgeCap",
     })
-    print(f"Filtered edge analysis: {filled} with xG, high-edge: {len(high_edge)}")
-
+    print(f"Dixon-Coles analysis: {filled} with xG, high-edge: {len(high_edge)}")
 
 if __name__ == "__main__":
     main()
