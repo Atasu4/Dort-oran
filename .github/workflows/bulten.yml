@@ -30,3 +30,8 @@ jobs:
           git commit -m "Bulteni, uc oran, macsonuclari ve edge analizi guncelle"
           git pull --rebase origin main
           git push
+      - name: Send edgeHigh to Telegram
+        env:
+          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python3 scripts/telegram_gonder.py
