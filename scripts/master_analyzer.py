@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """Bülten üzerine Opta Supercomputer tarzı Monte Carlo + 5 site konsensüs katmanı.
-Her maç için binlerce simülasyon + ortak karar skoru.
-Power de-vig (soccer 1X2) + model edge hesaplama eklendi.
-Lig filtresi eklendi: sadece kaliteli liglerde edge hesaplanır.
+Power de-vig + model edge + lig filtresi + minimum played + edge cap.
 """
 from __future__ import annotations
 
@@ -19,28 +17,38 @@ IST = ZoneInfo("Europe/Istanbul")
 ROOT = Path(__file__).resolve().parent.parent
 
 SITES = ["Forebet", "PredictZ", "WinDrawWin", "Statarea", "SoccerVista"]
-MIN_EDGE = 0.04  # %4 minimum edge
+MIN_EDGE = 0.05          # %5 minimum edge
+MAX_EDGE = 0.25          # %25 üstü muhtemel artifact, at
+MIN_PLAYED = 6           # Her iki takım da en az 6 maç oynamış olmalı
 
-# Kaliteli ligler (kısa kodlar)
+# Kaliteli ligler
 ALLOWED_LEAGUES = {
-    "TSL", "T1L",          # Türkiye Süper Lig, 1. Lig
-    "İNP", "INGPL2",       # Premier League, Championship
-    "İTA", "İTB",          # Serie A, Serie B
-    "İS1", "İS2",          # La Liga, Segunda
-    "FR1", "FR2",          # Ligue 1, Ligue 2
-    "HOL", "HOL2",         # Eredivisie, Eerste Divisie
-    "POR", "POR2",         # Primeira Liga, Liga Portugal 2
-    "BEL", "BEL2",         # Pro League, Challenger
-    "RUS1", "UKR",         # Russian Premier, Ukrainian
-    "POL1", "ÇEK2",        # Ekstraklasa, Chance Liga
-    "DAN1", "NOR",         # Superliga, Eliteserien (approx)
-    "İSV", "AVU",          # Swiss, Austrian
+    "TSL", "T1L",
+    "İNP", "INGPL2",
+    "İTA", "İTB",
+    "İS1", "İS2",
+    "FR1", "FR2",
+    "HOL", "HOL2",
+    "POR", "POR2",
+    "BEL", "BEL2",
+    "RUS1", "UKR",
+    "POL1", "ÇEK2",
+    "DAN1", "NOR",
+    "İSV", "AVU",
+    "AL1", "BR1",
 }
 
 def is_allowed_league(league: str) -> bool:
     if not league:
         return False
     return league.upper() in {l.upper() for l in ALLOWED_LEAGUES}
+
+def enough_played(home, away) -> bool:
+    if not home or not away:
+        return False
+    hp = home.get("played") or 0
+    ap = away.get("played") or 0
+    return hp >= MIN_PLAYED and ap >= MIN_PLAYED
 
 
 def atomic_write_json(path: Path, data):
@@ -96,7 +104,6 @@ def opta_monte_carlo(xg_h: float, xg_a: float, n_sims: int = 15000) -> dict | No
 
 
 def power_devig(odds: list[float]) -> tuple[list[float], float] | None:
-    """Power method de-vig for 1X2. Returns fair probs and k."""
     if any(o is None or o <= 1.01 for o in odds):
         return None
     implied = [1.0 / o for o in odds]
@@ -118,7 +125,6 @@ def power_devig(odds: list[float]) -> tuple[list[float], float] | None:
 
 
 def consensus(opta_fav: Optional[str], site_picks: Optional[dict] = None) -> dict:
-    """5 site ile Opta ortak karar. site_picks yoksa beklemede."""
     if not site_picks:
         return {
             "consensus": 0,
@@ -147,12 +153,13 @@ def poisson_xg(home, away, lg_h, lg_a):
     hp, ap = home.get("played") or 0, away.get("played") or 0
     if hp <= 0 or ap <= 0:
         return None
+    # Basit home advantage çarpanı
     h_att = (home["gf"] / hp) / lg_h
     h_def = (home["ga"] / hp) / lg_a
     a_att = (away["gf"] / ap) / lg_a
     a_def = (away["ga"] / ap) / lg_h
-    exp_home = round(h_att * a_def * lg_h, 2)
-    exp_away = round(a_att * h_def * lg_a, 2)
+    exp_home = round(h_att * a_def * lg_h * 1.12, 2)  # ~%12 home edge
+    exp_away = round(a_att * h_def * lg_a * 0.92, 2)
     return {"xgH": exp_home, "xgA": exp_away}
 
 
@@ -166,10 +173,12 @@ def main():
         league = match.get("league") or ""
         allowed = is_allowed_league(league)
 
-        home = (match.get("homeTable") or {}).get("home")
-        away = (match.get("awayTable") or {}).get("away")
-        xg = poisson_xg(home, away, match.get("lgH"), match.get("lgA"))
-        if not xg:
+        home_tbl = (match.get("homeTable") or {}).get("home")
+        away_tbl = (match.get("awayTable") or {}).get("away")
+        played_ok = enough_played(home_tbl, away_tbl)
+
+        xg = poisson_xg(home_tbl, away_tbl, match.get("lgH"), match.get("lgA"))
+        if not xg or not played_ok:
             for k in ("xgH", "xgA", "opta_p1", "opta_px", "opta_p2", "opta_max", "opta_under25", "opta_fav", "opta_sims", "consensus",
                       "fair_p1", "fair_px", "fair_p2", "edge_1", "edge_x", "edge_2", "has_edge", "power_k"):
                 match.pop(k, None)
@@ -187,7 +196,7 @@ def main():
                     "id": match.get("id"),
                     "home": match.get("home"),
                     "away": match.get("away"),
-                    "league": match.get("league"),
+                    "league": league,
                     "date": match.get("date"),
                     "time": match.get("time"),
                     "opta_max": probs["opta_max"],
@@ -197,10 +206,9 @@ def main():
                     "strong": cons["strong"],
                 })
 
-        # Power de-vig + edge (sadece allowed liglerde high_edge'e ekle)
         odds = [match.get("o1"), match.get("ox"), match.get("o2")]
         devig = power_devig(odds)
-        if devig and probs:
+        if devig and probs and allowed and played_ok:
             fair, k = devig
             match["fair_p1"] = round(fair[0] * 100, 1)
             match["fair_px"] = round(fair[1] * 100, 1)
@@ -213,18 +221,21 @@ def main():
             match["edge_x"] = round(ex * 100, 1)
             match["edge_2"] = round(e2 * 100, 1)
             max_edge = max(e1, ex, e2)
-            match["has_edge"] = max_edge >= MIN_EDGE and allowed
+            # Edge filtresi: min + max cap
+            match["has_edge"] = MIN_EDGE <= max_edge <= MAX_EDGE
             if match["has_edge"]:
-                fav_edge = max(e1, ex, e2)
                 high_edge.append({
                     "id": match.get("id"),
                     "home": match.get("home"),
                     "away": match.get("away"),
-                    "league": match.get("league"),
+                    "league": league,
                     "date": match.get("date"),
                     "time": match.get("time"),
                     "opta_fav": probs["opta_fav"],
-                    "max_edge": round(fav_edge * 100, 1),
+                    "max_edge": round(max_edge * 100, 1),
+                    "o1": match.get("o1"),
+                    "ox": match.get("ox"),
+                    "o2": match.get("o2"),
                     "fair_p1": match["fair_p1"],
                     "opta_p1": probs["opta_p1"],
                 })
@@ -232,11 +243,13 @@ def main():
     high_prob.sort(key=lambda x: (-x["opta_max"], -x["consensus"]))
     high_edge.sort(key=lambda x: -x["max_edge"])
     data["xgUpdated"] = datetime.now(IST).isoformat(timespec="minutes")
-    data["optaHigh"] = high_prob[:30]
-    data["edgeHigh"] = high_edge[:30]
-    data["optaModel"] = "MonteCarlo-15000 + Consensus + PowerDeVig + LeagueFilter"
+    data["optaHigh"] = high_prob[:20]
+    data["edgeHigh"] = high_edge[:20]
+    data["optaModel"] = "MonteCarlo-15000 + PowerDeVig + LeagueFilter + MinPlayed + EdgeCap"
     data["consensusSites"] = SITES
     data["minEdge"] = MIN_EDGE
+    data["maxEdge"] = MAX_EDGE
+    data["minPlayed"] = MIN_PLAYED
     data["allowedLeagues"] = sorted(ALLOWED_LEAGUES)
     atomic_write_json(path, data)
     atomic_write_json(ROOT / "app_summary.json", {
@@ -246,9 +259,9 @@ def main():
         "matches": len(data.get("matches") or []),
         "opta_high": len(high_prob),
         "edge_high": len(high_edge),
-        "model": "MonteCarlo+Consensus+PowerDeVig+LeagueFilter",
+        "model": "MonteCarlo+PowerDeVig+LeagueFilter+MinPlayed+EdgeCap",
     })
-    print(f"Opta MC + Power De-vig (filtered) {filled}/{len(data.get('matches') or [])}, high-prob: {len(high_prob)}, high-edge: {len(high_edge)}")
+    print(f"Filtered edge analysis: {filled} with xG, high-edge: {len(high_edge)}")
 
 
 if __name__ == "__main__":
