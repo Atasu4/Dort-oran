@@ -1,11 +1,21 @@
 import json
 import re
+import time
 import urllib.request
 from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
 URL = "https://arsiv.mackolik.com/AjaxHandlers/ProgramDataHandler.ashx?type=6&sortValue=DATE&day=-1&sort=-1&sortDir=-1&groupId=-1&np=0&sport=1"
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36",
+    "Accept": "application/json, text/javascript, */*; q=0.01",
+    "Accept-Language": "tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7",
+    "Referer": "https://arsiv.mackolik.com/Genis-Iddaa-Programi",
+    "X-Requested-With": "XMLHttpRequest",
+    "Connection": "keep-alive",
+}
 
 
 def odd(value):
@@ -44,22 +54,27 @@ def side_line(row, played, win, draw, loss, goals_for, goals_against, points):
     }
 
 
+def fetch(url, retries=3):
+    for attempt in range(retries):
+        try:
+            req = urllib.request.Request(url, headers=HEADERS)
+            with urllib.request.urlopen(req, timeout=40) as response:
+                return response.read().decode("utf-8", "replace")
+        except Exception as e:
+            print(f"Fetch attempt {attempt+1} failed: {e}")
+            if attempt < retries - 1:
+                time.sleep(2)
+    raise Exception(f"Failed to fetch {url} after {retries} attempts")
+
+
 def load_table(standing_id, cache):
     if standing_id in cache:
         return cache[standing_id]
     table = {}
     url = f"https://arsiv.mackolik.com/AjaxHandlers/StandingHandler.ashx?op=standing&id={standing_id}"
-    request = urllib.request.Request(
-        url,
-        headers={
-            "User-Agent": "Mozilla/5.0",
-            "Referer": "https://arsiv.mackolik.com/Standings/Default.aspx",
-            "X-Requested-With": "XMLHttpRequest",
-        },
-    )
     try:
-        with urllib.request.urlopen(request, timeout=20) as response:
-            payload = json.loads(response.read().decode("utf-8", "replace"))
+        raw = fetch(url)
+        payload = json.loads(raw)
         home_goals = home_games = away_goals = away_games = 0
         for rank, row in enumerate(payload.get("s") or [], start=1):
             if not isinstance(row, list) or len(row) < 16:
@@ -86,14 +101,7 @@ def load_table(standing_id, cache):
 
 
 def main():
-    request = urllib.request.Request(
-        URL,
-        headers={
-            "User-Agent": "Mozilla/5.0",
-            "Referer": "https://arsiv.mackolik.com/Genis-Iddaa-Programi",
-        },
-    )
-    raw = urllib.request.urlopen(request, timeout=40).read().decode("utf-8", "replace")
+    raw = fetch(URL)
     text = re.sub(r"([{,])\s*([A-Za-z_][A-Za-z0-9_]*)\s*:", r'\1"\2":', raw).replace("'", '"')
     data = json.loads(text)
     now = datetime.now(ZoneInfo("Europe/Istanbul"))
@@ -103,34 +111,29 @@ def main():
     for day in data["m"]:
         for row in day["m"]:
             date = str(row[7])
-            time = str(row[6])
-            if date == today:
-                pass
-            elif date == tomorrow and time <= "11:59":
-                pass
-            else:
-                continue
-            o1, ox, o2 = odd(row[16]), odd(row[17]), odd(row[18])
-            if o1 is None or ox is None or o2 is None:
-                continue
-            matches.append(
-                {
-                    "id": int(row[0]),
-                    "home": str(row[1]).strip(),
-                    "away": str(row[3]).strip(),
-                    "homeId": team_id(row[2]),
-                    "awayId": team_id(row[4]),
-                    "standingId": team_id(row[49]) if len(row) > 49 else 0,
-                    "time": time,
-                    "date": date,
-                    "league": str(row[26] or ""),
-                    "o1": o1,
-                    "ox": ox,
-                    "o2": o2,
-                    "alt": odd(row[22]),
-                    "ust": odd(row[23]),
-                }
-            )
+            time_ = str(row[6])
+            if date == today or (date == tomorrow and time_ <= "11:59"):
+                o1, ox, o2 = odd(row[16]), odd(row[17]), odd(row[18])
+                if o1 is None or ox is None or o2 is None:
+                    continue
+                matches.append(
+                    {
+                        "id": int(row[0]),
+                        "home": str(row[1]).strip(),
+                        "away": str(row[3]).strip(),
+                        "homeId": team_id(row[2]),
+                        "awayId": team_id(row[4]),
+                        "standingId": team_id(row[49]) if len(row) > 49 else 0,
+                        "time": time_,
+                        "date": date,
+                        "league": str(row[26] or ""),
+                        "o1": o1,
+                        "ox": ox,
+                        "o2": o2,
+                        "alt": odd(row[22]),
+                        "ust": odd(row[23]),
+                    }
+                )
     cache = {}
     for match in matches:
         standing_id = match.pop("standingId", 0)
