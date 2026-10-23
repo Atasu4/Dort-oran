@@ -2,6 +2,7 @@
 """Bülten üzerine Opta Supercomputer tarzı Monte Carlo + 5 site konsensüs katmanı.
 Her maç için binlerce simülasyon + ortak karar skoru.
 Power de-vig (soccer 1X2) + model edge hesaplama eklendi.
+Lig filtresi eklendi: sadece kaliteli liglerde edge hesaplanır.
 """
 from __future__ import annotations
 
@@ -19,6 +20,27 @@ ROOT = Path(__file__).resolve().parent.parent
 
 SITES = ["Forebet", "PredictZ", "WinDrawWin", "Statarea", "SoccerVista"]
 MIN_EDGE = 0.04  # %4 minimum edge
+
+# Kaliteli ligler (kısa kodlar)
+ALLOWED_LEAGUES = {
+    "TSL", "T1L",          # Türkiye Süper Lig, 1. Lig
+    "İNP", "INGPL2",       # Premier League, Championship
+    "İTA", "İTB",          # Serie A, Serie B
+    "İS1", "İS2",          # La Liga, Segunda
+    "FR1", "FR2",          # Ligue 1, Ligue 2
+    "HOL", "HOL2",         # Eredivisie, Eerste Divisie
+    "POR", "POR2",         # Primeira Liga, Liga Portugal 2
+    "BEL", "BEL2",         # Pro League, Challenger
+    "RUS1", "UKR",         # Russian Premier, Ukrainian
+    "POL1", "ÇEK2",        # Ekstraklasa, Chance Liga
+    "DAN1", "NOR",         # Superliga, Eliteserien (approx)
+    "İSV", "AVU",          # Swiss, Austrian
+}
+
+def is_allowed_league(league: str) -> bool:
+    if not league:
+        return False
+    return league.upper() in {l.upper() for l in ALLOWED_LEAGUES}
 
 
 def atomic_write_json(path: Path, data):
@@ -141,6 +163,9 @@ def main():
     high_prob = []
     high_edge = []
     for match in data.get("matches") or []:
+        league = match.get("league") or ""
+        allowed = is_allowed_league(league)
+
         home = (match.get("homeTable") or {}).get("home")
         away = (match.get("awayTable") or {}).get("away")
         xg = poisson_xg(home, away, match.get("lgH"), match.get("lgA"))
@@ -157,7 +182,7 @@ def main():
             cons = consensus(probs["opta_fav"], site_picks)
             match["consensus"] = cons
             filled += 1
-            if probs["opta_max"] >= 55:
+            if probs["opta_max"] >= 55 and allowed:
                 high_prob.append({
                     "id": match.get("id"),
                     "home": match.get("home"),
@@ -172,7 +197,7 @@ def main():
                     "strong": cons["strong"],
                 })
 
-        # Power de-vig + edge
+        # Power de-vig + edge (sadece allowed liglerde high_edge'e ekle)
         odds = [match.get("o1"), match.get("ox"), match.get("o2")]
         devig = power_devig(odds)
         if devig and probs:
@@ -181,7 +206,6 @@ def main():
             match["fair_px"] = round(fair[1] * 100, 1)
             match["fair_p2"] = round(fair[2] * 100, 1)
             match["power_k"] = round(k, 3)
-            # Edge: model_prob - fair_market (in fraction)
             e1 = (probs["opta_p1"] / 100) - fair[0]
             ex = (probs["opta_px"] / 100) - fair[1]
             e2 = (probs["opta_p2"] / 100) - fair[2]
@@ -189,7 +213,7 @@ def main():
             match["edge_x"] = round(ex * 100, 1)
             match["edge_2"] = round(e2 * 100, 1)
             max_edge = max(e1, ex, e2)
-            match["has_edge"] = max_edge >= MIN_EDGE
+            match["has_edge"] = max_edge >= MIN_EDGE and allowed
             if match["has_edge"]:
                 fav_edge = max(e1, ex, e2)
                 high_edge.append({
@@ -210,9 +234,10 @@ def main():
     data["xgUpdated"] = datetime.now(IST).isoformat(timespec="minutes")
     data["optaHigh"] = high_prob[:30]
     data["edgeHigh"] = high_edge[:30]
-    data["optaModel"] = "MonteCarlo-15000 + Consensus + PowerDeVig"
+    data["optaModel"] = "MonteCarlo-15000 + Consensus + PowerDeVig + LeagueFilter"
     data["consensusSites"] = SITES
     data["minEdge"] = MIN_EDGE
+    data["allowedLeagues"] = sorted(ALLOWED_LEAGUES)
     atomic_write_json(path, data)
     atomic_write_json(ROOT / "app_summary.json", {
         "updated": data["xgUpdated"],
@@ -221,9 +246,9 @@ def main():
         "matches": len(data.get("matches") or []),
         "opta_high": len(high_prob),
         "edge_high": len(high_edge),
-        "model": "MonteCarlo+Consensus+PowerDeVig",
+        "model": "MonteCarlo+Consensus+PowerDeVig+LeagueFilter",
     })
-    print(f"Opta MC + Power De-vig {filled}/{len(data.get('matches') or [])}, high-prob: {len(high_prob)}, high-edge: {len(high_edge)}")
+    print(f"Opta MC + Power De-vig (filtered) {filled}/{len(data.get('matches') or [])}, high-prob: {len(high_prob)}, high-edge: {len(high_edge)}")
 
 
 if __name__ == "__main__":
